@@ -6,7 +6,7 @@
         <div class="row">
             <?php
 
-                if($project -> checkIfProjectExist($router -> getRouteParam('1'))){
+                if($project -> projectExist($router -> getRouteParam('1')) == true){
                     ?>
                     Il existe
                     <?php

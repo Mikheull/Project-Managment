@@ -16,23 +16,23 @@
                 <div class="input_group">
                     <div class="input-field input-half">
                         <label for="first_name">Prénom</label>
-                        <input type="text" name="first_name" id="first_name" placeholder="Prénom" value="<?= $user -> getDataFromUserToken($user -> myToken(), 'first_name') ?>">
+                        <input type="text" name="first_name" id="first_name" placeholder="Prénom" value="<?= $user -> getUserData($main -> getToken(), 'first_name') ?>">
                     </div>
                     <div class="input-field input-half">
                         <label for="last_name">Nom</label>
-                        <input type="text" name="last_name" id="last_name" placeholder="Nom" value="<?= $user -> getDataFromUserToken($user -> myToken(), 'last_name') ?>">
+                        <input type="text" name="last_name" id="last_name" placeholder="Nom" value="<?= $user -> getUserData($main -> getToken(), 'last_name') ?>">
                     </div>
 
                     <div class="input-field input-half-al">
                         <label for="username">Pseudo</label>
-                        <input type="text" name="username" id="username" placeholder="Pseudo" value="<?= $user -> getDataFromUserToken($user -> myToken(), 'username') ?>">
+                        <input type="text" name="username" id="username" placeholder="Pseudo" value="<?= $user -> getUserData($main -> getToken(), 'username') ?>">
                     </div>
                 </div>
 
                 <div class="input_group">
                     <div class="input-field input-half-al">
                         <label for="bio">Bio</label>
-                        <textarea name="bio" id="bio" placeholder="Bio"><?= $user -> getDataFromUserToken($user -> myToken(), 'bio') ?></textarea>
+                        <textarea name="bio" id="bio" placeholder="Bio"><?= $user -> getUserData($main -> getToken(), 'bio') ?></textarea>
                     </div>
                 </div>
 

@@ -118,7 +118,7 @@ class config extends router {
      * Transforme une date en "ago"
      * 
      * @access public
-     * @author Mikhaël Bailly
+     * @author null
      * @param string $datetime = la date
      * @param string $full = full ou pas
      * @return string

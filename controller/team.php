@@ -38,11 +38,7 @@ $team = new team($db);
 if(isset($_POST['project_token'])){
     $project_token = htmlentities(addslashes($_POST['project_token']));
 
-    if($team -> canAcess( $project_token, $user -> myToken() ) == false){
-        $errors = $team -> try_join( $project_token, $user -> myToken() );
-    }else{
-        $errors = ['success' => false, 'message' => ['text' => "Vous êtes déjà dans l\'équipe !", 'theme' => 'dark', 'timeout' => 2000] ];
-    }
+    $errors = $team -> joinTeam( $project_token, $main -> getToken() );
 }
 
 
@@ -59,7 +55,7 @@ if(isset($_POST['project_token'])){
 if(isset($_POST['accept_invitation'])){
     $project_token = htmlentities(addslashes($_POST['invitation']));
 
-    $errors = $team -> setInvitationAnswer($project_token, $user -> myToken(), 'accept');
+    $errors = $team -> setInvitationAnswer($project_token, $main -> getToken(), 'accept');
 }
 
 
@@ -76,7 +72,7 @@ if(isset($_POST['accept_invitation'])){
 if(isset($_POST['decline_invitation'])){
     $project_token = htmlentities(addslashes($_POST['invitation']));
 
-    $errors = $team -> setInvitationAnswer($project_token, $user -> myToken(), 'decline');
+    $errors = $team -> setInvitationAnswer($project_token, $main -> getToken(), 'decline');
 }
 
 

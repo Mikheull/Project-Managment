@@ -2,6 +2,8 @@
 
 class main {
 
+/******************************************************************************/
+
     /**
      * Generer un token selon une taille et un mode de génération
      * 
@@ -37,5 +39,7 @@ class main {
     function getToken(){
         return $_SESSION['user_token'];
     }
+
+/******************************************************************************/
 
 }

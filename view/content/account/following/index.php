@@ -30,14 +30,14 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-2">
-                                            <a href="<?= $config -> rootUrl() ;?>member/<?= $user -> getDataFromUserToken( $res['following'], 'username') ?>" title="Accéder au compte de <?= $user -> getDataFromUserToken( $res['following'], 'first_name') ?> <?= $user -> getDataFromUserToken( $res['following'], 'last_name') ?>">
-                                                <div class="profil_pic"> <img src="<?= $config -> rootUrl() ;?>dist/<?= $user -> getDataFromUserToken( $res['following'], 'profil_image') == NULL ? 'images/content/defaut_profil_pic.png' : 'uploads/u/'. $res['following'].'/profil_pic/'.$user -> getDataFromUserToken( $res['following'], 'profil_image') ;?>" alt="Image de profil" width="70%"> </div> 
+                                            <a href="<?= $config -> rootUrl() ;?>member/<?= $user -> getUserData( $res['following'], 'username') ?>" title="Accéder au compte de <?= $user -> getUserData( $res['following'], 'first_name') ?> <?= $user -> getUserData( $res['following'], 'last_name') ?>">
+                                                <div class="profil_pic"> <img src="<?= $config -> rootUrl() ;?>dist/<?= $user -> getUserData( $res['following'], 'profil_image') == NULL ? 'images/content/defaut_profil_pic.png' : 'uploads/u/'. $res['following'].'/profil_pic/'.$user -> getUserData( $res['following'], 'profil_image') ;?>" alt="Image de profil" width="70%"> </div> 
                                             </a>
                                         </div>
                                         <div class="col-8 align-self-center">
-                                            <a href="<?= $config -> rootUrl() ;?>member/<?= $user -> getDataFromUserToken( $res['following'], 'username') ?>" title="Accéder au compte de <?= $user -> getDataFromUserToken( $res['following'], 'first_name') ?> <?= $user -> getDataFromUserToken( $res['following'], 'last_name') ?>">
-                                                <span class="username"><?= $user -> getDataFromUserToken( $res['following'], 'username') ?></span>
-                                                <span class="name"><?= $user -> getDataFromUserToken( $res['following'], 'first_name') ?> <?= $user -> getDataFromUserToken( $res['following'], 'last_name') ?></span>
+                                            <a href="<?= $config -> rootUrl() ;?>member/<?= $user -> getUserData( $res['following'], 'username') ?>" title="Accéder au compte de <?= $user -> getUserData( $res['following'], 'first_name') ?> <?= $user -> getUserData( $res['following'], 'last_name') ?>">
+                                                <span class="username"><?= $user -> getUserData( $res['following'], 'username') ?></span>
+                                                <span class="name"><?= $user -> getUserData( $res['following'], 'first_name') ?> <?= $user -> getUserData( $res['following'], 'last_name') ?></span>
                                             </a>
                                         </div>
                                         <div class="col-2 align-self-center">

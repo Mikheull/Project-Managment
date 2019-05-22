@@ -12,7 +12,7 @@
         <section class="content">
             <?php
 
-                if($team -> checkIfTeamExist($router -> getRouteParam('1'))){
+                if($team -> teamExist($router -> getRouteParam('1'))){
 
                     if($team -> canAcess($router -> getRouteParam('1'), $_SESSION['user_token'])){
                         require ('view/content/team/dashboard/components/home.php');

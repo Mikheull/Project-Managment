@@ -6,16 +6,19 @@ class user extends db_connect {
         parent::__construct($connect);
     }
 
-/**
- * function myToken()
- * 
- * Renvoi son token public
- * @return varchar
-*/
-    
-    function myToken() {
-        return $_SESSION['user_token'];
-    } 
+/******************************************************************************/
+
+    /**
+     * Récupère une information d'un utilisateur donné
+     * 
+     * Va renvoyer toutes les équipes d'un utilisateur
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $user_token Token de l'utilisateur
+     * @return array
+     */
+
 
 
 /**
@@ -27,7 +30,7 @@ class user extends db_connect {
  * @return var
 */
     
-    function getDataFromUserToken($user_token, $info) {
+    function getUserData($user_token, $info) {
         $request = $this -> _db -> query("SELECT * FROM `imp_user` WHERE `public_token` = '$user_token' ");
         $res = $request->fetch();
 
@@ -44,7 +47,7 @@ class user extends db_connect {
 */
     
     function editPassword($new_password) {
-        $token = $this -> myToken();
+        $token = $this -> getToken();
         $new_password = password_hash($new_password, PASSWORD_DEFAULT);
         $exec = $this -> _db -> exec("UPDATE `imp_user` SET `password` = '$new_password' WHERE `public_token` = '$token' ");
 
@@ -84,7 +87,7 @@ class user extends db_connect {
 */
     
 function editUserInfos($first_name, $last_name, $username, $bio) {
-    $token = $this -> myToken();
+    $token = $this -> getToken();
 
     $exec = $this -> _db -> exec("UPDATE `imp_user` SET `first_name` = '$first_name', `last_name` = '$last_name', `username` = '$username', `bio` = '$bio' WHERE `public_token` = '$token' ");
 
@@ -117,7 +120,7 @@ function editUserInfos($first_name, $last_name, $username, $bio) {
  * @return boolean
 */
     function isBlocked($blocked) {
-        $token = $this -> myToken();
+        $token = $this -> getToken();
 
         $request = $this -> _db -> query("SELECT * FROM `imp_blocked` WHERE (`user_public_token` = '$token' AND `blocked_user_token` = '$blocked') ");
         $res = $request->fetch();
@@ -137,7 +140,7 @@ function editUserInfos($first_name, $last_name, $username, $bio) {
  * @return array
 */
     function block($user_token) {
-        $token = $this -> myToken();
+        $token = $this -> getToken();
 
         $req = $this -> _db -> prepare("INSERT INTO `imp_blocked` (`user_public_token`, `blocked_user_token`) VALUES (:user_public_token, :blocked_user_token)");
 
@@ -162,7 +165,7 @@ function editUserInfos($first_name, $last_name, $username, $bio) {
  * @return array
 */
     function unblock($user_token) {
-        $token = $this -> myToken();
+        $token = $this -> getToken();
 
         $req = $this -> _db -> prepare("DELETE FROM `imp_blocked` WHERE `user_public_token` = :user_public_token AND `blocked_user_token` = :blocked_user_token AND `enable` = '1' ");
 
@@ -186,7 +189,7 @@ function editUserInfos($first_name, $last_name, $username, $bio) {
  * @return array
 */
     function getUnreadNotifs() {
-        $token = $this -> myToken();
+        $token = $this -> getToken();
 
         $request = $this -> _db -> query("SELECT * FROM `imp_notification` WHERE `user_public_token` = '$token' AND `n_read` = '0' AND `enable` = '1' ");
         return $request->fetchAll();

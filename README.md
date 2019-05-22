@@ -1,6 +1,3 @@
-Faire un système de Error Code, genre de 0 à 100 c'est des pas trop graves etc, en faisant un doc de réference et les affichages qui suivent
-
-
 ## SQL_STRUCTURE
 
 **imp_user**

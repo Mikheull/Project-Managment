@@ -6,19 +6,23 @@ class sendmail extends db_connect {
         parent::__construct($connect);
     }
 
+/******************************************************************************/
 
-/**
- * function send($from, $to, $object, $content)
- * 
- * Envoi un mail
- * @param 1 = De
- * @param 2 = Pour
- * @param 3 = Objet
- * @param 4 = Contenu
- * @return array
-*/
+    /**
+     * Envoi de mail
+     * 
+     * Va envoyer un email a l'utilisateur
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $from Sender
+     * @param string $to Destinataire
+     * @param string $object Objet
+     * @param string $content Contenu
+     * @return boolean
+     */
     
-    function send($from, $to, $object, $content) {
+    function send($from = '', $to = '', $object = 'undefined', $content = '') {
         mail($to, $object, $content);
 
         return (
@@ -35,8 +39,6 @@ class sendmail extends db_connect {
 
     }
 
-
+/******************************************************************************/
 
 }
-
-

@@ -24,16 +24,16 @@
                     <div class="input_group">
                         <div class="input-field input-half">
                             <label for="first_name">Prénom</label>
-                            <input type="text" name="first_name" id="first_name" placeholder="Prénom" value="<?= (isset($_POST['first_name']) ? $_POST['first_name'] : ($auth -> isConnected() == true ? $user -> getDataFromUserToken( $user -> myToken(), 'first_name') : '') ) ?>">
+                            <input type="text" name="first_name" id="first_name" placeholder="Prénom" value="<?= (isset($_POST['first_name']) ? $_POST['first_name'] : ($auth -> isConnected() == true ? $user -> getUserData( $main -> getToken(), 'first_name') : '') ) ?>">
                         </div>
                         <div class="input-field input-half">
                             <label for="last_name">Nom</label>
-                            <input type="text" name="last_name" id="last_name" placeholder="Nom" value="<?= (isset($_POST['last_name']) ? $_POST['last_name'] : ($auth -> isConnected() == true ? $user -> getDataFromUserToken( $user -> myToken(), 'last_name') : '') ) ?>">
+                            <input type="text" name="last_name" id="last_name" placeholder="Nom" value="<?= (isset($_POST['last_name']) ? $_POST['last_name'] : ($auth -> isConnected() == true ? $user -> getUserData( $main -> getToken(), 'last_name') : '') ) ?>">
                         </div>
 
                         <div class="input-field input-half-al">
                             <label for="email">Mail</label>
-                            <input type="email" name="email" id="email" placeholder="Email" value="<?= (isset($_POST['email']) ? $_POST['email'] : ($auth -> isConnected() == true ? $user -> getDataFromUserToken( $user -> myToken(), 'mail') : '') ) ?>">
+                            <input type="email" name="email" id="email" placeholder="Email" value="<?= (isset($_POST['email']) ? $_POST['email'] : ($auth -> isConnected() == true ? $user -> getUserData( $main -> getToken(), 'mail') : '') ) ?>">
                         </div>
                     </div>   
 

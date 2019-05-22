@@ -40,7 +40,7 @@ if(isset($_POST['update_user_pass'])){
 
         if($new_password == $confirm_password){
 
-            if (password_verify($old_password, $user -> getDataFromUserToken($user -> myToken(), 'password') )) {
+            if (password_verify($old_password, $user -> getUserData($main -> getToken(), 'password') )) {
                 if(strlen($new_password) >= 8){
                     $errors = $user -> editPassword($new_password);
                 }else{
@@ -81,7 +81,7 @@ if(isset($_POST['update_user_infos'])){
         $username = htmlentities( addslashes($_POST['username']));
         $bio = htmlentities( addslashes($_POST['bio']));
 
-        if($user -> getDataFromUserToken($user -> myToken(), 'username') == $username OR $user -> verifyUsername($username) == false){
+        if($user -> getUserData($main -> getToken(), 'username') == $username OR $user -> verifyUsername($username) == false){
 
             if(strlen($bio) <= 255){
                 $errors = $user -> editUserInfos($first_name, $last_name, $username, $bio);

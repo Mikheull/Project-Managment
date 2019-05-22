@@ -10,7 +10,7 @@
             <div class="row">
                 <?php
 
-                    if($team -> checkIfTeamExist($router -> getRouteParam('1'))){
+                    if($team -> teamExist($router -> getRouteParam('1'))){
                         if($team -> canAcess($router -> getRouteParam('1'), $_SESSION['user_token'])){
                             ?>
                                 Accès autorisé ! on affiche la page

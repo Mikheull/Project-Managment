@@ -247,29 +247,4 @@ class authentication extends db_connect {
 
 /******************************************************************************/
 
-  
-
-
-
-
-
-
-/**
- * function getDataFromUserToken($user_token, $info)
- * 
- * Récupère une information d'un utilisateur donné
- * @param 1 = Le token de l'utilisateur
- * @param 2 = L'information
- * @return var
-*/
-    
-    function getDataFromUserToken($user_token, $info) {
-        $request = $this -> _db -> query("SELECT * FROM `imp_user` WHERE `public_token` = '$user_token' ");
-        $res = $request->fetch();
-
-        return $res[$info];
-    }  
-
-    
-
 }

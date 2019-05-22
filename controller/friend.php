@@ -34,7 +34,7 @@ $friend = new friend($db);
  * 
  */
 if(isset($_POST['follow'])){
-    $errors = $friend -> follow( $user -> myToken(), $user -> usernameToToken($router -> getRouteParam('1')) );
+    $errors = $friend -> follow( $main -> getToken(), $user -> usernameToToken($router -> getRouteParam('1')) );
 }
 
 
@@ -47,7 +47,7 @@ if(isset($_POST['follow'])){
  * 
  */
 if(isset($_POST['unfollow'])){
-    $errors = $friend -> unfollow( $user -> myToken(), $user -> usernameToToken($router -> getRouteParam('1')) );
+    $errors = $friend -> unfollow( $main -> getToken(), $user -> usernameToToken($router -> getRouteParam('1')) );
 }
 
 // End of file

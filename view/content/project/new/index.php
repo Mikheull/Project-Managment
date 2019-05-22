@@ -35,7 +35,7 @@
                                 <div class="team_profilImage">?</div>
                                 <div class="actions">
                                     <?php
-                                        if($team -> getDataFromTeamToken($t['team_token'], 'public') == true){
+                                        if($team -> getTeamData($t['team_token'], 'public') == true){
                                             echo '<i class="fas fa-unlock" data-tippy="Équipe publique"></i>';
                                         }else{
                                             echo '<i class="fas fa-lock" data-tippy="Équipe privée"></i>';
@@ -44,14 +44,14 @@
                                     <i class="fas fa-ellipsis-h"></i>
                                 </div>
                             </div>
-                            <div class="name"> <?= $team -> getDataFromTeamToken($t['team_token'], 'name') ;?> </div>
+                            <div class="name"> <?= $team -> getTeamData($t['team_token'], 'name') ;?> </div>
                         </div>
 
-                        <div class="body"> <?= $team -> getDataFromTeamToken($t['team_token'], 'description') ;?> </div>
+                        <div class="body"> <?= $team -> getTeamData($t['team_token'], 'description') ;?> </div>
                         
                         <div class="footer">
                             <a href="<?= $config -> rootUrl() ;?>app/<?= $t['team_token'] ?>"> <i class="fas fa-external-link-alt"></i> </a>
-                            <span class="date">Créer le <?= date("d M Y", strtotime($team -> getDataFromTeamToken($t['team_token'], 'date_begin') )) ;?></span>
+                            <span class="date">Créer le <?= date("d M Y", strtotime($team -> getTeamData($t['team_token'], 'date_begin') )) ;?></span>
                         </div>
                         
                     </div>
