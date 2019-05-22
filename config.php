@@ -1,12 +1,13 @@
 <?php
-require ('db.php');
+
+require_once ('db.php');
+
 session_start();
 
 function load($class){
     require('model/class/'. $class .'.php');
 }
 spl_autoload_register("load");
-
 
 require_once ('controller/config.php');
 require_once ('model/class/main.php');
@@ -15,6 +16,8 @@ require_once ('controller/user.php');
 require_once ('controller/authentication.php');
 
 $main = new main();
+
+
 /**
  * INIT
  */
