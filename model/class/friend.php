@@ -26,10 +26,7 @@ class friend extends db_connect {
         $request = $this -> _db -> query("SELECT * FROM `imp_follow` WHERE (`follower` = '$follower' AND `following` = '$following') OR (`follower` = '$follower' AND `following` = '$following') ");
         $res = $request->fetch();
         
-        if($res){
-            return true;        
-        }
-        return false;
+        return ($res ? true : false);
     } 
 
 

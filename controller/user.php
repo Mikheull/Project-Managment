@@ -81,7 +81,7 @@ if(isset($_POST['update_user_infos'])){
         $username = htmlentities( addslashes($_POST['username']));
         $bio = htmlentities( addslashes($_POST['bio']));
 
-        if($user -> getUserData($main -> getToken(), 'username') == $username OR $user -> verifyUsername($username) == false){
+        if($user -> getUserData($main -> getToken(), 'username') == $username OR $user -> usernameExist($username) == false){
 
             if(strlen($bio) <= 255){
                 $errors = $user -> editUserInfos($first_name, $last_name, $username, $bio);

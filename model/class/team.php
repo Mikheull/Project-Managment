@@ -113,7 +113,7 @@ class team extends db_connect {
      * @return boolean
      */
 
-    function canAcess($token, $user_token) {
+    function canAcess($token = '', $user_token = '') {
         $request = $this -> _db -> query("SELECT * FROM `pr_team_member` WHERE `team_token` = '$token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
         $res = $request->fetch();
         
@@ -138,7 +138,7 @@ class team extends db_connect {
      * @return array
      */
 
-    function joinTeam($token, $user_token) {
+    function joinTeam($token = '', $user_token = '') {
 
         if($this -> canAcess( $token, $user_token ) == false){
             $request = $this -> _db -> query("SELECT * FROM `pr_team` WHERE `public_token` = '$token' ");
@@ -179,7 +179,7 @@ class team extends db_connect {
      * @return array
      */
 
-    function addUser($token, $user_token) {
+    function addUser($token = '', $user_token = '') {
 
         $req = $this -> _db -> prepare("INSERT INTO `pr_team_member` (`team_token`, `user_public_token`) VALUES (:team_token, :user_public_token)");
 
@@ -213,7 +213,7 @@ class team extends db_connect {
      * @return array
      */
 
-    function setInvitationAnswer($token, $user_token, $choose) {
+    function setInvitationAnswer($token = '', $user_token = '', $choose = '') {
         setlocale(LC_TIME, "fr_FR");
         $date = date("Y-m-d H:i:s");
 
