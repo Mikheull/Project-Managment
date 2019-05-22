@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="359.365" height="507.547" viewBox="0 0 359.365 507.547">
+  <defs>
+    <filter id="Rectangle_36_Copy" x="0" y="0" width="359.365" height="507.547" filterUnits="userSpaceOnUse">
+      <feOffset dx="-10" dy="9" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="10.5" result="blur"/>
+      <feFlood flood-color="#ff5756" flood-opacity="0"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Create_New_User" data-name="Create New User" transform="translate(41.5 22.5)">
+    <g transform="matrix(1, 0, 0, 1, -41.5, -22.5)" filter="url(#Rectangle_36_Copy)">
+      <g id="Rectangle_36_Copy-2" data-name="Rectangle 36 Copy" transform="translate(41.5 22.5)" fill="#fff" stroke="#e8ebf2" stroke-miterlimit="10" stroke-width="1">
+        <rect width="296.365" height="444.547" rx="6" stroke="none"/>
+        <rect x="0.5" y="0.5" width="295.365" height="443.547" rx="5.5" fill="none"/>
+      </g>
+    </g>
+    <g id="DB-Name" transform="translate(35.564 174.262)">
+      <text id="T_Ritika_Singh" data-name="T Ritika Singh" transform="translate(0 19.04)" font-size="6" font-family="AktivGrotesk-Bold, Aktiv Grotesk" font-weight="700"><tspan x="0" y="0">Improove Team</tspan></text>
+      <text id="User_name" data-name="User name" transform="translate(0 6)" fill="rgba(104,104,104,0.6)" font-size="6" font-family="AktivGrotesk-Light, Aktiv Grotesk" font-weight="300"><tspan x="0" y="0">Nom de l’équipe</tspan></text>
+      <path id="Line_17" data-name="Line 17" d="M0,1H225.237" transform="translate(0 29.822)" fill="none" stroke="#000" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
+    </g>
+    <text id="if_email_id_is_not_v" data-name="if email id is not v" transform="translate(35.564 238.162)" fill="#ff5a28" font-size="6" font-family="AktivGrotesk-Bold, Aktiv Grotesk" font-weight="700"><tspan x="0" y="0">Insert here</tspan></text>
+    <text id="User_name-2" data-name="User name" transform="translate(35.564 221.161)" fill="rgba(104,104,104,0.6)" font-size="6" font-family="AktivGrotesk-Light, Aktiv Grotesk" font-weight="300"><tspan x="0" y="0">Logo</tspan></text>
+    <text id="The_email_must_be_a" data-name="The email must be a" transform="translate(35.564 304.143)" fill="#ff5a28" font-size="6" font-family="AktivGrotesk-Regular, Aktiv Grotesk"><tspan x="0" y="0">Veuillez télécharger un logo</tspan></text>
+    <path id="Line_17_Copy" data-name="Line 17 Copy" d="M0,1H225.237" transform="translate(35.564 244.584)" fill="#ff5a28" stroke="#ff5a28" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
+    <g id="Category_Copy" data-name="Category Copy" transform="translate(35.564 270.285)">
+      <text id="User_type" data-name="User type" transform="translate(0 6)" fill="#686868" font-size="6" font-family="AktivGrotesk-Regular, Aktiv Grotesk"><tspan x="0" y="0">Invitations</tspan></text>
+      <g id="Combined_Shape" data-name="Combined Shape" transform="translate(215.754 5.377) rotate(-45)" fill="none" stroke-miterlimit="10" opacity="0.475">
+        <path d="M.593,5.927V5.335H5.927v.593ZM0,5.927V0H.593V5.927Z" stroke="none"/>
+        <path d="M 5.927237987518311 5.927237987518311 L 0.592667818069458 5.927237987518311 L 0.592667818069458 5.334568023681641 L 5.927237987518311 5.334568023681641 L 5.927237987518311 5.927237987518311 Z M 0.592667818069458 5.927237987518311 L -2.198333731939783e-06 5.927237987518311 L -2.198333731939783e-06 -2.198333731939783e-06 L 0.592667818069458 -2.198333731939783e-06 L 0.592667818069458 5.334568023681641 L 0.592667818069458 5.927237987518311 Z" stroke="none"/>
+      </g>
+      <path id="Line_17_Copy-2" data-name="Line 17 Copy" d="M0,1H225.237" transform="translate(0 17.967)" fill="none" stroke="rgba(208,214,230,0.85)" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
+    </g>
+    <g id="Button" transform="translate(79.426 369.27)">
+      <rect id="Rectangle_19" data-name="Rectangle 19" width="65.2" height="24.895" rx="2" fill="#ff5a28"/>
+      <text id="Create" transform="translate(31.225 13.911)" fill="#fff" font-size="6" font-family="AktivGrotesk-Bold, Aktiv Grotesk" font-weight="700"><tspan x="-8.112" y="0">Créer</tspan></text>
+    </g>
+    <text id="Create_New_User-2" data-name="Create New User" transform="translate(138.498 122.026)" fill="#686868" font-size="10" font-family="AktivGrotesk-Bold, Aktiv Grotesk" font-weight="700"><tspan x="-62.25" y="0">Créer une nouvelle équipe</tspan></text>
+    <g id="Visual" transform="translate(75.573 34.971)">
+      <path id="Line_20" data-name="Line 20" d="M.5,10.06,9.872.689" transform="translate(-0.5 17.501)" fill="none" stroke="#ff5a28" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
+      <path id="Line_21" data-name="Line 21" d="M.5,6.947,7.127.32" transform="translate(126.937 28.914)" fill="none" stroke="#ff5a28" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
+      <path id="Line_22" data-name="Line 22" d="M.5,4.251,3.773.977" transform="translate(30.322 41.686)" fill="none" stroke="#ff5a28" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
+      <path id="Line_23" data-name="Line 23" d="M0,8.382,8.382,0" transform="translate(59.569)" fill="none" stroke="#ff5a28" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1"/>
+      <path id="Combined_Shape-2" data-name="Combined Shape" d="M3.417,8.3V4.881H0V3.417H3.417V0H4.881V3.417H8.3V4.881H4.881V8.3Z" transform="translate(37.638 14.818)" fill="#ff5a28"/>
+      <path id="Combined_Shape_Copy_5" data-name="Combined Shape Copy 5" d="M2.441,5.927V3.487H0V2.441H2.441V0H3.487V2.441H5.927V3.487H3.487V5.927Z" transform="translate(44.751 43.269)" fill="#ff5a28"/>
+      <path id="Combined_Shape_Copy_6" data-name="Combined Shape Copy 6" d="M2.441,5.927V3.487H0V2.441H2.441V0H3.487V2.441H5.927V3.487H3.487V5.927Z" transform="translate(19.856 30.822)" fill="#ff5a28"/>
+      <path id="Combined_Shape_Copy_7" data-name="Combined Shape Copy 7" d="M.976,2.371V1.394H0V.976H.976V0h.418V.976h.976v.418H1.394v.976Z" transform="translate(96.319 18.375)" fill="#ff5a28"/>
+      <path id="Combined_Shape_Copy_8" data-name="Combined Shape Copy 8" d="M3.9,9.484v-3.9H0V3.9H3.9V0H5.579V3.9h3.9V5.579h-3.9v3.9Z" transform="translate(88.02 38.527)" fill="#ff5a28"/>
+      <path id="Combined_Shape_Copy_9" data-name="Combined Shape Copy 9" d="M1.464,3.557V2.092H0V1.464H1.464V0h.628V1.464H3.557v.628H2.092V3.557Z" transform="translate(104.024 32.007)" fill="#ff5a28"/>
+      <path id="Combined_Shape_Copy_10" data-name="Combined Shape Copy 10" d="M1.464,3.557V2.092H0V1.464H1.464V0h.628V1.464H3.557v.628H2.092V3.557Z" transform="translate(121.806 8.298)" fill="#ff5a28"/>
+      <g id="user" transform="translate(63.718 14.226)">
+        <path id="Oval_11" data-name="Oval 11" d="M17.962,8.981A8.981,8.981,0,0,0,0,8.981C0,13.941,17.962,13.941,17.962,8.981Z" transform="translate(0 10.076)" fill="none" stroke="#ff5a28" stroke-miterlimit="10" stroke-width="3"/>
+        <circle id="Oval_12" data-name="Oval 12" cx="4.939" cy="4.939" r="4.939" transform="translate(4.149 0)" fill="none" stroke="#ff5a28" stroke-miterlimit="10" stroke-width="3"/>
+      </g>
+    </g>
+    <g id="Button-2" data-name="Button" transform="translate(155.295 369.27)">
+      <g id="Rectangle_19-2" data-name="Rectangle 19" fill="none" stroke="#979797" stroke-miterlimit="10" stroke-width="1">
+        <rect width="67.571" height="24.895" rx="2" stroke="none"/>
+        <rect x="0.5" y="0.5" width="66.571" height="23.895" rx="1.5" fill="none"/>
+      </g>
+      <text id="Cancel" transform="translate(31.746 13.911)" fill="#686868" font-size="6" font-family="AktivGrotesk-Regular, Aktiv Grotesk"><tspan x="-10.608" y="0">Annuler</tspan></text>
+    </g>
+  </g>
+</svg>
