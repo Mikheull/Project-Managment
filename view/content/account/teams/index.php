@@ -26,7 +26,7 @@
                         </div>
                         <div class="buttons nav-right">
                             <a class="light-btn light-border-btn"> <i class="fas fa-star"></i> Vue des favoris</a>
-                            <a href="#team_mod" class="primary-btn" rel="modal:open"> <i class="fas fa-plus"></i> Nouvelle équipe</a>
+                            <a href="<?= $config -> rootUrl() ;?>app/new-team" class="primary-btn"> <i class="fas fa-plus"></i> Nouvelle équipe</a>
                         </div>
                     </div>
                 </div>

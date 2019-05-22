@@ -12,3 +12,10 @@
     </select>
 
 </form>
+
+<div class="spacer-md"></div>
+<span>OU</span>
+<div class="spacer-md"></div>
+
+
+<a href="<?= $config -> rootUrl() ;?>app/new-team" class="primary-btn">Créez en une</a>

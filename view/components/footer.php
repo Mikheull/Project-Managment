@@ -1,9 +1,9 @@
 <section id="footer">
 
     <div class="container">
-        <div class="row links_container justify-content-center">
+        <div class="row links_container">
 
-            <div class="col col-md-2 offset-md-0 col-8 offset-2">
+            <div class="col col-md-2 col-sm-12 col-12">
                 <a class="navbar-brand" href="<?= $config -> rootUrl() ;?>./" title="Aller a la page d'accueil">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 28">
                         <defs><style>.cls-1,.cls-3{fill:#4c6cf6;}.cls-2{fill:none;stroke:#4c6cf6;stroke-linecap:round;stroke-miterlimit:10;stroke-width:2px;}.cls-3{font-size:16px;font-family:Nunito-Bold, Nunito;font-weight:700;}.cls-4{letter-spacing:-0.01em;}.cls-5{letter-spacing:-0.02em;}</style></defs>
@@ -20,7 +20,7 @@
                 </a>
             </div>
 
-            <div class="link-box col col-md-2 col-sm-6 col-10">
+            <div class="link-box col col-md-2 col-6">
                 <div class="title">Fonctionnalités</div>
                 <ul>
                     <li> <a href="<?= $config -> rootUrl() ;?>features#gestion-de-projet" title="Outil Gestion de projet">Gestion de projet</a> </li>
@@ -33,7 +33,7 @@
                 </ul>
             </div>
 
-            <div class="link-box col col-md-2 col-sm-6 col-10">
+            <div class="link-box col col-md-2 col-6">
                 <div class="title">Resources</div>
                 <ul>
                     <li> <a href="<?= $config -> rootUrl() ;?>member" title="Trouver un membre">Membres</a> </li>
@@ -43,7 +43,7 @@
                 </ul>
             </div>
 
-            <div class="link-box col col-md-2 col-sm-6 col-10">
+            <div class="link-box col col-md-2 col-6">
                 <div class="title">A propos</div>
                 <ul>
                     <li> <a href="<?= $config -> rootUrl() ;?>about" title="Aprenez en plus sur Improove">A propos d’Improove</a> </li>
@@ -52,7 +52,7 @@
                 </ul>
             </div>
 
-            <div class="link-box col col-md-2 col-sm-6 col-10">
+            <div class="link-box col col-md-2 col-6">
                 <div class="title">Légal et sécurité</div>
                 <ul>
                     <li> <a href="<?= $config -> rootUrl() ;?>rgpd" title="Nos engagements envers le RGPD">RGPD</a> </li>
@@ -63,7 +63,7 @@
                 </ul>
             </div>
 
-            <div class="link-box col col-md-2 col-sm-6 col-10">
+            <div class="link-box col col-md-2 col-6">
                 <div class="title">Contact</div>
                 <ul>
                     <li> <a href="<?= $config -> rootUrl() ;?>contact?for=help" title="Nous contacter pour de l'aide">Besoin d’aide</a> </li>

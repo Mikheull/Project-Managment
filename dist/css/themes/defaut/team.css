@@ -1,0 +1,24 @@
+.team_hub {padding: 20vh 0;text-align: center}
+.team_hub .nice-select {margin: 5vh 25%;width: 50%;}
+.team_hub .nice-select .list {width: 100%;}
+
+/* Erreur home de projet */
+.error .content:first-of-type {text-align: center}
+.error .content {margin: 10vh 0}
+.error .content p {margin: 2vh 0}
+
+
+/* Liste de projet vide */
+.team_empty {width: 100%;text-align: center;margin: 5vh 0}
+.team_empty span {display: block;font-size: 1.1em;margin: 2vh 0}
+
+
+@media (max-width: 767px) {
+    .error .content {margin: 10vh 0 5vh;text-align: center}
+
+}
+
+@media (max-width: 568px) {
+    .error .content {margin: 10vh 0 5vh;text-align: center}
+
+}

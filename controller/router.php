@@ -65,11 +65,25 @@ $router -> addRoutes(
         [ 'route' => 'member/{{USER_NAME}}/followers', 'dir_path' => 'view/content/member/followers/'],
         [ 'route' => 'member/{{USER_NAME}}/following', 'dir_path' => 'view/content/member/following/'],
 
-        [ 'route' => 'team', 'dir_path' => 'view/content/team/home/'],
-        [ 'route' => 'team/{{TEAM_TOKEN}}', 'dir_path' => 'view/content/team/dashboard/'],
-        [ 'route' => 'team/{{TEAM_TOKEN}}/edit', 'dir_path' => 'view/content/team/edit/'],
 
-        [ 'route' => 'app', 'dir_path' => 'view/content/project/new/'],
+        [ 'route' => 'app', 'dir_path' => 'view/content/app/dashboard/'],
+        
+        [ 'route' => 'app/new-team', 'dir_path' => 'view/content/app/team/new/'],
+        [ 'route' => 'app/team', 'dir_path' => 'view/content/app/team/select/'],
+        [ 'route' => 'app/team/{{TEAM_TOKEN}}', 'dir_path' => 'view/content/app/team/home/'],
+        [ 'route' => 'app/team/{{TEAM_TOKEN}}/overview', 'dir_path' => 'view/content/app/team/overview/'],
+        [ 'route' => 'app/team/{{TEAM_TOKEN}}/members', 'dir_path' => 'view/content/app/team/members/'],
+        [ 'route' => 'app/team/{{TEAM_TOKEN}}/roles', 'dir_path' => 'view/content/app/team/roles/'],
+        [ 'route' => 'app/team/{{TEAM_TOKEN}}/messenger', 'dir_path' => 'view/content/app/team/messenger/'],
+        [ 'route' => 'app/team/{{TEAM_TOKEN}}/plugins', 'dir_path' => 'view/content/app/team/plugins/'],
+        [ 'route' => 'app/team/{{TEAM_TOKEN}}/activity', 'dir_path' => 'view/content/app/team/activity/'],
+        [ 'route' => 'app/team/{{TEAM_TOKEN}}/settings', 'dir_path' => 'view/content/app/team/settings/'],
+
+        [ 'route' => 'app/project', 'dir_path' => 'view/content/app/project/home/'],
+
+
+
+        // [ 'route' => 'app', 'dir_path' => 'view/content/project/new/'],
         [ 'route' => 'app/{{PROJECT_TOKEN}}', 'dir_path' => 'view/content/project/home/'],
         [ 'route' => 'app/{{PROJECT_TOKEN}}/edit', 'dir_path' => 'view/content/project/edit/'],
         [ 'route' => 'app/{{PROJECT_TOKEN}}/t/gestion-projet', 'dir_path' => 'view/content/project/tools/gestion-projet/home/'],

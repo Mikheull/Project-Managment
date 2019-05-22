@@ -52,7 +52,31 @@ class team extends db_connect {
             'count' => $count, 
             'content' => $res
         ]);
-    }  
+    } 
+
+
+    
+    /**
+     * Récupère les utilisateurs d'une équipe
+     * 
+     * Va renvoyer tout les utilisateurs d'une équipe
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $team_token Token de la team
+     * @return array
+     */
+    
+    function getTeamMembers($team_token = '') {
+        $request = $this -> _db -> query("SELECT * FROM `pr_team_member` WHERE `team_token` = '$team_token' ");
+        $res = $request->fetchAll();
+        $count = $request->rowCount();
+
+        return ([ 
+            'count' => $count, 
+            'content' => $res
+        ]);
+    }
 
 /******************************************************************************/
 
@@ -190,7 +214,7 @@ class team extends db_connect {
         $count = $req->rowCount();
 
         if($count !== 1){
-            return (['success' => false, 'message' => ['text' => 'Une erreur est survenue !', 'theme' => 'dark', 'timeout' => 2000] ]);
+            return (['success' => false, 'message' => ['text' => "Une erreur est survenue !", 'theme' => 'dark', 'timeout' => 2000] ]);
         }
     }  
 
@@ -199,6 +223,44 @@ class team extends db_connect {
 
 
 /******************************************************************************/
+
+    /**
+     * Invite un membre
+     * 
+     * Invite un utilisateur dans une équipe
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $user_token Token de l'utilisateur
+     * @param string $team_token Token de la team
+     * @param string $message Message customisé
+     * @return array
+     */
+
+    function inviteMember($user_token = '', $team_token = '', $message = '') { 
+
+        $request = $this -> _db -> query("SELECT * FROM `pr_team_member` WHERE `team_token` = '$team_token' AND `user_public_token` = '$user_token' ");
+        $res = $request->fetch();
+
+        if($res){
+            return (['success' => true, 'message' => ['text' => "L\'utilisateur est déjà dans l\'équipe !", 'theme' => 'dark', 'timeout' => 2000] ]);
+        }else{
+
+            $request = $this -> _db -> query("SELECT * FROM `pr_invitation_team` WHERE `team_token` = '$team_token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
+            $res = $request->fetch();
+            if($res){
+                return (['success' => false, 'message' => ['text' => "Une invitation lui a déjà été envoyé !", 'theme' => 'dark', 'timeout' => 2000] ]);
+            }else{
+                $request = $this -> _db -> exec("INSERT INTO `pr_invitation_team` (`team_token`, `user_public_token`, `message`) VALUES ('$team_token', '$user_token', '$message')");
+                return (['success' => true, 'message' => ['text' => "Vous avez envoyer l\'invitation !", 'theme' => 'dark', 'timeout' => 2000] ]);
+            }
+            
+        }
+
+
+    }
+
+
 
     /**
      * Envoi une réponse a une invation d'équipe
@@ -225,14 +287,46 @@ class team extends db_connect {
             
             if($choose == 'accept'){
                 $request = $this -> _db -> exec("INSERT INTO `pr_team_member` (`team_token`, `user_public_token`) VALUES ('$token', '$user_token')");
-                return (['success' => true, 'message' => ['text' => 'Vous avez accepter l invitation !', 'theme' => 'dark', 'timeout' => 2000] ]);
+                return (['success' => true, 'message' => ['text' => "Vous avez accepter l\'invitation !", 'theme' => 'dark', 'timeout' => 2000] ]);
             }else if($choose == 'decline'){
-                return (['success' => true, 'message' => ['text' => 'Vous avez refuser l invitation !', 'theme' => 'dark', 'timeout' => 2000] ]);
+                return (['success' => true, 'message' => ['text' => "Vous avez refuser l\'invitation !", 'theme' => 'dark', 'timeout' => 2000] ]);
             }
         }
 
-        return (['success' => false, 'message' => ['text' => 'Une erreur est survenue !', 'theme' => 'dark', 'timeout' => 2000] ]);
+        return (['success' => false, 'message' => ['text' => "Une erreur est survenue !", 'theme' => 'dark', 'timeout' => 2000] ]);
     }  
+
+
+
+    /**
+     * Créer une équipe
+     * 
+     * Crée une équipe en ajoutant le créateur dedans
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $name Nom de l'équipe
+     * @param string $desc Description de l'équipe
+     * @return array
+     */
+
+    function createTeam($name = '', $desc = '') {
+        $owner = $this -> getToken();
+        $token = $this -> generateToken(10, 'numbers');
+
+        $request = $this -> _db -> query("SELECT * FROM `pr_team` WHERE `name` = '$name' AND `enable` = '1' ");
+        $res = $request->fetch();
+        
+        if(!$res){
+            $request = $this -> _db -> exec("INSERT INTO `pr_team` (`name`, `description`, `public_token`, `founder_token`) VALUES ('$name', '$desc', '$token', '$owner')");
+            $request = $this -> _db -> exec("INSERT INTO `pr_team_member` (`user_public_token`, `team_token`, `role`) VALUES ('$owner', '$token', '1')");
+            return (['success' => true, 'message' => ['text' => "L\'équipe a été crée !", 'theme' => 'dark', 'timeout' => 2000] ]);
+        }else{
+            return (['success' => false, 'message' => ['text' => "Une équipe avec ce même nom existe déjà !", 'theme' => 'dark', 'timeout' => 2000] ]);
+        }
+    }  
+    
+
     
 /******************************************************************************/
 

@@ -115,6 +115,26 @@ class user extends db_connect {
 
 
     /**
+     * Vérifie si un user existe
+     * 
+     * Vérifie si un user existe déjà dans la base de données selon son token
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $token token public de l'utilisateur
+     * @return boolean
+     */
+    
+    function userExist($token = '') {
+        $request = $this -> _db -> query("SELECT * FROM `imp_user` WHERE `public_token` = '$token' ");
+        $res = $request->fetch();
+
+        return ($res ? true : false);
+    }
+
+
+
+    /**
      * Modifie les infos
      * 
      * Va modifier les infos de l'utilisateur

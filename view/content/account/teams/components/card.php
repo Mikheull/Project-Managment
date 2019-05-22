@@ -18,7 +18,7 @@
             <span>Créer le <?= date("d M Y", strtotime($team -> getTeamData($t['team_token'], 'date_begin') )) ;?> par <strong><?= $user -> getUserData($_SESSION['user_token'], 'first_name') .' '. $user -> getUserData($_SESSION['user_token'], 'last_name') ;?></strong></span>
         </div>
 
-        <a href="<?= $config -> rootUrl() ;?>team/<?= $t['team_token'] ?>"> <i class="fas fa-external-link-alt"></i> </a>
+        <a href="<?= $config -> rootUrl() ;?>app/team/<?= $t['team_token'] ?>"> <i class="fas fa-external-link-alt"></i> </a>
         <span class="date">Créer le <?= date("d M Y", strtotime($team -> getTeamData($t['team_token'], 'date_begin') )) ;?></span>
     </div>
     

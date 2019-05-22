@@ -5,7 +5,7 @@
                 <form method="POST" action="team">
                     <div class="input-field">
                         <label for="project_token">Invitation</label>
-                        <input type="text" placeholder="AO1P2K" name="project_token" id="project_token">
+                        <input type="text" placeholder="code" name="project_token" id="project_token">
                     </div>
                 </form>
             </div>

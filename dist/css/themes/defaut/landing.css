@@ -2,8 +2,8 @@
 .home_pre {margin: 10vh auto;min-height: 70vh;}
 .home_pre .left h2 {font-size: 2.5rem;font-family: 'Poppins', sans-serif;color: #394165;font-weight: bold}
 .home_pre .left h3 {font-size: 1.2rem;font-family: 'Poppins', sans-serif;color: #ABBAC8;margin-top: 15px}
-.home_pre .left .btn {margin-top: 5vh;display: inline-block}
-.home_pre .left .btn:first-of-type {margin-right: 2rem}
+.home_pre .left .btns {margin-top: 5vh;display: inline-block}
+.home_pre .left .btns:first-of-type {margin-right: 2rem}
 
 .home_partners {text-align: center}
 .home_partners .partners-content {border: solid 1px #e9e9e9;padding: 1vh 0 3vh;border-radius: 6px}
@@ -11,13 +11,34 @@
 .home_partners img {transition-duration: .5s;width: 80%}
 .home_partners img:hover {transform: scale(1.07);transition-duration: .5s}
 
-.home_presentation {margin: 20vh auto}
 .home_presentation .pres-element {margin: 20vh 0}
 .home_presentation .pres-element .heading h2 {margin: 0 0 15px 20px;font-weight: bold;font-family: 'Poppins', sans-serif}
 .home_presentation .pres-element .heading p {color: #ABBAC8;width: 70%}
 .home_presentation .pres-element .illustration {text-align: right}
 .home_presentation .pres-element .illustration:nth-child(odd) {text-align: left}
 
+
+@media (max-width: 767px) {
+
+}
+
+@media (max-width: 568px) {
+    .home_pre {margin: 2vh auto;}
+    .home_pre .left {text-align: center}
+    .home_pre .left h2 {font-size: 1.5rem;}
+    .home_pre .left h3 {font-size: .8rem;}
+    .home_pre .left .btns {margin: 5vh auto 0;display: inline-block}
+    .home_pre .left .btns:first-of-type {margin: 10vh auto 0}
+    .home_pre .right {margin: 10vh 0}
+
+    .home_partners .title {font-size: 1em;}
+
+    .home_presentation .pres-element {margin: 10vh auto}
+    .home_presentation .pres-element .heading h2 {margin: 0 0 15px 0;font-size: 1.5rem}
+    .home_presentation .pres-element .heading p {font-size: .8em;width: 100%}
+    .home_presentation .pres-element .illustration {margin: 20px 0;text-align: left}
+    
+}
 
 
 
@@ -32,27 +53,13 @@
 .page_head .buttons {margin: 5vh 0}
 
 
+@media (max-width: 767px) {
 
-.gray-bg {background: #F6F7FC;width: 100vw;padding: 4rem 0;margin: 5rem 0}
-.features {margin: 5rem auto;}
-.feature-content {padding: 15px;border: solid 1.5px rgba(112, 112, 112, 0.1);border-radius: 3px}
-.feature-content .heading {width: 100%}
-.feature-content .heading .icon {width: 48px;display: inline-block;}
-.feature-content .heading h3 {display: inline-block;font-size: 2rem;font-family: 'Poppins', sans-serif;color: #394165;font-weight: bold;margin-left: 20px}
-.feature-content .text-content {margin: 2rem 0 2rem 5rem}
-.feature-content .buttons {display: block;text-align: center}
+}
 
-.feature-content .btn-yellow {background: #FFCA28;color: #FFF}
-.feature-content .btn-yellow:hover {background: #ffd145;color: #FFF}
-.feature-content .btn-red {background: #FF5A28;color: #FFF}
-.feature-content .btn-red:hover {background: #fc6b3f;color: #FFF}
-.feature-content .btn-blue {background: #2862FF;color: #FFF}
-.feature-content .btn-blue:hover {background: #4374fd;color: #FFF}
-.feature-content .btn-green {background: #2EB915;color: #FFF}
-.feature-content .btn-green:hover {background: #42d429;color: #FFF}
-.feature-content .btn-purple {background: #9C28FF;color: #FFF}
-.feature-content .btn-purple:hover {background: #a43ffc;color: #FFF}
-.feature-content .btn-brown {background: #B94715;color: #FFF}
-.feature-content .btn-brown:hover {background: #d65b27;color: #FFF}
-.feature-content .btn-gray {background: #E8E8E8;color: #000}
-.feature-content .btn-gray:hover {background: #f5f4f4;color: #000}
+@media (max-width: 568px) {
+    .page_head {margin: 2vh auto;}
+    .page_head h2 {font-size: 1.5rem;}
+    .page_head img {height: auto;width: 80%;margin: 5vh 0}
+
+}

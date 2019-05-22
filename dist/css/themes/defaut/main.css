@@ -16,6 +16,8 @@
     --secondary-color: #EE635D;
     --black-color: #394165;
     --light-black-color: #444d74;
+    --black-background-color: #262E3E;
+    --light-background-color: #F6F7FC;
 }
 ::selection { color: var(--primary-color);}
 
@@ -67,13 +69,12 @@ strong {font-weight: bold}
 
 
 .btn {border: none;cursor: pointer;padding: 10px 15px;border-radius: 3px;width: max-content;}
-.primary-btn {border: none;cursor: pointer;background: var(--primary-color);color: #FFF;padding: 10px 15px;border-radius: 3px;width: max-content;}
+.primary-btn {border: none;cursor: pointer;background: var(--primary-color);color: #FFF !important;padding: 10px 15px;border-radius: 3px;width: max-content;}
 .primary-btn:hover {background: var(--light-primary-color);color: #FFF}
-.light-btn {border: none;cursor: pointer;background: #FFF;color: var(--light-primary-color);padding: 10px 15px;border-radius: 3px;width: max-content;}
+.light-btn {border: solid 1px #e0e0e0;cursor: pointer;background: #FFF;color: var(--light-primary-color);padding: 10px 15px;border-radius: 3px;width: max-content;}
 .light-btn:hover {background: #FFF;color: var(--light-primary-color)}
-.light-border-btn {border: solid 1px #ABBAC8;color: #262E3E}
 
-.dark-btn {background: var(--black-color);color: #FFF}
+.dark-btn {background: var(--black-color);color: #FFF !important}
 .dark-btn:hover {background: var(--light-black-color);color: #FFF}
 
 .red-btn {border: none;cursor: pointer;background: #DB2323;color: #FFF;padding: 10px 15px;border-radius: 3px;width: max-content;}
@@ -121,13 +122,25 @@ a:hover {color: #262E3E}
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
 @media (max-width: 1199px) {
-
+    #footer .navbar-brand text {display: none}
+    #footer .navbar-nav {display: none}
 }
 
 @media (max-width: 767px) {
     .navbar-header .navbar-brand text {display: none}
     .navbar-header .navbar-nav {display: none}
     .navbar-resp-nav {display: flex;justify-content: flex-end;margin: 20px 2rem}
+
+    #footer .navbar-brand text {display: block}
+    #footer .navbar-nav {display: block;}
+    #footer .navbar-brand svg {width: 100%;margin: 4vh auto}
+    #footer .link-box {margin-bottom: 25px;}
+    #footer .link-box .title {font-size: 1em;}
+    #footer .link-box ul li {font-size: .7em;margin-bottom: .6rem}
+    .btn {padding: 10px;font-size: .8em}
+    .btn a {padding: 10px;}
+
+
 }
 @media (max-width: 568px) {
     

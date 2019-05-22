@@ -25,7 +25,6 @@
                     <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>features" title="Découvrir les fonctionnalités">Fonctionnalités</a> </li>
                     <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>pricing" title="Découvrez nos tarifs">Tarifs</a> </li>
                     <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>" title="Renseignez vous sur la doc">Documentation</a> </li>
-                    <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>team" title="Gérez vos équipes">Équipes</a> </li>
                     <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>app" title="Aller sur la plateforme">App</a> </li>
                     <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>download" title="Télécharger l'application">Télécharger</a> </li>
                 </ul>
