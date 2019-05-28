@@ -28,6 +28,7 @@ Lorsque vous utilisez un service proposé par Improove, nous récupérons quelqu
 <hr>
 
 **imp_role**
+
 | nom | type | défaut | explications
 |--|--|--|--|
 | ID | Int | %auto-increment% | ID unique |
