@@ -1,3 +1,11 @@
+
+## EU Privacy Summary (GDPR)
+
+Lorsque vous utilisez un service proposé par Improove, nous récupérons quelques données de navigation et d'utilisation, aussi appelés "cookies".
+
+
+
+
 ## SQL_STRUCTURE
 
 **imp_user**
@@ -57,6 +65,55 @@
 
 <hr>
 
+**imp_follow**
+
+| nom | type | défaut | explications
+|--|--|--|--|
+| ID | Int | %auto-increment% | ID unique |
+| follower | Varchar |  | Token public de l'utilisateur A |
+| following | Varchar |  | Token public de l'utilisateur B |
+| date | DateTime | now | Date du follow |
+| enable | Boolean | true | Status du follow (actif - pas actif) |
+
+<hr>
+
+**imp_blocked**
+
+| nom | type | défaut | explications
+|--|--|--|--|
+| ID | Int | %auto-increment% | ID unique |
+| user_public_token | Varchar |  | Token public de l'utilisateur A |
+| blocked_user_token | Varchar |  | Token public de l'utilisateur B |
+| date | DateTime | now | Date du bloquage |
+| enable | Boolean | true | Status du bloquage (actif - pas actif) |
+
+<hr>
+
+**imp_newsletter**
+
+| nom | type | défaut | explications
+|--|--|--|--|
+| ID | Int | %auto-increment% | ID unique |
+| email | Varchar |  | Email de l'utilisateur |
+| date | DateTime | now | Date de l'inscription |
+| enable | Boolean | true | Status de l'inscription (actif - pas actif) |
+
+<hr>
+
+**imp_notification**
+
+| nom | type | défaut | explications
+|--|--|--|--|
+| ID | Int | %auto-increment% | ID unique |
+| user_public_token | Varchar |  | Token public de l'utilisateur qui reçois |
+| date | DateTime | now | Date de la réponse |
+| type | Varchar |  | Type de la notification (follow ...) |
+| content | Text |  | Contenu de la notification |
+| n_read | Boolean | false | Status du vue (true - false) |
+| enable | Boolean | true | Status de la notification (actif - pas actif) |
+
+<hr>
+
 **pr_invitation_team**
 
 | nom | type | défaut | explications
@@ -85,41 +142,55 @@
 
 <hr>
 
-**imp_friend**
+**pr_team**
 
 | nom | type | défaut | explications
 |--|--|--|--|
 | ID | Int | %auto-increment% | ID unique |
-| user_token_a | Varchar |  | Token public de l'utilisateur A |
-| user_token_b | Varchar |  | Token public de l'utilisateur B |
-| date_begin | DateTime | now | Date de la demande |
-| date_end | DateTime | NULL | Date de la réponse |
-| enable | Boolean | true | Status de la demande (1 = pending / 2 = ami) |
+| name | Varchar |  | Nom de l'équipe |
+| description | Varchar | now | Description de l'équipe |
+| public_token | Varchar |  | Token public de l'équipe |
+| custom-url | Varchar | NULL | URL custom pour l'équipe |
+| date_begin | Date | now | Date de création |
+| public | Boolean | true | Public ou Privé (true - false) |
+| founder_token | Varchar |  | Token du créateur |
+| enable | Boolean | true | Status de la team (actif - pas actif) |
 
+<hr>
 
-## URL_STRUCTURE
+**pr_team_member**
 
-| nom | url
-|--|--|
-| accueil | / |
-| pricing | /pricing |
-| features | /features |
-| contact | /contact |
-| contact avec paramètre | /contact?for=details |
-| download | /download |
-| developers | /developers |
-| help | /help |
-| article d'aide | /help/Article-unique-name |
-| CGV | /cgv |
-| CGU | /cgu |
-| privacy-policy | /privacy-policy |
-| rgpd | /rgpd |
-| security | /security |
-| login | /login |
-| login avec paramètre | /login?return_url=pricing |
-| logout | /logout |
-| register | /register |
-| reset-password | /reset-password |
-| new-password | /new-password/user-token/reset-token |
-| account | /account |
-| account/edit | account/edit |
+| nom | type | défaut | explications
+|--|--|--|--|
+| ID | Int | %auto-increment% | ID unique |
+| user_public_token | Varchar |  | Token de l'utilisateur |
+| team_token | Varchar |  | Token de l'équipe |
+| role | Int | 2 | Roles de l'utilisateur |
+| date_joined | Date | now | Date d'arrivée |
+| enable | Boolean | true | Status du membre (actif - pas actif) |
+
+<hr>
+
+**pr_team_role**
+
+| nom | type | défaut | explications
+|--|--|--|--|
+| ID | Int | %auto-increment% | ID unique |
+| team_token | Varchar |  | Token de l'équipe |
+| name | Varchar |  | Nom du role |
+| role_token | Varchar(30) |  | Token du role (1039131919391338318 ...) |
+| permissions | Text |  | Permissions pour le role |
+| color | Varchar(6) | 394165 | Couleur du role |
+| date | Date | now | Date de création |
+| enable | Boolean | true | Status du role (actif - pas actif) |
+
+<hr>
+
+**imp_permission**
+
+| nom | type | défaut | explications
+|--|--|--|--|
+| ID | Int | %auto-increment% | ID unique |
+| permission | %unique% |  | permission |
+
+<hr>

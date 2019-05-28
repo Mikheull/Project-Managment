@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes"/>
+    
+    <meta name="robots" content="nosnippet"/>
+    <meta name="language" content="fr"/>
+    <meta name="author" content="Mikhaël Bailly"/>
+    <meta name="category" content="gestion, app, website"/>
+    <meta name="theme-color" content="#1971c2"/>
+
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://www.improove.io/<?= $_GET['query'] ;?>"/>
+    <meta property="twitter:url" content="https://www.improove.io/<?= $_GET['query'] ;?>"/>
+
+    <!-- Meta generated Begin -->
+    <?php $config -> getConfigMeta($exec_router['config_path']) ;?>
+    <!-- Meta generated End-->
+
+
+    <link rel="stylesheet" type="text/css" media="screen" href="<?= $config -> rootUrl() . $config -> includeCss('rcH84cbzfsjxE8db9Hjm.min.css', $config -> getTheme('front'), 'front');?>">
+    <link rel="stylesheet" type="text/css" media="screen" href="<?= $config -> rootUrl() . $config -> includeCss('bootstrap-grid.min.css', $config -> getTheme('front'), 'front');?>">
+    
+    <link rel="shortcut icon" href="<?= $config -> rootUrl() ;?>dist/images/favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600|Poppins:300,400,500" rel="stylesheet">
+
+    <?php if($config -> getConfigLib($exec_router['config_path'],'fontawesome') == true){?> <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"> <?php } ;?>
+    <?php if($config -> getConfigLib($exec_router['config_path'],'feather-icons') == true){?> <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script> <?php } ;?>
+    <?php if($config -> getConfigLib($exec_router['config_path'],'jquery') == true){?> <script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script> <?php } ;?>
+    <?php if($config -> getConfigLib($exec_router['config_path'],'popper') == true){?> <script src="https://unpkg.com/popper.js@1"></script> <?php } ;?>
+    <?php if($config -> getConfigLib($exec_router['config_path'],'tippy') == true){?> <script src="https://unpkg.com/tippy.js@4"></script> <?php } ;?>
+    <?php if($config -> getConfigLib($exec_router['config_path'],'nice-select') == true){?> <script src="https://cdn.jsdelivr.net/npm/jquery-nice-select@1.1.0/js/jquery.nice-select.min.js"></script> <?php } ;?>
+    <?php if($config -> getConfigLib($exec_router['config_path'],'fakeLoader') == true){?> <script src="https://cdn.jsdelivr.net/npm/jq-fakeloader@2.0.1/js/fakeLoader.js"></script> <?php } ;?>
+    <?php if($config -> getConfigLib($exec_router['config_path'],'modaal') == true){?> <script src="https://cdn.jsdelivr.net/npm/modaal@0.4.4/dist/js/modaal.min.js"></script> <?php } ;?>
+
+    <!-- CSS generated Begin -->
+    <?php $config -> getConfigCss($exec_router['config_path']) ;?>
+    <!-- CSS generated End -->
+</head>
+
+
+
+<body>
+
+    <?php 
+        // La variable viens du fichier router
+        if($config -> renderMustBeConnected($exec_router['config_path']) == false OR $auth -> isConnected() == true){
+            require ($require_url);
+        }else{
+            $return_url = '';
+            foreach($router -> getRouteParam() as $p){ $return_url .= $p.'%2F';}
+            header('location: '. $config -> rootUrl() .'login?return_url='. $return_url);
+        }
+    ?>
+
+
+    <script src="<?= $config -> rootUrl() ;?>dist/js/main.js"></script>
+    <script> <?php if(isset($errors)){ ?> $( document ).ready(function() { popMessage('<?= $errors['message']['text'] ;?>', '<?= $errors['message']['theme'] ;?>', <?= $errors['message']['timeout'] ;?>) });  <?php } ?> </script>
+
+    <!-- Scripts generated Begin -->
+    <?php $config -> getConfigScript($exec_router['config_path']) ;?>
+</body>
+</html>

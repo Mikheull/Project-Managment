@@ -6,7 +6,7 @@
  * Il gère les méthodes relative a la class sendmail
  * 
  * utilisé dans :
- *  (Direct) - view/content/landing/contact/index.php
+ *  (Direct) - view/landing/contact/index.php
  * 
  */
 
@@ -23,7 +23,7 @@ $sendmail = new sendmail($db);
 /**
  * Formulaire de contact
  * 
- * @fichier d'execution = view/content/landing/contact/index.php
+ * @fichier d'execution = view/landing/contact/index.php
  * @variable d'execution = $_POST['new-send_contact_button']        : type = button
  * 
  * @variable obligatoire = $_POST['password']                       : type = password

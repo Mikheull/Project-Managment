@@ -60,7 +60,7 @@ class friend extends db_connect {
         $notif_content = 
             [
                 'sender' => $follower,
-                'message' => $follower.' vous suit désormais'
+                'message' => '%user% vous suit désormais'
             ];
         $notif_content = json_encode($notif_content);
         $exec = $this -> _db -> exec("INSERT INTO `imp_notification`( `user_public_token`, `type`, `content`) VALUES ('$following', 'follow', '$notif_content') ");
@@ -82,7 +82,7 @@ class friend extends db_connect {
 
     function unfollow($follower, $following) {
 
-        $req = $this -> _db -> prepare("DELETE FROM `imp_follow` WHERE (`follower` = :follower AND `following` = :following) OR (`follower` = :following AND `following` = :follower) AND `status` = '1' ");
+        $req = $this -> _db -> prepare("DELETE FROM `imp_follow` WHERE (`follower` = :follower AND `following` = :following) OR (`follower` = :following AND `following` = :follower) AND `enable` = '1' ");
 
         $req->bindParam(':follower', $follower);
         $req->bindParam(':following', $following);

@@ -1,0 +1,33 @@
+{
+    "use_generic_meta": false,
+    "must_be_logged": false,
+
+    "libs": [
+        "jquery",
+        "fontawesome",
+        "feather-icons",
+        "popper",
+        "tippy"
+    ],
+    
+    "meta": [ 
+        "<title>Improove - Règles de confidentialité</title>",
+        "<meta name='description' content='Consultez nos règles de confidentialité.'/>",
+        "<meta property='og:title' content='Improove - Règles de confidentialité'/>",
+        "<meta property='og:description' content='Consultez nos règles de confidentialité.'/>",
+        "<meta property='og:image' content='https://www.improove.io/dist/images/og_bg.png'/>",
+        "<meta property='og:image:width' content='128'/>",
+        "<meta property='og:image:height' content='128'/>",
+
+        "<meta property='twitter:card' content='summary_large_image'/>",
+        "<meta property='twitter:title' content='Improove - Règles de confidentialité'/>",
+        "<meta property='twitter:description' content='Consultez nos règles de confidentialité.'/>",
+        "<meta property='twitter:image' content='https://www.improove.io/dist/images/og_bg.png'/>"
+
+    ],
+
+    "css": [ 
+        "legals.min.css"
+    ]
+
+}

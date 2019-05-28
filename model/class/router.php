@@ -156,6 +156,7 @@ class router {
 
     function getRouteParam($position = 'all'){
         $params = explode( '/', $_SERVER['QUERY_STRING']);
+        $params[0] = str_replace("query=", '', $params[0]);
         
         return ($position == 'all' ? $params : $params[$position]);
     }

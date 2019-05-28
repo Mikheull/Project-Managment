@@ -14,7 +14,7 @@
  *  (Direct) - view/content/team/dashboard/index.php
  *  (Direct) - view/content/team/edit/index.php
  *  (Direct) - view/content/team/home/components/home.php
- *  (Direct) - view/content/team/homeindex.php
+ *  (Direct) - view/content/team/home/index.php
  * 
  */
 
@@ -84,17 +84,21 @@ if(isset($_POST['decline_invitation'])){
  * @fichier d'execution = view/content/app/team/members/components/home.php
  * @variable d'execution = $_POST['invite_member']                      : type = button
  * 
- * @variable obligatoire = $_POST['user_token']                         : type = text
+ * @variable obligatoire = $_POST['user_mail']                          : type = mail
  * 
  */
 if(isset($_POST['invite_member'])){
-    if(isset($_POST['user_token']) AND !empty($_POST['user_token'])){
+    if(isset($_POST['user_mail']) AND !empty($_POST['user_mail'])){
 
-        $user_token = htmlentities(addslashes($_POST['user_token']));
-        $team_token = $router -> getRouteParam('2');
+        $user_mail = htmlentities(addslashes($_POST['user_mail']));
+        if(isset($_POST['team_token']) AND !empty($_POST['team_token'])){
+            $team_token = htmlentities(addslashes($_POST['team_token']));
+        }else{
+            $team_token = $router -> getRouteParam('2');
+        }
 
-        if($user -> userExist($user_token) == true){
-            $errors = $team -> inviteMember($user_token, $team_token, "Je t\'invite dans ma team Khoya");
+        if($auth -> emailExist($user_mail) == true){
+            $errors = $team -> inviteMember($user_mail, $team_token, "Je t\'invite dans ma team Khoya");
         }else{
             $errors = ['success' => false, 'message' => ['text' => "L\'utilisateur n\'existe pas !", 'theme' => 'dark', 'timeout' => 2000] ];
         }
@@ -114,15 +118,17 @@ if(isset($_POST['invite_member'])){
  * 
  * @variable obligatoire = $_POST['name']                               : type = text
  * @variable obligatoire = $_POST['desc']                               : type = text
+ * @variable obligatoire = $_POST['status']                             : type = radio
  * 
  */
 if(isset($_POST['create_team'])){
-    if(isset($_POST['name']) AND !empty($_POST['name']) AND isset($_POST['desc']) AND !empty($_POST['desc'])){
+    if(isset($_POST['name']) AND !empty($_POST['name']) AND isset($_POST['desc']) AND !empty($_POST['desc']) AND isset($_POST['status']) AND !empty($_POST['status'])){
 
         $name = htmlentities(addslashes($_POST['name']));
         $desc = htmlentities(addslashes($_POST['desc']));
+        $status = htmlentities(addslashes($_POST['status']));
 
-        $errors = $team -> createTeam($name, $desc);
+        $errors = $team -> createTeam($name, $desc, $status);
 
     }else{
         $errors = ['success' => false, 'message' => ['text' => "Vous devez remplir tout les champs obligatoires !", 'theme' => 'dark', 'timeout' => 2000] ];

@@ -6,13 +6,13 @@
  * Il gère les méthodes relative a la class friend
  * 
  * utilisé dans :
- *  (Direct) - view/content/account/followers/index.php
- *  (Direct) - view/content/account/following/index.php
- *  (Direct) - view/content/member/followers/index.php
- *  (Direct) - view/content/member/followers/index.php
- *  (Direct) - view/content/member/home/index.php
- *  (Direct) - view/content/member/projects/index.php
- *  (Direct) - view/content/member/teams/index.php
+ *  (Direct) - view/account/followers/index.php
+ *  (Direct) - view/account/following/index.php
+ *  (Direct) - view/member/followers/index.php
+ *  (Direct) - view/member/followers/index.php
+ *  (Direct) - view/member/home/index.php
+ *  (Direct) - view/member/projects/index.php
+ *  (Direct) - view/member/teams/index.php
  * 
  */
 
@@ -29,7 +29,7 @@ $friend = new friend($db);
 /**
  * Formulaire pour suivre un utilisateur
  * 
- * @fichier d'execution = view/content/member/(*)/index.php
+ * @fichier d'execution = view/member/(*)/index.php
  * @variable d'execution = $_POST['follow']                         : type = button
  * 
  */
@@ -42,7 +42,7 @@ if(isset($_POST['follow'])){
 /**
  * Formulaire pour arreter de suivre un utilisateur
  * 
- * @fichier d'execution = view/content/member/(*)/index.php
+ * @fichier d'execution = view/member/(*)/index.php
  * @variable d'execution = $_POST['unfollow']                       : type = button
  * 
  */

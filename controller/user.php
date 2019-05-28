@@ -23,7 +23,7 @@ $user = new user($db);
 /**
  * Formulaire pour editer son mot de passe
  * 
- * @fichier d'execution = view/content/account/edit/index.php
+ * @fichier d'execution = view/account/edit/index.php
  * @variable d'execution = $_POST['update_user_pass']                   : type = button
  * 
  * @variable obligatoire = $_POST['old_password']                       : type = password
@@ -64,7 +64,7 @@ if(isset($_POST['update_user_pass'])){
 /**
  * Formulaire pour editer ses informations
  * 
- * @fichier d'execution = view/content/account/edit/index.php
+ * @fichier d'execution = view/account/edit/index.php
  * @variable d'execution = $_POST['update_user_infos']                  : type = button
  * 
  * @variable obligatoire = $_POST['first_name']                         : type = text
@@ -104,7 +104,7 @@ if(isset($_POST['update_user_infos'])){
 /**
  * Formulaire pour bloquer un utilisateur
  * 
- * @fichier d'execution = view/content/member/(*)/index.php
+ * @fichier d'execution = view/member/(*)/index.php
  * @variable d'execution = $_POST['block']                              : type = button
  * 
  */
@@ -117,7 +117,7 @@ if(isset($_POST['block'])){
 /**
  * Formulaire pour débloquer un utilisateur
  * 
- * @fichier d'execution = view/content/member/(*)/index.php
+ * @fichier d'execution = view/member/(*)/index.php
  * @variable d'execution = $_POST['unblock']                            : type = button
  * 
  */

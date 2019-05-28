@@ -22,7 +22,7 @@ $auth = new authentication($db);
 /**
  * Formulaire de connexion
  * 
- * @fichier d'execution = view/content/auth/login/index.php
+ * @fichier d'execution = view/auth/login/index.php
  * @variable d'execution = $_POST['login_btn']          : type = button
  * 
  * @variable obligatoire = $_POST['email']              : type = email
@@ -50,7 +50,7 @@ if(isset($_POST['login_btn'])){
 /**
  * Formulaire d'inscription
  * 
- * @fichier d'execution = view/content/auth/register/index.php
+ * @fichier d'execution = view/auth/register/index.php
  * @variable d'execution = $_POST['register_btn']           : type = button
  * 
  * @variable obligatoire = $_POST['username']               : type = text
@@ -92,7 +92,7 @@ if(isset($_POST['register_btn'])){
 /**
  * Formulaire de reset de mot de passe
  * 
- * @fichier d'execution = view/content/auth/reset-password/index.php
+ * @fichier d'execution = view/auth/reset-password/index.php
  * @variable d'execution = $_POST['reset-password_btn']     : type = button
  * 
  * @variable obligatoire = $_POST['email']                  : type = email
@@ -119,7 +119,7 @@ if(isset($_POST['reset-password_btn'])){
 /**
  * Formulaire de modification de mot de passe
  * 
- * @fichier d'execution = view/content/auth/new-password/index.php
+ * @fichier d'execution = view/auth/new-password/index.php
  * @variable d'execution = $_POST['new-password_btn']       : type = button
  * 
  * @variable obligatoire = $_POST['password']               : type = password

@@ -22,7 +22,6 @@
 
 /* Team */
 .team {width: 100%;padding: 10vh 15px 3vh;border-bottom: solid 2px rgba(232, 232, 232, 0.3)}
-.team .col {display: flex;justify-content: space-between}
 .team .nav-left h3 {font-size: 1.5em;font-family: 'Poppins', sans-serif;color: #394165}
 .team .nav-left small {font-size: .9em;color: rgba(57, 65, 101, 0.6)}
 .team .nav-right a {margin: 0 5px;font-size: .7em}
@@ -34,25 +33,43 @@
 
 .team-container {margin: 10vh 0rem;width: 100% }
 
-.block-item {height: auto;width: 100%;border-radius: 6px;border: solid 2px #EFEFEF;margin-bottom: 25px }
-.block-item .heading {height: 100px;padding: 15px }
-.block-item .heading .fs-line {display: flex;justify-content: space-between }
-.block-item .heading .team_profilImage {background: var(--primary-color);width: 48px;height: 48px;border-radius: 100%;color: #FFF;text-align: center;line-height: 48px}
-.block-item .heading .actions i {font-size: 1.2em;margin: 10px;color: #394165}
-.block-item .heading .name {font-size: 1.2em;margin: 10px 0;padding-bottom: 5px;color: #394165;border-bottom: solid 2px #F9F9F9}
-.block-item .body {height: 100px;padding: 15px;font-size: .7em;color: rgba(57, 65, 101, 0.7);border-bottom: solid 2px #F9F9F9 }
-.block-item .footer {height: 100px;padding: 15px; }
+.block-item {height: auto;width: 48%;border-radius: 6px;border: solid 2px #EFEFEF;margin-bottom: 25px;background: var(--light-background-color)}
+.block-item:nth-child(odd) {margin-right: 2%;}
+.block-item:nth-child(even) {margin-left: 2%;}
 
-.block-item .invitation {filter: blur(2px);}
-.block-item .overlay {position: absolute;top: 0;}
-.block-item .overlay .heading {height: 200px;text-align: center;font-size: 1.5rem;margin-top: 35px}
+.block-item .heading {height: auto;padding: 15px;margin: 0 }
+.block-item .heading .left {display: flex;}
+.block-item .heading .left .team_profilImage {background: var(--primary-color);width: 48px;height: 48px;border-radius: 100%;color: #FFF;text-align: center;line-height: 48px;box-shadow: 0px 0px 9px 1px rgba(139, 139, 139, 0.43);}
+.block-item .heading .left .name {font-size: 1.2em;font-family: 'Poppins', sans-serif;font-weight: bold;margin: 10px 20px;padding-bottom: 5px;color: var(--black-color);border-bottom: solid 2px #F9F9F9}
+.block-item .heading .left .lock {margin: 10px 0;color: var(--black-color)}
+.block-item .heading .right {text-align: right;margin: 10px 0;}
+
+.block-item .body {padding: 0 15px; }
+.block-item .body .desc {margin: 10px 20px;font-size: .9em;color: var(--light-black-color);width: 70%; }
+.block-item .body .infos {margin: 25px 5px;}
+.block-item .body .infos .part .head_title {font-size: 1.1em;font-family: 'Poppins', sans-serif;margin-bottom: 15px;}
+.block-item .body .infos .part .owner {display: flex}
+.block-item .body .infos .part .owner .image {height: 48px;width: 48px}
+.block-item .body .infos .part .owner .image img {border-radius: 50%;border: solid 1px #EFEFEF}
+.block-item .body .infos .part .owner .txt {line-height: 48px;margin: 0 5px;color: var(--light-black-color);font-size: .9em}
+.block-item .body .infos .part .members {display: inline-flex}
+.block-item .body .infos .part .members .item {width: 32px;height: 32px;}
+.block-item .body .infos .part .members .item img {border-radius: 50%;border: solid 1px #EFEFEF}
+
+.block-item.inv {position: relative;}
+.block-item .invitation {filter: blur(3px);}
+.block-item .overlay {position: absolute;top: 0}
+.block-item .overlay .heading {height: auto;text-align: center;width: 70%;margin: 25px 15%;font-size: 1.5rem;margin-top: 35px}
 .block-item .overlay .buttons {text-align: center}
 .block-item .overlay .buttons button {margin: 0 10px}
+
+
 
 /* Follower - Following */
 .fol_content {width: 70%;margin: 5vh 0}
 .fol_content .result_item {margin: 10px 0;border-bottom: solid 2px #f1f1f1}
-.fol_content .result_item .profil_pic img {border-radius: 100%;border: solid 1px rgba(112, 112, 112, 0.2)}
+.fol_content .result_item .profil_pic {height: 96px;width: 96px}
+.fol_content .result_item .profil_pic img {width: 100%;height: 100%;border-radius: 50%;border: solid 1px rgba(112, 112, 112, 0.2)}
 .fol_content .result_item .username {font-size: 1.2em;display: block;font-weight: bold}
 .fol_content .result_item .name {font-size: .8em;display: block}
 .fol_content .empty-fol {text-align: center;color: #c50d01;}

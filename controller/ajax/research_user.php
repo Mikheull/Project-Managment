@@ -9,7 +9,7 @@
  * utilisé dans :
  *  (Direct) - dist/js.research_user.js
  *  (Direct) - dist/js.research_user.min.js
- *  (Indirect) - view/content/member/search/index.php
+ *  (Indirect) - view/member/search/index.php
  * 
  */
 
@@ -22,12 +22,15 @@
 session_start();
 
 require_once ('../../db.php');
+
+require_once ('../../model/class/main.php');
 require_once ('../../model/class/db_connect.php');
 
 require_once ('../../model/class/router.php');
 require_once ('../../model/class/config.php');
 require_once ('../../model/class/search.php');
 
+$main = new main();
 $router = new router($db);
 $config = new config();
 $search = new search($db);
@@ -48,7 +51,7 @@ if( empty( $queryReturn ) ){
 }else{
 
     foreach($queryReturn as $item){
-        require ('../../view/content/member/search/components/search-item.php');
+        require ('../../view/member/search/components/search-item.php');
     }
 
 }

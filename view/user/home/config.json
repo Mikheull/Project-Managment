@@ -1,0 +1,17 @@
+{
+    "use_generic_meta": true,
+    "must_be_logged": false,
+
+    "libs": [
+        "jquery",
+        "fontawesome",
+        "feather-icons",
+        "popper",
+        "tippy"
+    ],
+     
+    "css": [ 
+        "account.min.css"
+    ]
+
+}

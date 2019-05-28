@@ -58,18 +58,4 @@
 
 </div>
 
-<template id="notifications_tmpl">
-    <ul>
-        <?php
-            if(empty($user -> getUnreadNotifs())){
-                echo 'Aucune notifications';
-            }else{
-                foreach($user -> getUnreadNotifs() as $notif){
-                    ?>
-                    <li> <a href=""><?= $config -> time_elapsed_string($notif['date'], true) ?> <?= $notif['type'] ?></a> </li>
-                    <?php
-                }
-            }
-        ?>
-    </ul>
-</template>
+<?php require_once ('view/components/notifications.php') ;?>

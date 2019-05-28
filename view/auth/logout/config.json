@@ -1,0 +1,26 @@
+{
+    "use_generic_meta": false,
+    "must_be_logged": false,
+
+
+    "meta": [ 
+        "<title>Improove - Déconnexion</title>",
+        "<meta name='description' content='A bientôt.'/>",
+        "<meta property='og:title' content='Improove - Déconnexion'/>",
+        "<meta property='og:description' content='A bientôt.'/>",
+        "<meta property='og:image' content='https://www.improove.io/dist/images/og_bg.png'/>",
+        "<meta property='og:image:width' content='128'/>",
+        "<meta property='og:image:height' content='128'/>",
+
+        "<meta property='twitter:card' content='summary_large_image'/>",
+        "<meta property='twitter:title' content='Improove - Déconnexion'/>",
+        "<meta property='twitter:description' content='A bientôt.'/>",
+        "<meta property='twitter:image' content='https://www.improove.io/dist/images/og_bg.png'/>"
+
+    ],
+     
+    "css": [ 
+        "auth.min.css"
+    ]
+
+}

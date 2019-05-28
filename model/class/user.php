@@ -30,6 +30,30 @@ class user extends db_connect {
 
 
     /**
+     * Obtenir le role de l'utilisateur sous forme d'icon
+     * 
+     * Va renvoyer une span avec l'icon du role et son nom
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $role Le role ID
+     * @return var
+     */
+    
+    function getRoleFormated($role = '') {
+        if($role == '1'){$role_format = '<span> <i class="fas fa-shield-alt fa-xs" data-tippy="Roi en ce royaume"></i> </span>' ;}
+        else if($role == '3'){$role_format = '<span> <i class="fas fa-headset fa-xs" data-tippy="Membre du support"></i> </span>' ;}
+        else if($role == '4'){$role_format = '<span> <i class="far fa-question-circle fa-xs" data-tippy="Helper"></i> </span>' ;}
+        else if($role == '5'){$role_format = '<span> <i class="fas fa-headset fa-xs" data-tippy="Moderateur"></i> </span>' ;}
+        else if($role == '6'){$role_format = '<span> <i class="fas fa-shield-alt fa-xs" data-tippy="Administrateur"></i> </span>' ;}
+        else {$role_format = '<span></span>' ;}
+        
+        return $role_format;
+    } 
+
+
+
+    /**
      * Transformer un username en token
      * 
      * Va renvoyer le token relié a l'username
