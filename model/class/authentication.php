@@ -76,7 +76,7 @@ class authentication extends db_connect {
 
                     header('location: '. $redirect);
                 }else {
-                    header('location: account');
+                    header('location: ./');
                 }
                 
             }else{

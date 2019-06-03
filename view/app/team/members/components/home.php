@@ -26,7 +26,14 @@
     </div>
     
 
-    <div class="container table margin-top-lg">
+    <div class="container table_content margin-top-lg">
+        <div class="row member_heading margin-bot-lg">
+            <div class="col-md-3 col-6 bold">Utilisateur</div>
+            <div class="col-md-5 col-6 bold">Rôles</div>
+            <div class="col-md-3 col-10 bold">Date d’arrivée</div>
+            <div class="col-md-1 col-2 bold"></div>
+        </div>
+
         <?php
             foreach($teamData['content'] as $u){
                 require ('view/app/team/members/components/user_item.php');
@@ -41,10 +48,28 @@
 
 
 <div id="invite" style="display: none;">
-    <form method="post">
-        <input type="email" name="user_mail" id="user_mail" placeholder="Mail de l'utilisateur">
-        <button class="btn primary-btn" name="invite_member">Inviter</button>
-    </form>
+
+    <div class="container">
+        <div class="row">
+            <div class="col text-align-center margin-bot-lg">
+                <h2 class="title-md bold color-dark">Invitation</h2>
+                <h3 class="title-xs color-gray">Entrez un email ci-dessous</h3>
+            </div>
+        </div>
+
+        <form method="post" class="row">
+            <div class="col-6 offset-3">
+                <div class="input-field">
+                    <label for="email" class="color-gray">Mail de l'utilisateur</label>
+                    <input type="email" placeholder="john-doe@domain.com" name="user_mail" id="user_mail" ">
+                </div>
+            </div>
+            <div class="col-12 text-align-center margin-bot-lg margin-top-lg">
+                <button class="btn primary-btn" name="invite_member">Inviter</button>
+            </div>
+        </form>
+    </div>
+   
 </div>
 
 <script>

@@ -1,0 +1,17 @@
+/* Hub */
+.hub_select .nice-select {margin: 5vh 25%;width: 50%;}
+.hub_select .nice-select .list {width: 100%;}
+
+/* Liste de projets vide */
+.hub_empty {width: 100%}
+
+/* Erreur home de projets */
+.error .row {height: 100vh;}
+.error .content p {margin: 2vh 0}
+@media (max-width: 767px) {
+    .error .content {margin: 10vh 0 5vh;text-align: center}
+    .error .content img {width: 100%;}
+}
+@media (max-width: 568px) {
+    .error .content {margin: 10vh 0 0vh;text-align: center}
+}

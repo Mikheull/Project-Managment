@@ -10,9 +10,11 @@ function popMessage(message, theme, delay){
         setTimeout(function() {
             $('.popMessage_container').fadeOut('fast');
         }, delay);
-    }, 200);
-    
+    }, 200); 
 }
+$(document).on('click', '.popMessage_container', function() {
+    $('.popMessage_container').fadeOut('fast');
+});
 
 
 
@@ -28,6 +30,7 @@ if ($("#notifications_tmpl")[0]){
     const template = document.getElementById('notifications_tmpl')
     const container = document.createElement('div')
     container.appendChild(document.importNode(template.content, true))
+    let baseUrl = window.location.origin;
 
     tippy('.notification', {
         content: container.innerHTML,
@@ -37,7 +40,7 @@ if ($("#notifications_tmpl")[0]){
         interactive: true,
         onShow(instance) {
             $.ajax({
-				url: 'controller/ajax/read_notif.php',
+				url: baseUrl + '/improove/controller/ajax/read_notif.php',
 				type: 'POST',
 				data: {},
 				success:function(data){
@@ -62,6 +65,10 @@ $(document).ready(function() {
 $( "select[name='goto_team']" ).change(function() {
     var href = $('select[name="goto_team"]').val();
     location.href= "team/"+href;
+});
+$( "select[name='goto_project']" ).change(function() {
+    var href = $('select[name="goto_project"]').val();
+    location.href= "project/"+href;
 });
 
 

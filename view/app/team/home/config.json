@@ -28,7 +28,7 @@
      
     "css": [ 
         "app/main.min.css",
-        "app/home.min.css",
+        "app/hub.min.css",
         "app/team.min.css"
     ]
 

@@ -27,11 +27,13 @@
 
 <?php // View Content ?>
 
-<div id="account-bg"> <?php require_once ('view/components/navbar-header-dark.php') ;?> </div>
+<?php require_once ('view/components/navbar-header-light.php') ;?>
 
-<div class="container account floating_container">
-    <?php require_once ('view/user/components/heading_'. $mode .'.php') ;?>
-    <?php require_once ('view/user/home/feed_gen.php') ;?>
+<div class="container account light-border margin-top-lg margin-bot-lg">
+    <div class="account_wrapper">
+        <?php require_once ('view/user/components/heading_'. $mode .'.php') ;?>
+        <?php require_once ('view/user/home/views/feed_gen.php') ;?>
+    </div>
 </div>
 
 <?php require_once ('view/components/footer.php') ;?>

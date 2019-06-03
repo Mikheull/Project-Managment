@@ -8,6 +8,7 @@
 
             $getUserInvitations = $team -> getUserTeamInvitations( $userToken );
             $getUserTeams = $team -> getUserTeam( $userToken );
+            $getUserTeamsArchived = $team -> getUserTeamArchived( $userToken );
             $mode = 'user';
         }else{
             header('location: login?return_url=account%2Fteams');
@@ -33,35 +34,21 @@
 
 <?php // View Content ?>
 
-<div id="account-bg"> <?php require_once ('view/components/navbar-header-dark.php') ;?> </div>
+<?php require_once ('view/components/navbar-header-light.php') ;?>
 
-<div class="container account floating_container">
-    <?php require_once ('view/user/components/heading_'. $mode .'.php') ;?>
-    <div class="team">
-        <div class="row bar">
-            <div class="col">
-               <?php require_once ('view/user/teams/components/'. $mode .'_bar-head.php') ?>
-            </div>
-        </div>
+<div class="container account light-border margin-top-lg margin-bot-lg">
+    <div class="account_wrapper">
+        <?php 
+            require_once ('view/user/components/heading_'. $mode .'.php');
+            require_once ('view/user/teams/components/'. $mode .'_bar-head.php');
 
-        <div class="row content">
-            <?php
-                if($getUserTeams['count'] !== 0){
-                    require ('view/user/teams/components/home_content.php');
-                }else{
-                    require ('view/user/teams/components/empty.php');
-                }
-            ?>
-        </div>
+            if($getUserTeams['count'] !== 0 OR $getUserInvitations['count'] !== 0 OR $getUserTeamsArchived['count'] !== 0){
+                require_once ('view/user/teams/components/home_content.php');
+            }else{
+                require_once ('view/user/teams/components/empty.php'); 
+            }
+        ?>
     </div>
 </div>
+
 <?php require_once ('view/components/footer.php') ;?>
-
-
-
-<script> 
-    $(document).on('click', '.invite', function() {
-	    event.preventDefault();
-        $('.invite').modaal();
-    });
-</script>

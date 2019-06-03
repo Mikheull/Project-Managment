@@ -41,12 +41,7 @@
 
 
 /* Partie Features */
-
 .page_head {text-align: center;margin: 0 auto}
-.page_head h2 {margin: 0 0 15px 20px;font-weight: bold;font-family: 'Poppins', sans-serif}
-.page_head img {height: 50vh}
-.page_head .btn {margin: 20px 10px}
-.page_head .buttons {margin: 5vh 0}
 
 
 @media (max-width: 767px) {
@@ -57,5 +52,22 @@
     .page_head {margin: 2vh auto;}
     .page_head h2 {font-size: 1.5rem;}
     .page_head img {height: auto;width: 80%;margin: 5vh 0}
+
+}
+
+/* ------------------------------------------------------------------------------------------------------------ */
+
+
+
+
+/* Partie Recherche */
+.search_head {margin: 10vh 0}
+.search_container .search_bar {margin: 0 auto;}
+.search_container .search_bar input {border-color: rgba(222, 222, 222, 0.3);}
+.search_container .search_result {margin: 25px auto;}
+#head_deco {background-size: 100%;background-repeat: no-repeat;height: 400px;width: 60%;margin: 0 20%;background-position: bottom;position: absolute;top: -20vh;z-index: -9;}
+
+@media (max-width: 767px) {
+    #head_deco {display: none}
 
 }

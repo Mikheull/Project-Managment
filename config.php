@@ -18,7 +18,6 @@ require_once ('controller/user.php');
 require_once ('controller/authentication.php');
 
 
-
 /**
  * INIT
  */

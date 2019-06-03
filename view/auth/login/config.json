@@ -29,6 +29,10 @@
      
     "css": [ 
         "auth.min.css"
+    ],
+     
+    "js": [ 
+        "form-validator.js"
     ]
 
 }

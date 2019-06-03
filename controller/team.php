@@ -35,11 +35,11 @@ $team = new team($db);
  * @variable d'execution = $_POST['project_token']                      : type = button
  * 
  */
-if(isset($_POST['project_token'])){
-    $project_token = htmlentities(addslashes($_POST['project_token']));
+// if(isset($_POST['project_token'])){
+//     $project_token = htmlentities(addslashes($_POST['project_token']));
 
-    $errors = $team -> joinTeam( $project_token, $main -> getToken() );
-}
+//     $errors = $team -> joinTeam( $project_token, $main -> getToken() );
+// }
 
 
 
@@ -127,13 +127,29 @@ if(isset($_POST['create_team'])){
         $name = htmlentities(addslashes($_POST['name']));
         $desc = htmlentities(addslashes($_POST['desc']));
         $status = htmlentities(addslashes($_POST['status']));
+        $invitations = $_POST['mails_list'];
 
-        $errors = $team -> createTeam($name, $desc, $status);
+        $errors = $team -> createTeam($name, $desc, $status, $invitations);
 
     }else{
         $errors = ['success' => false, 'message' => ['text' => "Vous devez remplir tout les champs obligatoires !", 'theme' => 'dark', 'timeout' => 2000] ];
     }
 }
+
+if(isset( $_POST['remove_member'] )){
+
+    if($team -> teamExist( $_POST['team_token'] ) == true){
+        if($team -> getTeamData($_POST['team_token'], 'founder_token') !== $_POST['user_token']){
+            $errors = $team -> kickMember($_POST['team_token'], $_POST['user_token']);
+        }else{
+            $errors = ['success' => false, 'message' => ['text' => "Vous ne pouvez pas retirer le fondateur, transferez les droits avant !", 'theme' => 'dark', 'timeout' => 2000] ];
+        }
+    }else{
+        $errors = ['success' => false, 'message' => ['text' => "L\'équipe n\'existe pas !", 'theme' => 'dark', 'timeout' => 2000] ];
+    }
+    
+}
+
 
 // End of file
 /******************************************************************************/

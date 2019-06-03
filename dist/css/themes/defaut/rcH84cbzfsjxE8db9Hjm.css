@@ -27,6 +27,7 @@
 
 /* Buttons */
 .btn {border: none;cursor: pointer;padding: 10px 15px;border-radius: 3px;width: max-content;height: max-content}
+.btn-sm {padding: 5px 10px;font-size: .8em}
 .primary-btn {background: var(--primary-color);color: var(--light-background-color) !important;}
 .primary-btn:hover {background: var(--light-primary-color);color: var(--light-background-color);}
 .light-btn-bordered {border: solid 1px #e0e0e0;background: #FFF;color: var(--light-black-color);}
@@ -34,16 +35,20 @@
 .light-btn:hover {background: #FFF;color: var(--light-primary-color);}
 .dark-btn {background: var(--black-color);color: var(--light-background-color) !important}
 .dark-btn:hover {background: var(--light-black-color);color: var(--light-background-color);}
+.btn:disabled {background: #313847 !important;color: #212733 !important;}
 
 /* Links */
 a, a:link {color: var(--black-color)}
 a:hover {color: #262E3E}
-.primary-link {color: var(--light-background-color) !important;}
-.primary-link:hover {color: var(--background-color) !important}
-.light-link {color: var(--light-black-color) !important;}
-.light-link:hover {color: var(--primary-color) !important}
+.link {cursor: pointer;}
+.primary-link {color: var(--primary-color) !important;}
+.primary-link:hover {color: var(--light-primary-color) !important}
+.light-link {color: var(--light-background-color) !important;}
+.light-link:hover {color: var(--light-background-color) !important}
 .dark-link {color: var(--light-black-color) !important}
 .dark-link:hover {color: var(--black-color) !important}
+.red-link {color: #f55050 !important}
+.red-link:hover {color: #f03e3e !important}
 
 /* Spacer */
 .spacer-lg {width: 100%;margin: 5rem}
@@ -84,6 +89,18 @@ h1, h2, h3, h4, h5, h6 {font-family: 'Poppins', sans-serif}
 .icon {width: 32px;height: 32px;}
 .icon-md {width: 64px;height: 64px;}
 
+/* Image de profil */
+.profil_picture .img {width: 200px;height: 200px;background-size: cover;display: block;border-radius: 100px;background-position: center}
+.profil_picture-md .img {height: 96px;width: 96px;background-size: cover;display: block;border-radius: 100px;background-position: center}
+.profil_picture-sm .img {height: 48px;width: 48px;background-size: cover;display: block;border-radius: 100px;background-position: center}
+.profil_picture-xs .img {height: 32px;width: 32px;background-size: cover;display: block;border-radius: 100px;background-position: center}
+
+/* General */
+.full-width {width: 100%}
+.half-width {width: 50%}
+.hidden {display: none;}
+.flex {display: flex;}
+
 
 /* Media Queries Mobile */
 @media (max-width: 568px) {
@@ -93,6 +110,17 @@ h1, h2, h3, h4, h5, h6 {font-family: 'Poppins', sans-serif}
     .title-xs {font-size: .8rem;}
     p {font-size: .9rem;} 
 }
+
+.feather {
+  width: 15px;
+  height: 15px;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+.modaal-container { border-radius: 6px !important}
 
 
 
@@ -167,15 +195,58 @@ strong {font-weight: bold}
 
 
 
+.accordion a {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 1rem 3rem 1rem 1rem;
+    border-bottom: 1px solid rgba(112, 112, 112, 0.1);
+  }
+  
+  .accordion a:hover, .accordion a:hover::after {cursor: pointer;}
+  .accordion a:hover::after {border: 1px solid var(--primary-color);}
+  
+  .accordion a.active {color: var(--primary-color);border-bottom: 1px solid var(--primary-color);}
+  
+  .accordion a::after {
+    font-family: "Font Awesome 5 Free"; font-weight: 900; content: "\f107";
+
+    position: absolute;
+    float: right;
+    right: 1rem;
+    font-size: 1rem;
+    color: var(--primary-color);
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid var(--primary-color);
+    text-align: center;
+  }
+  
+  .accordion a.active::after {
+    font-family: "Font Awesome 5 Free"; font-weight: 900; content: "\f00d";
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+  }
+  
+  .accordion .content {
+    opacity: 0;
+    padding: 0 1rem;
+    max-height: 0;
+    transition-duration: .2s;
+  }
+  
+  .accordion .content.active {
+    opacity: 1;
+    padding: 1rem;
+    max-height: 100%;
+    transition-duration: .4s;
+  }
 
 
 .tippy-popper a {color: #FFF}
-
-/* Icons
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-.i {width: 16px;}
-.i img {width: 100%;}
-.i svg {fill: #262E3E;stroke:#262E3E;}
 
 
 /* popMessage

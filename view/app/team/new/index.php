@@ -8,21 +8,22 @@
 
 <?php require_once ('view/app/components/sidebar.php'); ?>
 <div class="container-fluid main_wrapper new_team">
-    <div class="page_head container">
-        <div class="row">
-            <div class="col-12"><h2>Créer une équipe</h2></div>
+    <div class="creator_head container">
+        <div class="row text-align-center">
+            <div class="col-12"><h3 class="title-sm color-dark margin-bot-lg margin-top">Créer une équipe</h3></div>
 
-            <div class="col step-btn active" id="btn-first-step" data-step="first-step"> <a> <span style="padding: 10px 20px">1</span> Description</a> </div>
-            <div class="col step-btn" id="btn-second-step" data-step="second-step"> <a> <span style="padding: 10px 17px">2</span> Paramètres</a> </div>
-            <div class="col step-btn" id="btn-third-step" data-step="third-step"> <a> <span style="padding: 10px 17px">3</span> Invitations</a> </div>
+            <div class="col step-btn active" id="btn-first-step" data-step="first-step"> <a> <span style="padding: 10px 20px" class="margin-right">1</span> Description</a> </div>
+            <div class="col step-btn" id="btn-second-step" data-step="second-step"> <a> <span style="padding: 10px 17px" class="margin-right">2</span> Paramètres</a> </div>
+            <div class="col step-btn" id="btn-third-step" data-step="third-step"> <a> <span style="padding: 10px 17px" class="margin-right">3</span> Invitations</a> </div>
         </div>
     </div>
 
-    <div class="page_content container">
+    <div class="creator_container container margin-top-lg light-border">
         <div class="row">
+
             <form action="" method="post">
-                <div class="step-content" id="first-step">
-                    <div class="illustration"> <img src="<?= $config -> rootUrl() ;?>dist/images/illustrations/team_create.svg" alt=""> </div>
+                <div class="step-content text-align-center margin-top" id="first-step">
+                    <div class="illustration"> <img src="<?= $config -> rootUrl() ;?>dist/images/illustrations/team_create.svg" alt="" width="30%"> </div>
                     <div class="input_group">
                         <div class="input-field input-half">
                             <label for="name">Nom de l'équipe</label>
@@ -38,48 +39,64 @@
                     </div>
                     <br>
 
-                    <a class="btn primary-btn step-btn" data-step="second-step">Continuer</a>
+                    <div class="bot-btn text-align-center">
+                        <a class="btn primary-btn step-btn" data-step="second-step">Continuer</a>
+                    </div>
                 </div>
 
 
-                <div class="step-content" id="second-step">
+                <div class="step-content text-align-left margin-top margin-left margin-right" id="second-step">
                     <div class="head">
-                        <h3>Accès a l’équipe</h3>
-                        <p>Rendre votre équipe publique, autorisera n’importe qui ayant le lien d’invitation, à la rejoindre. Si vous voulez autorisez uniquement certaines personnes, cochez la case privée. </p>
+                        <h3 class="title-xs color-dark margin-bot margin-top">Accès a l’équipe</h3>
+                        <p class="color-gray">Rendre votre équipe publique, autorisera n’importe qui ayant le lien d’invitation, à la rejoindre. Si vous voulez autorisez uniquement certaines personnes, cochez la case privée. </p>
                     </div>
 
-                    <div class="input_group">
-                        <div class="input-field input-half">
+                    <div class="input_group status_team">
+                        <div class="input-field margin-top-lg margin-bottom">
                             <input type="radio" name="status" id="private" value="private" checked>
-                            <label for="private">Privée</label>
-
+                            <label class="margin-left" for="private">Privée</label>
+                        </div>
+                        <div class="input-field">
                             <input type="radio" name="status" id="public" value="public">
-                            <label for="public">Publique</label>
+                            <label class="margin-left" for="public">Publique</label>
                         </div>
                     </div>
+
                     <br>
 
-                    <a class="btn primary-btn step-btn" data-step="first-step">Précédent</a>
-                    <a class="btn primary-btn step-btn" data-step="third-step">Continuer</a>
+                    <div class="bot-btn text-align-center">
+                        <a class="btn primary-btn step-btn" data-step="first-step">Précédent</a>
+                        <a class="btn primary-btn step-btn" data-step="third-step">Continuer</a>
+                    </div>
                 </div>
 
 
                 <div class="step-content" id="third-step">
-                    <div class="head">
-                        <h3>Inviter un membre</h3>
-                        <p>Entrez un nom ou son mail</p>
+                    <div class="head text-align-center margin-bot-lg">
+                        <h3 class="title-xs color-dark margin-bot margin-top">Inviter un membre</h3>
+                        <p class="color-gray">Entrez le mail de l'utilisateur. Attention il doit être inscrit sur la plateforme ! </p>
                     </div>
 
-                    <input type="email" name="add_email" id="add_email" placeholder="Entrez un email">
-                    <button name="add_email_button">Ajouter ce mail</button>
+                    <div class="content">
+                        <div class="search text-align-center">
+                            <input type="text" name="mails_list[]" id="add_email" placeholder="Entrez un email">
+                            <div class="margin-top">
+                                <a href="javascript:void(0);" class="addField_button btn dark-btn" title="Add field"> Ajouter le mail </a>
+                            </div>
+                        </div>
 
-                    <div id="ouput-emails"></div>
-                    <br><br><br>
+                        <div class="output margin-top">
+                            <ul id="mails_list"></ul>
+                        </div>
+                    </div>
 
-                    <a class="btn primary-btn step-btn" data-step="second-step">Précédent</a>
-                    <button class="btn primary-btn" name="create_team">Créer</button>
+                    <div class="bot-btn text-align-center">
+                        <a class="btn primary-btn step-btn" data-step="second-step">Précédent</a>
+                        <button class="btn primary-btn" name="create_team">Créer</button>
+                    </div>
                 </div>
             </form>
+
         </div>
     </div>
 
@@ -101,20 +118,31 @@
         $('#'+step).show();
     })
 
-    $(document).on('click', 'button[name="add_email_button"]', function() {
-        event.preventDefault();
-        var email = $('#add_email').val();
-
-        if (email.length !== 0) {
-            popMessage('Mail ajouté dans la liste', 'dark', 2000)
-
-            var fieldHTML = '<input="text" name="">'+ email +'</input>'; 
-            $( '#ouput-emails' ).append(fieldHTML);
-            $("#add_email").val('');
-
-        }else{
-            popMessage('Vous devez entrer un email valide', 'dark', 2000)
-        }
+    $(document).ready(function(){
+        var maxField = 15; //Input fields increment limitation
+        var addButton = $('.addField_button'); //Add button selector
+        var wrapper = $('#mails_list'); //Input field wrapper
+        var x = 1; //Initial field counter is 1
         
+        //Once add button is clicked
+        $(addButton).click(function(){
+            //Check maximum number of input fields
+            if(x < maxField){ 
+                x++; //Increment field counter
+
+                let val = $( '#add_email' ).val();
+                var fieldHTML = '<div> <input type="text" name="mails_list[]" value="'+val+'"/> <a href="javascript:void(0);" class="removeField_button"> <i class="fas fa-minus-circle"></i> </a></div>'; //New input field html 
+                $(wrapper).append(fieldHTML); //Add field html
+                $( '#add_email' ).val('');
+            }
+        });
+        
+        //Once remove button is clicked
+        $(wrapper).on('click', '.removeField_button', function(e){
+            e.preventDefault();
+            $(this).parent('div').remove(); //Remove field html
+            x--; //Decrement field counter
+        });
+
     });
 </script>

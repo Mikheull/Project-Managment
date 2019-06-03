@@ -1,10 +1,10 @@
 <?php
 
-class router {
+class router extends db_connect {
     private $routes = [];
 
-	function __construct(){
-
+	function __construct($connect){
+        parent::__construct($connect);
     }
 
 /******************************************************************************/
@@ -34,10 +34,9 @@ class router {
             }
         }
         return false;
-
     }
 
-
+    
 
     /**
      * Ajouter une route

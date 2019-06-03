@@ -95,7 +95,12 @@ class config extends router {
         }else{
             if(isset($obj['meta'])){
                 foreach($obj['meta'] as $ob){ 
-                    echo $ob; 
+                    if(router::getRouteParam('0') == 'account'){
+                        $ob = str_replace("{{username}}", main::getToken(), "$ob");
+                    }
+
+
+                    echo $ob;
                 }
             }else{
                 echo file_get_contents('view/components/generic_meta.php');

@@ -16,9 +16,11 @@
     <meta property="og:url" content="https://www.improove.io/<?= $_GET['query'] ;?>"/>
     <meta property="twitter:url" content="https://www.improove.io/<?= $_GET['query'] ;?>"/>
 
-    <!-- Meta generated Begin -->
-    <?php $config -> getConfigMeta($exec_router['config_path']) ;?>
-    <!-- Meta generated End-->
+    <?php 
+        // Meta generated Begin 
+        $config -> getConfigMeta($exec_router['config_path']);
+        // Meta generated End 
+    ?>
 
 
     <link rel="stylesheet" type="text/css" media="screen" href="<?= $config -> rootUrl() . $config -> includeCss('rcH84cbzfsjxE8db9Hjm.min.css', $config -> getTheme('front'), 'front');?>">
@@ -31,14 +33,20 @@
     <?php if($config -> getConfigLib($exec_router['config_path'],'feather-icons') == true){?> <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script> <?php } ;?>
     <?php if($config -> getConfigLib($exec_router['config_path'],'jquery') == true){?> <script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script> <?php } ;?>
     <?php if($config -> getConfigLib($exec_router['config_path'],'popper') == true){?> <script src="https://unpkg.com/popper.js@1"></script> <?php } ;?>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <?php if($config -> getConfigLib($exec_router['config_path'],'bootbox') == true){?> <script src="https://cdn.jsdelivr.net/npm/bootbox@5.1.3/dist/bootbox.all.min.js"></script> <?php } ;?>
     <?php if($config -> getConfigLib($exec_router['config_path'],'tippy') == true){?> <script src="https://unpkg.com/tippy.js@4"></script> <?php } ;?>
     <?php if($config -> getConfigLib($exec_router['config_path'],'nice-select') == true){?> <script src="https://cdn.jsdelivr.net/npm/jquery-nice-select@1.1.0/js/jquery.nice-select.min.js"></script> <?php } ;?>
     <?php if($config -> getConfigLib($exec_router['config_path'],'fakeLoader') == true){?> <script src="https://cdn.jsdelivr.net/npm/jq-fakeloader@2.0.1/js/fakeLoader.js"></script> <?php } ;?>
     <?php if($config -> getConfigLib($exec_router['config_path'],'modaal') == true){?> <script src="https://cdn.jsdelivr.net/npm/modaal@0.4.4/dist/js/modaal.min.js"></script> <?php } ;?>
+    <?php if($config -> getConfigLib($exec_router['config_path'],'recaptcha') == true){?> <script src="https://www.google.com/recaptcha/api.js" async defer></script> <?php } ;?>
 
-    <!-- CSS generated Begin -->
-    <?php $config -> getConfigCss($exec_router['config_path']) ;?>
-    <!-- CSS generated End -->
+    <?php 
+        // CSS generated Begin
+        $config -> getConfigCss($exec_router['config_path']);
+        // CSS generated End
+    ?>
+   
 </head>
 
 
@@ -56,11 +64,13 @@
         }
     ?>
 
-
     <script src="<?= $config -> rootUrl() ;?>dist/js/main.js"></script>
     <script> <?php if(isset($errors)){ ?> $( document ).ready(function() { popMessage('<?= $errors['message']['text'] ;?>', '<?= $errors['message']['theme'] ;?>', <?= $errors['message']['timeout'] ;?>) });  <?php } ?> </script>
 
-    <!-- Scripts generated Begin -->
-    <?php $config -> getConfigScript($exec_router['config_path']) ;?>
+    <?php 
+        // Scripts generated Begin
+        $config -> getConfigScript($exec_router['config_path']);
+        // Scripts generated End
+    ?>
 </body>
 </html>

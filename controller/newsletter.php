@@ -43,7 +43,7 @@ if(isset($_POST['subscribe_newsletter'])){
                 $errors = ['success' => false, 'message' => ['text' => "Email invalide !", 'theme' => 'dark', 'timeout' => 2000] ];
             }
         }else{
-            $errors = ['success' => false, 'message' => ['text' => "Vous devez être connecté !", 'theme' => 'dark', 'timeout' => 2000] ];
+            $errors = ['success' => false, 'message' => ['text' => "Vous devez être connecté ! <a class=\"margin-left btn primary-btn\" href=\"login\">Se connecter</a> ", 'theme' => 'dark', 'timeout' => 2000] ];
         }
 
     }else{

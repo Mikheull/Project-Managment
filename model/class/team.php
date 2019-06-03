@@ -9,7 +9,7 @@ class team extends db_connect {
 /******************************************************************************/
 
     /**
-     * Récupère les équipe d'un utilisateur
+     * Récupère les équipes d'un utilisateur
      * 
      * Va renvoyer toutes les équipes d'un utilisateur
      *
@@ -30,6 +30,29 @@ class team extends db_connect {
         ]);
     }
  
+
+    /**
+     * Récupère les équipes archivés d'un utilisateur
+     * 
+     * Va renvoyer toutes les équipes archivés d'un utilisateur
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $user_token Token de l'utilisateur
+     * @return array
+     */
+    
+    function getUserTeamArchived($user_token = '') {
+        $request = $this -> _db -> query("SELECT * FROM `pr_team` WHERE `founder_token` = '$user_token' AND `enable` = '0' ");
+        $res = $request->fetchAll();
+        $count = $request->rowCount();
+
+        return ([ 
+            'count' => $count, 
+            'content' => $res
+        ]);
+    }
+
 
 
     /**
@@ -78,6 +101,27 @@ class team extends db_connect {
         ]);
     }
 
+
+    
+    /**
+     * Récupère la date d'ajout d'un utilisateur dans une équipe
+     * 
+     * Va renvoyer la date d'ajout d'un utilisateur dans une équipe
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $team_token Token de la team
+     * @param string $user_token Token de l'utilisateur'
+     * @return var
+     */
+    
+    function getMemberJoinDate($team_token = '', $user_token = '') {
+        $request = $this -> _db -> query("SELECT * FROM `pr_team_member` WHERE `team_token` = '$team_token' AND `user_public_token` = '$user_token' AND `enable` = '1'");
+        $res = $request->fetch();
+
+        return $res['date_joined'];
+    }
+
 /******************************************************************************/
 
 
@@ -101,7 +145,32 @@ class team extends db_connect {
         $res = $request->fetch();
 
         return $res[$info];
-    }  
+    }
+    
+    
+
+    /**
+     * Récupère les équipes dont on est créateur
+     * 
+     * Va renvoyer la liste de nos équipes
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @return var
+     */
+ 
+    function getOwnedTeam() {
+        $owner = main::getToken();
+        $request = $this -> _db -> query("SELECT * FROM `pr_team` WHERE `founder_token` = '$owner' AND `enable` = 1 ");
+        $res = $request->fetchAll();
+        $count = $request->rowCount();
+
+        return ([ 
+            'count' => $count, 
+            'content' => $res
+        ]);
+        return $request->fetch();
+    }
 
 
 
@@ -184,7 +253,7 @@ class team extends db_connect {
                 }
             }
         }else{
-            $errors = ['success' => false, 'message' => ['text' => "Vous êtes déjà dans l\'équipe !", 'theme' => 'dark', 'timeout' => 2000] ];
+            return(['success' => false, 'message' => ['text' => "Vous êtes déjà dans l\'équipe !", 'theme' => 'dark', 'timeout' => 2000] ]);
         }
 
     } 
@@ -217,6 +286,29 @@ class team extends db_connect {
             return (['success' => false, 'message' => ['text' => "Une erreur est survenue !", 'theme' => 'dark', 'timeout' => 2000] ]);
         }
     }  
+
+
+
+    /**
+     * Renommer une équipe
+     * 
+     * Va renommer une équipe
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $team_token Token de l'équipe
+     * @param string $new_name Nouveau nom
+     * @return array
+     */
+
+    function teamRename($team_token = '', $new_name = '') {
+        if($new_name !== ''){
+            $request = $this -> _db -> exec("UPDATE `pr_team` SET `name` = '$new_name' WHERE `public_token` = '$team_token' ");
+            return (['success' => true, 'message' => ['text' => "Le nom a été changé !", 'theme' => 'dark', 'timeout' => 2000] ]);
+        }
+        return (['success' => false, 'message' => ['text' => "Le nom est vide !", 'theme' => 'dark', 'timeout' => 2000] ]);
+    
+    }
 
 /******************************************************************************/
 
@@ -315,10 +407,11 @@ class team extends db_connect {
      * @param string $name Nom de l'équipe
      * @param string $desc Description de l'équipe
      * @param string $status Publique ou privée
+     * @param string $invitations Mails d'invitations
      * @return array
      */
 
-    function createTeam($name = '', $desc = '', $status = '') {
+    function createTeam($name = '', $desc = '', $status = '', $invitations = [] ) {
         $owner = $this -> getToken();
         $token = $this -> generateToken(10, 'numbers');
         $status_team = ( $status == 'public' ? 1 : 0 );
@@ -330,7 +423,12 @@ class team extends db_connect {
             $request = $this -> _db -> exec("INSERT INTO `pr_team` (`name`, `description`, `public_token`, `public`, `founder_token`) VALUES ('$name', '$desc', '$token', '$status_team', '$owner')");
             $request = $this -> _db -> exec("INSERT INTO `pr_team_member` (`user_public_token`, `team_token`, `role`) VALUES ('$owner', '$token', '1')");
             
-            header('location: team/'. $token);
+            foreach($invitations as $invite){
+                $invite = htmlentities(addslashes($invite));
+                $this -> inviteMember($invite, $token);
+            }
+
+            header('location: ../team/'. $token);
             return (['success' => true, 'message' => ['text' => "L\'équipe a été crée !", 'theme' => 'dark', 'timeout' => 2000] ]);
         }else{
             return (['success' => false, 'message' => ['text' => "Une équipe avec ce même nom existe déjà !", 'theme' => 'dark', 'timeout' => 2000] ]);
@@ -353,19 +451,104 @@ class team extends db_connect {
     function disable($token = '') {
         $owner = $this -> getToken();
         
-        $request = $this -> _db -> query("SELECT * FROM `pr_team` WHERE `public_token` = '$token' AND `enable` = '1' ");
+        $request = $this -> _db -> query("SELECT * FROM `pr_team` WHERE `public_token` = '$token' ");
         $res = $request->fetch();
         
         if($res){
-
-            $request = $this -> _db -> exec("UPDATE `pr_team` SET `enable`= 0 WHERE `public_token` = '$token' AND `founder_token` = '$owner' AND `enable` = '1' ");
-            $request = $this -> _db -> exec("UPDATE `pr_team_member` SET `enable`= 0 WHERE `team_token` = '$token' AND `enable` = '1' ");
+            $request = $this -> _db -> exec("DELETE FROM `pr_team` WHERE `public_token` = '$token' AND `founder_token` = '$owner'");
+            $request = $this -> _db -> exec("DELETE FROM `pr_team_member` WHERE `team_token` = '$token'");
             
             return (['success' => true, 'message' => ['text' => "L\'équipe a été supprimée !", 'theme' => 'dark', 'timeout' => 2000] ]);
         }else{
             return (['success' => false, 'message' => ['text' => "Aucune équipe n\'a été trouvée !", 'theme' => 'dark', 'timeout' => 2000] ]);
         }
-    }  
+    }
+    
+    
+
+    /**
+     * Archiver une équipe
+     * 
+     * Archiver une équipe temporairement en gardant les membres
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $token Token de l'équipe
+     * @return array
+     */
+
+    function archive($token = '') {
+        $owner = $this -> getToken();
+        
+        $request = $this -> _db -> query("SELECT * FROM `pr_team` WHERE `public_token` = '$token' AND `enable` = '1' ");
+        $res = $request->fetch();
+        
+        if($res){
+            $request = $this -> _db -> exec("UPDATE `pr_team` SET `enable`= 0 WHERE `public_token` = '$token' AND `founder_token` = '$owner' AND `enable` = '1' ");
+            $request = $this -> _db -> exec("UPDATE `pr_team_member` SET `enable`= 0 WHERE `team_token` = '$token' AND `enable` = '1' ");
+            
+            return (['success' => true, 'message' => ['text' => "L\'équipe a été archivé !", 'theme' => 'dark', 'timeout' => 2000] ]);
+        }else{
+            return (['success' => false, 'message' => ['text' => "Aucune équipe n\'a été trouvée !", 'theme' => 'dark', 'timeout' => 2000] ]);
+        }
+    } 
+    
+    
+
+    /**
+     * Désarchiver une équipe
+     * 
+     * Désarchiver une équipe en remettant les membres
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $token Token de l'équipe
+     * @return array
+     */
+
+    function unarchive($token = '') {
+        $owner = $this -> getToken();
+        
+        $request = $this -> _db -> query("SELECT * FROM `pr_team` WHERE `public_token` = '$token' AND `enable` = '0' ");
+        $res = $request->fetch();
+        
+        if($res){
+            $request = $this -> _db -> exec("UPDATE `pr_team` SET `enable`= 1 WHERE `public_token` = '$token' AND `founder_token` = '$owner' AND `enable` = '0' ");
+            $request = $this -> _db -> exec("UPDATE `pr_team_member` SET `enable`= 1 WHERE `team_token` = '$token' AND `enable` = '0' ");
+            
+            return (['success' => true, 'message' => ['text' => "L\'équipe a été désarchivé !", 'theme' => 'dark', 'timeout' => 2000] ]);
+        }else{
+            return (['success' => false, 'message' => ['text' => "Aucune équipe n\'a été trouvée !", 'theme' => 'dark', 'timeout' => 2000] ]);
+        }
+    }    
+    
+    
+
+    /**
+     * Retire un utilisateur d'une équipe
+     * 
+     * Retire un utilisateur d'une équipe
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $team_token Token de l'équipe
+     * @param string $user_token Token de l'utilisateur
+     * @return array
+     */
+
+    function kickMember($team_token = '', $user_token = '') {
+        $request = $this -> _db -> query("SELECT * FROM `pr_team_member` WHERE `team_token` = '$team_token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
+        $res = $request->fetch();
+        
+        if($res){
+            // $request = $this -> _db -> exec("UPDATE `pr_team_member` SET `enable`= 0 WHERE `team_token` = '$team_token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
+            $request = $this -> _db -> exec("DELETE FROM `pr_team_member` WHERE `team_token` = '$team_token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
+            header('location: ');
+            return (['success' => true, 'message' => ['text' => "L\'utilisateur a été retiré !", 'theme' => 'dark', 'timeout' => 2000] ]);
+        }else{
+            return (['success' => false, 'message' => ['text' => "L\'utilisateur n\'est pas dans l\'équipe !", 'theme' => 'dark', 'timeout' => 2000] ]);
+        }
+    } 
     
 
     

@@ -1,4 +1,6 @@
-<div class="heading nav-left">
-    <h3>Projets <span>0/5</span></h3>
-    <small>Découvrez les projets publiques de l'utilisateur.</small>
+<div class="row head-bar">
+    <div class="col">
+        <h3 class="title-sm bold color-dark">Projets <span><?= $getUserProjects['count'] ;?>/5</span></h3>
+        <p class="color-gray">Découvrez les projets publiques de l'utilisateur.</p>
+    </div>
 </div>

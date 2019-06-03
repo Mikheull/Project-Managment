@@ -8,7 +8,7 @@
         "feather-icons",
         "popper",
         "tippy",
-        "modaal"
+        "bootbox"
     ],
 
     "meta": [ 
@@ -28,7 +28,8 @@
     ],
 
     "css": [ 
-        "account.min.css"
+        "account.min.css",
+        "bootstrap-modal.min.css"
     ],
 
     "online_css": [ 
@@ -37,7 +38,7 @@
     ],
 
     "js": [ 
-        "short-actions.min.js"
+        "team-fast-act.min.js"
     ]
 
 }

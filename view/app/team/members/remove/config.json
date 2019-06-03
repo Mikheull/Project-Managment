@@ -1,0 +1,11 @@
+{
+    "use_generic_meta": true,
+    "must_be_logged": true,
+
+    "libs": [
+        "jquery",
+        "fontawesome",
+        "feather-icons"
+    ]
+
+}

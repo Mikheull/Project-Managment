@@ -22,52 +22,71 @@
 
     }
 
+    $list = $friend -> getFollowings($userToken);
 ?>
 
 
 
 <?php // View Content ?>
 
-<div id="account-bg"> <?php require_once ('view/components/navbar-header-dark.php') ;?> </div>
+<?php require_once ('view/components/navbar-header-light.php') ;?>
 
-<div class="container account floating_container follow">
-    <?php require_once ('view/user/components/heading_'. $mode .'.php') ;?>
-
-    <ul class="fol_content">
+<div class="container account light-border margin-top-lg margin-bot-lg">
+    <div class="account_wrapper">
+        <?php require_once ('view/user/components/heading_'. $mode .'.php') ;?>
+        
+        <div class="row head-bar">
+            <div class="col">
+                <h3 class="title-sm bold color-dark">Abonnements</h3>
+            </div>
+        </div>
+        
         <?php
-            if(empty($friend -> getFollowings($userToken))){
-                ?>
-                    <div class="row">
-                        <div class="col-6 offset-6 empty-fol"> <h3>0 followers</h3> </div>
+        if(empty($list)){
+            ?>
+                <div class="row">
+                    <div class="col-6 offset-3 text-align-center margin-top-lg margin-bot-lg light-border">
+                        <h2 class="title-sm color-dark margin-bot margin-top">0 followers</h2>
                     </div>
-                <?php
-            }else{
-                foreach($friend -> getFollowings($userToken) as $res){
-
-                ?>
-                    <li class="result_item">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-2">
-                                    <a href="<?= $config -> rootUrl() ;?>member/<?= $user -> getUserData( $res['following'], 'username') ?>" title="Accéder au compte de <?= $user -> getUserData( $res['following'], 'first_name') ?> <?= $user -> getUserData( $res['following'], 'last_name') ?>">
-                                        <div class="profil_pic"> <img src="<?= $config -> rootUrl() ;?>dist/<?= $user -> getUserData( $res['following'], 'profil_image') == NULL ? 'images/content/defaut_profil_pic.png' : 'uploads/u/'. $res['following'].'/profil_pic/'.$user -> getUserData( $res['following'], 'profil_image') ;?>" alt="Image de profil" width="70%"> </div> 
-                                    </a>
-                                </div>
-                                <div class="col-8 align-self-center">
-                                    <a href="<?= $config -> rootUrl() ;?>member/<?= $user -> getUserData( $res['following'], 'username') ?>" title="Accéder au compte de <?= $user -> getUserData( $res['following'], 'first_name') ?> <?= $user -> getUserData( $res['following'], 'last_name') ?>">
-                                        <span class="username"><?= $user -> getUserData( $res['following'], 'username') ?></span>
-                                        <span class="name"><?= $user -> getUserData( $res['following'], 'first_name') ?> <?= $user -> getUserData( $res['following'], 'last_name') ?></span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
+                </div>
             <?php
-                }
-            }
+        }else{
+            ?>
+            
+                <div class="row margin-top-lg margin-bot-lg">
+                    <ul class="follow_content">
+                        <?php
+                        foreach($list as $res){
+                            ?>
+                            <li class="item margin-bot col-5 light-border">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-3 col-12 margin-bot margin-top">
+                                            <a href="<?= $config -> rootUrl() ;?>member/<?= $user -> getUserData( $res['following'], 'username') ?>" title="Accéder au compte de <?= $user -> getUserData( $res['following'], 'first_name') ?> <?= $user -> getUserData( $res['following'], 'last_name') ?>">
+                                                <div class="col-md-3 profil_picture-md">
+                                                    <div class="img light-border" style="background-image: url('<?= $config -> rootUrl() ;?>dist/<?= $user -> getUserData( $res['following'], 'profil_image') == NULL ? 'images/content/defaut_profil_pic.png' : 'uploads/u/'. $res['following'].'/profil_pic/'.$user -> getUserData( $res['following'], 'profil_image') ;?>');"></div>
+                                                </div>    
+                                            </a>
+                                        </div>
+                                        <div class="col-md-9 col-12 align-self-center">
+                                            <a href="<?= $config -> rootUrl() ;?>member/<?= $user -> getUserData( $res['following'], 'username') ?>" title="Accéder au compte de <?= $user -> getUserData( $res['following'], 'first_name') ?> <?= $user -> getUserData( $res['following'], 'last_name') ?>">
+                                                <p class="title-xs bold color-dark"><?= $user -> getUserData( $res['following'], 'username') ?></p>
+                                                <p class="color-dark"><?= $user -> getUserData( $res['following'], 'first_name') ?> <?= $user -> getUserData( $res['following'], 'last_name') ?></p>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        <?php
+                            }
+                        ?>
+                    </ul>
+                </div>
+            <?php
+        }
         ?>
-    </ul>
 
+    </div>
 </div>
 
 <?php require_once ('view/components/footer.php') ;?>

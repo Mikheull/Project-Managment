@@ -36,7 +36,7 @@
             <div class="link-box col col-md-2 col-6">
                 <div class="title">Resources</div>
                 <ul>
-                    <li> <a href="<?= $config -> rootUrl() ;?>member" title="Trouver un membre">Membres</a> </li>
+                    <li> <a href="<?= $config -> rootUrl() ;?>search" title="Faire une recherche">Recherche</a> </li>
                     <li> <a href="<?= $config -> rootUrl() ;?>doc" title="Parcourez notre documentation">Documentation</a> </li>
                     <li> <a href="<?= $config -> rootUrl() ;?>help" title="Trouvez les réponses a vos questions">Centre d’aide</a> </li>
                     <li> <a href="<?= $config -> rootUrl() ;?>blog" title="Aprenez en plus sur Improove">Blog</a> </li>

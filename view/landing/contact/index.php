@@ -20,7 +20,13 @@
     <div class="container contact">
     
         <div class="row">
-            <div class="col-6">
+            <div class="col-md-6 offset-md-3 col-12 offset-0 margin-bot-lg">
+                
+                <div class="margin-bot-lg margin-top-lg text-align-center">
+                    <h2 class="title-lg bold color-dark margin-bot">Contactez nous</h2>
+                    <h3 class="title-xs color-gray">Vous avez une question ? Remplissez notre formulaire pour prendre contact avec nous. Ou consultez la F.A.Q ci-dessous</h3>
+                </div>
+
                 <form action="" method="POST">
                     <div class="input_group">
                         <div class="input-field input-half">
@@ -49,7 +55,7 @@
                         </div>
                     </div>               
                 
-                    Captcha Google
+                    <div class="g-recaptcha margin-bot" data-sitekey="6Lf17aUUAAAAADTZBmHbHKb0b35bFVU6xFstRllP"></div>
 
                     <button class="btn primary-btn" name="send_contact_button">Envoyer</button>
 
@@ -59,6 +65,51 @@
 
     </div>
     
+
+
+    <div class="container margin-bot-lg margin-top-lg">
+        <h2 class="title-lg bold color-dark margin-bot">Frequently Asked Questions</h2>
+
+        <div class="accordion">
+            <div class="accordion-item margin-bot">
+                <a class="color-primary">Consectetur adipiscing elit ?</a>
+                <div class="content">
+                    <p class="color-gray">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Elementum sagittis vitae et leo duis ut. Ut tortor pretium viverra suspendisse potenti.</p>
+                </div>
+            </div>
+            <div class="accordion-item margin-bot">
+                <a class="color-primary">Sed do eiusmod tempor incididunt ut labore et dolore ?</a>
+                <div class="content">
+                    <p class="color-gray">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Elementum sagittis vitae et leo duis ut. Ut tortor pretium viverra suspendisse potenti.</p>
+                </div>
+            </div>
+            <div class="accordion-item margin-bot">
+                <a class="color-primary">Lorem ipsum dolor sit amet ?</a>
+                <div class="content">
+                    <p class="color-gray">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Elementum sagittis vitae et leo duis ut. Ut tortor pretium viverra suspendisse potenti.</p>
+                </div>
+            </div>
+            <div class="accordion-item margin-bot">
+                <a class="color-primary">Tempor incididunt ut labore ?</a>
+                <div class="content">
+                    <p class="color-gray">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Elementum sagittis vitae et leo duis ut. Ut tortor pretium viverra suspendisse potenti.</p>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+
     <?php require ('view/components/newsletter.php') ;?>
 
 <?php require ('view/components/footer.php') ;?>
+
+
+
+<script>
+const items = document.querySelectorAll(".accordion a");
+function toggleAccordion(){
+    this.classList.toggle('active');
+    this.nextElementSibling.classList.toggle('active');
+}
+items.forEach(item => item.addEventListener('click', toggleAccordion));
+</script>

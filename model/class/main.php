@@ -18,7 +18,15 @@ class main {
      */
     
     function generateToken($length = 20, $type = 'all'){
-        $pattern =  ($type == 'numbers') ? '0123456789' : (($type == 'letters') ? 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' : '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+        if($type == 'numbers'){
+            $pattern = '0123456789';
+        }else if($type == 'letters'){
+            $pattern = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        }else if($type == 'numbers-letters_min'){
+            $pattern = '0123456789abcdefghijklmnopqrstuvwxyz';
+        }else{
+            $pattern = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        }
         $token = substr(str_shuffle(str_repeat($pattern, ceil($length/strlen($pattern)) )),1,$length);
 
         return $token;
