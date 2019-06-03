@@ -151,5 +151,37 @@ if(isset( $_POST['remove_member'] )){
 }
 
 
+/**
+ * Formulaire pour editer les informations d'une équipe
+ * 
+ * @fichier d'execution = view/content/app/team/settings/index.php
+ * @variable d'execution = $_POST['update_team_infos']                  : type = button
+ * 
+ * @variable obligatoire = $_POST['name']                               : type = text
+ * @variable obligatoire = $_POST['desc']                               : type = text
+ * @variable obligatoire = $_POST['status']                             : type = text
+ * 
+ */
+if(isset($_POST['update_team_infos'])){
+    
+    if(isset($_POST['name']) AND !empty($_POST['name']) AND isset($_POST['desc']) AND !empty($_POST['desc']) AND isset($_POST['status']) AND !empty($_POST['status'])){
+        $name = htmlentities(addslashes($_POST['name']));
+        $desc = htmlentities( addslashes($_POST['desc']));
+        
+        $_POST['status'] == 'private' ? $status = 0 : $status = 1;
+        $team_token = $router -> getRouteParam('2');
+
+        if(strlen($desc) <= 255){
+            $errors = $team -> editTeamInfos($name, $desc, $status, $team_token);
+        }else{
+            $errors = ['success' => false, 'message' => ['text' => "La description est trop longue (".strlen($bio)."/255) !", 'theme' => 'dark', 'timeout' => 2000] ];
+        }
+
+    }else{
+        $errors = ['success' => false, 'message' => ['text' => "Vous devez remplir tout les champs ", 'theme' => 'dark', 'timeout' => 2000] ];
+    }
+
+}
+
 // End of file
 /******************************************************************************/

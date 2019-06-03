@@ -211,7 +211,27 @@ class team extends db_connect {
         $res = $request->fetch();
         
         return ($res ? true : false);
-    } 
+    }
+    
+    
+    /**
+     * Modifie les infos
+     * 
+     * Va modifier les infos de l'équipe
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $name nom
+     * @param string $desc description
+     * @param string $status status
+     * @param string $token token de l'équipe
+     * @return array
+     */
+    
+    function editTeamInfos($name = '', $desc = '', $status = '', $token = '') {
+        $exec = $this -> _db -> exec("UPDATE `pr_team` SET `name` = '$name', `description` = '$desc', `public` = '$status' WHERE `public_token` = '$token' ");
+        return (['success' => true, 'message' => ['text' => "Les informations on été modifiés !", 'theme' => 'dark', 'timeout' => 2000] ]);
+    }
 
 /******************************************************************************/
 
