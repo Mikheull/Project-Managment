@@ -77,11 +77,11 @@ if(isset($_POST['invite_member'])){
         if($auth -> emailExist($user_mail) == true){
             $errors = $project -> inviteMember($user_mail, $project_token, "Je t\'invite dans mon projet Khoya");
         }else{
-            $errors = ['success' => false, 'message' => ['text' => "L\'utilisateur n\'existe pas !", 'theme' => 'dark', 'timeout' => 2000] ];
+            $errors = ['success' => false, 'options' => ['content' => "L\'utilisateur n\'existe pas !", 'theme' => 'error'] ];
         }
 
     }else{
-        $errors = ['success' => false, 'message' => ['text' => "Vous devez remplir tout les champs obligatoires !", 'theme' => 'dark', 'timeout' => 2000] ];
+        $errors = ['success' => false, 'options' => ['content' => "Vous devez remplir tout les champs obligatoires !", 'theme' => 'error'] ];
     }
 }
 
@@ -110,7 +110,7 @@ if(isset($_POST['create_project'])){
         $errors = $project -> createProject($name, $desc, $status, $invitations);
 
     }else{
-        $errors = ['success' => false, 'message' => ['text' => "Vous devez remplir tout les champs obligatoires !", 'theme' => 'dark', 'timeout' => 2000] ];
+        $errors = ['success' => false, 'options' => ['content' => "Vous devez remplir tout les champs obligatoires !", 'theme' => 'error'] ];
     }
 }
 

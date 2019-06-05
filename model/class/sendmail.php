@@ -28,11 +28,10 @@ class sendmail extends db_connect {
         return (
             [
                 'success' => true, 
-                'message' => 
+                'options' => 
                     [
-                        'text' => 'from: '.$from.'<br>to: '.$to.'<br>object: '.$object.'<br>content: '.$content, 
-                        'theme' => 'dark', 
-                        'timeout' => 2000
+                        'content' => 'from: '.$from.'<br>to: '.$to.'<br>object: '.$object.'<br>content: '.$content, 
+                        'theme' => 'success'
                     ] 
             ]
         );

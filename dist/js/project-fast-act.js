@@ -22,7 +22,7 @@ $(document).on("click", "[data-action='invite']", function(e) {
         callback: function (result) {
             if(result !== ''){
                 $.ajax({
-                    url:  '../controller/ajax/project_short-actions.php',
+                    url:  rootUrl + 'controller/ajax/project_short-actions.php',
                     type: 'POST',
                     data: {result: result, project_token: ref, action: 'invite'},
                     success:function(data){
@@ -60,7 +60,7 @@ $(document).on("click", "[data-action='delete']", function(e) {
         callback: function (result) {
             if(result == true){
                 $.ajax({
-                    url:  '../controller/ajax/project_short-actions.php',
+                    url:  rootUrl + 'controller/ajax/project_short-actions.php',
                     type: 'POST',
                     data: {project_token: ref, action: 'delete'},
                     success:function(data){
@@ -96,7 +96,7 @@ $(document).on("click", "[data-action='archive']", function(e) {
         callback: function (result) {
             if(result == true){
                 $.ajax({
-                    url:  '../controller/ajax/project_short-actions.php',
+                    url:  rootUrl + 'controller/ajax/project_short-actions.php',
                     type: 'POST',
                     data: {project_token: ref, action: 'archive'},
                     success:function(data){
@@ -132,7 +132,7 @@ $(document).on("click", "[data-action='unarchive']", function(e) {
         callback: function (result) {
             if(result == true){
                 $.ajax({
-                    url:  '../controller/ajax/project_short-actions.php',
+                    url:  rootUrl + 'controller/ajax/project_short-actions.php',
                     type: 'POST',
                     data: {project_token: ref, action: 'unarchive'},
                     success:function(data){
@@ -168,7 +168,7 @@ $(document).on("click", "[data-action='leave']", function(e) {
         callback: function (result) {
             if(result == true){
                 $.ajax({
-                    url:  '../controller/ajax/project_short-actions.php',
+                    url:  rootUrl + 'controller/ajax/project_short-actions.php',
                     type: 'POST',
                     data: {project_token: ref, action: 'leave'},
                     success:function(data){
@@ -205,7 +205,7 @@ $(document).on("click", "[data-action='rename']", function(e) {
         callback: function (result) {
             if(result !== ''){
                 $.ajax({
-                    url:  '../controller/ajax/project_short-actions.php',
+                    url:  rootUrl + 'controller/ajax/project_short-actions.php',
                     type: 'POST',
                     data: {result: result, project_token: ref, action: 'rename'},
                     success:function(data){

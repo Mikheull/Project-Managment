@@ -230,7 +230,7 @@ class team extends db_connect {
     
     function editTeamInfos($name = '', $desc = '', $status = '', $token = '') {
         $exec = $this -> _db -> exec("UPDATE `pr_team` SET `name` = '$name', `description` = '$desc', `public` = '$status' WHERE `public_token` = '$token' ");
-        return (['success' => true, 'message' => ['text' => "Les informations on été modifiés !", 'theme' => 'dark', 'timeout' => 2000] ]);
+        return (['success' => true, 'options' => ['content' => "Les informations on été modifiés !", 'theme' => 'success'] ]);
     }
 
 /******************************************************************************/
@@ -260,20 +260,20 @@ class team extends db_connect {
             if($res['public'] == true){
                 $this -> addUser($token, $user_token);
     
-                return (['success' => true, 'message' => ['text' => "Vous avez rejoins l\'équipe publique !", 'theme' => 'dark', 'timeout' => 2000] ]);
+                return (['success' => true, 'options' => ['content' => "Vous avez rejoins l\'équipe publique !", 'theme' => 'success'] ]);
             }else{
                 $request = $this -> _db -> query("SELECT * FROM `pr_invitation_team` WHERE `team_token` = '$token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
                 $res = $request->fetch();
                 if($res){
                     $this -> addUser($token, $user_token);
 
-                    return (['success' => true, 'message' => ['text' => "Vous avez rejoins l\'équipe !", 'theme' => 'dark', 'timeout' => 2000] ]);
+                    return (['success' => true, 'options' => ['content' => "Vous avez rejoins l\'équipe !", 'theme' => 'success'] ]);
                 }else{
-                    return (['success' => true, 'message' => ['text' => "Vous n etes pas autorisé a rejoindre cette équipe !", 'theme' => 'dark', 'timeout' => 2000] ]);
+                    return (['success' => true, 'options' => ['content' => "Vous n\'etes pas autorisé a rejoindre cette équipe !", 'theme' => 'error'] ]);
                 }
             }
         }else{
-            return(['success' => false, 'message' => ['text' => "Vous êtes déjà dans l\'équipe !", 'theme' => 'dark', 'timeout' => 2000] ]);
+            return(['success' => false, 'options' => ['content' => "Vous êtes déjà dans l\'équipe !", 'theme' => 'error'] ]);
         }
 
     } 
@@ -303,7 +303,7 @@ class team extends db_connect {
         $count = $req->rowCount();
 
         if($count !== 1){
-            return (['success' => false, 'message' => ['text' => "Une erreur est survenue !", 'theme' => 'dark', 'timeout' => 2000] ]);
+            return (['success' => false, 'options' => ['content' => "Une erreur est survenue !", 'theme' => 'error'] ]);
         }
     }  
 
@@ -324,9 +324,9 @@ class team extends db_connect {
     function teamRename($team_token = '', $new_name = '') {
         if($new_name !== ''){
             $request = $this -> _db -> exec("UPDATE `pr_team` SET `name` = '$new_name' WHERE `public_token` = '$team_token' ");
-            return (['success' => true, 'message' => ['text' => "Le nom a été changé !", 'theme' => 'dark', 'timeout' => 2000] ]);
+            return (['success' => true, 'options' => ['content' => "Le nom a été changé !", 'theme' => 'success'] ]);
         }
-        return (['success' => false, 'message' => ['text' => "Le nom est vide !", 'theme' => 'dark', 'timeout' => 2000] ]);
+        return (['success' => false, 'options' => ['content' => "Le nom est vide !", 'theme' => 'error'] ]);
     
     }
 
@@ -360,21 +360,21 @@ class team extends db_connect {
             $res = $request->fetch();
 
             if($res){
-                return (['success' => true, 'message' => ['text' => "L\'utilisateur est déjà dans l\'équipe !", 'theme' => 'dark', 'timeout' => 2000] ]);
+                return (['success' => true, 'options' => ['content' => "L\'utilisateur est déjà dans l\'équipe !", 'theme' => 'error'] ]);
             }else{
 
                 $request = $this -> _db -> query("SELECT * FROM `pr_invitation_team` WHERE `team_token` = '$team_token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
                 $res = $request->fetch();
                 if($res){
-                    return (['success' => false, 'message' => ['text' => "Une invitation lui a déjà été envoyé !", 'theme' => 'dark', 'timeout' => 2000] ]);
+                    return (['success' => false, 'options' => ['content' => "Une invitation lui a déjà été envoyé !", 'theme' => 'error'] ]);
                 }else{
                     $request = $this -> _db -> exec("INSERT INTO `pr_invitation_team` (`team_token`, `user_public_token`, `message`) VALUES ('$team_token', '$user_token', '$message')");
-                    return (['success' => true, 'message' => ['text' => "Vous avez envoyer l\'invitation !", 'theme' => 'dark', 'timeout' => 2000] ]);
+                    return (['success' => true, 'options' => ['content' => "Vous avez envoyer l\'invitation !", 'theme' => 'success'] ]);
                 }
                 
             }
         }else{
-            return (['success' => true, 'message' => ['text' => "Aucun utilisateur trouvé !", 'theme' => 'dark', 'timeout' => 2000] ]);
+            return (['success' => true, 'options' => ['content' => "Aucun utilisateur trouvé !", 'theme' => 'error'] ]);
         }
    
     }
@@ -406,13 +406,13 @@ class team extends db_connect {
             
             if($choose == 'accept'){
                 $request = $this -> _db -> exec("INSERT INTO `pr_team_member` (`team_token`, `user_public_token`) VALUES ('$token', '$user_token')");
-                return (['success' => true, 'message' => ['text' => "Vous avez accepter l\'invitation !", 'theme' => 'dark', 'timeout' => 2000] ]);
+                return (['success' => true, 'options' => ['content' => "Vous avez accepter l\'invitation !", 'theme' => 'success'] ]);
             }else if($choose == 'decline'){
-                return (['success' => true, 'message' => ['text' => "Vous avez refuser l\'invitation !", 'theme' => 'dark', 'timeout' => 2000] ]);
+                return (['success' => true, 'options' => ['content' => "Vous avez refuser l\'invitation !", 'theme' => 'success'] ]);
             }
         }
 
-        return (['success' => false, 'message' => ['text' => "Une erreur est survenue !", 'theme' => 'dark', 'timeout' => 2000] ]);
+        return (['success' => false, 'options' => ['content' => "Une erreur est survenue !", 'theme' => 'error'] ]);
     }  
 
 
@@ -449,9 +449,9 @@ class team extends db_connect {
             }
 
             header('location: ../team/'. $token);
-            return (['success' => true, 'message' => ['text' => "L\'équipe a été crée !", 'theme' => 'dark', 'timeout' => 2000] ]);
+            return (['success' => true, 'options' => ['content' => "L\'équipe a été crée !", 'theme' => 'success'] ]);
         }else{
-            return (['success' => false, 'message' => ['text' => "Une équipe avec ce même nom existe déjà !", 'theme' => 'dark', 'timeout' => 2000] ]);
+            return (['success' => false, 'options' => ['content' => "Une équipe avec ce même nom existe déjà !", 'theme' => 'error'] ]);
         }
     } 
     
@@ -478,9 +478,9 @@ class team extends db_connect {
             $request = $this -> _db -> exec("DELETE FROM `pr_team` WHERE `public_token` = '$token' AND `founder_token` = '$owner'");
             $request = $this -> _db -> exec("DELETE FROM `pr_team_member` WHERE `team_token` = '$token'");
             
-            return (['success' => true, 'message' => ['text' => "L\'équipe a été supprimée !", 'theme' => 'dark', 'timeout' => 2000] ]);
+            return (['success' => true, 'options' => ['content' => "L\'équipe a été supprimée !", 'theme' => 'success'] ]);
         }else{
-            return (['success' => false, 'message' => ['text' => "Aucune équipe n\'a été trouvée !", 'theme' => 'dark', 'timeout' => 2000] ]);
+            return (['success' => false, 'options' => ['content' => "Aucune équipe n\'a été trouvée !", 'theme' => 'error'] ]);
         }
     }
     
@@ -507,9 +507,9 @@ class team extends db_connect {
             $request = $this -> _db -> exec("UPDATE `pr_team` SET `enable`= 0 WHERE `public_token` = '$token' AND `founder_token` = '$owner' AND `enable` = '1' ");
             $request = $this -> _db -> exec("UPDATE `pr_team_member` SET `enable`= 0 WHERE `team_token` = '$token' AND `enable` = '1' ");
             
-            return (['success' => true, 'message' => ['text' => "L\'équipe a été archivé !", 'theme' => 'dark', 'timeout' => 2000] ]);
+            return (['success' => true, 'options' => ['content' => "L\'équipe a été archivé !", 'theme' => 'success'] ]);
         }else{
-            return (['success' => false, 'message' => ['text' => "Aucune équipe n\'a été trouvée !", 'theme' => 'dark', 'timeout' => 2000] ]);
+            return (['success' => false, 'options' => ['content' => "Aucune équipe n\'a été trouvée !", 'theme' => 'error'] ]);
         }
     } 
     
@@ -536,9 +536,9 @@ class team extends db_connect {
             $request = $this -> _db -> exec("UPDATE `pr_team` SET `enable`= 1 WHERE `public_token` = '$token' AND `founder_token` = '$owner' AND `enable` = '0' ");
             $request = $this -> _db -> exec("UPDATE `pr_team_member` SET `enable`= 1 WHERE `team_token` = '$token' AND `enable` = '0' ");
             
-            return (['success' => true, 'message' => ['text' => "L\'équipe a été désarchivé !", 'theme' => 'dark', 'timeout' => 2000] ]);
+            return (['success' => true, 'options' => ['content' => "L\'équipe a été désarchivé !", 'theme' => 'success'] ]);
         }else{
-            return (['success' => false, 'message' => ['text' => "Aucune équipe n\'a été trouvée !", 'theme' => 'dark', 'timeout' => 2000] ]);
+            return (['success' => false, 'options' => ['content' => "Aucune équipe n\'a été trouvée !", 'theme' => 'error'] ]);
         }
     }    
     
@@ -564,9 +564,9 @@ class team extends db_connect {
             // $request = $this -> _db -> exec("UPDATE `pr_team_member` SET `enable`= 0 WHERE `team_token` = '$team_token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
             $request = $this -> _db -> exec("DELETE FROM `pr_team_member` WHERE `team_token` = '$team_token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
             header('location: ');
-            return (['success' => true, 'message' => ['text' => "L\'utilisateur a été retiré !", 'theme' => 'dark', 'timeout' => 2000] ]);
+            return (['success' => true, 'options' => ['content' => "L\'utilisateur a été retiré !", 'theme' => 'success'] ]);
         }else{
-            return (['success' => false, 'message' => ['text' => "L\'utilisateur n\'est pas dans l\'équipe !", 'theme' => 'dark', 'timeout' => 2000] ]);
+            return (['success' => false, 'options' => ['content' => "L\'utilisateur n\'est pas dans l\'équipe !", 'theme' => 'error'] ]);
         }
     } 
     

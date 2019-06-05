@@ -185,9 +185,9 @@ class project extends db_connect {
     function projectRename($project_token = '', $new_name = '') {
         if($new_name !== ''){
             $request = $this -> _db -> exec("UPDATE `pr_project` SET `name` = '$new_name' WHERE `public_token` = '$project_token' ");
-            return (['success' => true, 'message' => ['text' => "Le nom a été changé !", 'theme' => 'dark', 'timeout' => 2000] ]);
+            return (['success' => true, 'options' => ['content' => "Le nom a été changé !", 'theme' => 'success'] ]);
         }
-        return (['success' => false, 'message' => ['text' => "Le nom est vide !", 'theme' => 'dark', 'timeout' => 2000] ]);
+        return (['success' => false, 'options' => ['content' => "Le nom est vide !", 'theme' => 'error'] ]);
     
     }
 
@@ -221,21 +221,21 @@ class project extends db_connect {
             $res = $request->fetch();
 
             if($res){
-                return (['success' => true, 'message' => ['text' => "L\'utilisateur est déjà dans le projet !", 'theme' => 'dark', 'timeout' => 2000] ]);
+                return (['success' => true, 'options' => ['content' => "L\'utilisateur est déjà dans le projet !", 'theme' => 'error'] ]);
             }else{
 
                 $request = $this -> _db -> query("SELECT * FROM `pr_invitation_project` WHERE `project_token` = '$project_token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
                 $res = $request->fetch();
                 if($res){
-                    return (['success' => false, 'message' => ['text' => "Une invitation lui a déjà été envoyé !", 'theme' => 'dark', 'timeout' => 2000] ]);
+                    return (['success' => false, 'options' => ['content' => "Une invitation lui a déjà été envoyé !", 'theme' => 'success'] ]);
                 }else{
                     $request = $this -> _db -> exec("INSERT INTO `pr_invitation_project` (`project_token`, `user_public_token`, `message`) VALUES ('$project_token', '$user_token', '$message')");
-                    return (['success' => true, 'message' => ['text' => "Vous avez envoyer l\'invitation !", 'theme' => 'dark', 'timeout' => 2000] ]);
+                    return (['success' => true, 'options' => ['content' => "Vous avez envoyer l\'invitation !", 'theme' => 'success'] ]);
                 }
                 
             }
         }else{
-            return (['success' => true, 'message' => ['text' => "Aucun utilisateur trouvé !", 'theme' => 'dark', 'timeout' => 2000] ]);
+            return (['success' => true, 'options' => ['content' => "Aucun utilisateur trouvé !", 'theme' => 'error'] ]);
         }
    
     }
@@ -267,13 +267,13 @@ class project extends db_connect {
             
             if($choose == 'accept'){
                 $request = $this -> _db -> exec("INSERT INTO `pr_project_member` (`project_token`, `user_public_token`) VALUES ('$token', '$user_token')");
-                return (['success' => true, 'message' => ['text' => "Vous avez accepter l\'invitation !", 'theme' => 'dark', 'timeout' => 2000] ]);
+                return (['success' => true, 'options' => ['content' => "Vous avez accepter l\'invitation !", 'theme' => 'success'] ]);
             }else if($choose == 'decline'){
-                return (['success' => true, 'message' => ['text' => "Vous avez refuser l\'invitation !", 'theme' => 'dark', 'timeout' => 2000] ]);
+                return (['success' => true, 'options' => ['content' => "Vous avez refuser l\'invitation !", 'theme' => 'success'] ]);
             }
         }
 
-        return (['success' => false, 'message' => ['text' => "Une erreur est survenue !", 'theme' => 'dark', 'timeout' => 2000] ]);
+        return (['success' => false, 'options' => ['content' => "Une erreur est survenue !", 'theme' => 'error'] ]);
     }  
 
 
@@ -309,9 +309,9 @@ class project extends db_connect {
             }
 
             header('location: ../project/'. $token);
-            return (['success' => true, 'message' => ['text' => "Le projet a été crée !", 'theme' => 'dark', 'timeout' => 2000] ]);
+            return (['success' => true, 'options' => ['content' => "Le projet a été crée !", 'theme' => 'success'] ]);
         }else{
-            return (['success' => false, 'message' => ['text' => "Un projet avec ce même nom existe déjà !", 'theme' => 'dark', 'timeout' => 2000] ]);
+            return (['success' => false, 'options' => ['content' => "Un projet avec ce même nom existe déjà !", 'theme' => 'error'] ]);
         }
     }
     
@@ -338,9 +338,9 @@ class project extends db_connect {
             $request = $this -> _db -> exec("DELETE FROM `pr_project` WHERE `public_token` = '$token' AND `founder_token` = '$owner'");
             $request = $this -> _db -> exec("DELETE FROM `pr_project_member` WHERE `project_token` = '$token'");
             
-            return (['success' => true, 'message' => ['text' => "Le projet a été supprimée !", 'theme' => 'dark', 'timeout' => 2000] ]);
+            return (['success' => true, 'options' => ['content' => "Le projet a été supprimée !", 'theme' => 'success'] ]);
         }else{
-            return (['success' => false, 'message' => ['text' => "Aucun projet n\'a été trouvée !", 'theme' => 'dark', 'timeout' => 2000] ]);
+            return (['success' => false, 'options' => ['content' => "Aucun projet n\'a été trouvée !", 'theme' => 'error'] ]);
         }
     } 
 
@@ -367,9 +367,9 @@ class project extends db_connect {
             $request = $this -> _db -> exec("UPDATE `pr_project` SET `enable`= 0 WHERE `public_token` = '$token' AND `founder_token` = '$owner' AND `enable` = '1' ");
             $request = $this -> _db -> exec("UPDATE `pr_project_member` SET `enable`= 0 WHERE `project_token` = '$token' AND `enable` = '1' ");
             
-            return (['success' => true, 'message' => ['text' => "Le projet a été archivé !", 'theme' => 'dark', 'timeout' => 2000] ]);
+            return (['success' => true, 'options' => ['content' => "Le projet a été archivé !", 'theme' => 'success'] ]);
         }else{
-            return (['success' => false, 'message' => ['text' => "Aucune équipe n\'a été trouvée !", 'theme' => 'dark', 'timeout' => 2000] ]);
+            return (['success' => false, 'options' => ['content' => "Aucune équipe n\'a été trouvée !", 'theme' => 'error'] ]);
         }
     } 
     
@@ -396,9 +396,9 @@ class project extends db_connect {
             $request = $this -> _db -> exec("UPDATE `pr_project` SET `enable`= 1 WHERE `public_token` = '$token' AND `founder_token` = '$owner' AND `enable` = '0' ");
             $request = $this -> _db -> exec("UPDATE `pr_project_member` SET `enable`= 1 WHERE `project_token` = '$token' AND `enable` = '0' ");
             
-            return (['success' => true, 'message' => ['text' => "Le projet a été désarchivé !", 'theme' => 'dark', 'timeout' => 2000] ]);
+            return (['success' => true, 'options' => ['content' => "Le projet a été désarchivé !", 'theme' => 'success'] ]);
         }else{
-            return (['success' => false, 'message' => ['text' => "Aucune équipe n\'a été trouvée !", 'theme' => 'dark', 'timeout' => 2000] ]);
+            return (['success' => false, 'options' => ['content' => "Aucune équipe n\'a été trouvée !", 'theme' => 'error'] ]);
         }
     }    
     
@@ -423,9 +423,9 @@ class project extends db_connect {
         if($res){
             $request = $this -> _db -> exec("DELETE FROM `pr_project_member` WHERE `project_token` = '$project_token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
             header('location: ');
-            return (['success' => true, 'message' => ['text' => "L\'utilisateur a été retiré !", 'theme' => 'dark', 'timeout' => 2000] ]);
+            return (['success' => true, 'options' => ['content' => "L\'utilisateur a été retiré !", 'theme' => 'success'] ]);
         }else{
-            return (['success' => false, 'message' => ['text' => "L\'utilisateur n\'est pas dans le projet !", 'theme' => 'dark', 'timeout' => 2000] ]);
+            return (['success' => false, 'options' => ['content' => "L\'utilisateur n\'est pas dans le projet !", 'theme' => 'error'] ]);
         }
     } 
 

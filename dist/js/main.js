@@ -2,6 +2,19 @@ feather.replace()
 
 
 
+// function getRootUrl(){
+//     let counter = window.location.pathname.split("/").length;
+//     let correctSlug = '';
+//     if(counter !== 0){
+//         for(let i = 2; i < counter; i ++){
+//             correctSlug = correctSlug+'../';
+//         }
+//     }
+//     return correctSlug;
+// }
+const rootUrl = 'http://localhost:8888/Improove/';
+
+
 // Function pour faire pop un message (d'erreur en général)
 function popMessage(message, theme, delay){
     setTimeout(function() {

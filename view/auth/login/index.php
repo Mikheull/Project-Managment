@@ -21,7 +21,7 @@
                                     <div class="input-field">
                                         <label for="email" class="color-gray">Email</label>
                                         <input type="email" data-required="true" data-validate="email" placeholder="john-doe@domain.com" name="email" id="email" value="<?= isset($_POST['email']) ? $_POST['email'] : '' ?>">
-                                        <small></small>
+                                        <small class="error"></small>
                                     </div>
                                 </div>
 
@@ -31,6 +31,7 @@
                                     <div class="input-field">
                                         <label for="password" class="color-gray">Mot de passe</label>
                                         <input type="password" data-required="true" data-validate="password" name="password" id="password">
+                                        <small class="error"></small>
                                         <a href="reset-password" class="small" title="Redefinir son mot de passe">Mot de passe oublié ?</a>
                                     </div>
                                 </div>

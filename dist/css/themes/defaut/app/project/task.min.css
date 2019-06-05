@@ -1,0 +1,1 @@
+.tabs{width:100%;display:flex;flex-wrap:nowrap;height:80vh;max-height:80vh;-webkit-overflow-scrolling:touch;overflow-x:auto}.tabs .tab-item{width:30%;flex:0 0 auto;margin-right:1%}@media (max-width:768px){.tabs .tab-item{width:48%;margin-right:1%}}@media (max-width:568px){.tabs .tab-item{width:98%;margin-right:1%}}

@@ -9,7 +9,7 @@
                 <h2 class="title-lg bold color-dark margin-bot">Eminuit autem inter humilia la supergressa iam impotentia</h2>
                 <h3 class="title-sm color-gray">Clematius nec hiscere nec loqui permissus</h3>
                 <div class="btns margin-top-lg margin-right"> <a href="<?= $config -> rootUrl() ;?>app" title="Débuter un projet" class="btn primary-btn">Lancez votre projet</a> </div>
-                <div class="btns margin-top-lg"> <a href="" title="Regarder la vidéo" class="btn light-btn-bordered"><i data-feather="play-circle"></i> Regarder la vidéo</a> </div>
+                <div class="btns margin-top-lg"> <a href="" title="Regarder la vidéo" class="btn light-btn-bordered open_pres-video"><i data-feather="play-circle"></i> Regarder la vidéo</a> </div>
             </div>
             <div class="col-md-7 col-12 align-self-center right">
                 <img src="<?= $config -> rootUrl() ;?>dist/images/illustrations/landing_home.svg" alt="" width="100%">

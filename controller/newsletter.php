@@ -40,14 +40,14 @@ if(isset($_POST['subscribe_newsletter'])){
             if($user -> getUserData($main -> getToken(), 'mail') == $email){
                 $errors = $newsletter -> subscribe($email);
             }else{
-                $errors = ['success' => false, 'message' => ['text' => "Email invalide !", 'theme' => 'dark', 'timeout' => 2000] ];
+                $errors = ['success' => false, 'options' => ['content' => "Email invalide !", 'theme' => 'error'] ];
             }
         }else{
-            $errors = ['success' => false, 'message' => ['text' => "Vous devez être connecté ! <a class=\"margin-left btn primary-btn\" href=\"login\">Se connecter</a> ", 'theme' => 'dark', 'timeout' => 2000] ];
+            $errors = ['success' => false, 'options' => ['content' => "Vous devez être connecté ! <a class=\"margin-left btn primary-btn\" href=\"login\">Se connecter</a> ", 'theme' => 'error'] ];
         }
 
     }else{
-        $errors = ['success' => false, 'message' => ['text' => "Vous devez remplir tout les champs obligatoires !", 'theme' => 'dark', 'timeout' => 2000] ];
+        $errors = ['success' => false, 'options' => ['content' => "Vous devez remplir tout les champs obligatoires !", 'theme' => 'error'] ];
     }
 
 }

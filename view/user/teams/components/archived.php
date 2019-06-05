@@ -27,7 +27,7 @@
 if($router -> getRouteParam('0') == 'account'){
 ?>
     <div id="tp-<?= $t['public_token'] ?>" class="hidden">
-        <ul class="margin-bot">
+        <ul class="margin-bot margin-top">
             <?php
                 if($owner == $main -> getToken()){
                     ?>

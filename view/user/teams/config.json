@@ -33,8 +33,7 @@
     ],
 
     "online_css": [ 
-        "https://cdn.jsdelivr.net/npm/tippy.js@4.3.1/themes/light-border.css",
-        "https://cdn.jsdelivr.net/npm/modaal@0.4.4/dist/css/modaal.min.css"
+        "https://cdn.jsdelivr.net/npm/tippy.js@4.3.1/themes/light-border.css"
     ],
 
     "js": [ 

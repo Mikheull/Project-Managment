@@ -32,7 +32,8 @@
     ],
      
     "js": [ 
-        "form-validator.js"
+        "form-validator.js",
+        "auth.js"
     ]
 
 }

@@ -55,7 +55,7 @@ class friend extends db_connect {
         $count = $req->rowCount();
 
         if($count !== 1){
-            return (['success' => false, 'message' => ['text' => 'Une erreur est survenue !', 'theme' => 'light', 'timeout' => 2000] ]);
+            return (['success' => false, 'options' => ['content' => 'Une erreur est survenue !', 'theme' => 'error'] ]);
         }
         $notif_content = 
             [
@@ -65,7 +65,7 @@ class friend extends db_connect {
         $notif_content = json_encode($notif_content);
         $exec = $this -> _db -> exec("INSERT INTO `imp_notification`( `user_public_token`, `type`, `content`) VALUES ('$following', 'follow', '$notif_content') ");
         
-        return (['success' => true, 'message' => ['text' => 'Vous avez suivi l utilisateur !', 'theme' => 'light', 'timeout' => 2000] ]);
+        return (['success' => true, 'options' => ['content' => 'Vous avez suivi l utilisateur !', 'theme' => 'success'] ]);
     } 
 
     /**
@@ -91,9 +91,9 @@ class friend extends db_connect {
         $count = $req->rowCount();
 
         if($count !== 1){
-            return (['success' => false, 'message' => ['text' => 'Une erreur est survenue !', 'theme' => 'light', 'timeout' => 2000] ]);
+            return (['success' => false, 'options' => ['content' => 'Une erreur est survenue !', 'theme' => 'error'] ]);
         }
-        return (['success' => true, 'message' => ['text' => 'Vous ne suivez plus l utilisateur !', 'theme' => 'light', 'timeout' => 2000] ]);
+        return (['success' => true, 'options' => ['content' => 'Vous ne suivez plus l utilisateur !', 'theme' => 'success'] ]);
     }    
 
 /******************************************************************************/

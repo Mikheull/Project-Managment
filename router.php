@@ -15,7 +15,11 @@ if(isset($_GET['query'])){
         }
 
     }else{
-        require ('view/error/not-found.php');
+        $_GET['query'] = 'not-found';
+        $exec_router['file_path'] = 'view/error/not-found/index.php';
+        $exec_router['config_path'] = 'view/error/not-found/config.json';
+        $require_url = $exec_router['file_path'];
+        require ('view/index.php');
     }
 
 }else{

@@ -113,7 +113,7 @@ class user extends db_connect {
         $new_password = password_hash($new_password, PASSWORD_DEFAULT);
         $exec = $this -> _db -> exec("UPDATE `imp_user` SET `password` = '$new_password' WHERE `public_token` = '$token' ");
 
-        return (['success' => true, 'message' => ['text' => "Le mot de passe a été modifié !", 'theme' => 'light', 'timeout' => 2000] ]);
+        return (['success' => true, 'options' => ['content' => "Le mot de passe a été modifié !", 'theme' => 'success'] ]);
     }    
 
 
@@ -176,7 +176,7 @@ class user extends db_connect {
         $token = $this -> getToken();
         $exec = $this -> _db -> exec("UPDATE `imp_user` SET `first_name` = '$first_name', `last_name` = '$last_name', `username` = '$username', `bio` = '$bio' WHERE `public_token` = '$token' ");
 
-        return (['success' => true, 'message' => ['text' => "Les informations on été modifiés !", 'theme' => 'light', 'timeout' => 2000] ]);
+        return (['success' => true, 'options' => ['content' => "Les informations on été modifiés !", 'theme' => 'success'] ]);
     }     
 
 /******************************************************************************/
@@ -231,11 +231,11 @@ class user extends db_connect {
             $count = $req->rowCount();
     
             if($count !== 1){
-                return (['success' => false, 'message' => ['text' => "Une erreur est survenue !", 'theme' => 'light', 'timeout' => 2000] ]);
+                return (['success' => false, 'options' => ['content' => "Une erreur est survenue !", 'theme' => 'error'] ]);
             }
-            return (['success' => true, 'message' => ['text' => "Vous avez bloqué l\'utilisateur !", 'theme' => 'light', 'timeout' => 2000] ]);
+            return (['success' => true, 'options' => ['content' => "Vous avez bloqué l\'utilisateur !", 'theme' => 'success'] ]);
         }else{
-            return (['success' => false, 'message' => ['text' => "Vous avez déjà bloqué l\'utilisateur !", 'theme' => 'light', 'timeout' => 2000] ]);
+            return (['success' => false, 'options' => ['content' => "Vous avez déjà bloqué l\'utilisateur !", 'theme' => 'error'] ]);
         }
     } 
 
@@ -265,11 +265,11 @@ class user extends db_connect {
             $count = $req->rowCount();
 
             if($count !== 1){
-                return (['success' => false, 'message' => ['text' => 'Une erreur est survenue !', 'theme' => 'light', 'timeout' => 2000] ]);
+                return (['success' => false, 'options' => ['content' => 'Une erreur est survenue !', 'theme' => 'error'] ]);
             }
-            return (['success' => true, 'message' => ['text' => 'Vous avez débloqué l utilisateur !', 'theme' => 'light', 'timeout' => 2000] ]);
+            return (['success' => true, 'options' => ['content' => 'Vous avez débloqué l utilisateur !', 'theme' => 'success'] ]);
         }else{
-            return (['success' => false, 'message' => ['text' => "Vous n\'avez pas bloqué l\'utilisateur !", 'theme' => 'light', 'timeout' => 2000] ]);
+            return (['success' => false, 'options' => ['content' => "Vous n\'avez pas bloqué l\'utilisateur !", 'theme' => 'error'] ]);
         }
     }  
   

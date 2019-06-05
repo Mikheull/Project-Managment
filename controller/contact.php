@@ -46,7 +46,7 @@ if(isset($_POST['send_contact_button'])){
         $errors = $sendmail -> send('contact@improove.co', $first_name.'-'.$last_name, $object, $message);
 
     }else{
-        $errors = ['success' => false, 'message' => ['text' => "Vous devez remplir tout les champs obligatoires !", 'theme' => 'dark', 'timeout' => 2000] ];
+        $errors = ['success' => false, 'options' => ['content' => "Vous devez remplir tout les champs obligatoires !", 'theme' => 'error'] ];
     }
 
 }

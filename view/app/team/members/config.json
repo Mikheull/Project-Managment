@@ -8,7 +8,7 @@
         "feather-icons",
         "popper",
         "tippy",
-        "modaal"
+        "bootbox"
     ],
 
     "meta": [ 
@@ -29,13 +29,16 @@
      
     "css": [ 
         "app/main.min.css",
-        "app/hub.min.css",
-        "app/team.min.css"
+        "app/team.min.css",
+        "bootstrap-modal.min.css"
     ], 
 
     "online_css": [ 
-        "https://cdn.jsdelivr.net/npm/tippy.js@4.3.1/themes/light-border.css",
-        "https://cdn.jsdelivr.net/npm/modaal@0.4.4/dist/css/modaal.min.css"
+        "https://cdn.jsdelivr.net/npm/tippy.js@4.3.1/themes/light-border.css"
+    ],
+
+    "js": [ 
+        "team-fast-act.min.js"
     ]
 
 }

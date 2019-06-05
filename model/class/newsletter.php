@@ -26,9 +26,9 @@ class newsletter extends db_connect {
         
         if(!$res){
             $request = $this -> _db -> exec("INSERT INTO `imp_newsletter` (`email`) VALUES ('$email') ");
-            return (['success' => true, 'message' => ['text' => "Inscription a la newsletter validée !", 'theme' => 'dark', 'timeout' => 2000] ]);
+            return (['success' => true, 'options' => ['content' => "Inscription a la newsletter validée !", 'theme' => 'success'] ]);
         }
-        return (['success' => false, 'message' => ['text' => "Vous êtes déjà inscris !", 'theme' => 'dark', 'timeout' => 2000] ]);
+        return (['success' => false, 'options' => ['content' => "Vous êtes déjà inscris !", 'theme' => 'error'] ]);
     } 
 
 /******************************************************************************/

@@ -40,6 +40,7 @@
     <?php if($config -> getConfigLib($exec_router['config_path'],'fakeLoader') == true){?> <script src="https://cdn.jsdelivr.net/npm/jq-fakeloader@2.0.1/js/fakeLoader.js"></script> <?php } ;?>
     <?php if($config -> getConfigLib($exec_router['config_path'],'modaal') == true){?> <script src="https://cdn.jsdelivr.net/npm/modaal@0.4.4/dist/js/modaal.min.js"></script> <?php } ;?>
     <?php if($config -> getConfigLib($exec_router['config_path'],'recaptcha') == true){?> <script src="https://www.google.com/recaptcha/api.js" async defer></script> <?php } ;?>
+    <?php if($config -> getConfigLib($exec_router['config_path'],'dragscroll') == true){?> <script src="https://cdn.jsdelivr.net/npm/dragscroll@0.0.8/dragscroll.min.js"></script> <?php } ;?>
 
     <?php 
         // CSS generated Begin
@@ -64,8 +65,37 @@
         }
     ?>
 
+
+
+
+
+
+
+
+    <script src="<?= $config -> rootUrl() ;?>dist/js/notify.js"></script>
     <script src="<?= $config -> rootUrl() ;?>dist/js/main.js"></script>
-    <script> <?php if(isset($errors)){ ?> $( document ).ready(function() { popMessage('<?= $errors['message']['text'] ;?>', '<?= $errors['message']['theme'] ;?>', <?= $errors['message']['timeout'] ;?>) });  <?php } ?> </script>
+    <script>
+        <?php
+            if(isset($errors)){
+                ?>
+                $( document ).ready(function() {
+                    notify.new({
+                        content : '<?= $errors['options']['content'] ;?>',
+                        <?php if(isset($errors['options']['position'])){ echo 'position : \''.$errors['options']['position'].'\'' ;}?>
+                        <?php if(isset($errors['options']['animation'])){ echo 'animation : \''.$errors['options']['animation'].'\'' ;}?>
+                        <?php if(isset($errors['options']['clickToHide'])){ echo 'clickToHide : \''.$errors['options']['clickToHide'].'\'' ;}?>
+                        <?php if(isset($errors['options']['autoHide'])){ echo 'autoHide : \''.$errors['options']['autoHide'].'\'' ;}?>
+                        <?php if(isset($errors['options']['autoHideDelay'])){ echo 'autoHideDelay : \''.$errors['options']['autoHideDelay'].'\'' ;}?>
+                        <?php if(isset($errors['options']['size'])){ echo 'size : \''.$errors['options']['size'].'\'' ;}?>
+                        <?php if(isset($errors['options']['theme'])){ echo 'theme : \''.$errors['options']['theme'].'\'' ;}?>
+                        <?php if(isset($errors['options']['showDuration'])){ echo 'showDuration : \''.$errors['options']['showDuration'].'\'' ;}?>
+                        <?php if(isset($errors['options']['hideDuration'])){ echo 'hideDuration : \''.$errors['options']['hideDuration'].'\'' ;}?>
+                    });
+                });
+                <?php
+            }
+        ?>
+    </script>
 
     <?php 
         // Scripts generated Begin

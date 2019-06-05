@@ -120,8 +120,30 @@ h1, h2, h3, h4, h5, h6 {font-family: 'Poppins', sans-serif}
   fill: none;
 }
 
-.modaal-container { border-radius: 6px !important}
+/* Notify */
+.notify {position: fixed;z-index: 9999;padding: 1rem 3rem;border-radius: 3px;height: auto;text-align: center;cursor: pointer;}
 
+.notify.error {background: #c64444;border: solid 1px #b63f3f;color: #FFF}
+.notify.success {background: #3db56e;border: solid 1px #38a766;color: #FFF}
+.notify.warning {background: #ebc063;border: solid 1px #d8b05a;color: #FFF}
+.notify.dark {background: #262E3E;border: solid 1px #1d2330;color: #FFF}
+.notify.light {background: #FFF;border: solid 1px #F5F5F5;color: #262E3E}
+
+.notify.sm {width: 25vw}
+.notify.md {width: 50vw}
+.notify.lg {width: 100vw}
+
+.notify.left-top {left: 10px;top: 10px}
+.notify.center-top {left: 50%;transform: translateX(-50%);top: 10px}
+.notify.right-top {right: 10px;top: 10px}
+.notify.left-bottom {left: 10px;bottom: 10px}
+.notify.center-bottom {left: 50%;transform: translateX(-50%);bottom: 10px}
+.notify.right-bottom {right: 10px;bottom: 10px}
+
+/* Media Queries Mobile */
+@media (max-width: 767px) {
+  .notify.sm, .notify.md {width: 100vw}
+}
 
 
 
@@ -174,6 +196,8 @@ strong {font-weight: bold}
 
 .input-field {padding: .8rem 0.6rem .8rem 0;width: 100%;height: auto;}
 .input-field .required {color: var(--primary-color)}
+.input-field small {color: #DB2323;margin-top: 5px;font-size: .7em;}
+.input-field .error, .input-field .error:focus {border-color: rgba(219, 35, 35, 0.5);}
 .input-field label {display: block;font-size: .8em;padding-bottom: .5rem}
 .input-field textarea, input[type="text"], input[type="number"], input[type="email"], input[type="password"] {padding: 5px;height: 2.4rem;border: none;border-radius: 6px;border: 1px solid #ced4da;background: #ffffff;width: 100%;}
 .input-field textarea {height: 150px;font-family: 'Nunito'}
@@ -255,7 +279,8 @@ strong {font-weight: bold}
 .popMessage_container {position: fixed;width: 100%;top: 20px;z-index: 9999;}
 .popMessage {padding: 1rem 3rem;min-width: 40%;width: max-content;margin: 0 auto;border-radius: 6px;height: auto;text-align: center;}
 .popMessage.light {background: #FFF;border: solid 1px #F5F5F5;color: #262E3E}
-.popMessage.dark {background: #262E3E;color: #FFF}
+.popMessage.dark {background: #262E3E;border: solid 1px #1d2330;color: #FFF}
+.popMessage.red {background: #c64444;border: solid 1px #b63f3f;color: #FFF}
 
 
 /* Typography

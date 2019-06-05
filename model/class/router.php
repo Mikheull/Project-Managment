@@ -135,7 +135,7 @@ class router extends db_connect {
             }
             
         }else{
-            return (['success' => false, 'message' => ['text' => 'La route n existe pas !', 'theme' => 'dark', 'timeout' => 2000] ]);
+            return (['success' => false, 'options' => ['content' => 'La route n existe pas !', 'theme' => 'error'] ]);
         }
         
     }

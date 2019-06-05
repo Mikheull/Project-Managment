@@ -26,18 +26,25 @@
 
 
 
-<div id="tp-<?= $u['user_public_token'] ?>" style="display: none;">
-    <ul>
-        <li> <a href="<?= $config -> rootUrl() ;?>app/team/<?= $team_token ;?>/members/<?= $user -> getUserData($u['user_public_token'], 'public_token') ?>" class="dark-link"><i data-feather="eye"></i> Accéder a sa page</a>  </li>
+<div id="tp-<?= $u['user_public_token'] ?>" class="hidden">
+    <ul class="margin-bot">
         <?php
             if($team -> getTeamData($team_token, 'founder_token') == $auth -> getToken() ){
-            ?>
-                <li> <a href="<?= $config -> rootUrl() ;?>app/team/<?= $team_token ;?>/members/<?= $user -> getUserData($u['user_public_token'], 'public_token') ?>/edit" class="dark-link"><i data-feather="circle"></i> Editer</a> </li>
-                <li> <a href="<?= $config -> rootUrl() ;?>app/team/<?= $team_token ;?>/members/r/<?= $user -> getUserData($u['user_public_token'], 'public_token') ?>" class="dark-link"><i data-feather="circle"></i> Retirer</a> </li>
-            <?php
+                if($u['user_public_token'] !== $auth -> getToken()){
+                    ?>
+                        <li class="margin-top margin-bot"> <a href="<?= $config -> rootUrl() ;?>app/team/<?= $team_token ;?>/members/<?= $user -> getUserData($u['user_public_token'], 'public_token') ?>" class="btn btn-sm dark-btn">Accéder a son profil</a> </li>
+                        <li> <a href="<?= $config -> rootUrl() ;?>app/team/<?= $team_token ;?>/members/<?= $user -> getUserData($u['user_public_token'], 'public_token') ?>/activity" class="dark-link">Activité</a> </li>
+                        <li> <a href="<?= $config -> rootUrl() ;?>app/team/<?= $team_token ;?>/members/<?= $user -> getUserData($u['user_public_token'], 'public_token') ?>/edit" class="dark-link">Editer</a> </li>
+                        <li> <a href="" data-action="kick" data-ref="<?= $team_token ?>" data-mem="<?= $u['user_public_token'] ?>" class="link red-link">Retirer</a> </li>
+                    <?php
+                }else{
+                    ?>
+                        <li class="margin-top margin-bot"> <a href="<?= $config -> rootUrl() ;?>app/team/<?= $team_token ;?>/members/<?= $user -> getUserData($u['user_public_token'], 'public_token') ?>" class="btn btn-sm dark-btn">Accéder a mon profil</a> </li>
+                        <li> <a href="<?= $config -> rootUrl() ;?>app/team/<?= $team_token ;?>/members/<?= $user -> getUserData($u['user_public_token'], 'public_token') ?>/activity" class="dark-link">Activité</a> </li>
+                    <?php
+                }
             }
         ?>
-        
     </ul>
 </div>
 

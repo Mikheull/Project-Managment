@@ -100,11 +100,11 @@ if(isset($_POST['invite_member'])){
         if($auth -> emailExist($user_mail) == true){
             $errors = $team -> inviteMember($user_mail, $team_token, "Je t\'invite dans ma team Khoya");
         }else{
-            $errors = ['success' => false, 'message' => ['text' => "L\'utilisateur n\'existe pas !", 'theme' => 'dark', 'timeout' => 2000] ];
+            $errors = ['success' => false, 'options' => ['content' => "L\'utilisateur n\'existe pas !", 'theme' => 'error'] ];
         }
 
     }else{
-        $errors = ['success' => false, 'message' => ['text' => "Vous devez remplir tout les champs obligatoires !", 'theme' => 'dark', 'timeout' => 2000] ];
+        $errors = ['success' => false, 'options' => ['content' => "Vous devez remplir tout les champs obligatoires !", 'theme' => 'error'] ];
     }
 }
 
@@ -132,7 +132,7 @@ if(isset($_POST['create_team'])){
         $errors = $team -> createTeam($name, $desc, $status, $invitations);
 
     }else{
-        $errors = ['success' => false, 'message' => ['text' => "Vous devez remplir tout les champs obligatoires !", 'theme' => 'dark', 'timeout' => 2000] ];
+        $errors = ['success' => false, 'options' => ['content' => "Vous devez remplir tout les champs obligatoires !", 'theme' => 'error'] ];
     }
 }
 
@@ -142,10 +142,10 @@ if(isset( $_POST['remove_member'] )){
         if($team -> getTeamData($_POST['team_token'], 'founder_token') !== $_POST['user_token']){
             $errors = $team -> kickMember($_POST['team_token'], $_POST['user_token']);
         }else{
-            $errors = ['success' => false, 'message' => ['text' => "Vous ne pouvez pas retirer le fondateur, transferez les droits avant !", 'theme' => 'dark', 'timeout' => 2000] ];
+            $errors = ['success' => false, 'options' => ['content' => "Vous ne pouvez pas retirer le fondateur, transferez les droits avant !", 'theme' => 'error'] ];
         }
     }else{
-        $errors = ['success' => false, 'message' => ['text' => "L\'équipe n\'existe pas !", 'theme' => 'dark', 'timeout' => 2000] ];
+        $errors = ['success' => false, 'options' => ['content' => "L\'équipe n\'existe pas !", 'theme' => 'error'] ];
     }
     
 }
@@ -174,11 +174,11 @@ if(isset($_POST['update_team_infos'])){
         if(strlen($desc) <= 255){
             $errors = $team -> editTeamInfos($name, $desc, $status, $team_token);
         }else{
-            $errors = ['success' => false, 'message' => ['text' => "La description est trop longue (".strlen($bio)."/255) !", 'theme' => 'dark', 'timeout' => 2000] ];
+            $errors = ['success' => false, 'options' => ['content' => "La description est trop longue (".strlen($bio)."/255) !", 'theme' => 'error'] ];
         }
 
     }else{
-        $errors = ['success' => false, 'message' => ['text' => "Vous devez remplir tout les champs ", 'theme' => 'dark', 'timeout' => 2000] ];
+        $errors = ['success' => false, 'options' => ['content' => "Vous devez remplir tout les champs ", 'theme' => 'error'] ];
     }
 
 }

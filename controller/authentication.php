@@ -40,7 +40,7 @@ if(isset($_POST['login_btn'])){
 
         $errors = $auth -> login($email, $password, $cookie);
     }else{
-        $errors = ['success' => false, 'message' => ['text' => "Vous devez remplir tout les champs obligatoires !", 'theme' => 'light', 'timeout' => 2000] ];
+        $errors = ['success' => false, 'options' => ['content' => "Vous devez remplir tout les champs obligatoires !", 'theme' => 'error'] ];
     }
 
 }
@@ -73,16 +73,16 @@ if(isset($_POST['register_btn'])){
                 if(strlen($password) >= 8){
                     $errors = $auth -> register($username, $email, $password);
                 }else{
-                    $errors = ['success' => false, 'message' => ['text' => "Le mot de passe est trop court (8 caractères minimum) !", 'theme' => 'light', 'timeout' => 2000] ];
+                    $errors = ['success' => false, 'options' => ['content' => "Le mot de passe est trop court (8 caractères minimum) !", 'theme' => 'error'] ];
                 }
             }else{
-                $errors = ['success' => false, 'message' => ['text' => "Les mot de passes sont différents !", 'theme' => 'light', 'timeout' => 2000] ];
+                $errors = ['success' => false, 'options' => ['content' => "Les mot de passes sont différents !", 'theme' => 'error'] ];
             }
         }else{
-            $errors = ['success' => false, 'message' => ['text' => "Vous devez accepter nos conditions !", 'theme' => 'light', 'timeout' => 2000] ];
+            $errors = ['success' => false, 'options' => ['content' => "Vous devez accepter nos conditions !", 'theme' => 'error'] ];
         }
     }else{
-        $errors = ['success' => false, 'message' => ['text' => "Vous devez remplir tout les champs obligatoires !", 'theme' => 'light', 'timeout' => 2000] ];
+        $errors = ['success' => false, 'options' => ['content' => "Vous devez remplir tout les champs obligatoires !", 'theme' => 'error'] ];
     }
 
 }
@@ -106,10 +106,10 @@ if(isset($_POST['reset-password_btn'])){
         if($auth -> emailExist($email) == true){
             $errors = $auth -> newPassResetDemand($email);
         }else{
-            $errors = ['success' => false, 'message' => ['text' => "Le mail n\'existe pas !", 'theme' => 'light', 'timeout' => 2000] ];
+            $errors = ['success' => false, 'options' => ['content' => "Le mail n\'existe pas !", 'theme' => 'error'] ];
         }
     }else{
-        $errors = ['success' => false, 'message' => ['text' => "Vous devez remplir tout les champs obligatoires !", 'theme' => 'light', 'timeout' => 2000] ];
+        $errors = ['success' => false, 'options' => ['content' => "Vous devez remplir tout les champs obligatoires !", 'theme' => 'error'] ];
     }
 
 }
@@ -135,10 +135,10 @@ if(isset($_POST['new-password_btn'])){
         if(strlen($password) >= 8){
             $errors = $auth -> resetPassword($public_token, $token, $password);
         }else{
-            $errors = ['success' => false, 'message' => ['text' => "Le mot de passe est trop court (8 caractères minimum) !", 'theme' => 'light', 'timeout' => 2000] ];
+            $errors = ['success' => false, 'options' => ['content' => "Le mot de passe est trop court (8 caractères minimum) !", 'theme' => 'error'] ];
         }
     }else{
-        $errors = ['success' => false, 'message' => ['text' => "Vous devez remplir tout les champs obligatoires !", 'theme' => 'light', 'timeout' => 2000] ];
+        $errors = ['success' => false, 'options' => ['content' => "Vous devez remplir tout les champs obligatoires !", 'theme' => 'error'] ];
     }
 
 }

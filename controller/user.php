@@ -44,17 +44,17 @@ if(isset($_POST['update_user_pass'])){
                 if(strlen($new_password) >= 8){
                     $errors = $user -> editPassword($new_password);
                 }else{
-                    $errors = ['success' => false, 'message' => ['text' => "Le mot de passe est trop court (8 caractères minimum) !", 'theme' => 'light', 'timeout' => 2000] ];
+                    $errors = ['success' => false, 'options' => ['content' => "Le mot de passe est trop court (8 caractères minimum) !", 'theme' => 'error'] ];
                 }
             }else{
-                $errors = ['success' => false, 'message' => ['text' => "L\'ancien mot de passe est incorrect !", 'theme' => 'light', 'timeout' => 2000] ];
+                $errors = ['success' => false, 'options' => ['content' => "L\'ancien mot de passe est incorrect !", 'theme' => 'error'] ];
             }
         }else{
-            $errors = ['success' => false, 'message' => ['text' => "Les mot de passes sont différents !", 'theme' => 'light', 'timeout' => 2000] ];
+            $errors = ['success' => false, 'options' => ['content' => "Les mot de passes sont différents !", 'theme' => 'error'] ];
         }
 
     }else{
-        $errors = ['success' => false, 'message' => ['text' => "Vous devez remplir tout les champs obligatoires !", 'theme' => 'light', 'timeout' => 2000] ];
+        $errors = ['success' => false, 'options' => ['content' => "Vous devez remplir tout les champs obligatoires !", 'theme' => 'error'] ];
     }
 
 }
@@ -86,15 +86,15 @@ if(isset($_POST['update_user_infos'])){
             if(strlen($bio) <= 255){
                 $errors = $user -> editUserInfos($first_name, $last_name, $username, $bio);
             }else{
-                $errors = ['success' => false, 'message' => ['text' => "La bio est trop longue (".strlen($bio)."/255) !", 'theme' => 'light', 'timeout' => 2000] ];
+                $errors = ['success' => false, 'options' => ['content' => "La bio est trop longue (".strlen($bio)."/255) !", 'theme' => 'error'] ];
             }
 
         }else{
-            $errors = ['success' => false, 'message' => ['text' => "Cet username est déjà utilisé !", 'theme' => 'light', 'timeout' => 2000] ];
+            $errors = ['success' => false, 'options' => ['content' => "Cet username est déjà utilisé !", 'theme' => 'error'] ];
         }
 
     }else{
-        $errors = ['success' => false, 'message' => ['text' => "Vous devez remplir tout les champs obligatoires ", 'theme' => 'light', 'timeout' => 2000] ];
+        $errors = ['success' => false, 'options' => ['content' => "Vous devez remplir tout les champs obligatoires ", 'theme' => 'error'] ];
     }
 
 }

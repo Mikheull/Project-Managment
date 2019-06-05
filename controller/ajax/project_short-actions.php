@@ -57,18 +57,15 @@ if($action == 'invite'){
         if($auth -> emailExist($user_mail) == true){
             $errors = $project -> inviteMember($user_mail, $project_token, "Je t\'invite dans mon projet Khoya");
         }else{
-            $errors = ['success' => false, 'message' => ['text' => "L\'utilisateur n\'existe pas !", 'theme' => 'dark', 'timeout' => 2000] ];
+            $errors = ['success' => false, 'options' => ['content' => "L\'utilisateur n\'existe pas !", 'theme' => 'error'] ];
         }
-
-        // if(isset($errors)){ echo "<script> $( document ).ready(function() { popMessage('".$errors['message']['text']."', '".$errors['message']['theme']."', ".$errors['message']['timeout'].") }) </script>"; }
 
         print_r($errors);
     }else{
-        echo "<script> $( document ).ready(function() { popMessage('Vous n\'avez pas les droits', 'dark', 1000)" ;
+        echo "<script> $( document ).ready(function() { notify.new({content : 'Vous n\'avez pas les droits', theme: 'error'});" ;
     }
     
 }
-
 
 
 if($action == 'delete'){
@@ -77,7 +74,7 @@ if($action == 'delete'){
         $errors = $project -> disable($project_token);
         echo '<script> document.location.reload(true); </script>';
     }else{
-        echo "<script> $( document ).ready(function() { popMessage('Vous n\'avez pas les droits', 'dark', 1000)" ;
+        echo "<script> $( document ).ready(function() { notify.new({content : 'Vous n\'avez pas les droits', theme: 'error'});" ;
     }
     
 }
@@ -90,7 +87,7 @@ if($action == 'archive'){
         $errors = $project -> archive($project_token);
         echo '<script> document.location.reload(true); </script>';
     }else{
-        echo "<script> $( document ).ready(function() { popMessage('Vous n\'avez pas les droits', 'dark', 1000)" ;
+        echo "<script> $( document ).ready(function() { notify.new({content : 'Vous n\'avez pas les droits', theme: 'error'});" ;
     }
     
 }
@@ -103,7 +100,7 @@ if($action == 'unarchive'){
         $errors = $project -> unarchive($project_token);
         echo '<script> document.location.reload(true); </script>';
     }else{
-        echo "<script> $( document ).ready(function() { popMessage('Vous n\'avez pas les droits', 'dark', 1000)" ;
+        echo "<script> $( document ).ready(function() { notify.new({content : 'Vous n\'avez pas les droits', theme: 'error'});" ;
     }
     
 }
@@ -118,7 +115,7 @@ if($action == 'leave'){
         $errors = $project -> kickMember($project_token, $main -> getToken());
         print_r($errors);
     }else{
-        echo "<script> $( document ).ready(function() { popMessage('Vous êtes le créateur', 'dark', 1000)" ;
+        echo "<script> $( document ).ready(function() { notify.new({content : 'Vous êtes le créateur', theme: 'error'});" ;
     }
     
 }
@@ -132,7 +129,7 @@ if($action == 'rename'){
         $errors = $project -> projectRename($project_token, $new_name);
         echo '<script> document.location.reload(true); </script>';
     }else{
-        echo "<script> $( document ).ready(function() { popMessage('Vous n\'avez pas les droits', 'dark', 1000)" ;
+        echo "<script> $( document ).ready(function() { notify.new({content : 'Vous n\'avez pas les droits', theme: 'error'});" ;
     }
     
 }

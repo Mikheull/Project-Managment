@@ -39,6 +39,7 @@ $team = new team($db);
 $auth = new authentication($db);
 
 if(isset($_POST['result'])){ $result = $_POST['result']; }
+if(isset($_POST['member'])){ $member = $_POST['member']; }
 $team_token = $_POST['team_token'];
 $action = $_POST['action'];
 
@@ -57,14 +58,12 @@ if($action == 'invite'){
         if($auth -> emailExist($user_mail) == true){
             $errors = $team -> inviteMember($user_mail, $team_token, "Je t\'invite dans ma team Khoya");
         }else{
-            $errors = ['success' => false, 'message' => ['text' => "L\'utilisateur n\'existe pas !", 'theme' => 'dark', 'timeout' => 2000] ];
+            $errors = ['success' => false, 'options' => ['content' => "L\'utilisateur n\'existe pas !", 'theme' => 'error'] ];
         }
-
-        // if(isset($errors)){ echo "<script> $( document ).ready(function() { popMessage('".$errors['message']['text']."', '".$errors['message']['theme']."', ".$errors['message']['timeout'].") }) </script>"; }
 
         print_r($errors);
     }else{
-        echo "<script> $( document ).ready(function() { popMessage('Vous n\'avez pas les droits', 'dark', 1000)" ;
+        echo "<script> $( document ).ready(function() { notify.new({content : 'Vous n\'avez pas les droits', theme: 'error'});" ;
     }
     
 }
@@ -77,7 +76,7 @@ if($action == 'delete'){
         $errors = $team -> disable($team_token);
         echo '<script> document.location.reload(true); </script>';
     }else{
-        echo "<script> $( document ).ready(function() { popMessage('Vous n\'avez pas les droits', 'dark', 1000)" ;
+        echo "<script> $( document ).ready(function() { notify.new({content : 'Vous n\'avez pas les droits', theme: 'error'});" ;
     }
     
 }
@@ -90,7 +89,7 @@ if($action == 'archive'){
         $errors = $team -> archive($team_token);
         echo '<script> document.location.reload(true); </script>';
     }else{
-        echo "<script> $( document ).ready(function() { popMessage('Vous n\'avez pas les droits', 'dark', 1000)" ;
+        echo "<script> $( document ).ready(function() { notify.new({content : 'Vous n\'avez pas les droits', theme: 'error'});" ;
     }
     
 }
@@ -103,7 +102,7 @@ if($action == 'unarchive'){
         $errors = $team -> unarchive($team_token);
         echo '<script> document.location.reload(true); </script>';
     }else{
-        echo "<script> $( document ).ready(function() { popMessage('Vous n\'avez pas les droits', 'dark', 1000)" ;
+        echo "<script> $( document ).ready(function() { notify.new({content : 'Vous n\'avez pas les droits', theme: 'error'});" ;
     }
     
 }
@@ -113,12 +112,23 @@ if($action == 'unarchive'){
 if($action == 'leave'){
 
     if($team -> getTeamData($team_token, 'founder_token') !== $main -> getToken()){
-        echo 'leave';
-
         $errors = $team -> kickMember($team_token, $main -> getToken());
         print_r($errors);
     }else{
-        echo "<script> $( document ).ready(function() { popMessage('Vous êtes le créateur', 'dark', 1000)" ;
+        echo "<script> $( document ).ready(function() { notify.new({content : 'Vous êtes le créateur', theme: 'error'});" ;
+    }
+    
+}
+
+
+
+if($action == 'kick'){
+
+    if($team -> getTeamData($team_token, 'founder_token') !== $member){
+        $errors = $team -> kickMember($team_token, $member);
+        print_r($errors);
+    }else{
+        echo "<script> $( document ).ready(function() { notify.new({content : 'Vous ne pouvez pas vous retirer', theme: 'error'});" ;
     }
     
 }
@@ -132,7 +142,7 @@ if($action == 'rename'){
         $errors = $team -> teamRename($team_token, $new_name);
         echo '<script> document.location.reload(true); </script>';
     }else{
-        echo "<script> $( document ).ready(function() { popMessage('Vous n\'avez pas les droits', 'dark', 1000)" ;
+        echo "<script> $( document ).ready(function() { notify.new({content : 'Vous n\'avez pas les droits', theme: 'error'});" ;
     }
     
 }

@@ -80,11 +80,11 @@ class authentication extends db_connect {
                 }
                 
             }else{
-                return (['success' => false, 'message' => ['text' => "Identifiants incorrect !", 'theme' => 'light', 'timeout' => 2000] ]);
+                return (['success' => false, 'options' => ['content' => "Identifiants incorrect !", 'theme' => 'error'] ]);
             }
     
         }else{
-            return (['success' => false, 'message' => ['text' => "Vous êtes actuellement déjà connecté !", 'theme' => 'light', 'timeout' => 2000] ]);
+            return (['success' => false, 'options' => ['content' => "Vous êtes actuellement déjà connecté !", 'theme' => 'error'] ]);
         }
     }
 
@@ -125,11 +125,11 @@ class authentication extends db_connect {
                 header('location: account');
             
             }else{
-                return (['success' => false, 'message' => ['text' => "Un utilisateur existe déjà avec ce mail / username !", 'theme' => 'light', 'timeout' => 2000] ]);
+                return (['success' => false, 'options' => ['content' => "Un utilisateur existe déjà avec ce mail / username !", 'theme' => 'error'] ]);
             }
 
         }else{
-            return (['success' => false, 'message' => ['text' => "Vous êtes actuellement déjà connecté !", 'theme' => 'light', 'timeout' => 2000] ]);
+            return (['success' => false, 'options' => ['content' => "Vous êtes actuellement déjà connecté !", 'theme' => 'error'] ]);
         }
     }
 
@@ -209,7 +209,7 @@ class authentication extends db_connect {
             $request = $this -> _db -> exec("INSERT INTO `imp_reset_password` (`user_public_token`, `token`) VALUES ('$user_token', '$token') ");
             header('location: new-password/'. $user_token .'/'. $token);
         }else{
-            return (['success' => false, 'message' => ['text' => "Une demande est déjà en cours avec ce mail !", 'theme' => 'light', 'timeout' => 2000] ]);
+            return (['success' => false, 'options' => ['content' => "Une demande est déjà en cours avec ce mail !", 'theme' => 'error'] ]);
         }
 
     } 
@@ -240,7 +240,7 @@ class authentication extends db_connect {
             
             header('location: ../../login');
         }else{
-            return (['success' => false, 'message' => ['text' => 'Une erreur est survenue !', 'theme' => 'light', 'timeout' => 2000] ]);
+            return (['success' => false, 'options' => ['content' => 'Une erreur est survenue !', 'theme' => 'error'] ]);
         }
 
     } 

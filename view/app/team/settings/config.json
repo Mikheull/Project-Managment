@@ -7,7 +7,8 @@
         "fontawesome",
         "feather-icons",
         "popper",
-        "tippy"
+        "tippy",
+        "bootbox"
     ],
 
     "meta": [ 
@@ -28,7 +29,12 @@
      
     "css": [ 
         "app/main.min.css",
-        "app/team.min.css"
+        "app/team.min.css",
+        "bootstrap-modal.min.css"
+    ],
+
+    "js": [ 
+        "team-fast-act.min.js"
     ]
 
 }
