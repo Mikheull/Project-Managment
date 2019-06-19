@@ -24,10 +24,11 @@
 .color-dark {color: var(--black-color) !important}
 .color-lg-dark {color: var(--light-black-color) !important}
 .color-gray {color: var(--gray-color) !important}
+.color-red {color: #f55050 !important}
 
 /* Buttons */
-.btn {border: none;cursor: pointer;padding: 10px 15px;border-radius: 3px;width: max-content;height: max-content}
-.btn-sm {padding: 5px 10px;font-size: .8em}
+.btn {border: none;cursor: pointer;padding: 10px 15px;border-radius: 3px;width: max-content}
+.btn-sm {padding: 5px 10px;font-size: .8em;}
 .primary-btn {background: var(--primary-color);color: var(--light-background-color) !important;}
 .primary-btn:hover {background: var(--light-primary-color);color: var(--light-background-color);}
 .light-btn-bordered {border: solid 1px #e0e0e0;background: #FFF;color: var(--light-black-color);}
@@ -35,14 +36,18 @@
 .light-btn:hover {background: #FFF;color: var(--light-primary-color);}
 .dark-btn {background: var(--black-color);color: var(--light-background-color) !important}
 .dark-btn:hover {background: var(--light-black-color);color: var(--light-background-color);}
+.red-btn {background: #f55050;color: var(--light-background-color) !important}
+.red-btn:hover {background: #fd6262;color: var(--light-background-color);}
 .btn:disabled {background: #313847 !important;color: #212733 !important;}
 
 /* Links */
 a, a:link {color: var(--black-color)}
 a:hover {color: #262E3E}
 .link {cursor: pointer;}
+.link.active {color: var(--primary-color) !important; }
 .primary-link {color: var(--primary-color) !important;}
 .primary-link:hover {color: var(--light-primary-color) !important}
+.primary-link.active {color: var(--primary-color) !important; font-weight: bold}
 .light-link {color: var(--light-background-color) !important;}
 .light-link:hover {color: var(--light-background-color) !important}
 .dark-link {color: var(--light-black-color) !important}
@@ -64,6 +69,11 @@ h1, h2, h3, h4, h5, h6 {font-family: 'Poppins', sans-serif}
 .title-sm {font-size: 1.5rem;}
 .title-xs {font-size: 1.2rem;}
 
+.text-lg {font-size: 2rem;}
+.text-md {font-size: 1.3rem;}
+.text-sm {font-size: 1rem;}
+.text-xs {font-size: .8rem;}
+
 /* Margins */
 .margin-bot-lg {margin-bottom: 2.5rem;}
 .margin-bot {margin-bottom: 1rem;}
@@ -82,12 +92,14 @@ h1, h2, h3, h4, h5, h6 {font-family: 'Poppins', sans-serif}
 
 /* Border */
 .light-border {border: solid 1px #e9e9e9;border-radius: 6px}
+.primary-border {border: solid 1px var(--primary-color);border-radius: 6px}
 .dark-border {border: solid 1px var(--black-background-color);border-radius: 6px}
 
 /* Icons */
 .icon-xs {width: 16px;height: 16px;}
 .icon {width: 32px;height: 32px;}
 .icon-md {width: 64px;height: 64px;}
+.icon-round {border-radius: 50%;text-align: center}
 
 /* Image de profil */
 .profil_picture .img {width: 200px;height: 200px;background-size: cover;display: block;border-radius: 100px;background-position: center}
@@ -98,9 +110,33 @@ h1, h2, h3, h4, h5, h6 {font-family: 'Poppins', sans-serif}
 /* General */
 .full-width {width: 100%}
 .half-width {width: 50%}
+.center {margin: auto}
 .hidden {display: none;}
 .flex {display: flex;}
+.inline-block {display: inline-block;}
+.block {display: block;}
 
+
+/* SpaceBar */
+.spacebar {height: 1px;background: var(--light-gray-color)}
+.spacebar.spacebar-xl {width: 100%;margin: 0 auto}
+.spacebar.spacebar-lg {width: 75%;margin: 0 auto}
+.spacebar.spacebar-md {width: 50%;margin: 0 auto}
+.spacebar.spacebar-sm {width: 33%;margin: 0 auto}
+.spacebar.spacebar-xs {width: 25%;margin: 0 auto}
+
+/* Ombres */
+.title-lg-shadow {text-shadow: 43px -25px 0px rgba(7, 24, 40, 0.03);}
+.title-md-shadow {text-shadow: 26px -15px 0px rgba(7, 24, 40, 0.03);}
+.title-sm-shadow {text-shadow: 21px -12px 0px rgba(7, 24, 40, 0.03);}
+.title-xs-shadow {text-shadow: 12px -7px 0px rgba(7, 24, 40, 0.03);}
+
+
+/* Hide */
+@media (max-width: 1140px) {.lg-hide {display: none}}
+@media (max-width: 960px) {.md-hide {display: none}}
+@media (max-width: 720px) {.sm-hide {display: none}}
+@media (max-width: 568px) {.xs-hide {display: none}}
 
 /* Media Queries Mobile */
 @media (max-width: 568px) {
@@ -109,6 +145,10 @@ h1, h2, h3, h4, h5, h6 {font-family: 'Poppins', sans-serif}
     .title-sm {font-size: 1rem;} 
     .title-xs {font-size: .8rem;}
     p {font-size: .9rem;} 
+    .text-lg {font-size: 1.5rem;}
+    .text-md {font-size: 1rem;}
+    .text-sm {font-size: .8rem;}
+    .text-xs {font-size: .8rem;}
 }
 
 .feather {
@@ -123,7 +163,7 @@ h1, h2, h3, h4, h5, h6 {font-family: 'Poppins', sans-serif}
 /* Notify */
 .notify {position: fixed;z-index: 9999;padding: 1rem 3rem;border-radius: 3px;height: auto;text-align: center;cursor: pointer;}
 
-.notify.error {background: #c64444;border: solid 1px #b63f3f;color: #FFF}
+.notify.error {background: #df4759;border: solid 1px #df4759;color: #FFF}
 .notify.success {background: #3db56e;border: solid 1px #38a766;color: #FFF}
 .notify.warning {background: #ebc063;border: solid 1px #d8b05a;color: #FFF}
 .notify.dark {background: #262E3E;border: solid 1px #1d2330;color: #FFF}
@@ -199,7 +239,7 @@ strong {font-weight: bold}
 .input-field small {color: #DB2323;margin-top: 5px;font-size: .7em;}
 .input-field .error, .input-field .error:focus {border-color: rgba(219, 35, 35, 0.5);}
 .input-field label {display: block;font-size: .8em;padding-bottom: .5rem}
-.input-field textarea, input[type="text"], input[type="number"], input[type="email"], input[type="password"] {padding: 5px;height: 2.4rem;border: none;border-radius: 6px;border: 1px solid #ced4da;background: #ffffff;width: 100%;}
+.input-field textarea, input[type="text"], input[type="number"], input[type="email"], input[type="password"], input[type="date"], input[type="time"] {padding: 5px;height: 2.4rem;border: none;border-radius: 6px;border: 1px solid #ced4da;background: #ffffff;width: 100%;}
 .input-field textarea {height: 150px;font-family: 'Nunito'}
 .input-field input:focus, textarea:focus {border: 1px solid var(--primary-color);}
 .input-half {width: 46%;display: inline-block}
@@ -271,17 +311,6 @@ strong {font-weight: bold}
 
 
 .tippy-popper a {color: #FFF}
-
-
-/* popMessage
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-
-.popMessage_container {position: fixed;width: 100%;top: 20px;z-index: 9999;}
-.popMessage {padding: 1rem 3rem;min-width: 40%;width: max-content;margin: 0 auto;border-radius: 6px;height: auto;text-align: center;}
-.popMessage.light {background: #FFF;border: solid 1px #F5F5F5;color: #262E3E}
-.popMessage.dark {background: #262E3E;border: solid 1px #1d2330;color: #FFF}
-.popMessage.red {background: #c64444;border: solid 1px #b63f3f;color: #FFF}
-
 
 /* Typography
 –––––––––––––––––––––––––––––––––––––––––––––––––– */

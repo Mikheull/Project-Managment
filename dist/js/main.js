@@ -15,22 +15,6 @@ feather.replace()
 const rootUrl = 'http://localhost:8888/Improove/';
 
 
-// Function pour faire pop un message (d'erreur en général)
-function popMessage(message, theme, delay){
-    setTimeout(function() {
-        $( "body" ).prepend( "<div class='popMessage_container'> <div class='popMessage "+ theme +" slidedown'> <span>"+ message +"</span> </div> </div>" );
-        $( ".popMessage_container" ).hide().fadeIn('fast')
-        setTimeout(function() {
-            $('.popMessage_container').fadeOut('fast');
-        }, delay);
-    }, 200); 
-}
-$(document).on('click', '.popMessage_container', function() {
-    $('.popMessage_container').fadeOut('fast');
-});
-
-
-
 // Partie du plugin Tippy
 
 tippy.setDefaults({

@@ -33,17 +33,19 @@
 
 
 <?php
-    if($getUserProjectsArchived['count'] !== 0){
-        ?>
-        <h3 class="title-sm bold color-dark">Projets archivées <span><?= $getUserProjectsArchived['count'] ;?></span></h3>
-        <div class="row team-container justify-content-between">
-            <?php
-            foreach($getUserProjectsArchived['content'] as $t){
-                require ('view/user/projects/components/archived.php');
-            }
+    if($router -> getRouteParam('0') == 'account'){
+        if($getUserProjectsArchived['count'] !== 0){
             ?>
-        </div>
-        <?php
+            <h3 class="title-sm bold color-dark">Projets archivées <span><?= $getUserProjectsArchived['count'] ;?></span></h3>
+            <div class="row team-container justify-content-between">
+                <?php
+                foreach($getUserProjectsArchived['content'] as $t){
+                    require ('view/user/projects/components/archived.php');
+                }
+                ?>
+            </div>
+            <?php
+        }
     }
 ?>
 

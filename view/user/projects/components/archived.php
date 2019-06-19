@@ -2,25 +2,30 @@
     $owner = $project -> getProjectData($t['public_token'], 'founder_token');
 ?>
 
-<div class="block-item">
-    <div class="heading">
-        <div class="container">
-            <div class="row">
-                <div class="col-8 left">
-                    <div class="team_profilImage"><?= substr($project -> getProjectData($t['public_token'], 'name'), 0, 1) ;?></div>
-                    <div class="name"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $t['public_token'] ?>"> <?= $project -> getProjectData($t['public_token'], 'name') ;?> </a> </div>
-                    <div class="lock"> <?= $project -> getProjectData($t['public_token'], 'public') == true ? '<i data-feather="unlock" data-tippy="Équipe publique"></i>' : '<i data-feather="lock" data-tippy="Équipe privée"></i>' ;?> </div>
-                </div> 
-                
-                <?php if($router -> getRouteParam('0') == 'account'){ ?>
-                    <div class="col-4 right">
+
+<div class="col-md-4 col-12">
+    <div class="card-item light-border">
+
+        <div class="header">
+            <div class="options text-align-right margin-right margin-top">
+                <div class="dropdown margin-left">
+                    <?php if($router -> getRouteParam('0') == 'account'){ ?>
                         <i class="fas fa-ellipsis-h" id="act-<?= $t['public_token'] ;?>"></i>
-                    </div>
-                <?php } ?>
+                    <?php } ?>
+                </div>
             </div>
+        </div>
+
+        <div class="content margin-bot-lg margin-top text-align-center">
+            <div class="team_profilImage"><?= substr($utils -> getData('pr_project', 'name', 'public_token', $t['public_token']), 0, 1) ;?></div>
+            <div class="name title-sm bold color-dark"> <a href="<?= $config -> rootUrl() ;?>app/team/<?= $t['public_token'] ?>"> <?= $utils -> getData('pr_project', 'name', 'public_token', $t['public_token']) ;?> </a> </div>
+            <div class="desc color-lg-dark margin-top"> Le projet est actuellement archivé, désarchivé là pour y avoir accès </div>
         </div>
     </div>
 </div>
+
+
+
 
 
 <?php

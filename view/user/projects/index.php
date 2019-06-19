@@ -11,7 +11,7 @@
             $getUserProjectsArchived = $project -> getUserProjectArchived( $userToken );
             $mode = 'user';
         }else{
-            header('location: login?return_url=account%2Fprojects');
+            header('location: '. $config -> rootUrl() .'login?return_url=account%2Fprojects');
         }
 
 
@@ -21,7 +21,7 @@
 
         $userToken = $user -> usernameToToken($router -> getRouteParam('1'));
         if(empty($userToken)){
-            header('location: ../member');
+            header('location: '. $config -> rootUrl() .'member');
         }
         $getUserProjects = $project -> getUserProject( $userToken );
         $mode = 'member';
@@ -36,7 +36,7 @@
 
 <?php require_once ('view/components/navbar-header-light.php') ;?>
 
-<div class="container account light-border margin-top-lg margin-bot-lg">
+<div class="container account margin-top-lg margin-bot-lg">
     <div class="account_wrapper">
         <?php 
             require_once ('view/user/components/heading_'. $mode .'.php');

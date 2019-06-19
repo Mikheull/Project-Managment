@@ -30,7 +30,7 @@ $(document).on("click", "[data-action='invite']", function(e) {
                     }
                 });
             }else{
-                popMessage('Mail invalide', 'dark', 1000)
+                notify.new({content : 'Mail invalide', theme: 'error'});
             }
         }
     });
@@ -213,7 +213,7 @@ $(document).on("click", "[data-action='rename']", function(e) {
                     }
                 });
             }else{
-                popMessage('Vide', 'dark', 1000)
+                notify.new({content : 'Vide', theme: 'error'});
             }
         }
     });

@@ -1,61 +1,59 @@
 <?php
-    $owner = $team -> getTeamData($t['team_token'], 'founder_token');
+    $owner = $utils -> getData('pr_team', 'founder_token', 'public_token', $t['team_token']);
 ?>
 
-<div class="block-item">
-    <div class="heading">
-        <div class="container">
-            <div class="row">
-                <div class="col-8 left">
-                    <div class="team_profilImage"><?= substr($team -> getTeamData($t['team_token'], 'name'), 0, 1) ;?></div>
-                    <div class="name"> <a href="<?= $config -> rootUrl() ;?>app/team/<?= $t['team_token'] ?>"> <?= $team -> getTeamData($t['team_token'], 'name') ;?> </a> </div>
-                    <div class="lock"> <?= $team -> getTeamData($t['team_token'], 'public') == true ? '<i data-feather="unlock" data-tippy="Équipe publique"></i>' : '<i data-feather="lock" data-tippy="Équipe privée"></i>' ;?> </div>
-                </div> 
-                
-                <?php if($router -> getRouteParam('0') == 'account'){ ?>
-                    <div class="col-4 right">
+
+
+
+
+<div class="col-md-4 col-12">
+    <div class="card-item light-border">
+
+        <div class="header">
+            <div class="options text-align-right margin-right margin-top">
+                <div class="lock"> <?= $utils -> getData('pr_team', 'public', 'public_token', $t['team_token']) == true ? '<i data-feather="unlock" data-tippy="Équipe publique"></i>' : '<i data-feather="lock" data-tippy="Équipe privée"></i>' ;?> </div>
+                <div class="dropdown margin-left">
+                    <?php if($router -> getRouteParam('0') == 'account'){ ?>
                         <i class="fas fa-ellipsis-h" id="act-<?= $t['team_token'] ;?>"></i>
-                    </div>
-                <?php } ?>
+                    <?php } ?>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="body"> 
-        <div class="desc"> <?= $team -> getTeamData($t['team_token'], 'description') ;?> </div>  
-        <div class="container infos">
-            <div class="row">
-                <div class="col-8 part">
-                    <div class="head_title">Créer par</div>
-                    <div class="owner"> 
-                        <div class="col-md-3 profil_picture-sm">
-                            <div class="img light-border" style="background-image: url('<?= $config -> rootUrl() ;?>dist/<?= $user -> getUserData($owner, 'profil_image') == NULL ? 'images/content/defaut_profil_pic.png' : 'uploads/u/'. $owner.'/profil_pic/'.$user -> getUserData($owner, 'profil_image') ;?>');"></div>
-                        </div>
-                        <span class="txt"><?= $user -> getUserData($owner, 'first_name') ?> <?= $user -> getUserData($owner, 'last_name') ?> - <?= $config -> time_elapsed_string($team -> getTeamData($t['team_token'], 'date_begin') ) ?></span>
-                    </div>
-                </div>
-                <div class="col-4 part">
-                    <div class="head_title">Membres</div>
-                    <div class="members">
-                        <?php 
-                            $team_member = $team -> getTeamMembers($t['team_token']);
-                            foreach($team_member['content'] as $member){
-                                ?> 
-                                    <div class="item" data-tippy="<?= $user -> getUserData($member['user_public_token'], 'username') ?>"> 
-                                        <div class="profil_picture-xs">
-                                            <div class="img light-border" style="background-image: url('<?= $config -> rootUrl() ;?>dist/<?= $user -> getUserData($member['user_public_token'], 'profil_image') == NULL ? 'images/content/defaut_profil_pic.png' : 'uploads/u/'. $member['user_public_token'].'/profil_pic/'.$user -> getUserData($member['user_public_token'], 'profil_image') ;?>');"></div>
-                                        </div>
-                                    </div> 
-                                <?php
-                            }
-                        ?>
-                    </div>
-                </div>
+        <div class="content margin-bot-lg margin-top text-align-center">
+            <div class="team_profilImage"><?= substr($utils -> getData('pr_team', 'name', 'public_token', $t['team_token']), 0, 1) ;?></div>
+            <div class="name title-sm bold color-dark"> <a href="<?= $config -> rootUrl() ;?>app/team/<?= $t['team_token'] ?>"> <?= $utils -> getData('pr_team', 'name', 'public_token', $t['team_token']) ;?> </a> </div>
+            <div class="desc color-lg-dark margin-top"> <?= $utils -> getData('pr_team', 'description', 'public_token', $t['team_token']) ;?> </div>
+        </div>
+
+        <div class="footer">
+            <div class="owner"> <span class="txt"><i class="fas fa-calendar-check margin-right"></i> <?= $config -> time_elapsed_string($utils -> getData('pr_team', 'date_begin', 'public_token', $t['team_token']) ) ?></span> </div>
+            <div class="members margin-right">
+                <?php 
+                    $team_member = $team -> getTeamMembers($t['team_token']);
+                    foreach($team_member['content'] as $member){
+                        ?> 
+                            <div class="item" data-tippy="<?= $utils -> getData('imp_user', 'username', 'public_token', $member['user_public_token']) ?>"> 
+                                <div class="profil_picture-xs">
+                                    <div class="img light-border" style="background-image: url('<?= $config -> rootUrl() ;?>dist/<?= $utils -> getData('imp_user', 'profil_image', 'public_token', $member['user_public_token']) == NULL ? 'images/content/defaut_profil_pic.png' : 'uploads/u/'. $member['user_public_token'].'/profil_pic/'.$utils -> getData('imp_user', 'profil_image', 'public_token', $member['user_public_token']) ;?>');"></div>
+                                </div>
+                            </div> 
+                        <?php
+                    }
+                ?>
             </div>
-        </div>  
+        </div>
+
     </div>
-    
 </div>
+
+
+
+
+
+
+
+
 
 
 <?php

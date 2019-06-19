@@ -5,16 +5,16 @@ if($type == 'member'){
         <div class="container">
             <div class="row">
                 <div class="col-1 align-self-center margin-bot">
-                    <a href="<?= $config -> rootUrl() ;?>member/<?= $user -> getUserData($item, 'username') ?>" title="Accéder au compte de <?= $user -> getUserData($item, 'first_name')?> <?= $user -> getUserData($item, 'last_name')?>">
+                    <a href="<?= $config -> rootUrl() ;?>member/<?= $utils -> getData('imp_user', 'username', 'public_token', $item ) ?>" title="Accéder au compte de <?= $utils -> getData('imp_user', 'first_name', 'public_token', $item )?> <?= $utils -> getData('imp_user', 'last_name', 'public_token', $item )?>">
                         <div class="col-md-3 profil_picture-sm">
-                            <div class="img light-border" style="background-image: url('<?= $config -> rootUrl() ;?>dist/<?= $user -> getUserData($item, 'profil_image') == NULL ? 'images/content/defaut_profil_pic.png' : 'uploads/u/'. $item .'/profil_pic/'.$user -> getUserData($item, 'profil_image') ;?>"></div>
+                            <div class="img light-border" style="background-image: url('<?= $config -> rootUrl() ;?>dist/<?= $utils -> getData('imp_user', 'profil_image', 'public_token', $item ) == NULL ? 'images/content/defaut_profil_pic.png' : 'uploads/u/'. $item .'/profil_pic/'.$utils -> getData('imp_user', 'profil_image', 'public_token', $item ) ;?>"></div>
                         </div>       
                     </a>
                 </div>
                 <div class="col-8 align-self-center">
-                    <a href="<?= $config -> rootUrl() ;?>member/<?= $user -> getUserData($item, 'username') ?>" title="Accéder au compte de <?= $user -> getUserData($item, 'first_name')?> <?= $user -> getUserData($item, 'last_name')?>">
-                        <p class="title-xs bold color-dark"><?= $user -> getUserData($item, 'username') ?></p>
-                        <p class="color-dark"> <?= $user -> getUserData($item, 'first_name')?> <?= $user -> getUserData($item, 'last_name')?></p>
+                    <a href="<?= $config -> rootUrl() ;?>member/<?= $utils -> getData('imp_user', 'username', 'public_token', $item ) ?>" title="Accéder au compte de <?= $utils -> getData('imp_user', 'first_name', 'public_token', $item )?> <?= $utils -> getData('imp_user', 'last_name', 'public_token', $item )?>">
+                        <p class="title-xs bold color-dark"><?= $utils -> getData('imp_user', 'username', 'public_token', $item ) ?></p>
+                        <p class="color-dark"> <?= $utils -> getData('imp_user', 'first_name', 'public_token', $item )?> <?= $utils -> getData('imp_user', 'last_name', 'public_token', $item )?></p>
                     </a>
                 </div>
             </div>
@@ -33,9 +33,9 @@ if($type == 'team'){
         <div class="container">
             <div class="row">
                 <div class="col-8 align-self-center">
-                    <a href="<?= $config -> rootUrl() ;?>app/team/<?= $item ?>" title="Accéder a l'équipe <?= $team -> getTeamData($item, 'name') ?>">
-                        <p class="title-xs bold color-dark"><?= $team -> getTeamData($item, 'name') ?></p>
-                        <p class="color-dark"><?= $team -> getTeamData($item, 'description')?></p>
+                    <a href="<?= $config -> rootUrl() ;?>app/team/<?= $item ?>" title="Accéder a l'équipe <?= $utils -> getData('pr_team', 'name', 'public_token', $item) ?>">
+                        <p class="title-xs bold color-dark"><?= $utils -> getData('pr_team', 'name', 'public_token', $item) ?></p>
+                        <p class="color-dark"><?= $utils -> getData('pr_team', 'description', 'public_token', $item)?></p>
                     </a>
                 </div>
             </div>

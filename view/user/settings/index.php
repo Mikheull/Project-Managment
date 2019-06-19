@@ -7,7 +7,7 @@
 <?php // View Content ?>
 <?php require_once ('view/components/navbar-header-light.php') ;?>
 
-<div class="container account light-border margin-top-lg margin-bot-lg">
+<div class="container account margin-top-lg margin-bot-lg">
     <div class="account_wrapper">
         <?php require_once ('view/user/components/heading_user.php') ;?>
 
@@ -15,23 +15,23 @@
             <div class="input_group">
                 <div class="input-field input-half">
                     <label for="first_name">Prénom</label>
-                    <input type="text" name="first_name" id="first_name" placeholder="Prénom" value="<?= $user -> getUserData($main -> getToken(), 'first_name') ?>">
+                    <input type="text" name="first_name" id="first_name" placeholder="Prénom" value="<?= $utils -> getData('imp_user', 'first_name', 'public_token', $main -> getToken()) ?>">
                 </div>
                 <div class="input-field input-half">
                     <label for="last_name">Nom</label>
-                    <input type="text" name="last_name" id="last_name" placeholder="Nom" value="<?= $user -> getUserData($main -> getToken(), 'last_name') ?>">
+                    <input type="text" name="last_name" id="last_name" placeholder="Nom" value="<?= $utils -> getData('imp_user', 'last_name', 'public_token', $main -> getToken()) ?>">
                 </div>
 
                 <div class="input-field input-half-al">
                     <label for="username">Pseudo</label>
-                    <input type="text" name="username" id="username" placeholder="Pseudo" value="<?= $user -> getUserData($main -> getToken(), 'username') ?>">
+                    <input type="text" name="username" id="username" placeholder="Pseudo" value="<?= $utils -> getData('imp_user', 'username', 'public_token', $main -> getToken()) ?>">
                 </div>
             </div>
 
             <div class="input_group">
                 <div class="input-field input-half-al">
                     <label for="bio">Bio</label>
-                    <textarea name="bio" id="bio" placeholder="Bio"><?= $user -> getUserData($main -> getToken(), 'bio') ?></textarea>
+                    <textarea name="bio" id="bio" placeholder="Bio"><?= $utils -> getData('imp_user', 'bio', 'public_token', $main -> getToken()) ?></textarea>
                 </div>
             </div>
 

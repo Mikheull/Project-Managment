@@ -6,10 +6,10 @@
             }else{
                 foreach($user -> getUnreadNotifs() as $notif){
                     $content = json_decode( $notif['content'] );
-                    $message = str_replace('%user%', $user -> getUserData( $content->{'sender'}, 'username' ), $content->{'message'});
+                    $message = str_replace('%user%', $utils -> getData('imp_user', 'username', 'public_token', $content->{'sender'}), $content->{'message'});
                     
                     ?>
-                    <li> <a href="<?= $config -> rootUrl() ;?>member/<?= $user -> getUserData( $content->{'sender'}, 'username' ) ?>"><?= htmlspecialchars_decode($message) ?></a> </li>
+                    <li> <a href="<?= $config -> rootUrl() ;?>member/<?= $utils -> getData('imp_user', 'username', 'public_token', $content->{'sender'}) ?>"><?= htmlspecialchars_decode($message) ?></a> </li>
                     <?php
                 }
             }

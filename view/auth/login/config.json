@@ -13,17 +13,17 @@
 
     "meta": [ 
         "<title>Improove - Connexion</title>",
-        "<meta name='description' content='Connectez vous a la plateforme.'/>",
-        "<meta property='og:title' content='Improove - Connexion'/>",
-        "<meta property='og:description' content='Connectez vous a la plateforme.'/>",
-        "<meta property='og:image' content='https://www.improove.io/dist/images/og_bg.png'/>",
-        "<meta property='og:image:width' content='128'/>",
-        "<meta property='og:image:height' content='128'/>",
+        "<meta name=\"description\" content=\"Connectez vous a la plateforme.\"/>",
+        "<meta property=\"og:title\" content=\"Improove - Connexion\"/>",
+        "<meta property=\"og:description\" content=\"Connectez vous a la plateforme.\"/>",
+        "<meta property=\"og:image\" content=\"https://www.improove.io/dist/images/og_bg.png\"/>",
+        "<meta property=\"og:image:width\" content=\"128\"/>",
+        "<meta property=\"og:image:height\" content=\"128\"/>",
 
-        "<meta property='twitter:card' content='summary_large_image'/>",
-        "<meta property='twitter:title' content='Improove - Connexion'/>",
-        "<meta property='twitter:description' content='Connectez vous a la plateforme.'/>",
-        "<meta property='twitter:image' content='https://www.improove.io/dist/images/og_bg.png'/>"
+        "<meta property=\"twitter:card\" content=\"summary_large_image\"/>",
+        "<meta property=\"twitter:title\" content=\"Improove - Connexion\"/>",
+        "<meta property=\"twitter:description\" content=\"Connectez vous a la plateforme.\"/>",
+        "<meta property=\"twitter:image\" content=\"https://www.improove.io/dist/images/og_bg.png\"/>"
 
     ],
      
@@ -31,9 +31,8 @@
         "auth.min.css"
     ],
      
-    "js": [ 
-        "form-validator.js",
-        "auth.js"
+    "js": [
+        "auth.min.js"
     ]
 
 }

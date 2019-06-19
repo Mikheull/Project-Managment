@@ -20,13 +20,14 @@
             <div class="col-md-1 col-2 bold"></div>
         </div>
 
-        <?php
-            foreach($teamData['content'] as $u){
-                require ('view/app/team/members/components/user_item.php');
-            }
-        ?>
+        <div id="team_output">
+            <?php
+                foreach($teamData['content'] as $u){
+                    require ('view/app/team/members/components/user_item.php');
+                }
+            ?>
+        </div>
     </div>
 
 </div>
 
-<div id="team_output"></div>

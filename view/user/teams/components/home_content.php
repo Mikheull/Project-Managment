@@ -2,7 +2,7 @@
     if($router -> getRouteParam('0') == 'account'){
         if($getUserInvitations['count'] !== 0){
             ?>
-            <div class="row team-container justify-content-between invitation">
+            <div class="row team-container justify-content-between">
                 <?php
                     if($router -> getRouteParam('0') == 'account'){
                         foreach($getUserInvitations['content'] as $t){
@@ -33,17 +33,19 @@
 
 
 <?php
-    if($getUserTeamsArchived['count'] !== 0){
-        ?>
-        <h3 class="title-sm bold color-dark">Équipes archivées <span><?= $getUserTeamsArchived['count'] ;?></span></h3>
-        <div class="row team-container justify-content-between">
-            <?php
-            foreach($getUserTeamsArchived['content'] as $t){
-                require ('view/user/teams/components/archived.php');
-            }
+    if($router -> getRouteParam('0') == 'account'){
+        if($getUserTeamsArchived['count'] !== 0){
             ?>
-        </div>
-        <?php
+            <h3 class="title-sm bold color-dark">Équipes archivées <span><?= $getUserTeamsArchived['count'] ;?></span></h3>
+            <div class="row team-container justify-content-between">
+                <?php
+                foreach($getUserTeamsArchived['content'] as $t){
+                    require ('view/user/teams/components/archived.php');
+                }
+                ?>
+            </div>
+            <?php
+        }
     }
 ?>
 

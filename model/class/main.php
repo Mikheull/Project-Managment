@@ -2,6 +2,7 @@
 
 class main {
 
+  
 /******************************************************************************/
 
     /**
@@ -24,6 +25,8 @@ class main {
             $pattern = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         }else if($type == 'numbers-letters_min'){
             $pattern = '0123456789abcdefghijklmnopqrstuvwxyz';
+        }else if($type == 'uuid'){
+            $pattern = '0123456789abcdefg';
         }else{
             $pattern = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         }
@@ -47,6 +50,12 @@ class main {
     function getToken(){
         return $_SESSION['user_token'];
     }
+
+/******************************************************************************/
+
+
+
+/******************************************************************************/
 
 /******************************************************************************/
 

@@ -563,7 +563,6 @@ class team extends db_connect {
         if($res){
             // $request = $this -> _db -> exec("UPDATE `pr_team_member` SET `enable`= 0 WHERE `team_token` = '$team_token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
             $request = $this -> _db -> exec("DELETE FROM `pr_team_member` WHERE `team_token` = '$team_token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
-            header('location: ');
             return (['success' => true, 'options' => ['content' => "L\'utilisateur a été retiré !", 'theme' => 'success'] ]);
         }else{
             return (['success' => false, 'options' => ['content' => "L\'utilisateur n\'est pas dans l\'équipe !", 'theme' => 'error'] ]);

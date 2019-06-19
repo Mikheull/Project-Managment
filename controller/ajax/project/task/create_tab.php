@@ -51,8 +51,6 @@ if(isset($_POST['result']) AND isset($_POST['project_token'])){
 
     if(!empty($result)){
         $errors = $task -> newTab($project_token, $result);
-    }else{
-        $errors = ['success' => false, 'options' => ['content' => "Le nom est vide !", 'theme' => 'error'] ];
     }
 }
 

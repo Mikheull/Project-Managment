@@ -13,17 +13,17 @@
 
     "meta": [ 
         "<title>Improove - Réinitialiser son mot de passe</title>",
-        "<meta name='description' content='Réinitialiser votre mot de passe.'/>",
-        "<meta property='og:title' content='Improove - Réinitialiser son mot de passe'/>",
-        "<meta property='og:description' content='Réinitialiser votre mot de passe.'/>",
-        "<meta property='og:image' content='https://www.improove.io/dist/images/og_bg.png'/>",
-        "<meta property='og:image:width' content='128'/>",
-        "<meta property='og:image:height' content='128'/>",
+        "<meta name=\"description\" content=\"Réinitialiser votre mot de passe.\"/>",
+        "<meta property=\"og:title\" content=\"Improove - Réinitialiser son mot de passe\"/>",
+        "<meta property=\"og:description\" content=\"Réinitialiser votre mot de passe.\"/>",
+        "<meta property=\"og:image\" content=\"https://www.improove.io/dist/images/og_bg.png\"/>",
+        "<meta property=\"og:image:width\" content=\"128\"/>",
+        "<meta property=\"og:image:height\" content=\"128\"/>",
 
-        "<meta property='twitter:card' content='summary_large_image'/>",
-        "<meta property='twitter:title' content='Improove - Réinitialiser son mot de passe'/>",
-        "<meta property='twitter:description' content='Réinitialiser votre mot de passe.'/>",
-        "<meta property='twitter:image' content='https://www.improove.io/dist/images/og_bg.png'/>"
+        "<meta property=\"twitter:card\" content=\"summary_large_image\"/>",
+        "<meta property=\"twitter:title\" content=\"Improove - Réinitialiser son mot de passe\"/>",
+        "<meta property=\"twitter:description\" content=\"Réinitialiser votre mot de passe.\"/>",
+        "<meta property=\"twitter:image\" content=\"https://www.improove.io/dist/images/og_bg.png\"/>"
 
     ],
      

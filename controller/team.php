@@ -27,22 +27,6 @@
 $team = new team($db);
 
 
-
-/**
- * Formulaire pour rejoindre une équipe via le modal
- * 
- * @fichier d'execution = view/content/account/teams/index.php
- * @variable d'execution = $_POST['project_token']                      : type = button
- * 
- */
-// if(isset($_POST['project_token'])){
-//     $project_token = htmlentities(addslashes($_POST['project_token']));
-
-//     $errors = $team -> joinTeam( $project_token, $main -> getToken() );
-// }
-
-
-
 /**
  * Formulaire pour accepter une demande
  * 
@@ -139,8 +123,10 @@ if(isset($_POST['create_team'])){
 if(isset( $_POST['remove_member'] )){
 
     if($team -> teamExist( $_POST['team_token'] ) == true){
-        if($team -> getTeamData($_POST['team_token'], 'founder_token') !== $_POST['user_token']){
+        if($utils -> getData('pr_team', 'founder_token', 'public_token', $_POST['team_token']) !== $_POST['user_token']){
             $errors = $team -> kickMember($_POST['team_token'], $_POST['user_token']);
+            $utils -> addlog($main -> getToken(),  $_POST['team_token'], 'pr_team_member', 'team-kick', ['user_kicked' => $_POST['user_token']]);
+
         }else{
             $errors = ['success' => false, 'options' => ['content' => "Vous ne pouvez pas retirer le fondateur, transferez les droits avant !", 'theme' => 'error'] ];
         }
@@ -173,6 +159,7 @@ if(isset($_POST['update_team_infos'])){
 
         if(strlen($desc) <= 255){
             $errors = $team -> editTeamInfos($name, $desc, $status, $team_token);
+            $utils -> addlog($main -> getToken(), $team_token, 'pr_team', 'team-edit-settings');
         }else{
             $errors = ['success' => false, 'options' => ['content' => "La description est trop longue (".strlen($bio)."/255) !", 'theme' => 'error'] ];
         }

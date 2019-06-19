@@ -31,6 +31,7 @@ require_once ('../../model/class/search.php');
 require_once ('../../model/class/user.php');
 require_once ('../../model/class/team.php');
 require_once ('../../model/class/project.php');
+require_once ('../../model/class/utils.php');
 
 $main = new main();
 $router = new router($db);
@@ -39,6 +40,7 @@ $search = new search($db);
 $user = new user($db);
 $team = new team($db);
 $project = new project($db);
+$utils = new utils($db);
 
 $keyword = htmlentities($_POST['keyword']);
 $type = htmlentities($_POST['type']);

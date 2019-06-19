@@ -3,7 +3,6 @@
     $team_token = $router -> getRouteParam('2');
 ?>
 
-
 <?php // View Content ?>
 
 <?php require_once ('view/app/components/sidebar.php'); ?>
@@ -13,7 +12,7 @@
         if($team -> teamExist($team_token)){
 
             if($team -> canAcess($team_token, $main -> getToken())){
-                require ('view/app/team/overview/components/home.php');
+                require ('view/app/team/messenger/components/home.php');
             }else{
                 require ('view/app/team/errors/not-found.php');
             }

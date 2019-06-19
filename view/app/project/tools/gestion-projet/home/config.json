@@ -1,5 +1,5 @@
 {
-    "use_generic_meta": false,
+    "use_generic_meta": true,
     "must_be_logged": true,
 
     "libs": [
@@ -10,28 +10,21 @@
         "tippy",
         "bootbox"
     ],
-
-    "meta": [ 
-        "<title>Improove - Gestion de projet</title>",
-        "<meta name='description' content='Home de l'application.'/>",
-        "<meta property='og:title' content='Improove - Gestion de projet'/>",
-        "<meta property='og:description' content='Home de l'application.'/>",
-        "<meta property='og:image' content='https://www.improove.io/dist/images/og_bg.png'/>",
-        "<meta property='og:image:width' content='128'/>",
-        "<meta property='og:image:height' content='128'/>",
-
-        "<meta property='twitter:card' content='summary_large_image'/>",
-        "<meta property='twitter:title' content='Improove - Gestion de projet'/>",
-        "<meta property='twitter:description' content='Home de l'application.'/>",
-        "<meta property='twitter:image' content='https://www.improove.io/dist/images/og_bg.png'/>"
-
-    ],
      
     "css": [ 
         "app/main.min.css",
-        "app/project.min.css",
+        "app/project/main.min.css",
         "app/project/task.min.css",
         "bootstrap-modal.min.css"
+    ],
+     
+    "js": [ 
+        "task/tabs.min.js",
+        "task/tasks.min.js"
+    ],
+
+    "online_css": [ 
+        "https://cdn.jsdelivr.net/npm/tippy.js@4.3.1/themes/light-border.css"
     ]
 
 }

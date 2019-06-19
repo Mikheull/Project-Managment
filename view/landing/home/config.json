@@ -7,11 +7,16 @@
         "fontawesome",
         "feather-icons",
         "popper",
-        "tippy"
+        "tippy",
+        "aos"
     ],
 
     "css":[ 
         "landing.min.css"
+    ],
+
+    "online_css": [ 
+        "https://unpkg.com/aos@2.3.1/dist/aos.css"
     ]
 
 }

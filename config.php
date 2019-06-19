@@ -10,12 +10,15 @@ function load($class){
 spl_autoload_register("load");
 
 require_once ('controller/config.php');
-require_once ('model/class/main.php');
+// require_once ('model/class/main.php');
 $main = new main();
 
 require_once ('controller/router.php');
 require_once ('controller/user.php');
+require_once ('controller/utils.php');
 require_once ('controller/authentication.php');
+
+
 
 
 /**

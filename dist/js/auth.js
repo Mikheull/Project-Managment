@@ -17,6 +17,8 @@ $(document).on('input', 'input[data-validate="email"]', function() {
     }
 });
 
+
+
 $(document).on('input', 'input[data-validate="password"]', function() {
     let pass = $( 'input[data-validate="password"]' ).val();
 

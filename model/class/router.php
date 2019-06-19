@@ -160,6 +160,8 @@ class router extends db_connect {
         return ($position == 'all' ? $params : $params[$position]);
     }
 
+    
+
 /******************************************************************************/
 
 }

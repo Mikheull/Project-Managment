@@ -7,7 +7,7 @@
                 <option data-display="Select" disabled>Aucun</option>
                 <?php
                     foreach($allUserTeams['content'] as $all){
-                        ?> <option value="<?= $team -> getTeamData($all['team_token'], 'public_token') ?>"><?= $team -> getTeamData($all['team_token'], 'name') ?></option> <?php
+                        ?> <option value="<?= $utils -> getData('pr_team', 'public_token', 'public_token', $all['team_token']) ?>"><?= $utils -> getData('pr_team', 'name', 'public_token', $all['team_token']) ?></option> <?php
                     }
                 ?>
             </select>

@@ -80,38 +80,34 @@ $router -> addRoutes(
         
         [ 'route' => 'app/team', 'dir_path' => 'view/app/team/hub/'],
         [ 'route' => 'app/team/{{TEAM_TOKEN}}', 'dir_path' => 'view/app/team/home/'],
-        [ 'route' => 'app/team/{{TEAM_TOKEN}}/overview', 'dir_path' => 'view/app/team/overview/'],
         [ 'route' => 'app/team/{{TEAM_TOKEN}}/members', 'dir_path' => 'view/app/team/members/'],
-        [ 'route' => 'app/team/{{TEAM_TOKEN}}/members/{{USER_TOKEN}}', 'dir_path' => 'view/app/team/members/view/'],
+        [ 'route' => 'app/team/{{TEAM_TOKEN}}/members/{{USER_TOKEN}}/activity', 'dir_path' => 'view/app/team/members/activity/'],
         [ 'route' => 'app/team/{{TEAM_TOKEN}}/members/{{USER_TOKEN}}/edit', 'dir_path' => 'view/app/team/members/edit/'],
-        [ 'route' => 'app/team/{{TEAM_TOKEN}}/members/r/{{USER_TOKEN}}', 'dir_path' => 'view/app/team/members/remove/'],
         [ 'route' => 'app/team/{{TEAM_TOKEN}}/messenger', 'dir_path' => 'view/app/team/messenger/'],
         [ 'route' => 'app/team/{{TEAM_TOKEN}}/settings', 'dir_path' => 'view/app/team/settings/'],
 
 
-        [ 'route' => 'app/new-project', 'dir_path' => 'view/app//new/'],
         [ 'route' => 'app/project', 'dir_path' => 'view/app/project/hub/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}', 'dir_path' => 'view/app/project/home/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/settings', 'dir_path' => 'view/app/project/settings/'],
+        
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-projet', 'dir_path' => 'view/app/project/tools/gestion-projet/home/'],
-        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-projet/task/add', 'dir_path' => 'view/app/project/tools/gestion-projet/task-add/'],
-        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-projet/task/{{TASK_TOKEN}}/edit', 'dir_path' => 'view/app/project/tools/gestion-projet/task-edit/'],
-        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-projet/export', 'dir_path' => 'view/app/project/tools/gestion-projet/export/'],
-        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-projet/stats', 'dir_path' => 'view/app/project/tools/gestion-projet/stats/'],
-        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-projet/reports', 'dir_path' => 'view/app/project/tools/gestion-projet/generator/reports/'],
-        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-projet/generator/gantt', 'dir_path' => 'view/app/project/tools/gestion-projet/generator/gantt/'],
+        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-projet/reports', 'dir_path' => 'view/app/project/tools/gestion-projet/reports/'],
+        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-projet/gantt', 'dir_path' => 'view/app/project/tools/gestion-projet/gantt/'],
 
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-equipe', 'dir_path' => 'view/app/project/tools/gestion-equipe/home/'],
-        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-equipe/team/new', 'dir_path' => 'view/app/project/tools/gestion-equipe/team-new/'],
-        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-equipe/team/{{TEAM_TOKEN}}/edit', 'dir_path' => 'view/app/project/tools/gestion-equipe/team-edit/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-equipe/roles', 'dir_path' => 'view/app/project/tools/gestion-equipe/roles/'],
-        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-equipe/role/add', 'dir_path' => 'view/app/project/tools/gestion-equipe/role-add/'],
-        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-equipe/role/{{ROLE_TOKEN}}/edit', 'dir_path' => 'view/app/project/tools/gestion-equipe/role-edit/'],
+        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-equipe/role/{{ROLE_TOKEN}}/edit', 'dir_path' => 'view/app/project/tools/gestion-equipe/roles/edit/'],
+        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-equipe/members', 'dir_path' => 'view/app/project/tools/gestion-equipe/members/'],
+        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-equipe/members/{{USER_TOKEN}}/activity', 'dir_path' => 'view/app/project/tools/gestion-equipe/members/activity/'],
+        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-equipe/members/{{USER_TOKEN}}/edit', 'dir_path' => 'view/app/project/tools/gestion-equipe/members/edit/'],
+        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-equipe/settings', 'dir_path' => 'view/app/project/tools/gestion-equipe/settings/'],
 
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/messenger', 'dir_path' => 'view/app/project/tools/messenger/home/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/messenger/{{CONVERSATION_TOKEN}}', 'dir_path' => 'view/app/project/tools/messenger/conversation/'],
 
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/calendar', 'dir_path' => 'view/app/project/tools/calendar/home/'],
+        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/calendar/settings', 'dir_path' => 'view/app/project/tools/calendar/settings/'],
 
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/uml', 'dir_path' => 'view/app/project/tools/uml/home/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/uml/import', 'dir_path' => 'view/app/project/tools/uml/import/'],

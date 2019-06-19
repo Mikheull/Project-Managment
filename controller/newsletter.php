@@ -37,7 +37,7 @@ if(isset($_POST['subscribe_newsletter'])){
         $email = htmlentities(addslashes($_POST['email_newsletter']));
 
         if($auth -> isConnected()){
-            if($user -> getUserData($main -> getToken(), 'mail') == $email){
+            if( $utils -> getData('imp_user', 'mail', 'public_token', $main -> getToken() ) == $email){
                 $errors = $newsletter -> subscribe($email);
             }else{
                 $errors = ['success' => false, 'options' => ['content' => "Email invalide !", 'theme' => 'error'] ];
