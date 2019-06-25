@@ -39,10 +39,11 @@
     <?php if($config -> getConfigLib($exec_router['config_path'],'tippy') == true){?> <script src="https://unpkg.com/tippy.js@4"></script> <?php } ;?>
     <?php if($config -> getConfigLib($exec_router['config_path'],'nice-select') == true){?> <script src="https://cdn.jsdelivr.net/npm/jquery-nice-select@1.1.0/js/jquery.nice-select.min.js"></script> <?php } ;?>
     <?php if($config -> getConfigLib($exec_router['config_path'],'fakeLoader') == true){?> <script src="https://cdn.jsdelivr.net/npm/jq-fakeloader@2.0.1/js/fakeLoader.js"></script> <?php } ;?>
-    <?php if($config -> getConfigLib($exec_router['config_path'],'modaal') == true){?> <script src="https://cdn.jsdelivr.net/npm/modaal@0.4.4/dist/js/modaal.min.js"></script> <?php } ;?>
     <?php if($config -> getConfigLib($exec_router['config_path'],'recaptcha') == true){?> <script src="https://www.google.com/recaptcha/api.js" async defer></script> <?php } ;?>
     <?php if($config -> getConfigLib($exec_router['config_path'],'dragscroll') == true){?> <script src="https://cdn.jsdelivr.net/npm/dragscroll@0.0.8/dragscroll.min.js"></script> <?php } ;?>
     <?php if($config -> getConfigLib($exec_router['config_path'],'fullcalendar') == true){?> <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.2.0/main.min.js"></script> <?php } ;?>
+    <?php if($config -> getConfigLib($exec_router['config_path'],'colorpicker') == true){?> <script src="https://cdn.jsdelivr.net/npm/jquery-minicolors@2.1.10/jquery.minicolors.min.js"></script> <?php } ;?>
+    <?php if($config -> getConfigLib($exec_router['config_path'],'mermaid') == true){?> <script src="https://cdn.jsdelivr.net/npm/mermaid@8.0.0/dist/mermaid.min.js"></script> <script src="https://cdn.rawgit.com/knsv/mermaid/0.5.8/dist/mermaidAPI.js"></script><?php } ;?>
         
     <?php 
         // CSS generated Begin

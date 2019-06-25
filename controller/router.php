@@ -96,15 +96,15 @@ $router -> addRoutes(
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-projet/gantt', 'dir_path' => 'view/app/project/tools/gestion-projet/gantt/'],
 
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-equipe', 'dir_path' => 'view/app/project/tools/gestion-equipe/home/'],
-        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-equipe/roles', 'dir_path' => 'view/app/project/tools/gestion-equipe/roles/'],
-        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-equipe/role/{{ROLE_TOKEN}}/edit', 'dir_path' => 'view/app/project/tools/gestion-equipe/roles/edit/'],
+        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-equipe/team', 'dir_path' => 'view/app/project/tools/gestion-equipe/team/'],
+        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-equipe/team/{{TEAM_TOKEN}}/edit', 'dir_path' => 'view/app/project/tools/gestion-equipe/team/edit/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-equipe/members', 'dir_path' => 'view/app/project/tools/gestion-equipe/members/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-equipe/members/{{USER_TOKEN}}/activity', 'dir_path' => 'view/app/project/tools/gestion-equipe/members/activity/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-equipe/members/{{USER_TOKEN}}/edit', 'dir_path' => 'view/app/project/tools/gestion-equipe/members/edit/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-equipe/settings', 'dir_path' => 'view/app/project/tools/gestion-equipe/settings/'],
 
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/messenger', 'dir_path' => 'view/app/project/tools/messenger/home/'],
-        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/messenger/{{CONVERSATION_TOKEN}}', 'dir_path' => 'view/app/project/tools/messenger/conversation/'],
+        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/messenger/{{CONVERSATION_TOKEN}}', 'dir_path' => 'view/app/project/tools/messenger/conv/'],
 
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/calendar', 'dir_path' => 'view/app/project/tools/calendar/home/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/calendar/settings', 'dir_path' => 'view/app/project/tools/calendar/settings/'],
@@ -112,8 +112,7 @@ $router -> addRoutes(
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/uml', 'dir_path' => 'view/app/project/tools/uml/home/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/uml/import', 'dir_path' => 'view/app/project/tools/uml/import/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/uml/create', 'dir_path' => 'view/app/project/tools/uml/create/'],
-        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/uml/{{UML_TOKEN}}/edit', 'dir_path' => 'view/app/project/tools/uml/edit/'],
-        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/uml/export', 'dir_path' => 'view/app/project/tools/uml/export/'],
+        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/uml/{{UML_TOKEN}}', 'dir_path' => 'view/app/project/tools/uml/view/'],
 
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/recherche-utilisateur', 'dir_path' => 'view/app/project/tools/recherche-utilisateur/home/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/recherche-utilisateur/new', 'dir_path' => 'view/app/project/tools/recherche-utilisateur/survey-new/'],

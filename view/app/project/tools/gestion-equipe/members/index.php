@@ -1,5 +1,8 @@
 <?php
     require_once ('controller/project.php') ;
+
+    // $tabs = $task -> getTabs( $router -> getRouteParam('2') );
+    
 ?>
 
 
@@ -16,11 +19,17 @@
                 <div class="navbar-nav">
                     <ul class="text-align-left">
                         <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/gestion-equipe/team" class="link dark-link"> Équipes </a> </li>
-                        <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/gestion-equipe/members" class="link dark-link"> Membres </a> </li>
+                        <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/gestion-equipe/members" class="link dark-link active"> Membres </a> </li>
                         <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/gestion-equipe/settings" class="link dark-link"> Réglages </a> </li>
                     </ul>
                 </div>
             </div>
+        </div>
+
+
+
+        <div class="row">
+            aA
         </div>
     </div>
 </div>

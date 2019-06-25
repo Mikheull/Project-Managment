@@ -1,0 +1,26 @@
+{
+    "use_generic_meta": true,
+    "must_be_logged": true,
+
+    "libs": [
+        "jquery",
+        "fontawesome",
+        "feather-icons",
+        "popper",
+        "tippy",
+        "bootbox",
+        "mermaid"
+    ],
+     
+    "css": [ 
+        "app/main.min.css",
+        "app/project/main.min.css",
+        "app/project/uml.min.css",
+        "bootstrap-modal.min.css"
+    ],
+
+    "online_css": [ 
+        "https://cdn.jsdelivr.net/npm/tippy.js@4.3.1/themes/light-border.css"
+    ]
+
+}

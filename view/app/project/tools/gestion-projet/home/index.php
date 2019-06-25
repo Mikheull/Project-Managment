@@ -138,7 +138,7 @@
                 }
             ?>
             <div class="tab-item">
-                <div class="btn primary-btn full-width text-align-center" id="new-tab" data-pro="<?= $router -> getRouteParam('2') ?>">Nouvelle colonne</div>
+                <div class="btn primary-btn full-width text-align-center" id="new-tab" data-pro="<?= $router -> getRouteParam('2') ?>">Nouveau tableau</div>
             </div>
         </div>
     </div>

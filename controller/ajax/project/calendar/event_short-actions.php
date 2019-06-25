@@ -2,10 +2,13 @@
 
 
 /**
- * Script des ajouts d'events calendrier
+ * Script des actions rapides des evenements
+ * relié a des boutons en ajax, il fera certaines actions rapides
+ * depuis le panel des taches
  * 
  * utilisé dans :
- *  (Direct) - view/app/project/tools/calendar/home/index.php
+ *  (Direct) - dist/js/calendar/event.js
+ *  (Direct) - dist/js/calendar/event.min.js
  * 
  */
 
@@ -29,6 +32,7 @@ require_once ('../../../../model/class/project.php');
 require_once ('../../../../model/class/authentication.php');
 require_once ('../../../../model/class/utils.php');
 require_once ('../../../../model/class/calendar.php');
+require_once ('../../../../model/class/task.php');
 
 
 $main = new main();
@@ -39,7 +43,13 @@ $project = new project($db);
 $auth = new authentication($db);
 $utils = new utils($db);
 $calendar = new calendar($db);
+$task = new task($db);
 
+
+if(isset($_POST['result'])){ $result = $_POST['result']; }
+$event_token = $_POST['event_token'];
+$action = $_POST['action'];
+$exp[1] = $event_token;
 
 
 
@@ -48,17 +58,33 @@ $calendar = new calendar($db);
 /**
  * Test de l'envoi en ajax
  */
-if(isset($_POST['actions']) AND $_POST['actions'] == 'add_event'){
 
-    $project_token = $_POST['project_token'];
-    $name = $_POST['name'];
-    $start = $_POST['start'];
-    $end = $_POST['end'];
+if($action == 'delete'){
+    $errors = $calendar -> disableEvent($event_token);
+    echo '<script> document.location.reload(true); </script>';
+}
 
-    if(!empty($name)){
-        $errors = $calendar -> newEvent($project_token, $name, $start, $end);
+
+if($action == 'edit'){
+    if(!empty($_POST['event_name'])){
+        $event_name = htmlentities(addslashes($_POST['event_name']));
+        
+        if(isset($_POST['event_desc']) AND !empty($_POST['event_desc'])){ 
+            $event_desc = htmlentities(addslashes($_POST['event_desc'])); 
+        }else{
+            $event_desc = 'undefined';
+        }
+
+        $errors = $calendar -> editEvent($event_name, $event_desc, $event_token);
+        echo '<script> document.location.reload(true); </script>';
+
+    }else{
+        $errors = ['success' => false, 'options' => ['content' => "Remplissez tout les champs !", 'theme' => 'error'] ];
+        require_once ('../../../../view/app/project/tools/calendar/home/components/details_custom.php');
     }
 }
+
+
 
 
 
