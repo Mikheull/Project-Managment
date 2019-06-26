@@ -40,6 +40,7 @@
                     <li> <a href="<?= $config -> rootUrl() ;?>doc" title="Parcourez notre documentation">Documentation</a> </li>
                     <li> <a href="<?= $config -> rootUrl() ;?>help" title="Trouvez les réponses a vos questions">Centre d’aide</a> </li>
                     <li> <a href="<?= $config -> rootUrl() ;?>blog" title="Aprenez en plus sur Improove">Blog</a> </li>
+                    <li> <a href="<?= $config -> rootUrl() ;?>open-source" title="L'open Source">Open Source</a> </li>
                 </ul>
             </div>
 

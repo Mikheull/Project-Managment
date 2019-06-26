@@ -15,11 +15,8 @@
         "app/main.min.css",
         "app/project/main.min.css",
         "app/project/team.min.css",
-        "bootstrap-modal.min.css"
-    ],
-     
-    "js": [ 
-        "teams/team.min.js"
+        "bootstrap-modal.min.css",
+        "bootstrap-table.min.css"
     ],
 
     "online_css": [ 

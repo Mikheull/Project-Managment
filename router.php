@@ -29,3 +29,9 @@ if(isset($_GET['query'])){
     $require_url = $exec_router['file_path'];
     require ('view/index.php');
 }
+
+
+if($auth -> isConnected() == true){
+    $now = date("Y-m-d H:i:s");
+    $utils -> setData('imp_user', 'date_last_join', $now, 'public_token', $main -> getToken());
+}

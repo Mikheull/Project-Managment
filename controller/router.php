@@ -31,6 +31,7 @@ $router -> addRoutes(
         [ 'route' => 'features', 'dir_path' => 'view/landing/features/'],
         [ 'route' => 'contact', 'dir_path' => 'view/landing/contact/'],
         [ 'route' => 'download', 'dir_path' => 'view/landing/download/'],
+        [ 'route' => 'open-source', 'dir_path' => 'view/landing/open-source/'],
         [ 'route' => 'twitter', 'dir_path' => 'view/landing/social/twitter/'],
         [ 'route' => 'github', 'dir_path' => 'view/landing/social/github/'],
 

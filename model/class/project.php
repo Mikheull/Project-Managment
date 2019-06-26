@@ -109,6 +109,30 @@ class project extends db_connect {
 /******************************************************************************/
 
     /**
+     * Récupère la liste des membres
+     * 
+     * Va renvoyer la liste des membres d'un projet donné
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $project_token Token du projet
+     * @return array
+     */
+ 
+    function getProjectUser($project_token = '') {
+        $request = $this -> _db -> query("SELECT * FROM `pr_project_member` WHERE `project_token` = '$project_token' AND `enable`  =  '1' ");
+        $res = $request->fetchAll();
+        $count = $request->rowCount();
+
+        return ([ 
+            'count' => $count, 
+            'content' => $res
+        ]);
+    } 
+
+
+
+    /**
      * Récupère une information d'un projet donné
      * 
      * Va renvoyer une information d'un projet donné

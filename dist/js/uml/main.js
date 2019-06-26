@@ -32,7 +32,7 @@ var exportSVG = function(svg) {
         a.download = 'diagram_exported.svg';
         a.innerHTML = '<i class="fas fa-check"></i>';
         $( '#export_btn' ).html(a);
-        $( '#export_btn a' ).addClass('btn btn-sm light-btn-bordered light-color');
+        $( '#export_btn a' ).addClass('btn btn-sm light-btn-bordered light-color margin-right');
 
 };
 

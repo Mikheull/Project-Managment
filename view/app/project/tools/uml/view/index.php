@@ -30,18 +30,30 @@
                 <h3 class="title-sm bold color-dark margin-top">Votre diagramme :</h3>
                 <h2 class="text-md color-dark margin-bot-lg" id="diagram_name" contenteditable="true"><?= $utils -> getData('pr_uml', 'name', 'uml_token', $router -> getRouteParam("5") ) ?></h2>
             </div>
-            <div class="col-md-2 col-12">
-                <div class="btn btn-sm dark-btn" onclick="exportSVG(document.getElementById('uml_diagram'));" data-action="export_uml" data-ref="<?= $router -> getRouteParam("5") ?>"><i class="fas fa-download"></i></div>
+            <div class="col-md-2 col-12 flex">
+                <div> <div class="btn btn-sm dark-btn margin-right" onclick="exportSVG(document.getElementById('uml_diagram'));" data-action="export_uml" data-ref="<?= $router -> getRouteParam("5") ?>"><i class="fas fa-download"></i></div> </div>
                 <div id="export_btn"></div>
+                <div> <div class="btn btn-sm dark-btn margin-right"><i class="fas fa-edit"></i></div> </div>
+                <div> <div class="btn btn-sm dark-btn" id="full_screen"><i class="fas fa-expand"></i></div> </div>
             </div>
 
         </div>
 
         <div class="row">
-            <div class="mermaid col-md-10 offset-md-1 col-12 offset-12 text-align-center" id="uml_diagram">
+            <div class="mermaid col-md-10 offset-md-1 col-12 offset-12 text-align-center" id="uml_diagram" style="background: #FFF">
                 <?= $utils -> getData('pr_uml', 'content', 'uml_token', $router -> getRouteParam("5") ) ?>
             </div>
         </div>
 
     </div>
 </div>
+
+<script>
+    const el = document.getElementById('uml_diagram');
+
+    document.getElementById('full_screen').addEventListener('click', () => {
+        if (screenfull.enabled) {
+            screenfull.request(el);
+        }
+    });
+</script>
