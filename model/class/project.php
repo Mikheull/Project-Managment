@@ -154,6 +154,30 @@ class project extends db_connect {
 
 
     /**
+     * Récupère les projets public
+     * 
+     * Va renvoyer la liste des projets public
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @return array
+     */
+ 
+    function getPublicProjects() {
+        $request = $this -> _db -> query("SELECT * FROM `pr_project` WHERE `public` = 1 AND `enable` = 1 ");
+        $res = $request->fetchAll();
+        $count = $request->rowCount();
+
+        return ([ 
+            'count' => $count, 
+            'content' => $res
+        ]);
+        return $request->fetch();
+    }
+
+
+
+    /**
      * Vérifie si un projet existe
      * 
      * Va vérifier si un project existe selon un token donné
@@ -220,6 +244,76 @@ class project extends db_connect {
 
 
 /******************************************************************************/
+
+    /**
+     * Vérifie si un user peut accéder a un projet
+     * 
+     * Va vérifier si un utilisateur peut accéder a un projet selon le token donné
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $token Token du projet
+     * @param string $user_token Token de l'utilisateur
+     * @return array
+     */
+
+    function joinProject($token = '', $user_token = '') {
+
+        if($this -> canAcess( $token, $user_token ) == false){
+            $request = $this -> _db -> query("SELECT * FROM `pr_project` WHERE `public_token` = '$token' ");
+            $res = $request->fetch();
+    
+            if($res['public'] == true){
+                $this -> addUser($token, $user_token);
+    
+                return (['success' => true, 'options' => ['content' => "Vous avez rejoins le projet publique !", 'theme' => 'success'] ]);
+            }else{
+                $request = $this -> _db -> query("SELECT * FROM `pr_invitation_project` WHERE `project_token` = '$token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
+                $res = $request->fetch();
+                if($res){
+                    $this -> setInvitationAnswer($token, $user_token, 'accept');
+
+                    return (['success' => true, 'options' => ['content' => "Vous avez rejoins le projet !", 'theme' => 'success'] ]);
+                }else{
+                    return (['success' => true, 'options' => ['content' => "Vous n\'etes pas autorisé a rejoindre ce projet !", 'theme' => 'error'] ]);
+                }
+            }
+        }else{
+            return(['success' => false, 'options' => ['content' => "Vous êtes déjà dans le projet !", 'theme' => 'error'] ]);
+        }
+
+    } 
+
+
+
+    /**
+     * Ajoute un user dans un projet
+     * 
+     * Va ajouter un utilisateur dans le projet donné
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $token Token de l'équipe
+     * @param string $user_token Token de l'utilisateur
+     * @return array
+     */
+
+    function addUser($token = '', $user_token = '') {
+
+        $req = $this -> _db -> prepare("INSERT INTO `pr_project_member` (`project_token`, `user_public_token`) VALUES (:project_token, :user_public_token)");
+
+        $req->bindParam(':project_token', $token);
+        $req->bindParam(':user_public_token', $user_token);
+
+        $req->execute();
+        $count = $req->rowCount();
+
+        if($count !== 1){
+            return (['success' => false, 'options' => ['content' => "Une erreur est survenue !", 'theme' => 'error'] ]);
+        }
+    }  
+
+
 
     /**
      * Invite un membre

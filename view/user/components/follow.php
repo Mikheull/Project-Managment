@@ -37,10 +37,15 @@
 <?php require_once ('view/components/navbar-header-light.php') ;?>
 
 <div class="container account margin-top-lg margin-bot-lg">
-    <div class="account_wrapper">
-        <?php require_once ('view/user/components/heading_'. $mode .'.php') ;?>
+
+    <div class="row">
+        <div class="col-md-3 col-12">
+            <?php require_once ('view/user/components/heading_'. $mode .'.php') ;?>
+        </div>
         
-        <div class="row head-bar">
+        <div class="col-md-8 col-12">
+            <?php require_once ('view/user/components/navbar_'. $mode .'.php') ;?>
+            <div class="row head-bar">
             <div class="col">
                 <h3 class="title-sm bold color-dark"><?= $follow_mode == 'followers' ? 'Abonnés' : 'Abonnements' ;?></h3>
             </div>
@@ -63,17 +68,17 @@
                         <?php
                         foreach($list as $res){
                             ?>
-                            <li class="item margin-bot col-5 light-border">
+                            <li class="item margin-bot col-6 light-border">
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-3 col-12 margin-bot margin-top">
                                             <a href="<?= $config -> rootUrl() ;?>member/<?= $utils -> getData('imp_user', 'username', 'public_token', $res[$follow_mode] ) ?>" title="Accéder au compte de <?= $utils -> getData('imp_user', 'first_name', 'public_token', $res[$follow_mode] ) ?> <?= $utils -> getData('imp_user', 'last_name', 'public_token', $res[$follow_mode] ) ?>">
-                                                <div class="col-md-3 profil_picture-md">
+                                                <div class="profil_picture-md">
                                                     <div class="img light-border" style="background-image: url('<?= $config -> rootUrl() ;?>dist/<?= $utils -> getData('imp_user', 'profil_image', 'public_token', $res[$follow_mode] ) == NULL ? 'images/content/defaut_profil_pic.png' : 'uploads/u/'. $res[$follow_mode].'/profil_pic/'.$utils -> getData('imp_user', 'profil_image', 'public_token', $res[$follow_mode] ) ;?>');"></div>
                                                 </div>    
                                             </a>
                                         </div>
-                                        <div class="col-md-9 col-12 align-self-center">
+                                        <div class="col-md-5 col-12 align-self-center">
                                             <a href="<?= $config -> rootUrl() ;?>member/<?= $utils -> getData('imp_user', 'username', 'public_token', $res[$follow_mode] ) ?>" title="Accéder au compte de <?= $utils -> getData('imp_user', 'first_name', 'public_token', $res[$follow_mode] ) ?> <?= $utils -> getData('imp_user', 'last_name', 'public_token', $res[$follow_mode] ) ?>">
                                                 <p class="title-xs bold color-dark"><?= $utils -> getData('imp_user', 'username', 'public_token', $res[$follow_mode] ) ?></p>
                                                 <p class="color-dark"><?= $utils -> getData('imp_user', 'first_name', 'public_token', $res[$follow_mode] ) ?> <?= $utils -> getData('imp_user', 'last_name', 'public_token', $res[$follow_mode] ) ?></p>
@@ -90,8 +95,9 @@
             <?php
         }
         ?>
-
+        </div>
     </div>
+
 </div>
 
 <?php require_once ('view/components/footer.php') ;?>

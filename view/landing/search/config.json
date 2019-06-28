@@ -28,7 +28,8 @@
     ],
      
     "css": [ 
-        "landing.min.css"
+        "landing.min.css",
+        "account.min.css"
     ],
 
     "online_css": [ 

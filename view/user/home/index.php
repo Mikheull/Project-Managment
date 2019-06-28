@@ -30,10 +30,18 @@
 <?php require_once ('view/components/navbar-header-light.php') ;?>
 
 <div class="container account margin-top-lg margin-bot-lg">
-    <div class="account_wrapper">
-        <?php require_once ('view/user/components/heading_'. $mode .'.php') ;?>
-        <?php require_once ('view/user/home/components/feed_gen.php') ;?>
+
+    <div class="row">
+        <div class="col-md-3 col-12">
+            <?php require_once ('view/user/components/heading_'. $mode .'.php') ;?>
+        </div>
+        
+        <div class="col-md-8 col-12">
+            <?php require_once ('view/user/components/navbar_'. $mode .'.php') ;?>
+            <?php require_once ('view/user/home/components/feed_gen.php') ;?>
+        </div>
     </div>
+
 </div>
 
 <?php require_once ('view/components/footer.php') ;?>

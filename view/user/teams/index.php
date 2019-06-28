@@ -37,18 +37,25 @@
 <?php require_once ('view/components/navbar-header-light.php') ;?>
 
 <div class="container account margin-top-lg margin-bot-lg">
-    <div class="account_wrapper">
-        <?php 
-            require_once ('view/user/components/heading_'. $mode .'.php');
-            require_once ('view/user/teams/components/'. $mode .'_bar-head.php');
 
-            if($getUserTeams['count'] !== 0 OR $getUserInvitations['count'] !== 0 OR $getUserTeamsArchived['count'] !== 0){
-                require_once ('view/user/teams/components/home_content.php');
-            }else{
-                require_once ('view/user/teams/components/empty.php'); 
-            }
-        ?>
+    <div class="row">
+        <div class="col-md-3 col-12">
+            <?php require_once ('view/user/components/heading_'. $mode .'.php') ;?>
+        </div>
+        
+        <div class="col-md-9 col-12">
+            <?php require_once ('view/user/components/navbar_'. $mode .'.php') ;?>
+            <?php require_once ('view/user/teams/components/'. $mode .'_bar-head.php');
+
+                if($getUserTeams['count'] !== 0 OR $getUserInvitations['count'] !== 0 OR $getUserTeamsArchived['count'] !== 0){
+                    require_once ('view/user/teams/components/home_content.php');
+                }else{
+                    require_once ('view/user/teams/components/empty.php'); 
+                }
+            ?>
+        </div>
     </div>
+
 </div>
 
 <?php require_once ('view/components/footer.php') ;?>

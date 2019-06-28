@@ -207,7 +207,56 @@ class authentication extends db_connect {
         
         if($select -> rowCount() == 0){
             $request = $this -> _db -> exec("INSERT INTO `imp_reset_password` (`user_public_token`, `token`) VALUES ('$user_token', '$token') ");
-            header('location: new-password/'. $user_token .'/'. $token);
+            
+ob_start();
+?>
+<html lang="en">
+
+  <body style="margin:0; padding:0; background-color:#FFF;font-family: Arial, Helvetica, sans-serif">
+
+      <center>
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td align="center" valign="top" style="color: #4C6CF6;padding: 2vh 0;font-weight: bold;font-size: 1.5rem">
+                  <h1> IMPROOVE </h1>
+                </td>
+            </tr>
+        </table>
+      </center>
+
+      <table width="60%" cellpadding="0" cellspacing="0" border="0" style="margin: 0 20%">
+        <tr>
+          <td>
+            <p>
+              Bonjour. <br><br>
+              Vous avez récemment fait une demande de réinitialisation de mot de passe.  <br><br>
+
+              - date : 26 avril 2019 à 19h05 <br>
+              - IP : 111.20.101.21 <br>
+              - Localisation : Massy. Ile de France <br><br>
+
+
+              Voici les étapes à suivre : <br><br>
+
+              1) Cliquez sur le lien ci dessous <br>
+              <a href="http://localhost:8888/Improove/new-password/<?= $user_token ?>/<?= $token ?>" target="_blank" style="color:#4C6CF6; text-decoration:underline;">http://localhost:8888/Improove/new-password/<?= $user_token ?>/<?= $token ?></a><br>
+              2) Entrez votre nouveau mot de passe avant de confirmer <br>
+              3) Connectez vous avec votre nouvel identifiant <br><br>
+
+              Si vous n’êtes pas a l’origine de ce mail, ignorez le. <br>
+            </p>
+          </td>
+        </tr>
+      </table>
+
+  </body>
+</html>
+<?php
+$content_email = ob_get_clean();
+
+
+            sendmail::send('mikhae.bailly@gmail.com', 'mikhae.bailly@gmail.com', 'Demande de réinitialisation de mot de passe', $content_email);
+            header('location: login');
         }else{
             return (['success' => false, 'options' => ['content' => "Une demande est déjà en cours avec ce mail !", 'theme' => 'error'] ]);
         }

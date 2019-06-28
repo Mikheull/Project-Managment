@@ -5,8 +5,6 @@
     </div>
 
     <div class="col text-align-right">
-        <!-- <a class="btn btn-sm light-btn-bordered"> <i class="fas fa-star"></i> Vues</a> -->
         <a href="<?= $config -> rootUrl() ;?>app/new/project" class="btn btn-sm primary-btn"> <i class="fas fa-plus"></i> Créer</a>
-        <!-- <a class="btn btn-sm light-btn-bordered"> <i class="fas fa-search"></i></a> -->
     </div>
 </div>

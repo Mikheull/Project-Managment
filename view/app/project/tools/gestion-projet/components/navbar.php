@@ -4,7 +4,7 @@
         <div class="row navbar-nav">
             <div class="col-md-8 col-12 nav-left">
                 <ul class="text-align-left">
-                    <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>" class="dark-link"><i class="fas fa-home"></i></a> </li>
+                    <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>" class="dark-link"><i class="fas fa-home"></i> <span class="margin-right-lg margin-left bold"><?= $project -> getProjectData($router -> getRouteParam("2"), 'name') ;?></span></a> </li>
                     <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/gestion-projet" class="dark-link"> Gestion de projet </a> </li>
                     <li class="nav-item"> <a class="btn" id="navbar-submenu-btn"><i class="fas fa-ellipsis-h"></i></a> </li>
                 </ul>

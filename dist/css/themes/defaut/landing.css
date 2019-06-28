@@ -62,10 +62,10 @@
 
 /* Partie Recherche */
 .search_head {margin: 10vh 0}
+.search_container {position: relative;top: -100px;}
 .search_container .search_bar {margin: 0 auto;}
 .search_container .search_bar input {border-color: rgba(222, 222, 222, 0.3);}
-.search_container .search_result {margin: 25px auto;}
-#head_deco {background-size: 100%;background-repeat: no-repeat;height: 400px;width: 60%;margin: 0 20%;background-position: bottom;position: absolute;top: -20vh;z-index: -9;}
+#head_deco {background-size: 100%;background-repeat: no-repeat;height: 400px;width: 100%;margin: 0;background-position: bottom;position: absolute;z-index: -9;padding: 0;margin: 0}
 
 @media (max-width: 767px) {
     #head_deco {display: none}

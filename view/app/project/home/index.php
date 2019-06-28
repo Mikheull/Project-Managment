@@ -14,7 +14,11 @@
             if($project -> canAcess($project_token, $main -> getToken())){
                 require ('view/app/project/home/components/home.php');
             }else{
-                require ('view/app/project/errors/not-found.php');
+                if($utils -> getData('pr_project', 'public', 'public_token', $project_token) == true){
+                    require ('view/app/project/errors/public-join.php');
+                }else{
+                    require ('view/app/project/errors/private-join.php');
+                }
             }
 
         }else{

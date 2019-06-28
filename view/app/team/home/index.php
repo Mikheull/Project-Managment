@@ -14,7 +14,11 @@
             if($team -> canAcess($team_token, $main -> getToken())){
                 require ('view/app/team/home/components/home.php');
             }else{
-                require ('view/app/team/errors/not-found.php');
+                if($utils -> getData('pr_team', 'public', 'public_token', $team_token) == true){
+                    require ('view/app/team/errors/public-join.php');
+                }else{
+                    require ('view/app/team/errors/private-join.php');
+                }
             }
 
         }else{

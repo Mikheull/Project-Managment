@@ -72,11 +72,15 @@ $router -> addRoutes(
 
         // Members & Users
         [ 'route' => 'search', 'dir_path' => 'view/landing/search/'],
+        [ 'route' => 'search/teams', 'dir_path' => 'view/landing/search/teams/'],
+        [ 'route' => 'search/projects', 'dir_path' => 'view/landing/search/projects/'],
 
         // Application
         [ 'route' => 'app', 'dir_path' => 'view/app/hub/'],
         [ 'route' => 'app/new/project', 'dir_path' => 'view/app/project/new/'],
         [ 'route' => 'app/new/team', 'dir_path' => 'view/app/team/new/'],
+        [ 'route' => 'app/join/project/{{PROJECT_TOKEN}}', 'dir_path' => 'view/app/project/join/'],
+        [ 'route' => 'app/join/team/{{TEAM_TOKEN}}', 'dir_path' => 'view/app/team/join/'],
         
         
         [ 'route' => 'app/team', 'dir_path' => 'view/app/team/hub/'],

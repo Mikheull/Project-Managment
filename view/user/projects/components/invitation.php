@@ -3,27 +3,31 @@
 ?>
 
 <div class="col-md-4 col-12">
-    <div class="card-item light-border">
+    <div class="card-item light-border margin-bot">
 
-        <div class="header">
-            <div class="options text-align-right margin-right margin-top">
-                <div class="lock"> <?= $utils -> getData('pr_project', 'public', 'public_token', $t['project_token']) == true ? '<i data-feather="unlock"></i>' : '<i data-feather="lock"></i>' ;?> </div>
-                <div class="dropdown margin-left">
-                    <?php if($router -> getRouteParam('0') == 'account'){ ?>
-                        <i class="fas fa-ellipsis-h" id="act-<?= $t['project_token'] ;?>"></i>
-                    <?php } ?>
+        <div class="header relative">
+            <div class="head-bg absolute">
+                <svg id="Calque_1" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 43.78"><path style="fill: #5956f2" d="M0,0H64V35C32,43.78,0,43.78,0,43.78Z"/><path style="fill: #5956f2" d="M64,35"/></svg>
+            </div>
+
+            <div class="flex justify-content-between">
+                <div class="status margin-top margin-left <?= $utils -> getData('pr_project', 'public', 'public_token', $t['project_token']) == true ? 'bg-primary' : 'bg-red' ;?> color-light text-xs">
+                    <?= $utils -> getData('pr_project', 'public', 'public_token', $t['project_token']) == true ? 'publique' : 'privée' ;?>
                 </div>
+            </div>
+
+            <div class="heading text-align-center margin-top-lg">
+                <div class="team_profilImage"><?= substr($utils -> getData('pr_project', 'name', 'public_token', $t['project_token']), 0, 1) ;?></div>
+                <div class="name title-sm bold"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $t['project_token'] ?>" class="link light-link"> <?= $utils -> getData('pr_project', 'name', 'public_token', $t['project_token']) ;?> </a> </div>
             </div>
         </div>
 
-        <div class="content margin-bot-lg margin-top text-align-center">
-            <div class="team_profilImage"><?= substr($utils -> getData('pr_project', 'name', 'public_token', $t['project_token']), 0, 1) ;?></div>
-            <div class="name title-sm bold color-dark"> <a> <?= $utils -> getData('pr_project', 'name', 'public_token', $t['project_token']) ;?> </a> </div>
-            <div class="desc color-lg-dark margin-top"> Ce projet souhaite vous inviter a la rejoindre </div>
+        <div class="content margin-bot-lg text-align-center">
+            <div class="desc color-lg-dark margin-top-lg"> Ce projet souhaite vous inviter à la rejoindre </div>
         </div>
 
         <div class="footer">
-            <form method="POST">
+            <form method="POST" class="margin-top margin-bot text-align-center full-width">
                 <input type="hidden" name="invitation" value="<?= $t['project_token'] ?>">
                 <button class="btn primary-btn" name="accept_invitation">Accepter</button>
                 <button class="btn dark-btn" name="decline_invitation">Refuser</button>

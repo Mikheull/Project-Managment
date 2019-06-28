@@ -47,15 +47,27 @@ $type = htmlentities($_POST['type']);
 
 
 
+
+?>
+<script>
+    setTimeout(function() {
+        $('#loading_data').fadeOut( 300 );
+        setTimeout(function() {
+            $('#output_data').show();
+        }, 300);
+    }, 600);
+</script>
+<?php
+
 /**
  * Recherche de similarité du keyword dans la base de données
  */
 if($type == 'member'){
-    $queryReturn = $search -> searchUser($keyword);
+    $search -> searchContent($keyword, 'member');
 }else if($type == 'team'){
-    isset($_SESSION['user_token']) ? $search -> searchTeam($keyword, $main -> getToken() ) : $search -> searchTeam($keyword);
+    isset($_SESSION['user_token']) ? $search -> searchContent($keyword, 'team', $main -> getToken() ) : $search -> searchContent($keyword, 'team');
 }else if($type == 'project'){
-    isset($_SESSION['user_token']) ? $search -> searchProject($keyword, $main -> getToken() ) : $search -> searchProject($keyword);
+    isset($_SESSION['user_token']) ? $search -> searchContent($keyword, 'project', $main -> getToken() ) : $search -> searchContent($keyword, 'project');
 }
 
 
@@ -64,9 +76,20 @@ if( empty($queryReturn) ){
     ?> <div class="result_empty"> Aucun résultats ! </div> <?php
 }else{
     foreach($queryReturn as $item){
-        require ('../../view/landing/search/components/search-item.php');
+        if($type == 'member'){
+            require ('../../view/landing/search/components/user-card.php');
+        }else if($type == 'team'){
+            $t['team_token'] = $item;
+            require ('../../view/user/teams/components/card.php');
+        }else if($type == 'project'){
+            $t['project_token'] = $item;
+            require ('../../view/user/projects/components/card.php');
+        }
     }
 }
+
+
+
 
 
 // End of file

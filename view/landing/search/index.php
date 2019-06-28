@@ -1,6 +1,12 @@
-<?php require_once ('view/components/navbar-header-light.php') ;?>
+<?php 
+    require_once ('view/components/navbar-header-light.php') ;
 
-<div id="head_deco" style="background-image: url('<?= $config -> rootUrl() ;?>dist/images/illustrations/head_decoration-search.svg?>')"></div>
+    require ('controller/project.php') ;
+    require ('controller/team.php') ;
+
+?>
+
+<div id="head_deco" style="background-image: url('<?= $config -> rootUrl() ;?>dist/images/illustrations/search.svg?>')"></div>
 
 <div class="container">
 
@@ -12,29 +18,80 @@
     </div>
     
     <div class="row search_container margin-bot-lg">
-        <div class="col-md-8 col-10 search_bar light-border">
+        <div class="col-md-8 col-10 search_bar">
             <form method="post">
-                <div class="input-field" style="display: flex">
-                    <input type="text" placeholder="Recherche" name="website-search" id="website-search" class="margin-right">
-
-                    <select name="search_filter" id="search_filter">
-                        <option data-display="Select" disabled>Aucun</option>
-                        <option value="member">Membre</option>
-                        <option value="team">Équipes</option>
-                        <option value="project">Projet</option>
-                        <option value="help-article">Article Aide</option>
-                    </select>
+                <div class="input-field flex bg-white light-border">
+                    <input type="text" placeholder="Recherche" name="website-search" id="website-search" class="margin-right margin-left">
+                    <input type="hidden" name="search_filter" id="search_filter" value="member">
+                    <button class="btn primary-btn" name="search_button">Rechercher</button>
                 </div>
             </form>
         </div>
 
-        <div class="col-md-6 col-8 search_result light-border">
-            <div id="empty" class="text-align-center"> 
-                <img class="margin-top-lg margin-bot-lg" src="<?= $config -> rootUrl() ;?>dist/images/illustrations/empty_search.svg" alt="" width="20%"> 
-                <h3 class="title-xs color-dark margin-top-lg  margin-bot">Commencez par écrire dans la barre pour lancer la recherche</h3>
-            </div>
+        <div class="col-md-8 offset-md-2 col-10 offset-1">
+            <ul class="flex margin-top justify-content-end">
+                <li> <a class="filter_btn btn btn-sm dark-btn margin-right" data-filter="member">Membres</a> </li>
+                <li> <a class="filter_btn btn btn-sm light-btn-bordered margin-right" data-filter="team">Équipes</a> </li>
+                <li> <a class="filter_btn btn btn-sm light-btn-bordered margin-right" data-filter="project">Projets</a> </li>
+                <li> <a class="filter_btn btn btn-sm light-btn-bordered" data-filter="article">Articles</a> </li>
+            </ul>
+        </div>
+    </div>
 
-            <div id="output"></div>
+    <div class="row">
+        <div class="col-12 flex justify-content-between" id="loading_data">
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+        </div>
+        <div class="col-9 margin-top-lg">
+            <div class="row team-container justify-content-between" id="output_data">
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row margin-bot-lg margin-top-lg" id="public_data">
+        <div class="col-10">
+            <h2 class="title-xs bold color-dark ">Équipes publiques</h2>
+            <h3 class="text-sm color-gray">Découvrez les équipes libre accès</h3>
+        </div>
+        <div class="col-2 text-align-right">
+            <a href="<?= $config -> rootUrl() ;?>search/teams" class="btn btn-sm dark-btn">Voir tout</a>
+        </div>
+
+        <div class="col-9 margin-top-lg">
+            <div class="row team-container justify-content-between">
+                <?php
+                $allTeams = $team -> getPublicTeams();
+                foreach($allTeams['content'] as $t){
+                    $t['team_token'] = $t['public_token'];
+                    require ('view/user/teams/components/card.php');
+                }
+                ?>
+            </div>
+        </div>
+
+
+        <div class="col-10 margin-top-lg">
+            <h2 class="title-xs bold color-dark ">Projets publics</h2>
+            <h3 class="text-sm color-gray">Découvrez les projets libre accès</h3>
+        </div>
+        <div class="col-2 text-align-right">
+            <a href="<?= $config -> rootUrl() ;?>search/projects" class="btn btn-sm dark-btn">Voir tout</a>
+        </div>
+
+        <div class="col-9 margin-top-lg">
+            <div class="row team-container justify-content-between">
+                <?php
+                $allProjects = $project -> getPublicProjects();
+                foreach($allProjects['content'] as $t){
+                    $t['project_token'] = $t['public_token'];
+                    require ('view/user/projects/components/card.php');
+                }
+                ?>
+            </div>
         </div>
     </div>
     

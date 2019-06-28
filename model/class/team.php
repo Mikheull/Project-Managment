@@ -175,6 +175,30 @@ class team extends db_connect {
 
 
     /**
+     * Récupère les équipes publiques
+     * 
+     * Va renvoyer la liste des équipes publiques
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @return array
+     */
+ 
+    function getPublicTeams() {
+        $request = $this -> _db -> query("SELECT * FROM `pr_team` WHERE `public` = 1 AND `enable` = 1 ");
+        $res = $request->fetchAll();
+        $count = $request->rowCount();
+
+        return ([ 
+            'count' => $count, 
+            'content' => $res
+        ]);
+        return $request->fetch();
+    }
+
+
+
+    /**
      * Vérifie si une équipe existe
      * 
      * Va vérifier si une équipe existe selon un token donné
@@ -265,7 +289,7 @@ class team extends db_connect {
                 $request = $this -> _db -> query("SELECT * FROM `pr_invitation_team` WHERE `team_token` = '$token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
                 $res = $request->fetch();
                 if($res){
-                    $this -> addUser($token, $user_token);
+                    $this -> setInvitationAnswer($token, $user_token, 'accept');
 
                     return (['success' => true, 'options' => ['content' => "Vous avez rejoins l\'équipe !", 'theme' => 'success'] ]);
                 }else{

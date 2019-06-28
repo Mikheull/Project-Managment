@@ -11,93 +11,77 @@ class search extends db_connect {
 /******************************************************************************/
 
     /**
-     * Recherche d'utilisateur
+     * Recherche
      * 
-     * Va rechercher des utilisateurs selon un keyword donné
+     * Va faire une recherche selon un keyword donné et un type
      *
      * @access public
      * @author Mikhaël Bailly
-     * @param string $keyword l'utilisateur a rechercher
+     * @param string $keyword le mot a rechercher
+     * @param string $type le type de recherche
+     * @param string $table nom de la table sql
      * @return array
      */
 
-    function searchUser($keyword = '') {
+    function searchContent($keyword = '', $type = '', $token = '') {
 
-        $request = $this -> _db -> query("SELECT * FROM `imp_user` WHERE `username` LIKE '%$keyword%' OR first_name like '%".$keyword."%' OR last_name like '%".$keyword."%'");
-        foreach($request -> fetchAll() as $res){
-            if(!in_array($res['public_token'], $this->queryResult)){
-                array_push($this->queryResult, $res['public_token']);
-            }
-        }
-    } 
-
-
-
-    /**
-     * Recherche d'équipe
-     * 
-     * Va rechercher des équipes selon un keyword donné
-     *
-     * @access public
-     * @author Mikhaël Bailly
-     * @param string $keyword la team a rechercher
-     * @param string $user_token token public de l'utilisateur (optionel)
-     * @return array
-     */
-
-    function searchTeam($keyword = '', $user_token = null) {
-
-        $request = $this -> _db -> query("SELECT * FROM `pr_team` WHERE `name` LIKE '%$keyword%' AND public = '1'");
-        foreach($request -> fetchAll() as $res){
-            if(!in_array($res['public_token'], $this->queryResult)){
-                array_push($this->queryResult, $res['public_token']);
-            }
-        }
-
-        if(isset($user_token) AND $user_token !== null){
-            $request = $this -> _db -> query("SELECT * FROM `pr_team_member` WHERE `team_token` LIKE '%$keyword%' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
+        if($type == 'member'){
+            $request = $this -> _db -> query("SELECT * FROM `imp_user` WHERE username LIKE '%$keyword%' OR first_name like '%".$keyword."%' OR last_name like '%".$keyword."%'");
             foreach($request -> fetchAll() as $res){
-                if(!in_array($res['team_token'], $this->queryResult)){
-                    array_push($this->queryResult, $res['team_token']);
+                if(!in_array($res['public_token'], $this->queryResult)){
+                    array_push($this->queryResult, $res['public_token']);
                 }
             }
         }
-        
-    } 
 
 
-
-    /**
-     * Recherche de projets
-     * 
-     * Va rechercher des projets selon un keyword donné
-     *
-     * @access public
-     * @author Mikhaël Bailly
-     * @param string $keyword de projet a rechercher
-     * @param string $user_token token public de l'utilisateur (optionel)
-     * @return array
-     */
-
-    function searchProject($keyword = '', $user_token = null) {
-
-        $request = $this -> _db -> query("SELECT * FROM `pr_project` WHERE `name` LIKE '%$keyword%' AND public = '1'");
-        foreach($request -> fetchAll() as $res){
-            if(!in_array($res['public_token'], $this->queryResult)){
-                array_push($this->queryResult, $res['public_token']);
-            }
-        }
-
-        if(isset($user_token) AND $user_token !== null){
-            $request = $this -> _db -> query("SELECT * FROM `pr_project_member` WHERE `project_token` LIKE '%$keyword%' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
+        if($type == 'team'){
+            $request = $this -> _db -> query("SELECT * FROM `pr_team` WHERE `name` LIKE '%$keyword%' AND public = '1'");
             foreach($request -> fetchAll() as $res){
-                if(!in_array($res['project_token'], $this->queryResult)){
-                    array_push($this->queryResult, $res['project_token']);
+                if(!in_array($res['public_token'], $this->queryResult)){
+                    array_push($this->queryResult, $res['public_token']);
                 }
             }
+
+            if($token !== null){
+                $request = $this -> _db -> query("SELECT * FROM `pr_team` WHERE `name` LIKE '%$keyword%'");
+                foreach($request -> fetchAll() as $pre){
+                    $public_token = $pre['public_token'];
+                    $request = $this -> _db -> query("SELECT * FROM `pr_team_member` WHERE `team_token` LIKE '$public_token' AND `user_public_token` = '$token' AND `enable` = '1' ");
+                    foreach($request -> fetchAll() as $res){
+                        if(!in_array($res['team_token'], $this->queryResult)){
+                            array_push($this->queryResult, $res['team_token']);
+                        }
+                    }
+                }
+                
+            }
         }
-        
-    } 
+
+
+        if($type == 'project'){
+            $request = $this -> _db -> query("SELECT * FROM `pr_project` WHERE `name` LIKE '%$keyword%' AND public = '1'");
+            foreach($request -> fetchAll() as $res){
+                if(!in_array($res['public_token'], $this->queryResult)){
+                    array_push($this->queryResult, $res['public_token']);
+                }
+            }
+
+            if($token !== null){
+                $request = $this -> _db -> query("SELECT * FROM `pr_project` WHERE `name` LIKE '%$keyword%'");
+                foreach($request -> fetchAll() as $pre){
+                    $public_token = $pre['public_token'];
+                    $request = $this -> _db -> query("SELECT * FROM `pr_project_member` WHERE `project_token` LIKE '$public_token' AND `user_public_token` = '$token' AND `enable` = '1' ");
+                    foreach($request -> fetchAll() as $res){
+                        if(!in_array($res['project_token'], $this->queryResult)){
+                            array_push($this->queryResult, $res['project_token']);
+                        }
+                    }
+                }
+                
+            }
+        }
+    }
 
 
 

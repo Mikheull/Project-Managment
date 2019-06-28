@@ -13,6 +13,12 @@
     --light-background-color: #F6F7FC;
 
     --gray-color: #ABBAC8;
+
+    --red-color: #f55050;
+    --light-red-color: #fd6262;
+
+    --green-color: #42ba96;
+    --light-green-color: rgba(66,186,150,.1);
 }
 ::selection { color: var(--primary-color);}
 
@@ -24,7 +30,9 @@
 .color-dark {color: var(--black-color) !important}
 .color-lg-dark {color: var(--light-black-color) !important}
 .color-gray {color: var(--gray-color) !important}
-.color-red {color: #f55050 !important}
+.color-red {color: var(--red-color) !important}
+.color-green {color: var(--green-color) !important}
+.color-lg-green {color: var(--light-green-color) !important}
 
 /* Buttons */
 .btn {border: none;cursor: pointer;padding: 10px 15px;border-radius: 3px;width: max-content}
@@ -36,9 +44,11 @@
 .light-btn:hover {background: #FFF;color: var(--light-primary-color);}
 .dark-btn {background: var(--black-color);color: var(--light-background-color) !important}
 .dark-btn:hover {background: var(--light-black-color);color: var(--light-background-color);}
-.red-btn {background: #f55050;color: var(--light-background-color) !important}
-.red-btn:hover {background: #fd6262;color: var(--light-background-color);}
+.red-btn {background: var(--red-color);color: var(--light-background-color) !important}
+.red-btn:hover {background: var(--light-red-color);color: var(--light-background-color);}
 .btn:disabled {background: #313847 !important;color: #212733 !important;}
+.green-btn {background: var(--green-color);color: var(--light-background-color) !important}
+.green-btn:hover {background: var(--light-green-color);color: var(--light-background-color);}
 
 /* Links */
 a, a:link {color: var(--black-color)}
@@ -52,8 +62,21 @@ a:hover {color: #262E3E}
 .light-link:hover {color: var(--light-background-color) !important}
 .dark-link {color: var(--light-black-color) !important}
 .dark-link:hover {color: var(--black-color) !important}
-.red-link {color: #f55050 !important}
-.red-link:hover {color: #f03e3e !important}
+.red-link {color: var(--red-color) !important}
+.red-link:hover {color: var(--light-red-color) !important}
+.green-link {color: var(--light-green-color) !important}
+.green-link:hover {color: var(--green-color) !important}
+
+/* Backgrounds */
+.bg-primary {background: var(--primary-color) !important;}
+.bg-light {background: var(--light-background-color) !important;}
+.bg-white {background: #FFF !important;}
+.bg-dark {background: var(--black-background-color) !important}
+.bg-gray {background: var(--gray-color) !important}
+.bg-green {background: var(--green-color) !important}
+.bg-lg-green {background: var(--light-green-color) !important}
+.bg-red {background: var(--red-color) !important}
+.bg-lg-red {background: var(--light-red-color) !important}
 
 /* Spacer */
 .spacer-lg {width: 100%;margin: 5rem}
@@ -115,6 +138,8 @@ h1, h2, h3, h4, h5, h6 {font-family: 'Poppins', sans-serif}
 .flex {display: flex;}
 .inline-block {display: inline-block;}
 .block {display: block;}
+.relative {position: relative;}
+.absolute {position: absolute;}
 
 
 /* SpaceBar */
@@ -248,13 +273,63 @@ strong {font-weight: bold}
 .input-half-al {width: 46%;display: inline-block}
 
 
+:root {
+  --card-padding: 24px;
+  --card-height: 340px;
+  --card-skeleton: linear-gradient(#eeeeee var(--card-height), transparent 0);
+  --avatar-size: 32px;
+  --avatar-position: var(--card-padding) var(--card-padding);
+  --avatar-skeleton: radial-gradient(circle 16px at center, white 99%, transparent 0);
+  --title-height: 32px;
+  --title-width: 200px;
+  --title-position: var(--card-padding) 180px;
+  --title-skeleton: linear-gradient(white var(--title-height), transparent 0);
+  --desc-line-height: 16px;
+  --desc-line-skeleton: linear-gradient(white var(--desc-line-height), transparent 0);
+  --desc-line-1-width:230px;
+  --desc-line-1-position: var(--card-padding) 242px;
+  --desc-line-2-width:180px;
+  --desc-line-2-position: var(--card-padding) 265px;
+  --footer-height: 40px;
+  --footer-position: 0 calc(var(--card-height) - var(--footer-height));
+  --footer-skeleton: linear-gradient(white var(--footer-height), transparent 0);
+  --blur-width: 200px;
+  --blur-size: var(--blur-width) calc(var(--card-height) - var(--footer-height));
+}
 
+/*
+ * Card Skeleton for Loading
+ */
+.card {
+  width: 280px;
+  height: var(--card-height);
+}
+.card:empty::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  box-shadow: 0 10px 45px rgba(150, 150, 150, 0.1);
+  background-image: linear-gradient(90deg, rgba(247, 247, 247, 0) 0, rgba(247, 247, 247, 0.8) 50%, rgba(247, 247, 247, 0) 100%), var(--title-skeleton), var(--desc-line-skeleton), var(--desc-line-skeleton), var(--avatar-skeleton), var(--footer-skeleton), var(--card-skeleton);
+  background-size: var(--blur-size), var(--title-width) var(--title-height), var(--desc-line-1-width) var(--desc-line-height), var(--desc-line-2-width) var(--desc-line-height), var(--avatar-size) var(--avatar-size), 100% var(--footer-height), 100% 100%;
+  background-position: -150% 0, var(--title-position), var(--desc-line-1-position), var(--desc-line-2-position), var(--avatar-position), var(--footer-position), 0 0;
+  background-repeat: no-repeat;
+  -webkit-animation: loading 1.5s infinite;
+          animation: loading 1.5s infinite;
+}
 
+@-webkit-keyframes loading {
+  to {
+    background-position: 350% 0, var(--title-position), var(--desc-line-1-position), var(--desc-line-2-position), var(--avatar-position), var(--footer-position), 0 0;
+  }
+}
 
-
-
-.red-btn {border: none;cursor: pointer;background: #DB2323;color: #FFF;padding: 10px 15px;border-radius: 3px;width: max-content;}
-.red-btn:hover {background: #ec3737;color: #FFF}
+@keyframes loading {
+  to {
+    background-position: 350% 0, var(--title-position), var(--desc-line-1-position), var(--desc-line-2-position), var(--avatar-position), var(--footer-position), 0 0;
+  }
+}
 
 
 

@@ -36,7 +36,8 @@
     if($router -> getRouteParam('0') == 'account'){
         if($getUserTeamsArchived['count'] !== 0){
             ?>
-            <h3 class="title-sm bold color-dark">Équipes archivées <span><?= $getUserTeamsArchived['count'] ;?></span></h3>
+            <h3 class="title-sm bold color-dark margin-top-lg">Équipes archivées <span><?= $getUserTeamsArchived['count'] ;?></span></h3>
+            <p class="color-gray margin-bot-lg">Vos équipes archivés, seul vous pouvez les gérer.</p>
             <div class="row team-container justify-content-between">
                 <?php
                 foreach($getUserTeamsArchived['content'] as $t){

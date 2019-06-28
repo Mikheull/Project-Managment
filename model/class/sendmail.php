@@ -23,6 +23,22 @@ class sendmail extends db_connect {
      */
     
     function send($from = '', $to = '', $object = 'undefined', $content = '') {
+        $sender = $from;
+        $recipient = $to;
+
+        $subject = $object;
+        $message = $content;
+        $headers  = 'MIME-Version: 1.0' . "\r\n";
+        $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+        // Additional headers
+        $headers .= 'From: ' . $sender. "\r\n";  
+
+        if (mail($recipient, $subject, $message, $headers)){
+            echo "Message accepted";
+        }else{
+            echo "Error: Message not accepted";
+        }
         mail($to, $object, $content);
 
         return (
