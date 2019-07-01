@@ -1,0 +1,28 @@
+{
+    "use_generic_meta": true,
+    "must_be_logged": true,
+
+    "libs": [
+        "jquery",
+        "fontawesome",
+        "feather-icons",
+        "popper",
+        "tippy",
+        "bootbox",
+        "filepond"
+    ],
+     
+    "css": [ 
+        "app/main.min.css",
+        "app/project/main.min.css",
+        "app/project/document.min.css",
+        "bootstrap-modal.min.css"
+    ],
+
+    "online_css": [ 
+        "https://cdn.jsdelivr.net/npm/tippy.js@4.3.1/themes/light-border.css",
+        "https://cdn.jsdelivr.net/npm/filepond@4.4.10/dist/filepond.min.css",
+        "https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css"
+    ]
+
+}

@@ -1,5 +1,9 @@
+Animations : 
+- https://tobiasahlin.com/moving-letters/#
+- https://loading.io/progress/
+- https://loading.io/spinner/tail/-gooey-ball-tail-spinner
+- https://codepen.io/SitePoint/pen/MYLoWY
 
-  
 
 ## EU Privacy Summary (GDPR)
 

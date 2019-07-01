@@ -45,6 +45,7 @@
     <?php if($config -> getConfigLib($exec_router['config_path'],'colorpicker') == true){?> <script src="https://cdn.jsdelivr.net/npm/jquery-minicolors@2.1.10/jquery.minicolors.min.js"></script> <?php } ;?>
     <?php if($config -> getConfigLib($exec_router['config_path'],'mermaid') == true){?> <script src="https://cdn.jsdelivr.net/npm/mermaid@8.0.0/dist/mermaid.min.js"></script> <script src="https://cdn.rawgit.com/knsv/mermaid/0.5.8/dist/mermaidAPI.js"></script><?php } ;?>
     <?php if($config -> getConfigLib($exec_router['config_path'],'fullscreen') == true){?> <script src="https://cdn.jsdelivr.net/npm/screenfull@4.2.0/dist/screenfull.min.js"></script><?php } ;?>
+    <?php if($config -> getConfigLib($exec_router['config_path'],'filepond') == true){?> <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script> <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.min.js"></script> <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.min.js"></script> <script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.min.js"></script> <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.js"></script><?php } ;?>
         
     <?php 
         // CSS generated Begin
