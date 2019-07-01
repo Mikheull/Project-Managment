@@ -39,7 +39,6 @@ class sendmail extends db_connect {
         }else{
             echo "Error: Message not accepted";
         }
-        mail($to, $object, $content);
 
         return (
             [

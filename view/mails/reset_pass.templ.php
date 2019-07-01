@@ -1,3 +1,6 @@
+<?php
+ob_start();
+?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 
 <body>
@@ -125,7 +128,7 @@
                 <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
                   <tr>
                     <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                      <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:20px;font-weight:bold;line-height:1;text-align:left;color:#4C6CF6;"> Bonjour ((USERNAME)) </div>
+                      <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:20px;font-weight:bold;line-height:1;text-align:left;color:#4C6CF6;"> Bonjour <?= $utils -> getData('imp_user', 'username', 'public_token', $user_token) ;?> </div>
                     </td>
                   </tr>
                   <tr>
@@ -145,7 +148,7 @@
                   </tr>
                   <tr>
                     <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                      <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:16px;line-height:1;text-align:left;color:#637381;"> Vous avez récemment fait une demande de réinitialisation de mot de passe. <br></br> - date : 26 avril 2019 à 19h05<br></br> - IP : 111.20.101.21<br></br> - Localisation : Massy. Ile de France </div>
+                      <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:16px;line-height:1;text-align:left;color:#637381;"> Vous avez récemment fait une demande de réinitialisation de mot de passe. <br></br> - date : <?= date("Y-m-d H:i:s"); ?><br></br> - IP : 111.20.101.21<br></br> - Localisation : Massy. Ile de France </div>
                     </td>
                   </tr>
                   <tr>
@@ -185,7 +188,7 @@
                   </tr>
                   <tr>
                     <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                      <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:16px;line-height:1;text-align:left;color:#637381;"> 1) Cliquez sur le lien ci dessous <br></br> <a color="#637381" href="https://improove.co/reset/{ACCOUNT_TOKEN}/Dk4SFwkmatcMF8vEtrSJMqxvjrUiAf8kGpFfKbUshbTfYCdV2CbHEbzW">https://improove.co/reset/{ACCOUNT_TOKEN}/Dk4SFwkmatcMF8vEtrSJMqxvjrUiAf8kGpFfKbUshbTfYCdV2CbHEbzW</a>                        </div>
+                      <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:16px;line-height:1;text-align:left;color:#637381;"> 1) Cliquez sur le lien ci dessous <br></br> <a color="#637381" href="http://localhost:8888/Improove/new-password/<?= $user_token ?>/<?= $token ?>">http://localhost:8888/Improove/new-password/<?= $user_token ?>/<?= $token ?></a>                        </div>
                     </td>
                   </tr>
                   <tr>
@@ -481,3 +484,7 @@
 </body>
 
 </html>
+
+<?php
+$content_email = ob_get_clean();
+?>
