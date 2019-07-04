@@ -32,8 +32,8 @@ $router -> addRoutes(
         [ 'route' => 'contact', 'dir_path' => 'view/landing/contact/'],
         [ 'route' => 'download', 'dir_path' => 'view/landing/download/'],
         [ 'route' => 'open-source', 'dir_path' => 'view/landing/open-source/'],
-        [ 'route' => 'twitter', 'dir_path' => 'view/landing/social/twitter/'],
-        [ 'route' => 'github', 'dir_path' => 'view/landing/social/github/'],
+        [ 'route' => 'twitter', 'dir_path' => 'view/landing/social/twitter/', 'rendering_html' => false],
+        [ 'route' => 'github', 'dir_path' => 'view/landing/social/github/', 'rendering_html' => false],
 
         [ 'route' => 'developers', 'dir_path' => 'view/developers/'],
         
@@ -97,12 +97,11 @@ $router -> addRoutes(
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/settings', 'dir_path' => 'view/app/project/settings/'],
         
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-projet', 'dir_path' => 'view/app/project/tools/gestion-projet/home/'],
-        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-projet/export/{{TAB_TOKEN}}', 'dir_path' => 'view/app/project/tools/gestion-projet/export/'],
+        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-projet/export/{{TAB_TOKEN}}', 'dir_path' => 'view/app/project/tools/gestion-projet/export/', 'rendering_html' => false],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-projet/reports', 'dir_path' => 'view/app/project/tools/gestion-projet/reports/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-projet/gantt', 'dir_path' => 'view/app/project/tools/gestion-projet/gantt/'],
 
-        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-equipe', 'dir_path' => 'view/app/project/tools/gestion-equipe/home/'],
-        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-equipe/team', 'dir_path' => 'view/app/project/tools/gestion-equipe/team/'],
+        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-equipe', 'dir_path' => 'view/app/project/tools/gestion-equipe/team/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-equipe/team/create', 'dir_path' => 'view/app/project/tools/gestion-equipe/team/create/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-equipe/team/{{TEAM_TOKEN}}/edit', 'dir_path' => 'view/app/project/tools/gestion-equipe/team/edit/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-equipe/members', 'dir_path' => 'view/app/project/tools/gestion-equipe/members/'],

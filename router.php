@@ -7,6 +7,7 @@ if(isset($_GET['query'])){
         
         $exec_router = $router -> getRouteFilePath($_GET['query']);
         $require_url = $exec_router['file_path'];
+        $rendering_html = $exec_router['rendering_html'];
         
         if($exec_router['success'] == true && file_exists($exec_router['file_path']) && file_exists($exec_router['config_path'])){
             require ('view/index.php');
@@ -19,6 +20,7 @@ if(isset($_GET['query'])){
         $exec_router['file_path'] = 'view/error/not-found/index.php';
         $exec_router['config_path'] = 'view/error/not-found/config.json';
         $require_url = $exec_router['file_path'];
+        $rendering_html = true;
         require ('view/index.php');
     }
 
@@ -27,6 +29,7 @@ if(isset($_GET['query'])){
     $exec_router['file_path'] = 'view/landing/home/index.php';
     $exec_router['config_path'] = 'view/landing/home/config.json';
     $require_url = $exec_router['file_path'];
+    $rendering_html = true;
     require ('view/index.php');
 }
 

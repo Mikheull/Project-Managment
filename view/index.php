@@ -1,3 +1,9 @@
+<?php
+    if($rendering_html == false){
+        require ($require_url);
+    }else{
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -146,3 +152,7 @@
     ?>
 </body>
 </html>
+
+<?php
+    }
+?>

@@ -3,7 +3,7 @@
     require_once ('controller/task.php') ;
 
     $tabTasks = $task -> getTabTasks( $router -> getRouteParam('6') );
-
+    $tabTasks = $tabTasks['content'];
     header("Content-Type: text/plain");
     header("Content-disposition: attachment; filename=data.csv");
     

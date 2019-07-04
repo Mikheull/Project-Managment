@@ -128,10 +128,12 @@ class router extends db_connect {
                 $ori_route = str_replace("/", "\/", "$ori_route");
     
                 if(preg_match_all('/^'. $ori_route .'[\/]?$/', $route_name, $matches, PREG_SET_ORDER, 0) == true){
+                    $rendering_html = isset($route['rendering_html']) ? $route['rendering_html'] : true;
                     return ([
                         'success' => true,
                         'file_path' => $route['dir_path'].'index.php',
-                        'config_path' => $route['dir_path'].'config.json'
+                        'config_path' => $route['dir_path'].'config.json',
+                        'rendering_html' => $rendering_html
                     ]);
                 }
             }
