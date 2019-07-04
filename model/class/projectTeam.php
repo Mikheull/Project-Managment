@@ -68,25 +68,85 @@ class projectTeam extends db_connect {
      *
      * @access public
      * @author Mikhaël Bailly
-     * @param string $token Token de l'équipe
+     * @param string $team_token Token de l'équipe du projet
      * @param string $user_token Token de l'utilisateur
      * @return array
      */
 
-    function addUser($token = '', $user_token = '') {
+    function addMemberTeam($team_token = '', $user_token = '') {
+        $request = $this -> _db -> query("SELECT * FROM `pr_project_team_member` WHERE `project_team_token` = '$team_token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
+        $res = $request->fetch();
+        
+        if(!$res){
+            $req = $this -> _db -> prepare("INSERT INTO `pr_project_team_member` (`project_team_token`, `user_public_token`) VALUES (:project_team_token, :user_public_token)");
 
-        $req = $this -> _db -> prepare("INSERT INTO `pr_team_member` (`team_token`, `user_public_token`) VALUES (:team_token, :user_public_token)");
+            $req->bindParam(':project_team_token', $team_token);
+            $req->bindParam(':user_public_token', $user_token);
 
-        $req->bindParam(':team_token', $token);
-        $req->bindParam(':user_public_token', $user_token);
+            $req->execute();
+            $count = $req->rowCount();
 
-        $req->execute();
-        $count = $req->rowCount();
-
-        if($count !== 1){
-            return (['success' => false, 'options' => ['content' => "Une erreur est survenue !", 'theme' => 'error'] ]);
+            if($count !== 1){
+                return (['success' => false, 'options' => ['content' => "Une erreur est survenue !", 'theme' => 'error'] ]);
+            }else{
+                return (['success' => true, 'options' => ['content' => "L\'équipe a bien été ajoutée !", 'theme' => 'success'] ]);
+            }
+        }else{
+            return (['success' => false, 'options' => ['content' => "Le membre a déjà l\'équipe !", 'theme' => 'error'] ]);
         }
     } 
+
+
+
+    /**
+     * Retire un utilisateur d'une équipe
+     * 
+     * Retire un utilisateur d'une équipe
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $team_token Token de l'équipe
+     * @param string $user_token Token de l'utilisateur
+     * @return array
+     */
+
+    function kickMember($team_token = '', $user_token = '') {
+        $request = $this -> _db -> query("SELECT * FROM `pr_team_member` WHERE `team_token` = '$team_token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
+        $res = $request->fetch();
+        
+        if($res){
+            // $request = $this -> _db -> exec("UPDATE `pr_team_member` SET `enable`= 0 WHERE `team_token` = '$team_token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
+            $request = $this -> _db -> exec("DELETE FROM `pr_team_member` WHERE `team_token` = '$team_token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
+            return (['success' => true, 'options' => ['content' => "L\'utilisateur a été retiré !", 'theme' => 'success'] ]);
+        }else{
+            return (['success' => false, 'options' => ['content' => "L\'utilisateur n\'est pas dans l\'équipe !", 'theme' => 'error'] ]);
+        }
+    }
+    
+    
+
+    /**
+     * Vérifie si le membre a une équipe
+     * 
+     * Va vérifier si l'utilisateur a une équipe donnée
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $team_token Token de l'équipe du projet
+     * @param string $user_token Token de l'utilisateur
+     * @return array
+     */
+
+    function memberHasTeam($team_token = '', $user_token = '') {
+        $request = $this -> _db -> query("SELECT * FROM `pr_project_team_member` WHERE `project_team_token` = '$team_token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
+        $res = $request->fetch();
+        
+        if($res){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
 /******************************************************************************/
 
@@ -182,33 +242,6 @@ class projectTeam extends db_connect {
             return (['success' => false, 'options' => ['content' => "Aucune équipe n\'a été trouvée !", 'theme' => 'error'] ]);
         }
     }  
-    
-
-    /**
-     * Retire un utilisateur d'une équipe
-     * 
-     * Retire un utilisateur d'une équipe
-     *
-     * @access public
-     * @author Mikhaël Bailly
-     * @param string $team_token Token de l'équipe
-     * @param string $user_token Token de l'utilisateur
-     * @return array
-     */
-
-    function kickMember($team_token = '', $user_token = '') {
-        $request = $this -> _db -> query("SELECT * FROM `pr_team_member` WHERE `team_token` = '$team_token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
-        $res = $request->fetch();
-        
-        if($res){
-            // $request = $this -> _db -> exec("UPDATE `pr_team_member` SET `enable`= 0 WHERE `team_token` = '$team_token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
-            $request = $this -> _db -> exec("DELETE FROM `pr_team_member` WHERE `team_token` = '$team_token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
-            return (['success' => true, 'options' => ['content' => "L\'utilisateur a été retiré !", 'theme' => 'success'] ]);
-        }else{
-            return (['success' => false, 'options' => ['content' => "L\'utilisateur n\'est pas dans l\'équipe !", 'theme' => 'error'] ]);
-        }
-    } 
-    
 
     
 /******************************************************************************/

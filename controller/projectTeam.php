@@ -74,5 +74,28 @@ if(isset($_POST['edit_team'])){
 
 
 
+/**
+ * Formulaire pour ajouter des équipes a un membre
+ * 
+ * @fichier d'execution = view/app/project/tool/gestion-equipe/member/edit/index.php
+ * @variable d'execution = $_POST['add_team_user']                      : type = button
+ * 
+ * @variable obligatoire = $_POST['team']                               : type = array checkbox
+ * 
+ */
+if(isset($_POST['add_team_user'])){
+    
+    if(isset($_POST['team']) AND !empty($_POST['team'])){
+        $teams = $_POST['team'];
+        $user_token = $router -> getRouteParam('6');
+
+        foreach($teams as $tm){ 
+            $errors = $projectTeam -> addMemberTeam($tm, $user_token);
+        }
+    }
+
+}
+
+
 // End of file
 /******************************************************************************/

@@ -43,7 +43,7 @@
                                     ?>
                                         <div class="col-12 tg-list-item flex margin-bot">
                                             <div class="margin-right">
-                                                <input class="tgl tgl-light" name="permissions[]" value="<?= $tm['public_token'] ;?>" id="<?= $tm['public_token'] ;?>" type="checkbox"/>
+                                                <input class="tgl tgl-light" name="team[]" value="<?= $tm['public_token'] ;?>" id="<?= $tm['public_token'] ;?>" type="checkbox" <?= $projectTeam -> memberHasTeam($tm['public_token'], $router -> getRouteParam("6")) == true ? 'checked' : '' ?>/>
                                                 <label class="tgl-btn" for="<?= $tm['public_token'] ;?>"></label>
                                             </div>
                                             <div>
@@ -81,7 +81,7 @@
                                         ?>
                                             <div class="tg-list-item flex margin-bot">
                                                 <div class="margin-right">
-                                                    <input class="tgl tgl-light" name="permissions[]" value="<?= $perm['permission'] ;?>" id="<?= $perm['permission'] ;?>" type="checkbox" <?= $permission -> projectTeamHasPermission($router -> getRouteParam("6"), $perm['permission']) == true ? 'checked' : '' ?>/>
+                                                    <input class="tgl tgl-light" name="permissions[]" value="<?= $perm['permission'] ;?>" id="<?= $perm['permission'] ;?>" type="checkbox" <?= $permission -> memberHasPermission($router -> getRouteParam("6"), $router -> getRouteParam("2"), $perm['permission']) == true ? 'checked' : '' ?>/>
                                                     <label class="tgl-btn" for="<?= $perm['permission'] ;?>"></label>
                                                 </div>
                                                 <div>
