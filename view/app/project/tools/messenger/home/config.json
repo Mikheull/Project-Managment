@@ -1,6 +1,7 @@
 {
     "use_generic_meta": true,
     "must_be_logged": true,
+    "project_can_access": true,
 
     "libs": [
         "jquery",

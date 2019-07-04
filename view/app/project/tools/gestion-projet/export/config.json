@@ -1,5 +1,6 @@
 {
     "use_generic_meta": false,
-    "must_be_logged": true
+    "must_be_logged": true,
+    "project_can_access": true
 
 }

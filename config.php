@@ -17,6 +17,8 @@ require_once ('controller/router.php');
 require_once ('controller/user.php');
 require_once ('controller/utils.php');
 require_once ('controller/authentication.php');
+require_once ('controller/project.php') ;
+require_once ('controller/team.php') ;
 
 
 

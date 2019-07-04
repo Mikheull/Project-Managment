@@ -77,6 +77,50 @@ class config extends router {
 
 
     /**
+     * Récupérer si il faut avoir accès a un projet
+     * 
+     * Récupérer si il faut avoir accès a un projet
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $config_file = le chemin d'accès de la config
+     */
+
+    function renderProjectCanAcess($config_file = ''){
+        $content = file_get_contents($config_file);
+        $obj = json_decode($content, true);
+
+        if(isset($obj['project_can_access']) AND $obj['project_can_access'] == true){
+            return true;
+        }
+        return false;
+    }
+
+
+
+    /**
+     * Récupérer si il faut avoir accès a une équipe
+     * 
+     * Récupérer si il faut avoir accès a une équipe
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $config_file = le chemin d'accès de la config
+     */
+
+    function renderTeamCanAcess($config_file = ''){
+        $content = file_get_contents($config_file);
+        $obj = json_decode($content, true);
+
+        if(isset($obj['team_can_access']) AND $obj['team_can_access'] == true){
+            return true;
+        }
+        return false;
+    }
+
+
+
+    /**
      * Récupérer les metas d'une page
      * 
      * Récupérer les metas d'un fichier config
