@@ -1,7 +1,8 @@
 <?php
     require_once ('controller/project.php') ;
+    require_once ('controller/projectTeam.php') ;
 
-    // $tabs = $task -> getTabs( $router -> getRouteParam('2') );
+    $allTeams = $projectTeam -> getTeams( $router -> getRouteParam('2') );
     
 ?>
 
@@ -20,16 +21,18 @@
                     <ul class="text-align-left">
                         <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/gestion-equipe/team" class="link dark-link active"> Équipes </a> </li>
                         <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/gestion-equipe/members" class="link dark-link"> Membres </a> </li>
-                        <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/gestion-equipe/settings" class="link dark-link"> Réglages </a> </li>
                     </ul>
                 </div>
             </div>
         </div>
 
 
-
-        <div class="row">
-            Equipe
-        </div>
+        <?php
+            if($allTeams['count'] !== 0){
+                require_once ('view/app/project/tools/gestion-equipe/team/components/home.php');
+            }else{
+                require_once ('view/app/project/tools/gestion-equipe/team/components/empty.php');
+            }
+        ?>
     </div>
 </div>

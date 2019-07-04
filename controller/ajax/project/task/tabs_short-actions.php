@@ -46,6 +46,7 @@ $utils = new utils($db);
 if(isset($_POST['result'])){ $result = $_POST['result']; }
 $tab_token = $_POST['tab_token'];
 $action = $_POST['action'];
+if(isset($_POST['project_token'])){ $project_token = $_POST['project_token']; }
 
 
 
@@ -67,6 +68,11 @@ if($action == 'rename'){
     $new_name = htmlentities(addslashes($result));
     $errors = $task -> tabRename($tab_token, $new_name);
     
+}
+
+
+if($action == 'export'){
+    ?> <script>location.href="../../../../app/project/<?= $project_token ?>/t/gestion-projet/export/<?= $tab_token ?>"</script> <?php
 }
 
 

@@ -114,3 +114,41 @@ $(document).on("click", "[data-action='rename']", function(e) {
         }
     });
 });
+
+
+
+// Exportation
+$(document).on("click", "[data-action='export']", function(e) {
+    event.preventDefault();
+    let ref = this.dataset.ref;
+    let pro = this.dataset.pro;
+
+    bootbox.confirm({
+        backdrop: true,
+        closeButton: false,
+        title: "Êtes vous sûr ?",
+        message: "Vous allez exporter le tableau.",
+        buttons: {
+            cancel: {
+                label: '<i class="fa fa-times"></i> Cancel',
+                className: 'btn dark-btn'
+            },
+            confirm: {
+                label: '<i class="fa fa-check"></i> Confirm',
+                className: 'btn primary-btn'
+            }
+        },
+        callback: function (result) {
+            if(result == true){
+                $.ajax({
+                    url:  rootUrl + 'controller/ajax/project/task/tabs_short-actions.php',
+                    type: 'POST',
+                    data: {tab_token: ref, project_token: pro, action: 'export'},
+                    success:function(data){
+                        $('#tab_output').html(data);
+                    }
+                });
+            }
+        }
+    });
+});

@@ -1,3 +1,30 @@
+Page features :
+    - https://codyhouse.co/gem/vertical-fixed-navigation
+
+Création rapide tools :
+    - https://codyhouse.co/gem/stretchy-navigation
+
+
+Dropdown :
+    - https://www.cssscript.com/demo/accessible-custom-dropdown-menu-dropmic/
+
+
+calendrier :
+    - https://codyhouse.co/ds/components/app/drawer
+    - https://codyhouse.co/ds/components/app/off-canvas-content--full-width
+
+
+
+codyhouse :
+    - https://codyhouse.co/ds/components/content-and-layout
+    - https://codyhouse.co/ds/components/app/text-divider
+    - https://codyhouse.co/ds/components/app/card--link
+    - https://codyhouse.co/ds/components/app/counter--docked
+    - https://codyhouse.co/ds/components/app/custom-checkbox
+    - https://codyhouse.co/ds/components/app/avatar
+    - https://codyhouse.co/ds/components/app/button-states
+
+- https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_toggle_password
 Animations : 
 - https://tobiasahlin.com/moving-letters/#
 - https://loading.io/progress/

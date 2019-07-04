@@ -97,16 +97,17 @@ $router -> addRoutes(
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/settings', 'dir_path' => 'view/app/project/settings/'],
         
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-projet', 'dir_path' => 'view/app/project/tools/gestion-projet/home/'],
+        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-projet/export/{{TAB_TOKEN}}', 'dir_path' => 'view/app/project/tools/gestion-projet/export/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-projet/reports', 'dir_path' => 'view/app/project/tools/gestion-projet/reports/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-projet/gantt', 'dir_path' => 'view/app/project/tools/gestion-projet/gantt/'],
 
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-equipe', 'dir_path' => 'view/app/project/tools/gestion-equipe/home/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-equipe/team', 'dir_path' => 'view/app/project/tools/gestion-equipe/team/'],
+        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-equipe/team/create', 'dir_path' => 'view/app/project/tools/gestion-equipe/team/create/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-equipe/team/{{TEAM_TOKEN}}/edit', 'dir_path' => 'view/app/project/tools/gestion-equipe/team/edit/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-equipe/members', 'dir_path' => 'view/app/project/tools/gestion-equipe/members/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-equipe/members/{{USER_TOKEN}}/activity', 'dir_path' => 'view/app/project/tools/gestion-equipe/members/activity/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-equipe/members/{{USER_TOKEN}}/edit', 'dir_path' => 'view/app/project/tools/gestion-equipe/members/edit/'],
-        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/gestion-equipe/settings', 'dir_path' => 'view/app/project/tools/gestion-equipe/settings/'],
 
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/messenger', 'dir_path' => 'view/app/project/tools/messenger/home/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/messenger/{{CONVERSATION_TOKEN}}', 'dir_path' => 'view/app/project/tools/messenger/conv/'],

@@ -126,6 +126,7 @@
                         <div id="tp-<?= $t['tab_token'] ?>" class="hidden">
                             <ul class="margin-top">
                                 <li> <a href="" data-action="rename" data-ref="<?= $t['tab_token'] ?>" class="link dark-link">Renommer</a> </li>
+                                <li> <a href="" data-action="export" data-ref="<?= $t['tab_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>" class="link dark-link">Exporter le tableau</a> </li>
                                 <li> <a href="" data-action="delete" data-ref="<?= $t['tab_token'] ?>" class="link red-link">Supprimer</a> </li>
                             </ul>
                         </div>

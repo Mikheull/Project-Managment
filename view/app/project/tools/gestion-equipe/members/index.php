@@ -20,7 +20,6 @@
                     <ul class="text-align-left">
                         <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/gestion-equipe/team" class="link dark-link"> Équipes </a> </li>
                         <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/gestion-equipe/members" class="link dark-link active"> Membres </a> </li>
-                        <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/gestion-equipe/settings" class="link dark-link"> Réglages </a> </li>
                     </ul>
                 </div>
             </div>

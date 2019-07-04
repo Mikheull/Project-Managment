@@ -122,6 +122,230 @@ class authentication extends db_connect {
                 $request = $this -> _db -> exec("INSERT INTO `imp_user` (`username`, `mail`, `password`, `public_token`) VALUES ('$username', '$email', '$password', '$token') ");
                 mkdir("dist/uploads/u/".$token."/", 0700);
 
+ob_start();
+?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<body>
+  <div>
+    <div style="Margin:0px auto;max-width:600px;">
+      <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
+        <tbody>
+          <tr>
+            <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;vertical-align:top;">
+              <div class="mj-column-per-100 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                  <tr>
+                    <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
+                        <tbody>
+                          <tr>
+                            <td style="width:100px;"> <img height="auto" src="https://imgur.com/skBjpuI.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;" width="100" /> </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="background:#262E3E url(https://imgur.com/Mu0C4ih.png) top center / 100% 100% no-repeat;Margin:0px auto;border-radius:6px;max-width:600px;">
+      <div style="line-height:0;font-size:0;">
+        <table align="center" background="https://imgur.com/Mu0C4ih.png" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#262E3E url(https://imgur.com/Mu0C4ih.png) top center / 100% 100% no-repeat;width:100%;border-radius:6px;">
+          <tbody>
+            <tr>
+              <td style="direction:ltr;font-size:0px;padding:50px;text-align:center;vertical-align:top;">
+                <div class="mj-column-per-100 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                  <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                    <tr>
+                      <td align="center" style="font-size:0px;padding:10px 25px;padding-top:30px;padding-bottom:30px;word-break:break-word;">
+                        <div style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:30px;font-weight:500;line-height:1;text-align:center;color:#FFFFFF;"> Bienvenue ! </div>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div style="Margin:0px auto;max-width:600px;">
+      <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
+        <tbody>
+          <tr>
+            <td style="direction:ltr;font-size:0px;padding:20px 0;padding-top:50px;text-align:center;vertical-align:top;">
+              <div class="mj-column-per-100 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                  <tr>
+                    <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                      <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:20px;font-weight:bold;line-height:1;text-align:left;color:#4C6CF6;"> Bienvenue <?= $username ?> </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="font-size:0px;word-break:break-word;">
+                      <div style="height:30px;"> &nbsp; </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                      <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:16px;line-height:1;text-align:left;color:#637381;"> Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
+                        voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,
+                        sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
+                        Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="Margin:0px auto;max-width:600px;">
+      <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
+        <tbody>
+          <tr>
+            <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;vertical-align:top;">
+              <div class="mj-column-per-100 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                  <tr>
+                    <td style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                      <p style="border-top:solid 2px #EDEDED;font-size:1;margin:0px auto;width:100%;"> </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="center" vertical-align="middle" style="font-size:0px;padding:10px 25px;padding-top:50px;padding-bottom:50px;word-break:break-word;">
+                      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;">
+                        <tr>
+                          <td align="center" bgcolor="#4C6CF6" role="presentation" style="border:none;border-radius:3px;cursor:auto;padding:10px 25px;background:#4C6CF6;" valign="middle"> <a href="https://improove.co" style="background:#4C6CF6;color:#FFFFFF;font-family:Helvetica;font-size:13px;font-weight:normal;line-height:120%;Margin:0;text-decoration:none;text-transform:none;" target="_blank">
+              Aller sur la plateforme
+            </a> </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                      <p style="border-top:solid 2px #EDEDED;font-size:1;margin:0px auto;width:100%;"> </p>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="Margin:0px auto;max-width:600px;">
+      <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
+        <tbody>
+          <tr>
+            <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;vertical-align:top;">
+              <div class="mj-column-per-100 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                  <tr>
+                    <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                      <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="float:none;display:inline-table;">
+                        <tr>
+                          <td style="padding:4px;">
+                            <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-radius:0;width:24px;">
+                              <tr>
+                                <td style="font-size:0;height:24px;vertical-align:middle;width:24px;"> <a href="https://github.com/" target="_blank">
+                    <img
+                       height="24" src="https://imgur.com/38Hrprm.png" style="border-radius:0;" width="24"
+                    />
+                  </a> </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                      <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="float:none;display:inline-table;">
+                        <tr>
+                          <td style="padding:4px;">
+                            <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-radius:0;width:24px;">
+                              <tr>
+                                <td style="font-size:0;height:24px;vertical-align:middle;width:24px;"> <a href="https://linkedin.com/" target="_blank">
+                    <img
+                       height="24" src="https://imgur.com/9Xjubmq.png" style="border-radius:0;" width="24"
+                    />
+                  </a> </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                      <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="float:none;display:inline-table;">
+                        <tr>
+                          <td style="padding:4px;">
+                            <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-radius:0;width:24px;">
+                              <tr>
+                                <td style="font-size:0;height:24px;vertical-align:middle;width:24px;"> <a href="https://twitter.com/" target="_blank">
+                    <img
+                       height="24" src="https://imgur.com/OuJaUFF.png" style="border-radius:0;" width="24"
+                    />
+                  </a> </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="Margin:0px auto;max-width:600px;">
+      <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
+        <tbody>
+          <tr>
+            <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;vertical-align:top;">
+              <div class="mj-column-per-100 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                  <tr>
+                    <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                      <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:10px;line-height:1;text-align:center;color:#262E3E;"> Improove 2019. Tout droits réservés </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+
+</html>          
+<?php
+$content_email = ob_get_clean();
+
+            $sender = 'mikhae.bailly@gmail.com';
+            $recipient = $email;
+
+            $subject = 'Bienvenue sur Improove !';
+            $message = $content_email;
+            $headers  = 'MIME-Version: 1.0' . "\r\n";
+            $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+            // Additional headers
+            $headers .= 'From: ' . $sender. "\r\n";  
+
+            if (mail($recipient, $subject, $message, $headers)){
+                echo "Message accepted";
+            }else{
+                echo "Error: Message not accepted";
+            }
                 header('location: account');
             
             }else{
@@ -226,7 +450,7 @@ ob_start();
                         <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
                         <tbody>
                             <tr>
-                            <td style="width:100px;"> <img height="auto" src="http://localhost:8888/Improove/dist/images/logo_blue.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;" width="100" /> </td>
+                            <td style="width:100px;"> <img height="auto" src="https://imgur.com/skBjpuI.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;" width="100" /> </td>
                             </tr>
                         </tbody>
                         </table>
@@ -358,67 +582,67 @@ ob_start();
         </table>
     </div>
     <div style="Margin:0px auto;max-width:600px;">
-        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
+      <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
         <tbody>
-            <tr>
+          <tr>
             <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;vertical-align:top;">
-                <div class="mj-column-per-100 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+              <div class="mj-column-per-100 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
                 <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
-                    <tr>
+                  <tr>
                     <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="float:none;display:inline-table;">
+                      <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="float:none;display:inline-table;">
                         <tr>
-                            <td style="padding:4px;">
-                            <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#000000;border-radius:3px;width:30px;">
-                                <tr>
-                                <td style="font-size:0;height:30px;vertical-align:middle;width:30px;"> <a href="https://github.com/" target="_blank">
+                          <td style="padding:4px;">
+                            <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-radius:0;width:24px;">
+                              <tr>
+                                <td style="font-size:0;height:24px;vertical-align:middle;width:24px;"> <a href="https://github.com/" target="_blank">
                     <img
-                        height="30" src="https://www.mailjet.com/images/theme/v1/icons/ico-social/github.png" style="border-radius:3px;" width="30"
+                       height="24" src="https://imgur.com/38Hrprm.png" style="border-radius:0;" width="24"
                     />
-                    </a> </td>
-                                </tr>
+                  </a> </td>
+                              </tr>
                             </table>
-                            </td>
+                          </td>
                         </tr>
-                        </table>
-                        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="float:none;display:inline-table;">
+                      </table>
+                      <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="float:none;display:inline-table;">
                         <tr>
-                            <td style="padding:4px;">
-                            <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#0077b5;border-radius:3px;width:30px;">
-                                <tr>
-                                <td style="font-size:0;height:30px;vertical-align:middle;width:30px;"> <a href="https://linkedin.com/" target="_blank">
+                          <td style="padding:4px;">
+                            <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-radius:0;width:24px;">
+                              <tr>
+                                <td style="font-size:0;height:24px;vertical-align:middle;width:24px;"> <a href="https://linkedin.com/" target="_blank">
                     <img
-                        height="30" src="https://www.mailjet.com/images/theme/v1/icons/ico-social/linkedin.png" style="border-radius:3px;" width="30"
+                       height="24" src="https://imgur.com/9Xjubmq.png" style="border-radius:0;" width="24"
                     />
-                    </a> </td>
-                                </tr>
+                  </a> </td>
+                              </tr>
                             </table>
-                            </td>
+                          </td>
                         </tr>
-                        </table>
-                        <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="float:none;display:inline-table;">
+                      </table>
+                      <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="float:none;display:inline-table;">
                         <tr>
-                            <td style="padding:4px;">
-                            <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#55acee;border-radius:3px;width:30px;">
-                                <tr>
-                                <td style="font-size:0;height:30px;vertical-align:middle;width:30px;"> <a href="https://twitter.com/" target="_blank">
+                          <td style="padding:4px;">
+                            <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-radius:0;width:24px;">
+                              <tr>
+                                <td style="font-size:0;height:24px;vertical-align:middle;width:24px;"> <a href="https://twitter.com/" target="_blank">
                     <img
-                        height="30" src="https://www.mailjet.com/images/theme/v1/icons/ico-social/twitter.png" style="border-radius:3px;" width="30"
+                       height="24" src="https://imgur.com/OuJaUFF.png" style="border-radius:0;" width="24"
                     />
-                    </a> </td>
-                                </tr>
+                  </a> </td>
+                              </tr>
                             </table>
-                            </td>
+                          </td>
                         </tr>
-                        </table>
+                      </table>
                     </td>
-                    </tr>
+                  </tr>
                 </table>
-                </div>
+              </div>
             </td>
-            </tr>
+          </tr>
         </tbody>
-        </table>
+      </table>
     </div>
     <div style="Margin:0px auto;max-width:600px;">
         <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
@@ -448,7 +672,7 @@ ob_start();
 $content_email = ob_get_clean();
 
             $sender = 'mikhae.bailly@gmail.com';
-            $recipient = 'mikhae.bailly@gmail.com';
+            $recipient = $email;
 
             $subject = 'Demande de réinitialisation de mot de passe';
             $message = $content_email;
