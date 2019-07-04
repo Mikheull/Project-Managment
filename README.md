@@ -20,7 +20,6 @@ codyhouse :
     - https://codyhouse.co/ds/components/app/text-divider
     - https://codyhouse.co/ds/components/app/card--link
     - https://codyhouse.co/ds/components/app/counter--docked
-    - https://codyhouse.co/ds/components/app/custom-checkbox
     - https://codyhouse.co/ds/components/app/avatar
     - https://codyhouse.co/ds/components/app/button-states
 

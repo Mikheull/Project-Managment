@@ -36,18 +36,36 @@
         <div class="footer">
             <div class="owner"> <span class="txt"><i class="fas fa-calendar-check margin-right"></i> <?= $config -> time_elapsed_string($utils -> getData('pr_project', 'date_begin', 'public_token', $t['project_token']) ) ?></span> </div>
             <div class="members margin-right">
-                <?php 
-                    $project_member = $project -> getProjectMembers($t['project_token']);
-                    foreach($project_member['content'] as $member){
-                        ?> 
-                            <div class="item" data-tippy="<?= $utils -> getData('imp_user', 'username', 'public_token', $member['user_public_token']) ?>"> 
-                                <div class="profil_picture-xs">
-                                    <div class="img light-border" style="background-image: url('<?= $config -> rootUrl() ;?>dist/<?= $utils -> getData('imp_user', 'profil_image', 'public_token', $member['user_public_token']) == NULL ? 'images/content/defaut_profil_pic.png' : 'uploads/u/'. $member['user_public_token'].'/profil_pic/'.$utils -> getData('imp_user', 'profil_image', 'public_token', $member['user_public_token']) ;?>');"></div>
+                <div class="avatar-group">
+                    <?php
+                        $project_member = $project -> getProjectMembers($t['project_token']);
+                        $count = 1;
+                        foreach($project_member['content'] as $member){
+                            if($count < 5){
+                                ?> 
+                                    <div class="avatar avatar--sm" data-tippy="<?= $utils -> getData('imp_user', 'username', 'public_token', $member['user_public_token']) ?>"> 
+                                        <figure class="avatar__figure" role="img" aria-label="Emily Ewing">
+                                            <svg class="avatar__placeholder" aria-hidden="true" viewBox="0 0 20 20" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="6" r="2.5" stroke="currentColor"/><path d="M10,10.5a4.487,4.487,0,0,0-4.471,4.21L5.5,15.5h9l-.029-.79A4.487,4.487,0,0,0,10,10.5Z" stroke="currentColor"/></svg>
+                                            <img class="avatar__img" src="<?= $config -> rootUrl() ;?>dist/<?= $utils -> getData('imp_user', 'profil_image', 'public_token', $member['user_public_token']) == NULL ? 'images/content/defaut_profil_pic.png' : 'uploads/u/'. $member['user_public_token'].'/profil_pic/'.$utils -> getData('imp_user', 'profil_image', 'public_token', $member['user_public_token']) ;?>">
+                                        </figure>
+                                    </div>
+                                <?php
+                                $count ++;
+                            }
+
+                        }
+                    
+                        if($project_member['count'] > 5){
+                            ?>
+                                <div class="avatar avatar--sm avatar--btn">
+                                    <figure aria-hidden="true" class="avatar__figure">
+                                        <div class="avatar__users-counter color-lg-dark"><span>+<?= $project_member['count'] - $count + 1?></span></div>
+                                    </figure>
                                 </div>
-                            </div> 
-                        <?php
-                    }
-                ?>
+                            <?php
+                        }
+                    ?>
+                </div> 
             </div>
         </div>
 
