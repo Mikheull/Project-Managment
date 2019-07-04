@@ -23,37 +23,19 @@
                 </ul>
             </nav>
 
-            <section id="section1" class="cd-section">
-                <h1>Vertical Fixed Navigation</h1>
-            </section><!-- cd-section -->
-
-            <section id="section2" class="cd-section">
-                <p>&ldquo;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto numquam, totam iusto officia earum perferendis, culpa ad atque eveniet praesentium nobis expedita similique beatae tenetur. Distinctio vel tenetur, id cum.&rdquo;</p>
-            </section><!-- cd-section -->
-
-            <section id="section3" class="cd-section">
-                <p>&ldquo;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto numquam, totam iusto officia earum perferendis, culpa ad atque eveniet praesentium nobis expedita similique beatae tenetur. Distinctio vel tenetur, id cum.&rdquo;</p>
-            </section><!-- cd-section -->
-
-            <section id="section4" class="cd-section">
-                <p>&ldquo;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto numquam, totam iusto officia earum perferendis, culpa ad atque eveniet praesentium nobis expedita similique beatae tenetur. Distinctio vel tenetur, id cum.&rdquo;</p>
-            </section><!-- cd-section -->
-
-            <section id="section5" class="cd-section">
-                <p>&ldquo;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto numquam, totam iusto officia earum perferendis, culpa ad atque eveniet praesentium nobis expedita similique beatae tenetur. Distinctio vel tenetur, id cum.&rdquo;</p>
-            </section><!-- cd-section -->
-
-            <section id="section6" class="cd-section">
-                <p>&ldquo;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto numquam, totam iusto officia earum perferendis, culpa ad atque eveniet praesentium nobis expedita similique beatae tenetur. Distinctio vel tenetur, id cum.&rdquo;</p>
-            </section><!-- cd-section -->
-
-            <section id="section7" class="cd-section">
-                <p>&ldquo;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto numquam, totam iusto officia earum perferendis, culpa ad atque eveniet praesentium nobis expedita similique beatae tenetur. Distinctio vel tenetur, id cum.&rdquo;</p>
-            </section><!-- cd-section -->
-
-            <section id="section8" class="cd-section">
-                <p>&ldquo;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto numquam, totam iusto officia earum perferendis, culpa ad atque eveniet praesentium nobis expedita similique beatae tenetur. Distinctio vel tenetur, id cum.&rdquo;</p>
-            </section><!-- cd-section -->
+            <div class="container">
+                <div class="row">
+                    <section id="section1" class="col-12 cd-section"> <?php require_once ('view/landing/features/components/gestion-project.php') ;?> </section>
+                    <section id="section2" class="col-12 cd-section"> <?php require_once ('view/landing/features/components/gestion-equipe.php') ;?> </section>
+                    <section id="section3" class="col-12 cd-section"> <?php require_once ('view/landing/features/components/messenger.php') ;?> </section>
+                    <section id="section4" class="col-12 cd-section"> <?php require_once ('view/landing/features/components/calendar.php') ;?> </section>
+                    <section id="section5" class="col-12 cd-section"> <?php require_once ('view/landing/features/components/uml.php') ;?> </section>
+                    <section id="section6" class="col-12 cd-section"> <?php require_once ('view/landing/features/components/recherche-user.php') ;?> </section>
+                    <section id="section7" class="col-12 cd-section"> <?php require_once ('view/landing/features/components/bug-tracker.php') ;?> </section>
+                    <section id="section8" class="col-12 cd-section"> <?php require_once ('view/landing/features/components/document.php') ;?> </section>
+                </div>
+            </div>
+            
         </div>
 
     </section>
