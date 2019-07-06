@@ -15,19 +15,6 @@
 <div class="container-fluid main_wrapper">
     <?php require_once ('view/app/project/tools/calendar/components/navbar.php') ?>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-12 navbar-app">
-                <div class="navbar-nav">
-                    <ul class="text-align-left">
-                        <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/calendar" class="link dark-link active"> Calendrier </a> </li>
-                        <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/calendar/settings" class="link dark-link"> Réglages </a> </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="container calendar_wrapper margin-top-lg">
         <div class="row">
             <div class="col">

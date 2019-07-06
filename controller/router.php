@@ -112,7 +112,6 @@ $router -> addRoutes(
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/messenger/{{CONVERSATION_TOKEN}}', 'dir_path' => 'view/app/project/tools/messenger/conv/'],
 
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/calendar', 'dir_path' => 'view/app/project/tools/calendar/home/'],
-        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/calendar/settings', 'dir_path' => 'view/app/project/tools/calendar/settings/'],
 
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/uml', 'dir_path' => 'view/app/project/tools/uml/home/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/uml/import', 'dir_path' => 'view/app/project/tools/uml/import/'],

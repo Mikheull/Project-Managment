@@ -1,3 +1,7 @@
+sql server :
+    user : admin_improove
+    pass : 7kp9PHKUAd
+
 Page features :
     - https://codyhouse.co/gem/vertical-fixed-navigation
 
