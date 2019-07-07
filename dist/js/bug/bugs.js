@@ -42,7 +42,79 @@ $(document).on("click", "#new-bug", function(e) {
 
 
 
-// Expandable task
+// Expandable bug
 $(document).on('click', '.expand_btn', function() {
     $( this ).next('.expand_content').toggleClass( 'hidden' );
+});
+
+
+// Move to in working
+$(document).on("click", "#move-to-working", function(e) {
+    event.preventDefault();
+    let token = this.dataset.bug;
+
+    bootbox.confirm({
+        backdrop: true,
+        closeButton: false,
+        title: "Êtes vous sûr ?",
+        message: "Vous êtes sur le point de déplacer ce rapport dans (en cours).",
+        buttons: {
+            cancel: {
+                label: '<i class="fa fa-times"></i> Cancel',
+                className: 'btn dark-btn'
+            },
+            confirm: {
+                label: '<i class="fa fa-check"></i> Confirm',
+                className: 'btn primary-btn'
+            }
+        },
+        callback: function (result) {
+            if(result == true){
+                $.ajax({
+                    url:  rootUrl + 'controller/ajax/project/bug/edit_bug.php',
+                    type: 'POST',
+                    data: {bug_token: token, new_status: 2},
+                    success:function(data){
+                        $('#bug_output').html(data);
+                    }
+                });
+            }
+        }
+    });
+});
+
+
+// Move to end
+$(document).on("click", "#move-to-end", function(e) {
+    event.preventDefault();
+    let token = this.dataset.bug;
+
+    bootbox.confirm({
+        backdrop: true,
+        closeButton: false,
+        title: "Êtes vous sûr ?",
+        message: "Vous êtes sur le point de déplacer ce rapport dans (terminé).",
+        buttons: {
+            cancel: {
+                label: '<i class="fa fa-times"></i> Cancel',
+                className: 'btn dark-btn'
+            },
+            confirm: {
+                label: '<i class="fa fa-check"></i> Confirm',
+                className: 'btn primary-btn'
+            }
+        },
+        callback: function (result) {
+            if(result == true){
+                $.ajax({
+                    url:  rootUrl + 'controller/ajax/project/bug/edit_bug.php',
+                    type: 'POST',
+                    data: {bug_token: token, new_status: 3},
+                    success:function(data){
+                        $('#bug_output').html(data);
+                    }
+                });
+            }
+        }
+    });
 });

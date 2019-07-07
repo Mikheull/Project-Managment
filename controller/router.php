@@ -37,6 +37,13 @@ $router -> addRoutes(
 
         [ 'route' => 'developers', 'dir_path' => 'view/developers/'],
         
+        // Demo
+        [ 'route' => 'demo', 'dir_path' => 'view/demo/home/'],
+        [ 'route' => 'demo/@improove', 'dir_path' => 'view/demo/improove/'],
+        [ 'route' => 'demo/@team', 'dir_path' => 'view/demo/team/'],
+        [ 'route' => 'demo/@project', 'dir_path' => 'view/demo/project/'],
+        [ 'route' => 'demo/@me', 'dir_path' => 'view/demo/account/'],
+
         // Help
         [ 'route' => 'help', 'dir_path' => 'view/help/home/'],
         [ 'route' => 'help/{{ARTICLE_NAME}}', 'dir_path' => 'view/help/article/'],

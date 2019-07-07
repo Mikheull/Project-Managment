@@ -25,7 +25,24 @@
         </div>
 
         <div class="row">
+            <?php  
+                if(!is_dir('dist/uploads/p/'.$router -> getRouteParam("2").'/docs/')){
+                    mkdir('dist/uploads/p/'.$router -> getRouteParam("2").'/docs/', 0777, true);
+                }
 
+                $dir_files = new DirectoryIterator('dist/uploads/p/'.$router -> getRouteParam("2").'/docs/');
+            
+                if(empty($dir_files)){
+                    ?>
+                    
+                    <?php
+                }else{
+                    foreach ($dir_files as $fileInfo) {
+                        if($fileInfo->isDot()) continue;
+                        echo $fileInfo->getFilename() . "<br>\n";
+                    }
+                }
+            ?>
         </div>
         
     </div>
