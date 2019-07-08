@@ -37,7 +37,11 @@ if(isset($_POST['import_btn'])){
 
 				if(move_uploaded_file($tmpFilePath, $filePath)) {
 					$errors = ['success' => false, 'options' => ['content' => "Les fichiers ont été téléchargés !", 'theme' => 'success'] ];
+				}else{
+					$errors = ['success' => false, 'options' => ['content' => "Une erreur est survenue !", 'theme' => 'error'] ];
 				}
+			}else{
+				$errors = ['success' => false, 'options' => ['content' => "Une erreur est survenue !", 'theme' => 'error'] ];
 			}
 		}
 
@@ -45,6 +49,28 @@ if(isset($_POST['import_btn'])){
 
     }else{
         $errors = ['success' => false, 'options' => ['content' => "Merci de télécharger un fichier !", 'theme' => 'error'] ];
+    }
+}
+
+
+
+
+if(isset($_POST['create_doc'])){
+
+	if(!is_dir('dist/uploads/p/'.$router -> getRouteParam("2").'/docs/')){
+		mkdir('dist/uploads/p/'.$router -> getRouteParam("2").'/docs/', 0777, true);
+	}
+		
+	if(isset($_POST['doc_name']) AND !empty($_POST['doc_name']) AND isset($_POST['doc_content']) AND !empty($_POST['doc_content'])){
+
+        $doc_name = htmlentities(addslashes($_POST['doc_name']));
+        $doc_content = $_POST['doc_content'];
+
+		file_put_contents('dist/uploads/p/'.$router -> getRouteParam("2").'/docs/'.$doc_name, $doc_content);
+        $errors = ['success' => false, 'options' => ['content' => "Le fichier a été crée !", 'theme' => 'success'] ];
+
+    }else{
+        $errors = ['success' => false, 'options' => ['content' => "Vous devez remplir tout les champs obligatoires !", 'theme' => 'error'] ];
     }
 }
 

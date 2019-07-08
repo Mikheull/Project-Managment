@@ -10,7 +10,8 @@
         "popper",
         "tippy",
         "bootbox",
-        "fullscreen"
+        "fullscreen",
+        "prism"
     ],
 
 
@@ -34,11 +35,13 @@
         "app/main.min.css",
         "app/project/main.min.css",
         "app/project/document.min.css",
-        "bootstrap-modal.min.css"
+        "bootstrap-modal.min.css",
+        "prism.min.css"
     ],
 
     "online_css": [ 
-        "https://cdn.jsdelivr.net/npm/tippy.js@4.3.1/themes/light-border.css"
+        "https://cdn.jsdelivr.net/npm/tippy.js@4.3.1/themes/light-border.css",
+        "https://cdn.jsdelivr.net/npm/prismjs@1.16.0/themes/prism-tomorrow.css"
     ]
 
 }

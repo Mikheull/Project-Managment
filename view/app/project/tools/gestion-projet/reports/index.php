@@ -35,7 +35,7 @@
                 
             }else{
                 ?>
-                 <div class="col-8 offset-2 text-align-center margin-top-lg">
+                <div class="col-8 offset-2 text-align-center margin-top-lg">
                     <img src="<?= $config -> rootUrl() ;?>dist/images/illustrations/empty_task_activities.svg" alt="" width="50%">
                     <h3 class="title-sm bold color-dark margin-bot-lg margin-top-lg">Aucunes données pour le moment !</h3>
                 </div>

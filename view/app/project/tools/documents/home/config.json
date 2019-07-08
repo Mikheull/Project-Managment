@@ -32,7 +32,7 @@
     "css": [ 
         "app/main.min.css",
         "app/project/main.min.css",
-        "app/project/documents.min.css",
+        "app/project/document.min.css",
         "bootstrap-modal.min.css"
     ],
 

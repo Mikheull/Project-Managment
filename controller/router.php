@@ -133,12 +133,12 @@ $router -> addRoutes(
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/bug-tracker', 'dir_path' => 'view/app/project/tools/bug-tracker/home/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/bug-tracker/new', 'dir_path' => 'view/app/project/tools/bug-tracker/bug-new/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/bug-tracker/{{BUG_TOKEN}}/edit', 'dir_path' => 'view/app/project/tools/bug-tracker/bug-edit/'],
-        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/bug-tracker/analyse', 'dir_path' => 'view/app/project/tools/bug-tracker/analyse/'],
+        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/bug-tracker/reports', 'dir_path' => 'view/app/project/tools/bug-tracker/reports/'],
         
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/documents', 'dir_path' => 'view/app/project/tools/documents/home/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/documents/import', 'dir_path' => 'view/app/project/tools/documents/import/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/documents/create', 'dir_path' => 'view/app/project/tools/documents/create/'],
-        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/documents/{{DOCUMENTS_TOKEN}}', 'dir_path' => 'view/app/project/tools/documents/view/'],
+        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/documents/viewer', 'dir_path' => 'view/app/project/tools/documents/view/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/documents/{{DOCUMENTS_TOKEN}}/edit', 'dir_path' => 'view/app/project/tools/documents/edit/'],
 
     ]
