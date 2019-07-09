@@ -46,8 +46,8 @@ $auth = new authentication($db);
  */
 
 if(isset($_POST['bug_name']) AND !empty($_POST['bug_name']) AND isset($_POST['bug_desc']) AND !empty($_POST['bug_desc'])){
-    $bug_name = htmlentities(addslashes($_POST['bug_name']));
-    $bug_desc = htmlentities(addslashes($_POST['bug_desc']));
+    $bug_name = cleanVar($_POST['bug_name']);
+    $bug_desc = cleanVar($_POST['bug_desc']);
     $project_token = $_POST['project_token'];
 
     if(strlen($bug_desc) <= 254){

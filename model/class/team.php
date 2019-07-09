@@ -468,7 +468,7 @@ class team extends db_connect {
             $request = $this -> _db -> exec("INSERT INTO `pr_team_member` (`user_public_token`, `team_token`, `role`) VALUES ('$owner', '$token', '1')");
             
             foreach($invitations as $invite){
-                $invite = htmlentities(addslashes($invite));
+                $invite = cleanVar($invite);
                 $this -> inviteMember($invite, $token);
             }
 

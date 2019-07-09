@@ -23,7 +23,7 @@
                 </ul>
             </nav>
 
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
                     <section id="section1" class="col-12 cd-section"> <?php require_once ('view/landing/features/components/gestion-project.php') ;?> </section>
                     <section id="section2" class="col-12 cd-section"> <?php require_once ('view/landing/features/components/gestion-equipe.php') ;?> </section>

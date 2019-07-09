@@ -52,7 +52,7 @@ $action = $_POST['action'];
 if($action == 'invite'){
 
     if($project -> getProjectData($project_token, 'founder_token') == $main -> getToken()){
-        $user_mail = htmlentities(addslashes($result));
+        $user_mail = cleanVar($result);
         
         if($auth -> emailExist($user_mail) == true){
             $errors = $project -> inviteMember($user_mail, $project_token, "Je t\'invite dans mon projet Khoya");
@@ -125,7 +125,7 @@ if($action == 'leave'){
 if($action == 'rename'){
 
     if($project -> getProjectData($project_token, 'founder_token') == $main -> getToken()){
-        $new_name = htmlentities(addslashes($result));
+        $new_name = cleanVar($result);
         $errors = $project -> projectRename($project_token, $new_name);
         echo '<script> document.location.reload(true); </script>';
     }else{

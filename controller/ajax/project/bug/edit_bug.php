@@ -45,8 +45,8 @@ $auth = new authentication($db);
  * Test de l'envoi en ajax
  */
 
-$bug_token = htmlentities(addslashes($_POST['bug_token']));
-$new_status = htmlentities(addslashes($_POST['new_status']));
+$bug_token = cleanVar($_POST['bug_token']);
+$new_status = cleanVar($_POST['new_status']);
 
 if($new_status == 2){
     $errors = $bug -> setWorkinBug($bug_token);

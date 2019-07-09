@@ -37,7 +37,7 @@ $team = new team($db);
  * 
  */
 if(isset($_POST['accept_invitation'])){
-    $project_token = htmlentities(addslashes($_POST['invitation']));
+    $project_token = cleanVar($_POST['invitation']);
 
     $errors = $team -> setInvitationAnswer($project_token, $main -> getToken(), 'accept');
 }
@@ -54,7 +54,7 @@ if(isset($_POST['accept_invitation'])){
  * 
  */
 if(isset($_POST['decline_invitation'])){
-    $project_token = htmlentities(addslashes($_POST['invitation']));
+    $project_token = cleanVar($_POST['invitation']);
 
     $errors = $team -> setInvitationAnswer($project_token, $main -> getToken(), 'decline');
 }
@@ -74,9 +74,9 @@ if(isset($_POST['decline_invitation'])){
 if(isset($_POST['invite_member'])){
     if(isset($_POST['user_mail']) AND !empty($_POST['user_mail'])){
 
-        $user_mail = htmlentities(addslashes($_POST['user_mail']));
+        $user_mail = cleanVar($_POST['user_mail']);
         if(isset($_POST['team_token']) AND !empty($_POST['team_token'])){
-            $team_token = htmlentities(addslashes($_POST['team_token']));
+            $team_token = cleanVar($_POST['team_token']);
         }else{
             $team_token = $router -> getRouteParam('2');
         }
@@ -108,9 +108,9 @@ if(isset($_POST['invite_member'])){
 if(isset($_POST['create_team'])){
     if(isset($_POST['name']) AND !empty($_POST['name']) AND isset($_POST['desc']) AND !empty($_POST['desc']) AND isset($_POST['status']) AND !empty($_POST['status'])){
 
-        $name = htmlentities(addslashes($_POST['name']));
-        $desc = htmlentities(addslashes($_POST['desc']));
-        $status = htmlentities(addslashes($_POST['status']));
+        $name = cleanVar($_POST['name']);
+        $desc = cleanVar($_POST['desc']);
+        $status = cleanVar($_POST['status']);
         $invitations = $_POST['mails_list'];
 
         $errors = $team -> createTeam($name, $desc, $status, $invitations);
@@ -151,8 +151,8 @@ if(isset( $_POST['remove_member'] )){
 if(isset($_POST['update_team_infos'])){
     
     if(isset($_POST['name']) AND !empty($_POST['name']) AND isset($_POST['desc']) AND !empty($_POST['desc']) AND isset($_POST['status']) AND !empty($_POST['status'])){
-        $name = htmlentities(addslashes($_POST['name']));
-        $desc = htmlentities( addslashes($_POST['desc']));
+        $name = cleanVar($_POST['name']);
+        $desc = cleanVar($_POST['desc']);
         
         $_POST['status'] == 'private' ? $status = 0 : $status = 1;
         $team_token = $router -> getRouteParam('2');

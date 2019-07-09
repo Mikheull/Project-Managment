@@ -1,6 +1,8 @@
-sql server :
-    user : admin_improove
-    pass : 7kp9PHKUAd
+
+
+- https://css-tricks.com/snippets/php/find-urls-in-text-make-links/
+- https://css-tricks.com/snippets/php/discover-and-display-meta-tags/
+
 
 Page features :
     - https://codyhouse.co/gem/vertical-fixed-navigation

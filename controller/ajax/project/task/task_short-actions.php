@@ -63,9 +63,9 @@ if($action == 'delete'){
 
 if($action == 'edit'){
     if(!empty($_POST['task_name']) AND !empty($_POST['deadline']) AND !empty($_POST['duration'])){
-        $task_name = htmlentities(addslashes($_POST['task_name']));
-        $deadline = htmlentities(addslashes($_POST['deadline']));
-        $duration = htmlentities(addslashes($_POST['duration']));
+        $task_name = cleanVar($_POST['task_name']);
+        $deadline = cleanVar($_POST['deadline']);
+        $duration = cleanVar($_POST['duration']);
 
         $errors = $task -> editTask($task_name, $deadline, $duration, $task_token);
 

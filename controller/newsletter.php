@@ -34,7 +34,7 @@ $newsletter = new newsletter($db);
 if(isset($_POST['subscribe_newsletter'])){
     
     if(isset($_POST['email_newsletter']) AND !empty($_POST['email_newsletter'])){
-        $email = htmlentities(addslashes($_POST['email_newsletter']));
+        $email = cleanVar($_POST['email_newsletter']);
 
         if($auth -> isConnected()){
             if( $utils -> getData('imp_user', 'mail', 'public_token', $main -> getToken() ) == $email){

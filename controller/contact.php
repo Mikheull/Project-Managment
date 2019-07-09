@@ -36,12 +36,12 @@ $sendmail = new sendmail($db);
 if(isset($_POST['send_contact_button'])){
     
     if(isset($_POST['email']) AND isset($_POST['message']) AND !empty($_POST['email']) AND !empty($_POST['message'])){
-        $email = htmlentities(addslashes($_POST['email']));
-        $message = htmlentities( addslashes($_POST['message']));
+        $email = cleanVar($_POST['email']);
+        $message = cleanVar($_POST['message']);
 
-        $first_name = (isset($_POST['first_name']) ? htmlentities( addslashes($_POST['first_name'])) : 'undefined');
-        $last_name = (isset($_POST['last_name']) ? htmlentities( addslashes($_POST['last_name'])) : 'undefined');
-        $object = (isset($_POST['objet']) ? htmlentities( addslashes($_POST['objet'])) : 'Pas d\'objet');
+        $first_name = (isset($_POST['first_name']) ? cleanVar($_POST['first_name']) : 'undefined');
+        $last_name = (isset($_POST['last_name']) ? cleanVar($_POST['last_name']) : 'undefined');
+        $object = (isset($_POST['objet']) ? cleanVar($_POST['objet']) : 'Pas d\'objet');
 
         $errors = $sendmail -> send('contact@improove.co', $first_name.'-'.$last_name, $object, $message);
 

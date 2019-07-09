@@ -67,10 +67,10 @@ if($action == 'delete'){
 
 if($action == 'edit'){
     if(!empty($_POST['event_name'])){
-        $event_name = htmlentities(addslashes($_POST['event_name']));
+        $event_name = cleanVar($_POST['event_name']);
         
         if(isset($_POST['event_desc']) AND !empty($_POST['event_desc'])){ 
-            $event_desc = htmlentities(addslashes($_POST['event_desc'])); 
+            $event_desc = cleanVar($_POST['event_desc']); 
         }else{
             $event_desc = 'undefined';
         }

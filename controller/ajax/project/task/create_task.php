@@ -46,9 +46,9 @@ $auth = new authentication($db);
  */
 
 if(!empty($_POST['task_name']) AND !empty($_POST['deadline']) AND !empty($_POST['duration']) AND !empty($_POST['project_token']) AND !empty($_POST['tab_token'])){
-    $task_name = htmlentities(addslashes($_POST['task_name']));
-    $deadline = htmlentities(addslashes($_POST['deadline']));
-    $duration = htmlentities(addslashes($_POST['duration']));
+    $task_name = cleanVar($_POST['task_name']);
+    $deadline = cleanVar($_POST['deadline']);
+    $duration = cleanVar($_POST['duration']);
     $project_token = $_POST['project_token'];
     $tab_token = $_POST['tab_token'];
 

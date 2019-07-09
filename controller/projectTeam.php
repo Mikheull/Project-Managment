@@ -32,8 +32,8 @@ $projectTeam = new projectTeam($db);
 if(isset($_POST['create_team'])){
     if(isset($_POST['name']) AND !empty($_POST['name'])){
 
-        $name = htmlentities(addslashes($_POST['name']));
-        $color = htmlentities(addslashes($_POST['color']));
+        $name = cleanVar($_POST['name']);
+        $color = cleanVar($_POST['color']);
         $permissions = $_POST['permissions'];
         $project_token = $router -> getRouteParam('2');
 
@@ -60,8 +60,8 @@ if(isset($_POST['create_team'])){
 if(isset($_POST['edit_team'])){
     
     if(isset($_POST['name']) AND !empty($_POST['name'])){
-        $name = htmlentities(addslashes($_POST['name']));
-        $color = htmlentities(addslashes($_POST['color']));
+        $name = cleanVar($_POST['name']);
+        $color = cleanVar($_POST['color']);
         $permissions = $_POST['permissions'];
         $team_token = $router -> getRouteParam('6');
 

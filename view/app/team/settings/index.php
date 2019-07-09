@@ -8,19 +8,5 @@
 
 <?php require_once ('view/app/components/sidebar.php'); ?>
 <div class="main_wrapper">
-    <?php
-
-        if($team -> teamExist($team_token)){
-
-            if($team -> canAcess($team_token, $main -> getToken())){
-                require ('view/app/team/settings/components/home.php');
-            }else{
-                require ('view/app/team/errors/not-found.php');
-            }
-
-        }else{
-            require ('view/app/team/errors/not-found.php');
-        }
-
-    ?>
+    <?php require ('view/app/team/settings/components/home.php'); ?>
 </div>

@@ -19,8 +19,8 @@
     <meta name="theme-color" content="#1971c2"/>
 
     <meta property="og:type" content="website"/>
-    <meta property="og:url" content="https://www.improove.io/<?= $_GET['query'] ;?>"/>
-    <meta property="twitter:url" content="https://www.improove.io/<?= $_GET['query'] ;?>"/>
+    <meta property="og:url" content="https://www.improove.tk/<?= $_GET['query'] ;?>"/>
+    <meta property="twitter:url" content="https://www.improove.tk/<?= $_GET['query'] ;?>"/>
 
     <?php 
         // Meta generated Begin 

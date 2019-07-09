@@ -13,8 +13,8 @@
     <meta name="theme-color" content="#1971c2"/>
 
     <meta property="og:type" content="website"/>
-    <meta property="og:url" content="https://www.improove.io/"/>
-    <meta property="twitter:url" content="https://www.improove.io/"/>
+    <meta property="og:url" content="https://www.improove.tk/"/>
+    <meta property="twitter:url" content="https://www.improove.tk/"/>
     
 
     <link rel="stylesheet" type="text/css" media="screen" href="<?= $config -> rootUrl() ;?>dist/css/reset.min.css">

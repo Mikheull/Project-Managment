@@ -42,8 +42,8 @@ $team = new team($db);
 $project = new project($db);
 $utils = new utils($db);
 
-$keyword = htmlentities($_POST['keyword']);
-$type = htmlentities($_POST['type']);
+$keyword = cleanVar($_POST['keyword']);
+$type = cleanVar($_POST['type']);
 
 
 

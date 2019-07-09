@@ -97,6 +97,7 @@ class router extends db_connect {
         $ori_route = str_replace("{{TEAM_TOKEN}}", "([a-zA-Z0-9]{0,})", "$ori_route");
         $ori_route = str_replace("{{TASK_TOKEN}}", "([a-zA-Z0-9]{0,})", "$ori_route");
         $ori_route = str_replace("{{TAB_TOKEN}}", "([a-zA-Z0-9]{0,})", "$ori_route");
+        $ori_route = str_replace("{{CONVERSATION_TOKEN}}", "([a-zA-Z0-9]{0,})", "$ori_route");
         $ori_route = str_replace("{{DOCUMENTS_TOKEN}}", "([a-zA-Z0-9]{0,})", "$ori_route");
         $ori_route = str_replace("{{SURVEY_TOKEN}}", "([a-zA-Z0-9]{0,})", "$ori_route");
         $ori_route = str_replace("{{UML_TOKEN}}", "([a-zA-Z0-9]{0,})", "$ori_route");

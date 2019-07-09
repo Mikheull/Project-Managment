@@ -64,7 +64,7 @@ if (strpos($_SERVER['HTTP_REFERER'], 'app') !== false) {
 if($action == 'invite'){
 
     if($utils -> getData('pr_team', 'founder_token', 'public_token', $team_token) == $main -> getToken()){
-        $user_mail = htmlentities(addslashes($result));
+        $user_mail = cleanVar($result);
         
         if($auth -> emailExist($user_mail) == true){
             $errors = $team -> inviteMember($user_mail, $team_token, "Je t\'invite dans ma team Khoya");
@@ -148,7 +148,7 @@ if($action == 'kick'){
 if($action == 'rename'){
 
     if($utils -> getData('pr_team', 'founder_token', 'public_token', $team_token) == $main -> getToken()){
-        $new_name = htmlentities(addslashes($result));
+        $new_name = cleanVar($result);
         $errors = $team -> teamRename($team_token, $new_name);
         echo '<script> document.location.reload(true); </script>';
     }else{

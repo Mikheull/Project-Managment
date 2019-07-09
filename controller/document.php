@@ -63,7 +63,7 @@ if(isset($_POST['create_doc'])){
 		
 	if(isset($_POST['doc_name']) AND !empty($_POST['doc_name']) AND isset($_POST['doc_content']) AND !empty($_POST['doc_content'])){
 
-        $doc_name = htmlentities(addslashes($_POST['doc_name']));
+        $doc_name = cleanVar($_POST['doc_name']);
         $doc_content = $_POST['doc_content'];
 
 		file_put_contents('dist/uploads/p/'.$router -> getRouteParam("2").'/docs/'.$doc_name, $doc_content);

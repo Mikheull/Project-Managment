@@ -104,4 +104,29 @@ class utils extends db_connect {
 
 /******************************************************************************/
 
+
+
+/******************************************************************************/
+
+    function parsedownChannel($text, $project_token){
+        // Channels
+        if( strpos( $text, '#' ) !== false ){
+            $request = $this -> _db -> query("SELECT * FROM `pr_messenger_channels` WHERE `project_token` = '$project_token' AND `enable` = '1' ");
+            foreach($request->fetchAll() as $res){
+                $text = str_replace('#'.$res['name'], '<a href="'. $res['channel_token'] .'" class="btn dark-btn btn-xs">#'. $res['name'] .'</a>', $text);
+            }
+        }
+
+
+        // $text = preg_replace(
+        //     '/' . preg_quote('#') . '.*?' . preg_quote(' ') . '/', 
+        //     '<a href="LINK_HERE" class="btn dark-btn btn-xs">$0</a> ', 
+        //     $text
+        // );
+
+        return $text;
+    }
+
+/******************************************************************************/
+
 }

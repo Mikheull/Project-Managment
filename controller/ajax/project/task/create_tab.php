@@ -46,7 +46,7 @@ $auth = new authentication($db);
  * Test de l'envoi en ajax
  */
 if(isset($_POST['result']) AND isset($_POST['project_token'])){
-    $result = htmlentities(addslashes($_POST['result']));
+    $result = cleanVar($_POST['result']);
     $project_token = $_POST['project_token'];
 
     if(!empty($result)){

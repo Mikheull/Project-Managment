@@ -37,6 +37,7 @@
 /* Buttons */
 .btn {border: none;cursor: pointer;padding: 10px 15px;border-radius: 3px;width: max-content}
 .btn-sm {padding: 5px 10px;font-size: .8em;}
+.btn-xs {padding: 2px 5px;font-size: .8em;}
 .primary-btn {background: var(--primary-color);color: var(--light-background-color) !important;}
 .primary-btn:hover {background: var(--light-primary-color);color: var(--light-background-color);}
 .light-btn-bordered {border: solid 1px #e0e0e0;background: #FFF;color: var(--light-black-color);}

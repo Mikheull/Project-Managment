@@ -47,11 +47,6 @@
             <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/documents" class="dark-link"> Documents </a> 
         </li>
 
-        <li class="nav-item margin-bot flex nav-item-mr"> 
-            <img class="icon margin-right" src="<?= $config -> rootUrl() ;?>dist/images/icons/settings_icon.svg" alt=""> 
-            <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/settings" class="dark-link"> Réglages </a> 
-        </li>
-
     <ul>
 </div>
 

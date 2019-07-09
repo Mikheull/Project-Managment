@@ -34,9 +34,9 @@ $user = new user($db);
 if(isset($_POST['update_user_pass'])){
     
     if(isset($_POST['old_password']) AND !empty($_POST['old_password']) AND isset($_POST['new_password']) AND !empty($_POST['new_password']) AND isset($_POST['confirm_password']) AND !empty($_POST['confirm_password'])){
-        $old_password = htmlentities(addslashes($_POST['old_password']));
-        $new_password = htmlentities( addslashes($_POST['new_password']));
-        $confirm_password = htmlentities( addslashes($_POST['confirm_password']));
+        $old_password = cleanVar($_POST['old_password']);
+        $new_password = cleanVar($_POST['new_password']);
+        $confirm_password = cleanVar($_POST['confirm_password']);
 
         if($new_password == $confirm_password){
 
@@ -76,10 +76,10 @@ if(isset($_POST['update_user_pass'])){
 if(isset($_POST['update_user_infos'])){
     
     if(isset($_POST['first_name']) AND !empty($_POST['first_name']) AND isset($_POST['last_name']) AND !empty($_POST['last_name']) AND isset($_POST['username']) AND !empty($_POST['username']) AND isset($_POST['bio']) AND !empty($_POST['bio'])){
-        $first_name = htmlentities(addslashes($_POST['first_name']));
-        $last_name = htmlentities( addslashes($_POST['last_name']));
-        $username = htmlentities( addslashes($_POST['username']));
-        $bio = htmlentities( addslashes($_POST['bio']));
+        $first_name = cleanVar($_POST['first_name']);
+        $last_name = cleanVar($_POST['last_name']);
+        $username = cleanVar($_POST['username']);
+        $bio = cleanVar($_POST['bio']);
 
         if($utils -> getData('imp_user', 'username', 'public_token', $main -> getToken()) == $username OR $user -> usernameExist($username) == false){
 

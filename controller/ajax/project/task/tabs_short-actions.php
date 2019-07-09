@@ -65,7 +65,7 @@ if($action == 'delete'){
 
 if($action == 'rename'){
 
-    $new_name = htmlentities(addslashes($result));
+    $new_name = cleanVar($result);
     $errors = $task -> tabRename($tab_token, $new_name);
     
 }
