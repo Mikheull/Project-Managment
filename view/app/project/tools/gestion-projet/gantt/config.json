@@ -37,7 +37,8 @@
     ],
      
     "js": [ 
-        "task/reports.js"
+        "task/reports.js",
+        "project-fast-act.min.js"
     ],
 
     "online_css": [ 

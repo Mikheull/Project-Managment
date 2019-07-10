@@ -15,8 +15,8 @@
     <div class="container">
         
 
-        <div class="row tabs margin-top-lg">
-            <div class="col-md-3 col-12 light-border conv_list">
+        <div class="row tabs margin-top-lg light-border">
+            <div class="col-md-3 col-12 conv_list">
                 <?php
                     $allChannels = $messenger -> getProjectChannels($router -> getRouteParam("2"));
                     foreach($allChannels['content'] as $channel){
@@ -44,40 +44,69 @@
                 ?>
             </div>
 
-            <div class="col-md-9 col-12 light-border conv_wrapper">
-                <div class="row messages_list">
+            <div class="col-md-9 col-12 conv_wrapper chat">
+                <div class="chat-history">
+                    <div class="text-align-center">
+                        <span class="text-xs color-primary">Début du channel : <?= $config -> time_elapsed_string($utils -> getData('pr_messenger_channels', 'date_creation', 'channel_token', $router -> getRouteParam("5"))) ?></span>
+                    </div>
 
-                    <?php
-                        $allMessages = $messenger -> getMessages($router -> getRouteParam("5"));
-                        foreach($allMessages['content'] as $message){
-                            $mes = $parsedown -> text( $message['content_edited'] == null ? $message['content'] : $message['content_edited'] );
-                            $mes = $utils -> parsedownChannel($mes, $router -> getRouteParam("2"));
+                    <ul>
+
+                        <?php
+                            $allMessages = $messenger -> getMessages($router -> getRouteParam("5"));
+                            foreach($allMessages['content'] as $message){
+                                $mes = $parsedown -> text( $message['content_edited'] == null ? $message['content'] : $message['content_edited'] );
+                                $mes = $utils -> parsedownChannel($mes, $router -> getRouteParam("2"));
 
 
-                            if($message['author_token'] == $main -> getToken()){
-                                ?>
-                                <div class="col-12 text-align-right">
-                                    <?= $mes ;?>
-                                </div>
-                            <?php
-                            }else{
-                                ?>
-                                <div class="col-12 text-align-left">
-                                    <?= $mes ;?>
-                                </div>
-                            <?php
+                                if($message['author_token'] == $main -> getToken()){
+                                    ?>
+                                    <li class="clearfix">
+                                        <div class="message-data text-align-right">
+                                            <span class="message-data-time" ><?= $config -> time_elapsed_string($message['date_edited'] == null ? $message['date_creation'] : $message['date_edited']) ?></span> &nbsp; &nbsp;
+                                            <span class="message-data-name" >
+                                                <?= $utils -> getData('imp_user', 'username', 'public_token', $message['author_token']) ?>
+                                            </span>
+                                        </div>
+                                        <div class="message my-message float-right flex justify-content-between">
+                                            <?= $mes ;?>
+                                            <span class="hidden actions"><i class="fas fa-ellipsis-v color-dark"></i></span>
+                                        </div>
+                                    </li>
+                                    <?php
+                                }else{
+                                    ?>
+                                    <li>
+                                        <div class="message-data flex">
+                                            <span class="message-data-name flex">
+                                                <div class="avatar avatar--sm margin-right" data-tippy="<?= $utils -> getData('imp_user', 'username', 'public_token', $message['author_token']) ?>"> 
+                                                    <figure class="avatar__figure" role="img">
+                                                        <svg class="avatar__placeholder" aria-hidden="true" viewBox="0 0 20 20" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="6" r="2.5" stroke="currentColor"/><path d="M10,10.5a4.487,4.487,0,0,0-4.471,4.21L5.5,15.5h9l-.029-.79A4.487,4.487,0,0,0,10,10.5Z" stroke="currentColor"/></svg>
+                                                        <img class="avatar__img" src="<?= $config -> rootUrl() ;?>dist/<?= $utils -> getData('imp_user', 'profil_image', 'public_token', $message['author_token']) == NULL ? 'images/content/defaut_profil_pic.png' : 'uploads/u/'. $message['author_token'].'/profil_pic/'.$utils -> getData('imp_user', 'profil_image', 'public_token', $message['author_token']) ;?>">
+                                                    </figure>
+                                                </div>
+                                                <?= $utils -> getData('imp_user', 'username', 'public_token', $message['author_token']) ?>
+                                            </span>&nbsp; &nbsp;
+                                            <span class="message-data-time"><?= $config -> time_elapsed_string($message['date_edited'] == null ? $message['date_creation'] : $message['date_edited']) ?></span>
+                                        </div>
+                                        <div class="message other-message flex justify-content-between">
+                                            <?= $mes ;?>
+                                            <span class="hidden actions"><i class="fas fa-ellipsis-v color-dark"></i></span>
+                                        </div>
+                                    </li>
+                                <?php
+                                }
+                                
                             }
-                            
-                        }
-                    ?>
-                    
+                        ?>
+
+                    </ul>
                 </div>
 
-
-                <div class="row new_message">
+                <div class="chat-message clearfix">
                     <form method="post">
-                        <textarea name="message_content" id="emojionearea5" placeholder="Ecrivez un message"></textarea>
-                        <button name="message_send" class="btn primary-btn">Envoyer</button>
+                        <textarea name="message_content" id="emojionearea5" placeholder="Ecrivez un message" rows="3"></textarea>
+                        <button name="message_send" class="link primary-link">Envoyer</button>
                     </form>
                 </div>
             </div>
@@ -93,7 +122,6 @@ $(document).ready(function() {
     $("#emojionearea5").emojioneArea({
         pickerPosition: "top",
         filtersPosition: "bottom",
-        inline: true,
         hidePickerOnBlur: false
     });
 });

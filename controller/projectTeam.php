@@ -89,8 +89,18 @@ if(isset($_POST['add_team_user'])){
         $teams = $_POST['team'];
         $user_token = $router -> getRouteParam('6');
 
-        foreach($teams as $tm){ 
-            $errors = $projectTeam -> addMemberTeam($tm, $user_token);
+        $allTeams = $projectTeam -> getTeams( $router -> getRouteParam('2') );
+        foreach($allTeams['content'] as $checkTeam){
+
+            if(in_array($checkTeam['public_token'], $teams)){
+                if($projectTeam -> memberHasTeam($checkTeam['public_token'], $user_token) == false){
+                    $errors = $projectTeam -> addMemberTeam($checkTeam['public_token'], $user_token);
+                }
+            }else{
+                if($projectTeam -> memberHasTeam($checkTeam['public_token'], $user_token) == true){
+                    $errors = $projectTeam -> kickMember($checkTeam['public_token'], $user_token);
+                }
+            }
         }
     }
 

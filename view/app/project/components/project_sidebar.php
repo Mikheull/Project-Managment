@@ -37,3 +37,5 @@
     </div>
 
 </div>
+
+<div id="project_output" class="hidden"></div>

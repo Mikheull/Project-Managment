@@ -38,7 +38,8 @@
      
     "js": [ 
         "task/tabs.min.js",
-        "task/tasks.min.js"
+        "task/tasks.min.js",
+        "project-fast-act.min.js"
     ],
 
     "online_css": [ 

@@ -4,7 +4,7 @@
     <ul class="margin-top margin-bot text-align-left">
         <li class="nav-item margin-bot flex nav-item-mr"> 
             <img class="icon margin-right" src="<?= $config -> rootUrl() ;?>dist/images/icons/overview_icon.svg" alt=""> 
-            <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>" class="dark-link"> Overview </a> 
+            <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>" class="dark-link"> Dashboard </a> 
         </li>
 
         <li class="nav-item margin-bot flex nav-item-mr"> 

@@ -31,10 +31,3 @@ require_once ('controller/team.php') ;
 @error_reporting(E_ALL | E_STRICT);
 setlocale(LC_TIME, "fr_FR");
 
-
-function cleanVar($value) {
-    if(!get_magic_quotes_gpc()) { $value = addslashes($value); }
-    $value = strip_tags($value);
-    return $value;
-}
-

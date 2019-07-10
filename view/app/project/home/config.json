@@ -8,7 +8,8 @@
         "fontawesome",
         "feather-icons",
         "popper",
-        "tippy"
+        "tippy",
+        "bootbox"
     ],
 
     "meta": [ 
@@ -29,7 +30,16 @@
      
     "css": [ 
         "app/main.min.css",
-        "app/project/main.min.css"
+        "app/project/main.min.css",
+        "bootstrap-modal.min.css"
+    ],
+
+    "online_css": [ 
+        "https://cdn.jsdelivr.net/npm/tippy.js@4.3.1/themes/light-border.css"
+    ],
+
+    "js": [ 
+        "project-fast-act.min.js"
     ]
 
 }

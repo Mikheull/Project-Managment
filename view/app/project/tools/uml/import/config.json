@@ -41,6 +41,10 @@
     "online_css": [ 
         "https://cdn.jsdelivr.net/npm/jquery-nice-select@1.1.0/css/nice-select.css",
         "https://cdn.jsdelivr.net/npm/tippy.js@4.3.1/themes/light-border.css"
+    ],
+
+    "js": [ 
+        "project-fast-act.min.js"
     ]
 
 }

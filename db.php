@@ -30,3 +30,10 @@ try {
     throw new Exception('La base de donnée n\'a pas pu être connectée !');
 }
 
+
+function cleanVar($value) {
+    if(!get_magic_quotes_gpc()) { $value = addslashes($value); }
+    $value = strip_tags($value);
+    return $value;
+}
+

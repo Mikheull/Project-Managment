@@ -37,7 +37,8 @@
     ],
      
     "js": [ 
-        "bug/bugs.min.js"
+        "bug/bugs.min.js",
+        "project-fast-act.min.js"
     ],
 
     "online_css": [ 

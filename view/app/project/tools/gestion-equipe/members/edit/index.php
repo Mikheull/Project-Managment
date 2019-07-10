@@ -38,6 +38,7 @@
                     <div class="input_group">
                         <h4 class="title-xs color-dark margin-bot margin-top">Équipes</h4>
                         <div class="row">
+                            <input name="team[]" type="hidden" checked/>
                             <?php
                                 foreach($allTeams['content'] as $tm){
                                     ?>

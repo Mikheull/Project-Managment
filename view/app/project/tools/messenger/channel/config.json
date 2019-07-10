@@ -40,6 +40,10 @@
     "online_css": [ 
         "https://cdn.jsdelivr.net/npm/tippy.js@4.3.1/themes/light-border.css",
         "https://cdn.jsdelivr.net/npm/emojionearea@3.4.1/dist/emojionearea.min.css"
+    ],
+
+    "js": [ 
+        "project-fast-act.min.js"
     ]
 
 }

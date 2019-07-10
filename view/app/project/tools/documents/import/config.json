@@ -41,6 +41,10 @@
         "https://cdn.jsdelivr.net/npm/tippy.js@4.3.1/themes/light-border.css",
         "https://cdn.jsdelivr.net/npm/filepond@4.4.10/dist/filepond.min.css",
         "https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css"
+    ],
+
+    "js": [ 
+        "project-fast-act.min.js"
     ]
 
 }

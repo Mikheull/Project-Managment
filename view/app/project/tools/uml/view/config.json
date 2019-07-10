@@ -43,7 +43,8 @@
     ],
      
     "js": [ 
-        "uml/main.min.js"
+        "uml/main.min.js",
+        "project-fast-act.min.js"
     ]
 
 }

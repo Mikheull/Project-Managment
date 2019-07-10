@@ -99,27 +99,25 @@ class projectTeam extends db_connect {
 
 
     /**
-     * Retire un utilisateur d'une équipe
+     * Retire un utilisateur d'une équipe du projet
      * 
-     * Retire un utilisateur d'une équipe
+     * Retire un utilisateur d'une équipe du projet
      *
      * @access public
      * @author Mikhaël Bailly
-     * @param string $team_token Token de l'équipe
+     * @param string $team_token Token de l'équipe du projet
      * @param string $user_token Token de l'utilisateur
      * @return array
      */
 
     function kickMember($team_token = '', $user_token = '') {
-        $request = $this -> _db -> query("SELECT * FROM `pr_team_member` WHERE `team_token` = '$team_token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
+        $request = $this -> _db -> query("SELECT * FROM `pr_project_team_member` WHERE `project_team_token` = '$team_token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
         $res = $request->fetch();
         
         if($res){
-            // $request = $this -> _db -> exec("UPDATE `pr_team_member` SET `enable`= 0 WHERE `team_token` = '$team_token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
-            $request = $this -> _db -> exec("DELETE FROM `pr_team_member` WHERE `team_token` = '$team_token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
+            // $request = $this -> _db -> exec("UPDATE `pr_project_team_member` SET `enable`= 0 WHERE `project_team_token` = '$team_token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
+            $request = $this -> _db -> exec("DELETE FROM `pr_project_team_member` WHERE `project_team_token` = '$team_token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
             return (['success' => true, 'options' => ['content' => "L\'utilisateur a été retiré !", 'theme' => 'success'] ]);
-        }else{
-            return (['success' => false, 'options' => ['content' => "L\'utilisateur n\'est pas dans l\'équipe !", 'theme' => 'error'] ]);
         }
     }
     
@@ -228,14 +226,12 @@ class projectTeam extends db_connect {
      */
 
     function disable($token = '') {
-        $owner = $this -> getToken();
-        
-        $request = $this -> _db -> query("SELECT * FROM `pr_team` WHERE `public_token` = '$token' ");
+        $request = $this -> _db -> query("SELECT * FROM `pr_project_team` WHERE `public_token` = '$token' ");
         $res = $request->fetch();
         
         if($res){
-            $request = $this -> _db -> exec("DELETE FROM `pr_team` WHERE `public_token` = '$token' AND `founder_token` = '$owner'");
-            $request = $this -> _db -> exec("DELETE FROM `pr_team_member` WHERE `team_token` = '$token'");
+            $request = $this -> _db -> exec("DELETE FROM `pr_project_team` WHERE `public_token` = '$token'");
+            $request = $this -> _db -> exec("DELETE FROM `pr_project_team_member` WHERE `project_team_token` = '$token'");
             
             return (['success' => true, 'options' => ['content' => "L\'équipe a été supprimée !", 'theme' => 'success'] ]);
         }else{

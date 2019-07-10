@@ -37,7 +37,8 @@
     ],
      
     "js": [ 
-        "calendar/event.min.js"
+        "calendar/event.min.js",
+        "project-fast-act.min.js"
     ],
 
     "online_css": [ 
@@ -49,6 +50,7 @@
     "online_js": [ 
         "https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.2.0/main.min.js",
         "https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@4.2.0/main.min.js"
+        
     ]
 
 }

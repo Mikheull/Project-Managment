@@ -36,6 +36,10 @@
 
     "online_css": [ 
         "https://cdn.jsdelivr.net/npm/jquery-nice-select@1.1.0/css/nice-select.css"
+    ],
+
+    "js": [ 
+        "project-fast-act.min.js"
     ]
 
 }
