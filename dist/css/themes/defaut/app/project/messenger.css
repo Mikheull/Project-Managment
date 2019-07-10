@@ -3,6 +3,7 @@
 
 .conv_wrapper {height:80vh}
 
-.conv_wrapper .msg-item {margin: 5px 10px;max-width: 60%;background: #e2e2e2}
-.conv_wrapper .msg-right {text-align: right;float: right;}
-.conv_wrapper .msg-left {text-align: left;float: left;}
+.conv_wrapper .messages_list {height: 90%;}
+.conv_wrapper .new_message {height: 10%;width: 100%}
+.conv_wrapper .new_message form {width: 100%;}
+.conv_wrapper .new_message form textarea {height: 60px !important}

@@ -45,7 +45,7 @@
             </div>
 
             <div class="col-md-9 col-12 light-border conv_wrapper">
-                <div class="row">
+                <div class="row messages_list">
 
                     <?php
                         $allMessages = $messenger -> getMessages($router -> getRouteParam("5"));
@@ -53,15 +53,16 @@
                             $mes = $parsedown -> text( $message['content_edited'] == null ? $message['content'] : $message['content_edited'] );
                             $mes = $utils -> parsedownChannel($mes, $router -> getRouteParam("2"));
 
+
                             if($message['author_token'] == $main -> getToken()){
                                 ?>
-                                <div class="msg-item msg-right">
+                                <div class="col-12 text-align-right">
                                     <?= $mes ;?>
                                 </div>
                             <?php
                             }else{
                                 ?>
-                                <div class="msg-item msg-left">
+                                <div class="col-12 text-align-left">
                                     <?= $mes ;?>
                                 </div>
                             <?php
@@ -71,9 +72,29 @@
                     ?>
                     
                 </div>
+
+
+                <div class="row new_message">
+                    <form method="post">
+                        <textarea name="message_content" id="emojionearea5" placeholder="Ecrivez un message"></textarea>
+                        <button name="message_send" class="btn primary-btn">Envoyer</button>
+                    </form>
+                </div>
             </div>
 
         </div>
     </div>
-    messages https://github.com/mervick/emojionearea
 </div>
+
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#emojionearea5").emojioneArea({
+        pickerPosition: "top",
+        filtersPosition: "bottom",
+        inline: true,
+        hidePickerOnBlur: false
+    });
+});
+</script>
