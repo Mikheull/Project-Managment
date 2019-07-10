@@ -9,7 +9,8 @@
         "feather-icons",
         "popper",
         "tippy",
-        "bootbox"
+        "bootbox",
+        "dragscroll"
     ],
 
 

@@ -28,11 +28,17 @@
 
 
         <?php
+        if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'project.team.view')){
             if($allTeams['count'] !== 0){
                 require_once ('view/app/project/tools/gestion-equipe/team/components/home.php');
             }else{
                 require_once ('view/app/project/tools/gestion-equipe/team/components/empty.php');
             }
+        }else{
+            ?>
+            <div class="no-access">Vous n'avez pas la permission nécessaire pour accéder a ce contenu</div>
+            <?php
+        }
         ?>
     </div>
 </div>

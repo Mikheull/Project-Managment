@@ -100,7 +100,7 @@ class permission extends db_connect {
      * @param string $permission Permission
      * @return array
      */
-    function memberHasPermission($user_token, $project_token, $permission){
+    function hasPermission($user_token, $project_token, $permission){
         $perms = $this -> getMemberPermissions($user_token, $project_token);
 
         if (strpos($perms, "'*'") !== false) { 

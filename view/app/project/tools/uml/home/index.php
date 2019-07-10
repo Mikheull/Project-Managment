@@ -25,15 +25,26 @@
         </div>
 
         <div class="row">
-
-            <ul>
-                <?php
-                    $diagrams = $uml -> getDiagrams( $router -> getRouteParam("2") );
-                    foreach($diagrams['content'] as $diagram){
-                        ?> <li> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/uml/<?= $diagram['uml_token'] ?>"><?= $diagram['name'] ;?></a> </li> <?php
-                    }
-                ?>
-            </ul>
+            <?php
+                if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'uml.view')){
+                    ?>
+                        <div class="row tabs" id="tab_output">
+                            <ul>
+                                <?php
+                                    $diagrams = $uml -> getDiagrams( $router -> getRouteParam("2") );
+                                    foreach($diagrams['content'] as $diagram){
+                                        ?> <li> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/uml/<?= $diagram['uml_token'] ?>"><?= $diagram['name'] ;?></a> </li> <?php
+                                    }
+                                ?>
+                            </ul>
+                        </div>
+                    <?php
+                }else{
+                    ?>
+                    <div class="no-access">Vous n'avez pas la permission nécessaire pour accéder a ce contenu</div>
+                    <?php
+                }
+            ?>
         </div>
         
     </div>

@@ -28,6 +28,7 @@ require_once ('../../../../model/class/user.php');
 require_once ('../../../../model/class/project.php');
 require_once ('../../../../model/class/bug.php');
 require_once ('../../../../model/class/authentication.php');
+require_once ('../../../../model/class/permission.php');
 
 $main = new main();
 $router = new router($db);
@@ -36,8 +37,10 @@ $user = new user($db);
 $project = new project($db);
 $bug = new bug($db);
 $auth = new authentication($db);
+$permission = new permission($db);
 
 
+if(isset($_POST['project_token'])){ $project_token = $_POST['project_token']; }
 
 
 
@@ -46,19 +49,25 @@ $auth = new authentication($db);
  */
 
 if(isset($_POST['bug_name']) AND !empty($_POST['bug_name']) AND isset($_POST['bug_desc']) AND !empty($_POST['bug_desc'])){
-    $bug_name = cleanVar($_POST['bug_name']);
-    $bug_desc = cleanVar($_POST['bug_desc']);
-    $project_token = $_POST['project_token'];
+    if($permission -> hasPermission($main -> getToken(), $project_token, 'bug-tracker.create')){
+        $bug_name = cleanVar($_POST['bug_name']);
+        $bug_desc = cleanVar($_POST['bug_desc']);
+        $project_token = $_POST['project_token'];
 
-    if(strlen($bug_desc) <= 254){
-        $errors = $bug -> newBug($project_token, $bug_name, $bug_desc);
+        if(strlen($bug_desc) <= 254){
+            $errors = $bug -> newBug($project_token, $bug_name, $bug_desc);
+        }else{
+            $errors = ['success' => false, 'options' => ['content' => "La description est trop longue !", 'theme' => 'error'] ];
+        }
     }else{
-        $errors = ['success' => false, 'options' => ['content' => "La description est trop longue !", 'theme' => 'error'] ];
+        $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
     }
-
 }else{
     $errors = ['success' => false, 'options' => ['content' => "Remplissez tout les champs !", 'theme' => 'error'] ];
 }
+
+// Refresh ajax
+require ('../../../../view/app/project/tools/bug-tracker/home/components/tab_content.php');
 
 if(isset($errors)){
     ?>

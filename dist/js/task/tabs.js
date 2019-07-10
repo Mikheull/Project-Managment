@@ -44,9 +44,10 @@ $(document).on("click", "#new-tab", function(e) {
 
 
 // Suppression
-$(document).on("click", "[data-action='delete']", function(e) {
+$(document).on("click", "[data-action='tab-delete']", function(e) {
     event.preventDefault();
     let ref = this.dataset.ref;
+    let project = this.dataset.pro;
 
     bootbox.confirm({
         backdrop: true,
@@ -68,7 +69,7 @@ $(document).on("click", "[data-action='delete']", function(e) {
                 $.ajax({
                     url:  rootUrl + 'controller/ajax/project/task/tabs_short-actions.php',
                     type: 'POST',
-                    data: {tab_token: ref, action: 'delete'},
+                    data: {tab_token: ref, project_token: project, action: 'delete'},
                     success:function(data){
                         $('#tab_output').html(data);
                     }
@@ -81,9 +82,10 @@ $(document).on("click", "[data-action='delete']", function(e) {
 
 
 // Renommer
-$(document).on("click", "[data-action='rename']", function(e) {
+$(document).on("click", "[data-action='tab-rename']", function(e) {
     event.preventDefault();
     let ref = this.dataset.ref;
+    let project = this.dataset.pro;
 
     bootbox.prompt({
         backdrop: true,
@@ -105,7 +107,7 @@ $(document).on("click", "[data-action='rename']", function(e) {
                 $.ajax({
                     url:  rootUrl + 'controller/ajax/project/task/tabs_short-actions.php',
                     type: 'POST',
-                    data: {result: result, tab_token: ref, action: 'rename'},
+                    data: {result: result, tab_token: ref, project_token: project, action: 'rename'},
                     success:function(data){
                         $('#tab_output').html(data);
                     }
@@ -118,7 +120,7 @@ $(document).on("click", "[data-action='rename']", function(e) {
 
 
 // Exportation
-$(document).on("click", "[data-action='export']", function(e) {
+$(document).on("click", "[data-action='tab-export']", function(e) {
     event.preventDefault();
     let ref = this.dataset.ref;
     let pro = this.dataset.pro;

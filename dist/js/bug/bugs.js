@@ -52,6 +52,7 @@ $(document).on('click', '.expand_btn', function() {
 $(document).on("click", "#move-to-working", function(e) {
     event.preventDefault();
     let token = this.dataset.bug;
+    let project = this.dataset.pro;
 
     bootbox.confirm({
         backdrop: true,
@@ -73,7 +74,7 @@ $(document).on("click", "#move-to-working", function(e) {
                 $.ajax({
                     url:  rootUrl + 'controller/ajax/project/bug/edit_bug.php',
                     type: 'POST',
-                    data: {bug_token: token, new_status: 2},
+                    data: {bug_token: token, project_token: project, new_status: 2},
                     success:function(data){
                         $('#bug_output').html(data);
                     }
@@ -88,6 +89,7 @@ $(document).on("click", "#move-to-working", function(e) {
 $(document).on("click", "#move-to-end", function(e) {
     event.preventDefault();
     let token = this.dataset.bug;
+    let project = this.dataset.pro;
 
     bootbox.confirm({
         backdrop: true,
@@ -109,7 +111,7 @@ $(document).on("click", "#move-to-end", function(e) {
                 $.ajax({
                     url:  rootUrl + 'controller/ajax/project/bug/edit_bug.php',
                     type: 'POST',
-                    data: {bug_token: token, new_status: 3},
+                    data: {bug_token: token, project_token: project, new_status: 3},
                     success:function(data){
                         $('#bug_output').html(data);
                     }

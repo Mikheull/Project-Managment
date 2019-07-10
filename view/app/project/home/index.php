@@ -1,5 +1,6 @@
 <?php
     require_once ('controller/project.php') ;
+    require_once ('controller/task.php') ;
     $project_token = $router -> getRouteParam('2');
 ?>
 

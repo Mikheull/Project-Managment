@@ -32,6 +32,7 @@ require_once ('../../../../model/class/project.php');
 require_once ('../../../../model/class/task.php');
 require_once ('../../../../model/class/authentication.php');
 require_once ('../../../../model/class/utils.php');
+require_once ('../../../../model/class/permission.php');
 
 
 $main = new main();
@@ -42,10 +43,12 @@ $project = new project($db);
 $task = new task($db);
 $auth = new authentication($db);
 $utils = new utils($db);
+$permission = new permission($db);
 
 if(isset($_POST['result'])){ $result = $_POST['result']; }
 $task_token = $_POST['task_token'];
 $action = $_POST['action'];
+if(isset($_POST['project_token'])){ $project_token = $_POST['project_token']; }
 
 
 
@@ -56,8 +59,15 @@ $action = $_POST['action'];
  */
 
 if($action == 'delete'){
-    $errors = $task -> disableTask($task_token);
-    echo '<script> document.location.reload(true); </script>';
+    if($permission -> hasPermission($main -> getToken(), $project_token, 'task.delete')){
+        $errors = $task -> disableTask($task_token);
+    }else{
+        $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
+    }
+
+    // Refresh ajax
+    $tabs = $task -> getTabs( $project_token );
+    require ('../../../../view/app/project/tools/gestion-projet/home/components/tab_content.php');
 }
 
 
@@ -67,7 +77,15 @@ if($action == 'edit'){
         $deadline = cleanVar($_POST['deadline']);
         $duration = cleanVar($_POST['duration']);
 
-        $errors = $task -> editTask($task_name, $deadline, $duration, $task_token);
+        if($permission -> hasPermission($main -> getToken(), $project_token, 'task.edit')){
+            $errors = $task -> editTask($task_name, $deadline, $duration, $task_token);
+        }else{
+            $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
+        }
+
+        // Refresh ajax
+        $tabs = $task -> getTabs( $project_token );
+        require ('../../../../view/app/project/tools/gestion-projet/home/components/tab_content.php');
 
     }else{
         $errors = ['success' => false, 'options' => ['content' => "Remplissez tout les champs !", 'theme' => 'error'] ];
@@ -76,12 +94,26 @@ if($action == 'edit'){
 
 
 if($action == 'close'){
-    $errors = $task -> closeTask($task_token);
-    echo '<script> document.location.reload(true); </script>';
+    if($permission -> hasPermission($main -> getToken(), $project_token, 'task.finish')){
+        $errors = $task -> closeTask($task_token);
+    }else{
+        $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
+    }
+
+    // Refresh ajax
+    $tabs = $task -> getTabs( $project_token );
+    require ('../../../../view/app/project/tools/gestion-projet/home/components/tab_content.php');
 }
 if($action == 'reopen'){
-    $errors = $task -> reopenTask($task_token);
-    echo '<script> document.location.reload(true); </script>';
+    if($permission -> hasPermission($main -> getToken(), $project_token, 'task.finish')){
+        $errors = $task -> reopenTask($task_token);
+    }else{
+        $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
+    }
+
+    // Refresh ajax
+    $tabs = $task -> getTabs( $project_token );
+    require ('../../../../view/app/project/tools/gestion-projet/home/components/tab_content.php');
 }
 
 

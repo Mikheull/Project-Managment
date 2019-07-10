@@ -26,9 +26,19 @@
         </div>
 
 
-
-        <div class="row">
-            <?php require_once ('view/app/project/tools/gestion-equipe/members/components/home.php') ?>
-        </div>
+        <?php
+        if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'project.team.member.manage')){
+            ?>
+            <div class="row">
+                <?php require_once ('view/app/project/tools/gestion-equipe/members/components/home.php') ?>
+            </div>
+            <?php
+        }else{
+            ?>
+            <div class="no-access">Vous n'avez pas la permission nécessaire pour accéder a ce contenu</div>
+            <?php
+        }
+        ?>
+        
     </div>
 </div>

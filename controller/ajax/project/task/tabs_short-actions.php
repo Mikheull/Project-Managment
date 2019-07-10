@@ -32,6 +32,7 @@ require_once ('../../../../model/class/project.php');
 require_once ('../../../../model/class/task.php');
 require_once ('../../../../model/class/authentication.php');
 require_once ('../../../../model/class/utils.php');
+require_once ('../../../../model/class/permission.php');
 
 
 $main = new main();
@@ -42,6 +43,7 @@ $project = new project($db);
 $task = new task($db);
 $auth = new authentication($db);
 $utils = new utils($db);
+$permission = new permission($db);
 
 if(isset($_POST['result'])){ $result = $_POST['result']; }
 $tab_token = $_POST['tab_token'];
@@ -57,22 +59,44 @@ if(isset($_POST['project_token'])){ $project_token = $_POST['project_token']; }
  */
 
 if($action == 'delete'){
-    $errors = $task -> disableTab($tab_token);
-    echo '<script> document.location.reload(true); </script>';
-    
+    if($permission -> hasPermission($main -> getToken(), $project_token, 'task.tab.delete')){
+        $errors = $task -> disableTab($tab_token);
+    }else{
+        $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
+    }
+
+
+    // Refresh ajax
+    $tabs = $task -> getTabs( $project_token );
+    require ('../../../../view/app/project/tools/gestion-projet/home/components/tab_content.php');
 }
 
 
 if($action == 'rename'){
+    if($permission -> hasPermission($main -> getToken(), $project_token, 'task.tab.edit')){
+        $new_name = cleanVar($result);
+        $errors = $task -> tabRename($tab_token, $new_name);
+    }else{
+        $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
+    }
 
-    $new_name = cleanVar($result);
-    $errors = $task -> tabRename($tab_token, $new_name);
-    
+
+    // Refresh ajax
+    $tabs = $task -> getTabs( $project_token );
+    require ('../../../../view/app/project/tools/gestion-projet/home/components/tab_content.php');
 }
 
 
 if($action == 'export'){
-    ?> <script>location.href="../../../../app/project/<?= $project_token ?>/t/gestion-projet/export/<?= $tab_token ?>"</script> <?php
+    if($permission -> hasPermission($main -> getToken(), $project_token, 'task.tab.export')){
+        ?> <script>location.href="../../../../app/project/<?= $project_token ?>/t/gestion-projet/export/<?= $tab_token ?>"</script> <?php
+    }else{
+        $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
+
+        // Refresh ajax
+        $tabs = $task -> getTabs( $project_token );
+        require ('../../../../view/app/project/tools/gestion-projet/home/components/tab_content.php');
+    }
 }
 
 

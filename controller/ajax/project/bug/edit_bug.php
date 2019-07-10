@@ -28,6 +28,7 @@ require_once ('../../../../model/class/user.php');
 require_once ('../../../../model/class/project.php');
 require_once ('../../../../model/class/bug.php');
 require_once ('../../../../model/class/authentication.php');
+require_once ('../../../../model/class/permission.php');
 
 $main = new main();
 $router = new router($db);
@@ -36,6 +37,7 @@ $user = new user($db);
 $project = new project($db);
 $bug = new bug($db);
 $auth = new authentication($db);
+$permission = new permission($db);
 
 
 
@@ -47,14 +49,23 @@ $auth = new authentication($db);
 
 $bug_token = cleanVar($_POST['bug_token']);
 $new_status = cleanVar($_POST['new_status']);
+if(isset($_POST['project_token'])){ $project_token = $_POST['project_token']; }
 
-if($new_status == 2){
-    $errors = $bug -> setWorkinBug($bug_token);
-}else if($new_status == 3){
-    $errors = $bug -> setEndBug($bug_token);
+
+if($permission -> hasPermission($main -> getToken(), $project_token, 'bug-tracker.move')){
+    if($new_status == 2){
+        $errors = $bug -> setWorkinBug($bug_token);
+    }else if($new_status == 3){
+        $errors = $bug -> setEndBug($bug_token);
+    }else{
+        $errors = $bug -> disableBug($bug_token);
+    }
 }else{
-    $errors = $bug -> disableBug($bug_token);
+    $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
 }
+
+// Refresh ajax
+require ('../../../../view/app/project/tools/bug-tracker/home/components/tab_content.php');
 
 
 if(isset($errors)){

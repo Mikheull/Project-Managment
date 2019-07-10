@@ -43,6 +43,7 @@ $(document).on("click", ".new-task", function(e) {
 // Edit
 $(document).on("click", "[data-action='edit_task']", function(e) {
     let ref = this.dataset.ref;
+    let project = this.dataset.pro;
 
     bootbox.dialog({
         backdrop: true,
@@ -60,7 +61,7 @@ $(document).on("click", "[data-action='edit_task']", function(e) {
                     $.ajax({
                         url:  rootUrl + 'controller/ajax/project/task/task_short-actions.php',
                         type: 'POST',
-                        data: {task_name: task_name, deadline: deadline, duration: duration, task_token: ref, action: 'edit'},
+                        data: {task_name: task_name, deadline: deadline, duration: duration, task_token: ref, project_token: project, action: 'edit'},
                         success:function(data){
                             $('#tab_output').html(data);
                         }
@@ -84,6 +85,7 @@ $(document).on("click", "[data-action='edit_task']", function(e) {
 $(document).on("click", "[data-action='delete_task']", function(e) {
     event.preventDefault();
     let ref = this.dataset.ref;
+    let project = this.dataset.pro;
 
     bootbox.confirm({
         backdrop: true,
@@ -105,7 +107,7 @@ $(document).on("click", "[data-action='delete_task']", function(e) {
                 $.ajax({
                     url:  rootUrl + 'controller/ajax/project/task/task_short-actions.php',
                     type: 'POST',
-                    data: {task_token: ref, action: 'delete'},
+                    data: {task_token: ref, project_token: project, action: 'delete'},
                     success:function(data){
                         $('#tab_output').html(data);
                     }
@@ -120,6 +122,7 @@ $(document).on("click", "[data-action='delete_task']", function(e) {
 $(document).on("click", "[data-action='close_task']", function(e) {
     event.preventDefault();
     let ref = this.dataset.ref;
+    let project = this.dataset.pro;
 
     bootbox.confirm({
         backdrop: true,
@@ -141,7 +144,7 @@ $(document).on("click", "[data-action='close_task']", function(e) {
                 $.ajax({
                     url:  rootUrl + 'controller/ajax/project/task/task_short-actions.php',
                     type: 'POST',
-                    data: {task_token: ref, action: 'close'},
+                    data: {task_token: ref, project_token: project, action: 'close'},
                     success:function(data){
                         $('#tab_output').html(data);
                     }
@@ -156,6 +159,7 @@ $(document).on("click", "[data-action='close_task']", function(e) {
 $(document).on("click", "[data-action='reopen_task']", function(e) {
     event.preventDefault();
     let ref = this.dataset.ref;
+    let project = this.dataset.pro;
 
     bootbox.confirm({
         backdrop: true,
@@ -177,7 +181,7 @@ $(document).on("click", "[data-action='reopen_task']", function(e) {
                 $.ajax({
                     url:  rootUrl + 'controller/ajax/project/task/task_short-actions.php',
                     type: 'POST',
-                    data: {task_token: ref, action: 'reopen'},
+                    data: {task_token: ref, project_token: project, action: 'reopen'},
                     success:function(data){
                         $('#tab_output').html(data);
                     }

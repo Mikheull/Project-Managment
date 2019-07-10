@@ -28,6 +28,7 @@ require_once ('../../../../model/class/user.php');
 require_once ('../../../../model/class/project.php');
 require_once ('../../../../model/class/task.php');
 require_once ('../../../../model/class/authentication.php');
+require_once ('../../../../model/class/permission.php');
 
 $main = new main();
 $router = new router($db);
@@ -36,6 +37,7 @@ $user = new user($db);
 $project = new project($db);
 $task = new task($db);
 $auth = new authentication($db);
+$permission = new permission($db);
 
 
 
@@ -49,9 +51,17 @@ if(isset($_POST['result']) AND isset($_POST['project_token'])){
     $result = cleanVar($_POST['result']);
     $project_token = $_POST['project_token'];
 
-    if(!empty($result)){
-        $errors = $task -> newTab($project_token, $result);
+    if($permission -> hasPermission($main -> getToken(), $project_token, 'task.tab.create')){
+        if(!empty($result)){
+            $errors = $task -> newTab($project_token, $result);
+        }
+    }else{
+        $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
     }
+
+    // Refresh ajax
+    $tabs = $task -> getTabs( $project_token );
+    require ('../../../../view/app/project/tools/gestion-projet/home/components/tab_content.php');
 }
 
 if(isset($errors)){

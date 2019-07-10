@@ -70,7 +70,11 @@
                                         </div>
                                         <div class="message my-message float-right flex justify-content-between">
                                             <?= $mes ;?>
-                                            <span class="hidden actions"><i class="fas fa-ellipsis-v color-dark"></i></span>
+                                            <?php
+                                                if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'messenger.tchat.manage')){
+                                                    ?> <span class="hidden actions"><i class="fas fa-ellipsis-v color-dark"></i></span> <?php
+                                                }
+                                            ?>
                                         </div>
                                     </li>
                                     <?php
@@ -79,7 +83,7 @@
                                     <li>
                                         <div class="message-data flex">
                                             <span class="message-data-name flex">
-                                                <div class="avatar avatar--sm margin-right" data-tippy="<?= $utils -> getData('imp_user', 'username', 'public_token', $message['author_token']) ?>"> 
+                                                <div class="avatar avatar--sm margin-right"> 
                                                     <figure class="avatar__figure" role="img">
                                                         <svg class="avatar__placeholder" aria-hidden="true" viewBox="0 0 20 20" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="6" r="2.5" stroke="currentColor"/><path d="M10,10.5a4.487,4.487,0,0,0-4.471,4.21L5.5,15.5h9l-.029-.79A4.487,4.487,0,0,0,10,10.5Z" stroke="currentColor"/></svg>
                                                         <img class="avatar__img" src="<?= $config -> rootUrl() ;?>dist/<?= $utils -> getData('imp_user', 'profil_image', 'public_token', $message['author_token']) == NULL ? 'images/content/defaut_profil_pic.png' : 'uploads/u/'. $message['author_token'].'/profil_pic/'.$utils -> getData('imp_user', 'profil_image', 'public_token', $message['author_token']) ;?>">
@@ -91,7 +95,11 @@
                                         </div>
                                         <div class="message other-message flex justify-content-between">
                                             <?= $mes ;?>
-                                            <span class="hidden actions"><i class="fas fa-ellipsis-v color-dark"></i></span>
+                                            <?php
+                                                if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'messenger.tchat.manage.other')){
+                                                    ?> <span class="hidden actions"><i class="fas fa-ellipsis-v color-dark"></i></span> <?php
+                                                }
+                                            ?>
                                         </div>
                                     </li>
                                 <?php

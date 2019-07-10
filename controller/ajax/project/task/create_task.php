@@ -28,6 +28,7 @@ require_once ('../../../../model/class/user.php');
 require_once ('../../../../model/class/project.php');
 require_once ('../../../../model/class/task.php');
 require_once ('../../../../model/class/authentication.php');
+require_once ('../../../../model/class/permission.php');
 
 $main = new main();
 $router = new router($db);
@@ -36,6 +37,7 @@ $user = new user($db);
 $project = new project($db);
 $task = new task($db);
 $auth = new authentication($db);
+$permission = new permission($db);
 
 
 
@@ -52,7 +54,15 @@ if(!empty($_POST['task_name']) AND !empty($_POST['deadline']) AND !empty($_POST[
     $project_token = $_POST['project_token'];
     $tab_token = $_POST['tab_token'];
 
-    $errors = $task -> newTask($project_token, $tab_token, $task_name, $deadline, $duration);
+    if($permission -> hasPermission($main -> getToken(), $project_token, 'task.create')){
+        $errors = $task -> newTask($project_token, $tab_token, $task_name, $deadline, $duration);
+    }else{
+        $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
+    }
+
+    // Refresh ajax
+    $tabs = $task -> getTabs( $project_token );
+    require ('../../../../view/app/project/tools/gestion-projet/home/components/tab_content.php');
 
 }else{
     $errors = ['success' => false, 'options' => ['content' => "Remplissez tout les champs !", 'theme' => 'error'] ];

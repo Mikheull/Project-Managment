@@ -29,17 +29,23 @@
 
 
         <div class="row">
-            <?php 
-            if($activity['count'] !== 0){
-                require_once ('view/app/project/tools/gestion-projet/reports/components/contrib_chart_month.php');
-                require_once ('view/app/project/tools/gestion-projet/reports/components/contrib_graph.php');
-                
+            <?php
+            if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'task.report.view')){
+                if($activity['count'] !== 0){
+                    require_once ('view/app/project/tools/gestion-projet/reports/components/contrib_chart_month.php');
+                    require_once ('view/app/project/tools/gestion-projet/reports/components/contrib_graph.php');
+                    
+                }else{
+                    ?>
+                    <div class="col-8 offset-2 text-align-center margin-top-lg">
+                        <img src="<?= $config -> rootUrl() ;?>dist/images/illustrations/empty_task_activities.svg" alt="" width="50%">
+                        <h3 class="title-sm bold color-dark margin-bot-lg margin-top-lg">Aucunes données pour le moment !</h3>
+                    </div>
+                    <?php
+                }
             }else{
                 ?>
-                <div class="col-8 offset-2 text-align-center margin-top-lg">
-                    <img src="<?= $config -> rootUrl() ;?>dist/images/illustrations/empty_task_activities.svg" alt="" width="50%">
-                    <h3 class="title-sm bold color-dark margin-bot-lg margin-top-lg">Aucunes données pour le moment !</h3>
-                </div>
+                <div class="no-access">Vous n'avez pas la permission nécessaire pour accéder a ce contenu</div>
                 <?php
             }
             ?>
