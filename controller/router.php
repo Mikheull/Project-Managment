@@ -83,6 +83,8 @@ $router -> addRoutes(
         [ 'route' => 'search/projects', 'dir_path' => 'view/landing/search/projects/'],
 
         // Application
+        [ 'route' => 'sharing/{{TOKEN}}', 'dir_path' => 'view/app/sharing/'],
+
         [ 'route' => 'app', 'dir_path' => 'view/app/hub/'],
         [ 'route' => 'app/new/project', 'dir_path' => 'view/app/project/new/'],
         [ 'route' => 'app/new/team', 'dir_path' => 'view/app/team/new/'],

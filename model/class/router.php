@@ -101,6 +101,7 @@ class router extends db_connect {
         $ori_route = str_replace("{{DOCUMENTS_TOKEN}}", "([a-zA-Z0-9]{0,})", "$ori_route");
         $ori_route = str_replace("{{SURVEY_TOKEN}}", "([a-zA-Z0-9]{0,})", "$ori_route");
         $ori_route = str_replace("{{UML_TOKEN}}", "([a-zA-Z0-9]{0,})", "$ori_route");
+        $ori_route = str_replace("{{TOKEN}}", "([a-zA-Z0-9]{0,})", "$ori_route");
 
         return $ori_route;
      }
