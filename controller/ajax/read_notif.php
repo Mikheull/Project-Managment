@@ -1,5 +1,6 @@
-<script>console.log('sasa')</script>
-<?php
-echo 'ok'
+<script>
+    
+    instance.setContent('ok')
+    console.log('sasa')
 
-?>
+</script>

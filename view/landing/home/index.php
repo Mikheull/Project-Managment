@@ -41,7 +41,7 @@
 
 
     <div class="container home_presentation">
-        <div class="row pres-element" data-aos="fade-left" data-aos-duration="700">
+        <div class="row pres-element" data-aos="fade-right" data-aos-duration="700">
             <div class="col-md-6 col-10 illustration text-align-left order-md-1 order-2"> <img src="dist/images/illustrations/team_managment.svg" alt="" width="80%"> </div>
             <div class="col-md-6 col-10 heading align-self-center order-md-2 order-1">
                 <h2 class="title-sm bold color-dark margin-bot margin-left">Gérez votre équipe</h2>
@@ -57,7 +57,7 @@
             <div class="col-md-6 col-10 illustration text-align-right"> <img src="dist/images/illustrations/project_managment.svg" alt="" width="80%"> </div>
         </div>
 
-        <div class="row pres-element" data-aos="fade-left" data-aos-duration="700">
+        <div class="row pres-element" data-aos="fade-right" data-aos-duration="700">
             <div class="col-md-6 col-10 illustration text-align-left order-md-1 order-2"> <img src="dist/images/illustrations/share_experience.svg" alt="" width="80%"> </div>
             <div class="col-md-6 col-10 heading align-self-center order-md-2 order-1">
                 <h2 class="title-sm bold color-dark margin-bot margin-left">Partagez votre expérience</h2>
@@ -75,8 +75,6 @@
     </div>
 
     <?php require ('view/components/newsletter.php') ;?>
-
-
 
 </section>
 

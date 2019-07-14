@@ -2,7 +2,6 @@
     require_once ('view/components/navbar-header-light.php') ;
 
     require ('controller/project.php') ;
-    require ('controller/team.php') ;
 
 ?>
 
@@ -31,7 +30,6 @@
         <div class="col-md-8 offset-md-2 col-10 offset-1">
             <ul class="flex margin-top justify-content-end">
                 <li> <a class="filter_btn btn btn-sm dark-btn margin-right" data-filter="member">Membres</a> </li>
-                <li> <a class="filter_btn btn btn-sm light-btn-bordered margin-right" data-filter="team">Équipes</a> </li>
                 <li> <a class="filter_btn btn btn-sm light-btn-bordered margin-right" data-filter="project">Projets</a> </li>
                 <li> <a class="filter_btn btn btn-sm light-btn-bordered" data-filter="article">Articles</a> </li>
             </ul>
@@ -40,9 +38,6 @@
 
     <div class="row">
         <div class="col-12 flex justify-content-between" id="loading_data">
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
             <div class="card"></div>
         </div>
         <div class="col-9 margin-top-lg">
@@ -53,27 +48,7 @@
 
 
     <div class="row margin-bot-lg margin-top-lg" id="public_data">
-        <div class="col-10">
-            <h2 class="title-xs bold color-dark ">Équipes publiques</h2>
-            <h3 class="text-sm color-gray">Découvrez les équipes libre accès</h3>
-        </div>
-        <div class="col-2 text-align-right">
-            <a href="<?= $config -> rootUrl() ;?>search/teams" class="btn btn-sm dark-btn">Voir tout</a>
-        </div>
-
-        <div class="col-9 margin-top-lg">
-            <div class="row team-container justify-content-between">
-                <?php
-                $allTeams = $team -> getPublicTeams();
-                foreach($allTeams['content'] as $t){
-                    $t['team_token'] = $t['public_token'];
-                    require ('view/user/teams/components/card.php');
-                }
-                ?>
-            </div>
-        </div>
-
-
+        
         <div class="col-10 margin-top-lg">
             <h2 class="title-xs bold color-dark ">Projets publics</h2>
             <h3 class="text-sm color-gray">Découvrez les projets libre accès</h3>

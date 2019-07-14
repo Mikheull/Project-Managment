@@ -9,7 +9,7 @@ $allTasks = $task -> getAllTasks( $router -> getRouteParam('2') );
 
 
 <?php require_once ('view/app/project/components/project_sidebar.php') ?>
-<div class="content_wrapper container">
+<div class="content_wrapper container-fluid">
 
     <div class="row">
         <div class="col-lg-4 col-md-6 col-12 light-border p-3">

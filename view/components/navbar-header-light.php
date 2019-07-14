@@ -13,7 +13,7 @@
                                 <path class="cls-2" d="M1,14A13,13,0,0,0,14,27"/>
                                 <path class="cls-2" d="M14,27A13,13,0,0,0,27,14"/>
                                 <path class="cls-2" d="M14,1A13,13,0,0,0,1,14"/>
-                                <text class="cls-3" transform="translate(33.09 19.17)">IMPROOVE</text>
+                                <text class="cls-3 hidden-md" transform="translate(33.09 19.17)">IMPROOVE</text>
                             </g>
                         </g>
                     </svg>
@@ -44,12 +44,47 @@
                         <?php
                     }
                     ?>
-                    
                 </ul>
             </div>
             
             <div class="col col-md-3 navbar-resp-nav">
-                <i class="fas fa-bars"></i>
+                <a class="link" id="resp-nav-header-btn"><i class="fas fa-bars"></i></a>
+
+                <div class="navbar-resp-container">
+                    <a class="link light-link title-lg" id="resp-nav-header-close-btn"><i class="far fa-times-circle"></i></a>
+
+                    <div class="menu-wrapper">
+                        <div class="row margin-top-lg margin-bot">
+                                <?php
+                                if($auth -> isConnected() == false){
+                                    ?>
+                                    <ul class="nav col margin-left">
+                                        <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>login" title="Connectez vous" class="link light-link">Connexion</a> </li>
+                                        <li class="nav-item nav-item-btn"> <a href="<?= $config -> rootUrl() ;?>register" title="Inscrivez vous" class="link light-link">Inscription</a> </li>
+                                    </ul>
+                                    <?php
+                                }else{
+                                    ?>
+                                    <ul class="nav col margin-left flex">
+                                        <li class="nav-item margin-right notification"> <a href="<?= $config -> rootUrl() ;?>notifications" title="notifications" class="link light-link"><i data-feather="bell"></i></a> </li>
+                                        <li class="nav-item margin-right"> <a href="<?= $config -> rootUrl() ;?>logout" title="Déconnnexion" class="link light-link"><i data-feather="log-out"></i></a> </li>
+                                        <li class="nav-item margin-right"> <a href="<?= $config -> rootUrl() ;?>account" title="Accédez a votre compte" class="link light-link"><i data-feather="user"></i></a> </li>
+                                    </ul>
+                                    <?php
+                                }
+                                ?>
+                        </div>
+                        <div class="row margin-top-lg margin-bot">
+                            <ul class="nav col margin-left">
+                                <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>features" title="Découvrir les fonctionnalités" class="link light-link">Fonctionnalités</a> </li>
+                                <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>pricing" title="Découvrez nos tarifs" class="link light-link">Tarifs</a> </li>
+                                <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>" title="Renseignez vous sur la doc" class="link light-link">Documentation</a> </li>
+                                <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>app" title="Aller sur la plateforme" class="link light-link">App</a> </li>
+                                <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>download" title="Télécharger l'application" class="link light-link">Télécharger</a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
                 
 

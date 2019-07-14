@@ -8,10 +8,9 @@
 
 
 <?php // View Content ?>
-<?php require_once ('view/app/components/sidebar.php'); ?>
 
 <div class="container-fluid main_wrapper">
-    <?php require_once ('view/app/project/tools/gestion-equipe/components/navbar.php') ?>
+    <?php require_once ('view/app/project/components/project_sidebar.php') ?>
 
     <div class="container">
         <div class="row">

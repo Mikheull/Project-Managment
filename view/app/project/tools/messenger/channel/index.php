@@ -7,10 +7,9 @@
 
 
 <?php // View Content ?>
-<?php require_once ('view/app/components/sidebar.php'); ?>
 
 <div class="container-fluid main_wrapper">
-    <?php require_once ('view/app/project/tools/messenger/components/navbar.php') ?>
+    <?php require_once ('view/app/project/components/project_sidebar.php') ?>
 
     <div class="container">
         
@@ -54,35 +53,70 @@
 
                         <?php
                             $allMessages = $messenger -> getMessages($router -> getRouteParam("5"));
+                            $group_count = 1;
                             foreach($allMessages['content'] as $message){
                                 $mes = $parsedown -> text( $message['content_edited'] == null ? $message['content'] : $message['content_edited'] );
                                 $mes = $utils -> parsedownChannel($mes, $router -> getRouteParam("2"));
-
+                                
+                                
 
                                 if($message['author_token'] == $main -> getToken()){
                                     ?>
-                                    <li class="clearfix">
-                                        <div class="message-data text-align-right">
-                                            <span class="message-data-time" ><?= $config -> time_elapsed_string($message['date_edited'] == null ? $message['date_creation'] : $message['date_edited']) ?></span> &nbsp; &nbsp;
-                                            <span class="message-data-name" >
-                                                <?= $utils -> getData('imp_user', 'username', 'public_token', $message['author_token']) ?>
-                                            </span>
-                                        </div>
-                                        <div class="message my-message float-right flex justify-content-between">
+                                    <li class="clearfix" data-token="<?= $message['message_token'] ?>">
+                                        <?php
+                                        if(isset($pre_sender)){
+                                            if($pre_sender == $message['author_token']){
+                                                
+                                                $date1 = new DateTime($pre_sender_date);
+                                                $date1->modify('+15 minute');
+                                                $date2 = new DateTime($message['date_creation']);
+                                                
+                                                if ($date1 > $date2) {
+                                                    $group_count = $group_count + 1;
+                                                }else{
+                                                    $group_count = 1;
+                                                    ?>
+                                                        <script> $( 'li[data-token="<?= $message['message_token'] ?>"]' ).prev( "li" ).children().removeClass( "my-message-middle" ).addClass( "my-message-bottom" );</script>
+                                                        <div class="message-data text-align-right margin-top"> <span class="message-data-time text-xs" ><?= $config -> time_elapsed_string($message['date_edited'] == null ? $message['date_creation'] : $message['date_edited']) ?></span> </div>
+                                                    <?php
+                                                }
+                                            }
+                                        }else{
+                                            ?>
+                                                <div class="message-data text-align-right margin-top"> <span class="message-data-time text-xs" ><?= $config -> time_elapsed_string($message['date_edited'] == null ? $message['date_creation'] : $message['date_edited']) ?></span> </div>
+                                            <?php
+                                        }
+                                        ?>
+                                        
+                                        <div class="message my-message float-right flex justify-content-between <?= $group_count == 1 ? 'my-message-top' : 'my-message-middle' ?>">
                                             <?= $mes ;?>
                                             <?php
                                                 if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'messenger.tchat.manage')){
-                                                    ?> <span class="hidden actions"><i class="fas fa-ellipsis-v color-dark"></i></span> <?php
+                                                    ?> <span class="actions"><i class="fas fa-ellipsis-v color-dark"></i></span> <?php
                                                 }
                                             ?>
                                         </div>
                                     </li>
                                     <?php
+
+
                                 }else{
                                     ?>
                                     <li>
+                                        <?php
+                                        if(isset($pre_sender)){
+                                            if($pre_sender == $message['author_token']){
+                                                $date1 = new DateTime($pre_sender_date);
+                                                $date1->modify('+15 minute');
+                                                $date2 = new DateTime($message['date_creation']);
+                                                if ($date1 > $date2) {
+                                                    // echo 'moins de 15 minutes, on groupe';
+                                                }
+                                            }
+                                        }
+                                        ?>
                                         <div class="message-data flex">
-                                            <span class="message-data-name flex">
+                                            <span class="message-data-name flex text-xs">
                                                 <div class="avatar avatar--sm margin-right"> 
                                                     <figure class="avatar__figure" role="img">
                                                         <svg class="avatar__placeholder" aria-hidden="true" viewBox="0 0 20 20" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="6" r="2.5" stroke="currentColor"/><path d="M10,10.5a4.487,4.487,0,0,0-4.471,4.21L5.5,15.5h9l-.029-.79A4.487,4.487,0,0,0,10,10.5Z" stroke="currentColor"/></svg>
@@ -91,20 +125,22 @@
                                                 </div>
                                                 <?= $utils -> getData('imp_user', 'username', 'public_token', $message['author_token']) ?>
                                             </span>&nbsp; &nbsp;
-                                            <span class="message-data-time"><?= $config -> time_elapsed_string($message['date_edited'] == null ? $message['date_creation'] : $message['date_edited']) ?></span>
+                                            <span class="message-data-time text-xs"><?= $config -> time_elapsed_string($message['date_edited'] == null ? $message['date_creation'] : $message['date_edited']) ?></span>
                                         </div>
-                                        <div class="message other-message flex justify-content-between">
+                                        <div class="message other-message flex justify-content-between message-middle">
                                             <?= $mes ;?>
                                             <?php
                                                 if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'messenger.tchat.manage.other')){
-                                                    ?> <span class="hidden actions"><i class="fas fa-ellipsis-v color-dark"></i></span> <?php
+                                                    ?> <span class="actions"><i class="fas fa-ellipsis-v color-dark"></i></span> <?php
                                                 }
                                             ?>
                                         </div>
                                     </li>
                                 <?php
                                 }
-                                
+                                $pre_token = $message['message_token'];
+                                $pre_sender = $message['author_token'];
+                                $pre_sender_date = $message['date_creation'];
                             }
                         ?>
 

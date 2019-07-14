@@ -284,6 +284,27 @@ class project extends db_connect {
 
     } 
 
+    
+
+    /**
+     * Modifie les infos
+     * 
+     * Va modifier les infos du projet
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $name nom
+     * @param string $desc description
+     * @param string $status status
+     * @param string $token token du projet
+     * @return array
+     */
+    
+    function editProjectInfos($name = '', $desc = '', $status = '', $token = '') {
+        $exec = $this -> _db -> exec("UPDATE `pr_project` SET `name` = '$name', `description` = '$desc', `public` = '$status' WHERE `public_token` = '$token' ");
+        return (['success' => true, 'options' => ['content' => "Les informations on été modifiés !", 'theme' => 'success'] ]);
+    }
+
 
 
     /**
@@ -348,6 +369,15 @@ class project extends db_connect {
                     return (['success' => false, 'options' => ['content' => "Une invitation lui a déjà été envoyé !", 'theme' => 'success'] ]);
                 }else{
                     $request = $this -> _db -> exec("INSERT INTO `pr_invitation_project` (`project_token`, `user_public_token`, `message`) VALUES ('$project_token', '$user_token', '$message')");
+                    
+                    $notif_content = 
+                        [
+                            'sender' => main::getToken(),
+                            'message' => '%sender% vous a inviter dans un projet'
+                        ];
+                    $notif_content = json_encode($notif_content);
+                    $exec = $this -> _db -> exec("INSERT INTO `imp_notification`( `user_public_token`, `type`, `content`) VALUES ('$user_token', 'project_invite', '$notif_content') ");
+        
                     return (['success' => true, 'options' => ['content' => "Vous avez envoyer l\'invitation !", 'theme' => 'success'] ]);
                 }
                 

@@ -65,21 +65,18 @@ $router -> addRoutes(
 
         // Members & Users
         [ 'route' => 'account', 'dir_path' => 'view/user/home/'],
-        [ 'route' => 'account/teams', 'dir_path' => 'view/user/teams/'],
         [ 'route' => 'account/projects', 'dir_path' => 'view/user/projects/'],
         [ 'route' => 'account/followers', 'dir_path' => 'view/user/followers/'],
         [ 'route' => 'account/following', 'dir_path' => 'view/user/following/'],
         [ 'route' => 'account/settings', 'dir_path' => 'view/user/settings/'],
 
         [ 'route' => 'member/{{USER_NAME}}', 'dir_path' => 'view/user/home/'],
-        [ 'route' => 'member/{{USER_NAME}}/teams', 'dir_path' => 'view/user/teams/'],
         [ 'route' => 'member/{{USER_NAME}}/projects', 'dir_path' => 'view/user/projects/'],
         [ 'route' => 'member/{{USER_NAME}}/followers', 'dir_path' => 'view/user/followers/'],
         [ 'route' => 'member/{{USER_NAME}}/following', 'dir_path' => 'view/user/following/'],
 
-        // Members & Users
+        // Recherche
         [ 'route' => 'search', 'dir_path' => 'view/landing/search/'],
-        [ 'route' => 'search/teams', 'dir_path' => 'view/landing/search/teams/'],
         [ 'route' => 'search/projects', 'dir_path' => 'view/landing/search/projects/'],
 
         // Application
@@ -87,21 +84,9 @@ $router -> addRoutes(
 
         [ 'route' => 'app', 'dir_path' => 'view/app/hub/'],
         [ 'route' => 'app/new/project', 'dir_path' => 'view/app/project/new/'],
-        [ 'route' => 'app/new/team', 'dir_path' => 'view/app/team/new/'],
         [ 'route' => 'app/join/project/{{PROJECT_TOKEN}}', 'dir_path' => 'view/app/project/join/'],
-        [ 'route' => 'app/join/team/{{TEAM_TOKEN}}', 'dir_path' => 'view/app/team/join/'],
-        
-        
-        [ 'route' => 'app/team', 'dir_path' => 'view/app/team/hub/'],
-        [ 'route' => 'app/team/{{TEAM_TOKEN}}', 'dir_path' => 'view/app/team/home/'],
-        [ 'route' => 'app/team/{{TEAM_TOKEN}}/members', 'dir_path' => 'view/app/team/members/'],
-        [ 'route' => 'app/team/{{TEAM_TOKEN}}/members/{{USER_TOKEN}}/activity', 'dir_path' => 'view/app/team/members/activity/'],
-        [ 'route' => 'app/team/{{TEAM_TOKEN}}/members/{{USER_TOKEN}}/edit', 'dir_path' => 'view/app/team/members/edit/'],
-        [ 'route' => 'app/team/{{TEAM_TOKEN}}/messenger', 'dir_path' => 'view/app/team/messenger/'],
-        [ 'route' => 'app/team/{{TEAM_TOKEN}}/settings', 'dir_path' => 'view/app/team/settings/'],
 
 
-        [ 'route' => 'app/project', 'dir_path' => 'view/app/project/hub/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}', 'dir_path' => 'view/app/project/home/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/settings', 'dir_path' => 'view/app/project/settings/'],
         

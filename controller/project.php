@@ -116,6 +116,38 @@ if(isset($_POST['create_project'])){
 
 
 
+/**
+ * Formulaire pour editer les informations d'un projet
+ * 
+ * @fichier d'execution = view/content/app/project/settings/index.php
+ * @variable d'execution = $_POST['update_project_infos']                  : type = button
+ * 
+ * @variable obligatoire = $_POST['name']                               : type = text
+ * @variable obligatoire = $_POST['desc']                               : type = text
+ * @variable obligatoire = $_POST['status']                             : type = text
+ * 
+ */
+if(isset($_POST['update_project_infos'])){
+    
+    if(isset($_POST['name']) AND !empty($_POST['name']) AND isset($_POST['desc']) AND !empty($_POST['desc']) AND isset($_POST['status']) AND !empty($_POST['status'])){
+        $name = cleanVar($_POST['name']);
+        $desc = cleanVar($_POST['desc']);
+        
+        $_POST['status'] == 'private' ? $status = 0 : $status = 1;
+        $project_token = $router -> getRouteParam('2');
+        if(strlen($desc) <= 255){
+            $errors = $project -> editProjectInfos($name, $desc, $status, $project_token);
+            $utils -> addlog($main -> getToken(), $project_token, 'pr_project', 'project-edit-settings');
+        }else{
+            $errors = ['success' => false, 'options' => ['content' => "La description est trop longue (".strlen($bio)."/255) !", 'theme' => 'error'] ];
+        }
+    }else{
+        $errors = ['success' => false, 'options' => ['content' => "Vous devez remplir tout les champs ", 'theme' => 'error'] ];
+    }
+}
+
+
+
  
 
 // End of file

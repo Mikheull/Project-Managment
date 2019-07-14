@@ -6,7 +6,6 @@
 
 <?php // View Content ?>
 
-<?php require_once ('view/app/components/sidebar.php'); ?>
 <div class="container-fluid main_wrapper">
     <?php require ('view/app/project/home/components/home.php'); ?>
 </div>

@@ -32,6 +32,30 @@ class projectTeam extends db_connect {
 
 
 
+     /**
+     * Récupère les équipes Limit
+     * 
+     * Va renvoyer toutes les équipes Limit
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $project_token Token de la team
+     * @param string $limit Limit
+     * @param string $offset Offset
+     * @return array
+     */
+    function getTeamsLimit($project_token, $limit, $offset){
+        $request = $this -> _db -> query("SELECT * FROM `pr_project_team` WHERE `project_token` = '$project_token' AND `enable` = '1' LIMIT $limit OFFSET $offset ");
+        $res = $request->fetchAll();
+        $count = $request->rowCount();
+
+        return ([ 
+            'count' => $count, 
+            'content' => $res
+        ]);
+    }
+
+
     /**
      * Récupère les utilisateurs d'une équipe
      * 
@@ -242,4 +266,25 @@ class projectTeam extends db_connect {
     
 /******************************************************************************/
 
+
+    /**
+     * function search($param1, $param2, $param3, $param4)
+     * 
+     * Cette fonction va retourner une information d'une team donné
+     * 
+     * @param 1 = le type de recherche (category, product ...)
+     * @param 2 = la recherche (id, name ...)
+     * @param 3 = le keyword
+     * @param 4 = le mode de recherche (strict, like)
+     * @return array
+     * 
+     */
+    function search($type, $query, $keyword, $param){
+        if($param == 'strict'){
+            $request = $this -> _db -> query("SELECT * FROM `$type` WHERE `$query` = '$keyword' ");
+        }else{
+            $request = $this -> _db -> query("SELECT * FROM `$type` WHERE `$query` LIKE '%$keyword%' ");
+        }
+        return $request -> fetchAll();
+    }
 }

@@ -91,23 +91,6 @@
                     require ('view/app/project/errors/not-found.php');
                 }
                 
-            }else if($config -> renderTeamCanAcess($exec_router['config_path']) == true){
-                $team_token = $router -> getRouteParam('2');
-                if($team -> teamExist($router -> getRouteParam('2'))){
-    
-                    if($team -> canAcess($router -> getRouteParam('2'), $main -> getToken())){
-                        require ($require_url);
-                    }else{
-                        if($utils -> getData('pr_team', 'public', 'public_token', $router -> getRouteParam('2')) == true){
-                            require ('view/app/team/errors/public-join.php');
-                        }else{
-                            require ('view/app/team/errors/private-join.php');
-                        }
-                    }
-        
-                }else{
-                    require ('view/app/team/errors/not-found.php');
-                }
             }else{
                 require ($require_url);
             }

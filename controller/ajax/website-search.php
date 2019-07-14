@@ -29,7 +29,6 @@ require_once ('../../model/class/router.php');
 require_once ('../../model/class/config.php');
 require_once ('../../model/class/search.php');
 require_once ('../../model/class/user.php');
-require_once ('../../model/class/team.php');
 require_once ('../../model/class/project.php');
 require_once ('../../model/class/utils.php');
 
@@ -38,7 +37,6 @@ $router = new router($db);
 $config = new config();
 $search = new search($db);
 $user = new user($db);
-$team = new team($db);
 $project = new project($db);
 $utils = new utils($db);
 
@@ -64,8 +62,6 @@ $type = cleanVar($_POST['type']);
  */
 if($type == 'member'){
     $search -> searchContent($keyword, 'member');
-}else if($type == 'team'){
-    isset($_SESSION['user_token']) ? $search -> searchContent($keyword, 'team', $main -> getToken() ) : $search -> searchContent($keyword, 'team');
 }else if($type == 'project'){
     isset($_SESSION['user_token']) ? $search -> searchContent($keyword, 'project', $main -> getToken() ) : $search -> searchContent($keyword, 'project');
 }
@@ -78,9 +74,6 @@ if( empty($queryReturn) ){
     foreach($queryReturn as $item){
         if($type == 'member'){
             require ('../../view/landing/search/components/user-card.php');
-        }else if($type == 'team'){
-            $t['team_token'] = $item;
-            require ('../../view/user/teams/components/card.php');
         }else if($type == 'project'){
             $t['project_token'] = $item;
             require ('../../view/user/projects/components/card.php');

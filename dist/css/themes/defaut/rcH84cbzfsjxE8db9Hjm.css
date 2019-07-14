@@ -185,6 +185,7 @@ h1, h2, h3, h4, h5, h6 {font-family: 'Poppins', sans-serif}
   stroke-linecap: round;
   stroke-linejoin: round;
   fill: none;
+  margin: -3px 0;
 }
 
 /* Notify */
@@ -234,7 +235,9 @@ h1, h2, h3, h4, h5, h6 {font-family: 'Poppins', sans-serif}
 .navbar-header.light .navbar-nav .nav-item-btn a:hover {background: var(--light-primary-color);}
 
 .navbar-resp-nav {display: none}
-
+.navbar-resp-container {width: 70vw;height: 100vh;position: fixed;background: #212733;top: 0;right: 0;z-index: 999;display: none}
+#resp-nav-header-close-btn {float: right; margin: 45px 45px 0 0;}
+.menu-wrapper {clear: both;float: left;}
 
 /* Footer
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -267,6 +270,7 @@ h1, h2, h3, h4, h5, h6 {font-family: 'Poppins', sans-serif}
 @media (max-width: 1199px) {
   #footer .navbar-brand text {display: none}
   #footer .navbar-nav {display: none}
+  .navbar-header .navbar-brand text {display: none}
 }
 
 @media (max-width: 767px) {
@@ -286,7 +290,6 @@ h1, h2, h3, h4, h5, h6 {font-family: 'Poppins', sans-serif}
   .newsletter {text-align: center;}
   .newsletter p {width: 100%;margin-bottom: 25px;}
 }
-
 
 /* Main
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
