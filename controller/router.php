@@ -81,6 +81,7 @@ $router -> addRoutes(
 
         // Application
         [ 'route' => 'sharing/{{TOKEN}}', 'dir_path' => 'view/app/sharing/'],
+        [ 'route' => 'survey/{{SURVEY_TOKEN}}', 'dir_path' => 'view/app/survey/'],
 
         [ 'route' => 'app', 'dir_path' => 'view/app/hub/'],
         [ 'route' => 'app/new/project', 'dir_path' => 'view/app/project/new/'],
@@ -113,9 +114,9 @@ $router -> addRoutes(
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/uml/{{UML_TOKEN}}', 'dir_path' => 'view/app/project/tools/uml/view/'],
 
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/recherche-utilisateur', 'dir_path' => 'view/app/project/tools/recherche-utilisateur/home/'],
-        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/recherche-utilisateur/new', 'dir_path' => 'view/app/project/tools/recherche-utilisateur/survey-new/'],
-        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/recherche-utilisateur/{{SURVEY_TOKEN}}/edit', 'dir_path' => 'view/app/project/tools/recherche-utilisateur/survey-edit/'],
-        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/recherche-utilisateur/{{SURVEY_TOKEN}}/stats', 'dir_path' => 'view/app/project/tools/recherche-utilisateur/survey-stats/'],
+        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/recherche-utilisateur/create', 'dir_path' => 'view/app/project/tools/recherche-utilisateur/survey/create/'],
+        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/recherche-utilisateur/{{SURVEY_TOKEN}}/edit', 'dir_path' => 'view/app/project/tools/recherche-utilisateur/survey/edit/'],
+        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/recherche-utilisateur/{{SURVEY_TOKEN}}/report', 'dir_path' => 'view/app/project/tools/recherche-utilisateur/survey/report/'],
 
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/bug-tracker', 'dir_path' => 'view/app/project/tools/bug-tracker/home/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/bug-tracker/new', 'dir_path' => 'view/app/project/tools/bug-tracker/bug-new/'],

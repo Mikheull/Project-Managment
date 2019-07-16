@@ -14,17 +14,19 @@
 <div class="container-fluid main_wrapper">
     <?php require_once ('view/app/project/components/project_sidebar.php') ?>
 
-    <div class="container calendar_wrapper margin-top-lg">
-        <div class="row">
-            <div class="col">
-                <div id="calendar"></div>
+    <div class="content_wrapper">
+        <div class="container-fluid margin-top-lg">
+            <div class="row">
+                <div class="col">
+                    <div id="calendar"></div>
+                </div>
+                <div id="calendar_details_output"></div>
             </div>
-            <div id="calendar_details_output"></div>
-        </div>
-        
+            
 
-        <input type="hidden" name="ref" value="<?= $router -> getRouteParam('2') ?>">
-        <div id="calendar_output"></div>
+            <input type="hidden" name="ref" value="<?= $router -> getRouteParam('2') ?>">
+            <div id="calendar_output"></div>
+        </div>
     </div>
 
 </div>
@@ -66,7 +68,7 @@
                                 startEditable: false,
                                 durationEditable: false,
                                 rendering: 'color',
-                                color: '<?= $utils -> getSetting('task-color', 'set_calendar', $router -> getRouteParam("2")) ?>'
+                                color: '#f76707'
                             },
                         <?php
                     }
@@ -81,7 +83,7 @@
                                 end: '<?= $e['date_end'] ;?>',
                                 allDay: true,
                                 rendering: 'color',
-                                color: '<?= $utils -> getSetting('event-color', 'set_calendar', $router -> getRouteParam("2")) ?>',
+                                color: '#6741d9',
                                 startEditable: true,
                                 durationEditable: false,
                             },
@@ -117,7 +119,7 @@
                         end: arg.end,
                         allDay: arg.allDay,
                         rendering: 'color',
-                        color: '<?= $utils -> getSetting('event-color', 'set_calendar', $router -> getRouteParam("2")) ?>'
+                        color: '#f76707'
                     })
                 }
                 calendar.unselect()

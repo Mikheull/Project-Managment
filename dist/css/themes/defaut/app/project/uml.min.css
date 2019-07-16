@@ -1,1 +1,1 @@
-.refresh_btn{position:absolute;top:10px;left:25px}
+.refresh_btn{position:absolute;top:10px;left:25px}.file_container{display:contents;width:100%}.file_item{width:128px;border:solid 1px #e9e9e9;border-radius:6px;margin:0 25px 15px 0}.file_item .body{width:128px;height:96px;text-align:center;line-height:96px;font-size:2em;color:#e2e2e2}.file_item .footer{width:128px;min-height:32px;height:auto;text-align:center}.file_item:hover{border:solid 1px var(--light-black-color)}.file_item:hover .body{color:var(--light-black-color)}

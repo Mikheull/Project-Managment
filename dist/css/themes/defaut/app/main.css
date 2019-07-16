@@ -10,7 +10,6 @@
 @media (max-width: 568px) { .sidebar-project-container {width: 70vw;} }
 
 
-
 .navbar-app {width: 100%;padding: 10px 0;}
 .navbar-nav.nav-border-bot {border-bottom: solid 1px rgba(38, 46, 62, 0.1);padding-bottom: 15px}
 .navbar-app .navbar-nav .nav-left {display: flex}
@@ -20,6 +19,8 @@
 .nav-item-mr a {margin-top: 5px}
 .nav-item-mr:hover {background: rgba(93, 121, 246, 0.05);border-radius: 3px}
 
+/* page */ 
+.content_wrapper {width: 90vw;margin: 0 auto}
 
 
 
