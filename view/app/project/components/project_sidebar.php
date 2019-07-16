@@ -36,7 +36,7 @@
 
             <div class="col-md-4 col-12 nav-right">
                 <ul class="text-align-right">
-                    <li class="nav-item" data-action="invite" data-ref="<?= $router -> getRouteParam("2") ?>"> <a href="" class="btn btn-sm primary-btn"> <i data-feather="mail"></i> Inviter</a> </li>
+                    <li class="nav-item" id="rapid_actions"> <a class="btn btn-sm primary-btn"> <i data-feather="plus-circle"></i></a> </li>
                     <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/settings" title="Réglages"><i data-feather="settings"></i></a> </li>
                         
                     <li class="nav-item notification"> <a href="<?= $config -> rootUrl() ;?>notifications" title="notifications"><i data-feather="bell"></i></a> </li>
@@ -50,6 +50,9 @@
 
 </div>
 
+
+
+<!-- Ajax -->
 <div id="project_output" class="hidden"></div>
 
 
@@ -124,3 +127,81 @@
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+<!-- Menu + Actions -->
+<div id="rapid_actions_container" class="hidden">
+    <ul class="margin-bot margin-top text-align-left">
+        <?php
+            if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'project.team.member.manage')){
+                ?> <li class="nav-item margin-bot" data-action="invite" data-ref="<?= $router -> getRouteParam("2") ?>"> <a class="link dark-link" href="">Invitation</a> </li> <?php
+            }
+            if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'calendar.add.event')){
+                ?> <li class="nav-item" data-action="new_header_cal_event" data-ref="<?= $router -> getRouteParam("2") ?>"> <a class="link dark-link" href="">Évènement</a> </li> <?php
+            }
+            if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'task.create')){
+                ?> <li class="nav-item" data-action="new_header_task" data-ref="<?= $router -> getRouteParam("2") ?>"> <a class="link dark-link" href="">Tâche</a> </li> <?php
+            }
+            if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'bug-tracker.create')){
+                ?> <li class="nav-item" data-action="new_header_bug" data-ref="<?= $router -> getRouteParam("2") ?>"> <a class="link dark-link" href="">Rapport de bug</a> </li> <?php
+            }
+        ?>
+    </ul>
+</div>
+<script>
+    var template = document.getElementById('rapid_actions_container')
+    tippy('#rapid_actions', {
+        content: template.innerHTML,
+        animation: 'fade',
+        theme: 'light-border',
+        interactive: true,
+        placement: 'bottom',
+        arrowType: 'round',
+        arrow: true,
+    })
+
+// Nouveau rapport de bug
+$(document).on("click", "[data-action='new_header_task']", function(e) {
+    event.preventDefault();
+    let ref = this.dataset.ref;
+
+    bootbox.dialog({
+        backdrop: true,
+        closeButton: false,
+        title: "Créer une tâche",
+        buttons: {
+            confirm: {
+                label: 'Ok',
+                className: 'btn primary-btn',
+                callback: function(){
+                    let tab_token = $( 'select[name="tab_token"]' ).val();
+                    let task_name = $( 'input[name="task_name"]' ).val();
+                    let deadline = $( 'input[name="deadline"]' ).val();
+                    let duration = $( 'input[name="duration"]' ).val();
+                    
+                    $.ajax({
+                        url:  rootUrl + 'controller/ajax/project/task/create_task.php',
+                        type: 'POST',
+                        data: {task_name: task_name, deadline: deadline, duration: duration, project_token: ref, tab_token: tab_token},
+                        success:function(data){
+                            $('#tab_output').html(data);
+                        }
+                    });
+                   
+                }
+            },
+            cancel: {
+                label: 'Annuler',
+                className: 'btn dark-btn',
+            }
+        },
+        message: '<form method="POST" class="margin-bot-lg"> <div class="container"> <div class="row"> <div class="col-12 input"> <div class="input-field"> <label for="task_name" class="color-dark">Titre de la tâche</label> <input type="text" placeholder="Tache x" name="task_name" id="task_name"> </div></div><div class="col-12 input margin-bot"> <div class="input-field"> <label for="deadline" class="color-dark">Deadline</label> <input type="date" name="deadline" id="deadline"> </div></div><div class="col-12 input margin-bot"> <div class="input-field"> <label for="duration" class="color-dark">Durée</label> <input type="time" name="duration" id="duration" value="01:00"> </div></div><div class="col-12 input margin-bot"> <select name="tab_token"> <option disabled>Aucun</option> <?php require_once ("controller/task.php") ; $tabs=$task -> getTabs( $router -> getRouteParam("2") ); foreach($tabs["content"] as $t){echo "<option value=\"". $t["tab_token"] ."\">". $t["name"] ."</option>";}?> </select> </div></div></div></form>',
+        
+    });
+});
+</script>

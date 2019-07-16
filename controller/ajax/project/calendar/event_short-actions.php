@@ -85,6 +85,19 @@ if($action == 'edit'){
 }
 
 
+if($action == 'new_byHeader'){
+    if(!empty($_POST['event_name']) AND !empty($_POST['event_date'])){
+        $event_name = cleanVar($_POST['event_name']);
+        $event_date = cleanVar($_POST['event_date']);
+
+        $errors = $calendar -> newEvent($event_token, $event_name , $event_date , $event_date);
+
+    }else{
+        $errors = ['success' => false, 'options' => ['content' => "Remplissez tout les champs !", 'theme' => 'error'] ];
+    }
+}
+
+
 
 
 

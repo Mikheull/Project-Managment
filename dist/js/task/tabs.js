@@ -152,5 +152,6 @@ $(document).on("click", "[data-action='tab-export']", function(e) {
                 });
             }
         }
+        
     });
 });

@@ -218,3 +218,87 @@ $(document).on("click", "[data-action='rename']", function(e) {
         }
     });
 });
+
+
+
+
+
+// ------------------------------------------------------------------------------------------------------------
+
+
+// Nouvel event calendrier
+$(document).on("click", "[data-action='new_header_cal_event']", function(e) {
+    event.preventDefault();
+    let ref = this.dataset.ref;
+
+    bootbox.dialog({
+        backdrop: true,
+        closeButton: false,
+        title: "Créer un évènement",
+        buttons: {
+            confirm: {
+                label: 'Ok',
+                className: 'btn primary-btn',
+                callback: function(){
+                    let event_name = $( 'input[name="event_name"]' ).val();
+                    let event_date = $( 'input[name="date"]' ).val();
+                    
+                    $.ajax({
+                        url:  rootUrl + 'controller/ajax/project/calendar/event_short-actions.php',
+                        type: 'POST',
+                        data: {event_name: event_name, event_date: event_date, event_token: ref, action: 'new_byHeader'},
+                        success:function(data){
+                            $('#project_output').html(data);
+                        }
+                    });
+                   
+                }
+            },
+            cancel: {
+                label: 'Annuler',
+                className: 'btn dark-btn',
+            }
+        },
+        message: '<form method="POST" class="margin-bot-lg"> <div class="container"> <div class="row"> <div class="col-12 input"> <div class="input-field"> <label for="event_name" class="color-dark">Titre de l\'évènement</label> <input type="text" placeholder="Event x" name="event_name" id="event_name"> </div></div><div class="col-12 input"> <div class="input-field"> <label for="date" class="color-dark">Date de l\'évènement</label> <input type="date" name="date" id="date"> </div></div></div></div></form>',
+        
+    });
+});
+
+
+// Nouveau rapport de bug
+$(document).on("click", "[data-action='new_header_bug']", function(e) {
+    event.preventDefault();
+    let ref = this.dataset.ref;
+
+    bootbox.dialog({
+        backdrop: true,
+        closeButton: false,
+        title: "Déclarer un bug",
+        buttons: {
+            confirm: {
+                label: 'Ok',
+                className: 'btn primary-btn',
+                callback: function(){
+                    let bug_name = $( 'input[name="bug_name"]' ).val();
+                    let bug_desc = $( 'textarea[name="bug_desc"]' ).val();
+                    
+                    $.ajax({
+                        url:  rootUrl + 'controller/ajax/project/bug/create_bug.php',
+                        type: 'POST',
+                        data: {bug_name: bug_name, bug_desc: bug_desc, project_token: ref},
+                        success:function(data){
+                            $('#bug_output').html(data);
+                        }
+                    });
+                   
+                }
+            },
+            cancel: {
+                label: 'Annuler',
+                className: 'btn dark-btn',
+            }
+        },
+        message: '<form method="POST" class="margin-bot-lg"> <div class="container"> <div class="row"> <div class="col-12 input"> <div class="input-field"> <label for="bug_name" class="color-dark">Titre du bug</label> <input type="text" placeholder="Bug x" name="bug_name" id="bug_name"> </div></div><div class="col-12 input"> <div class="input-field"> <label for="bug_desc" class="color-dark">Description du bug</label> <textarea placeholder="Lorem Ipsum" name="bug_desc" id="bug_desc"></textarea> </div></div></div></div></form>',
+        
+    });
+});

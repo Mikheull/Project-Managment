@@ -32,13 +32,13 @@
                                                         if(isset($task_item['date_end'])){
                                                             $date_end = new DateTime( $task_item['date_end'] );
                                                             $endinterval = $date1->diff($date_end);
-                                                            ?> <i class="far fa-check-square color-primary"></i> <span class="color-primary">Terminée il y a <?= $endinterval->days ?> jour<?= ($endinterval->days > 1 ? 's' : '') ;?></span> <?php
+                                                            ?> <i data-feather="check-circle" class="color-primary"></i> <span class="color-primary">Terminée il y a <?= $endinterval->days ?> jour<?= ($endinterval->days > 1 ? 's' : '') ;?></span> <?php
                                                         }else{
 
                                                             if($date1 < $date2){
-                                                                ?> <i class="far fa-calendar"></i> <span>Dans <?= $interval->days ?> jour<?= ($interval->days > 1 ? 's' : '') ;?></span> <?php
+                                                                ?> <i data-feather="calendar"></i> <span>Dans <?= $interval->days ?> jour<?= ($interval->days > 1 ? 's' : '') ;?></span> <?php
                                                             }else{
-                                                                ?> <i class="far fa-calendar color-red"></i> <span class="color-red">En retard de <?= $interval->days ?> jour<?= ($interval->days > 1 ? 's' : '') ;?></span> <?php
+                                                                ?> <i data-feather="calendar" class="color-red"></i> <span class="color-red">En retard de <?= $interval->days ?> jour<?= ($interval->days > 1 ? 's' : '') ;?></span> <?php
                                                             }
                                                         }
                                                     ?>
@@ -62,16 +62,16 @@
                                                                 <div>
                                                                     <?php
                                                                     if(!isset($task_item['date_end'])){
-                                                                        ?> <div class="btn btn-sm primary-btn" data-action="close_task" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>">Terminer la tâche</div> <?php
+                                                                        ?> <div class="btn btn-sm primary-btn" data-action="close_task" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>"><i data-feather="eye-off"></i> Terminer</div> <?php
                                                                     }else{
-                                                                        ?> <div class="btn btn-sm primary-btn" data-action="reopen_task" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>">Réouvrir la tâche</div> <?php
+                                                                        ?> <div class="btn btn-sm primary-btn" data-action="reopen_task" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>"><i data-feather="eye"></i> Réouvrir</div> <?php
                                                                     }
                                                                     ?>
                                                                 </div>
 
                                                                 <div class="flex">
-                                                                    <div class="btn btn-sm light-btn-bordered margin-left margin-right" data-action="edit_task" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>"><i class="fas fa-edit"></i></div>
-                                                                    <div class="btn btn-sm dark-btn" data-action="delete_task" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>"><i class="far fa-trash-alt"></i></div>
+                                                                    <div class="btn btn-sm light-btn-bordered margin-left margin-right" data-action="edit_task" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>"><i data-feather="edit"></i></div>
+                                                                    <div class="btn btn-sm red-btn" data-action="delete_task" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>"><i data-feather="trash-2"></i></div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -88,7 +88,7 @@
 
 
                     <div class="row">
-                        <div class="col-6 offset-3 btn light-btn-bordered half-width color-primary text-align-center new-task" data-pro="<?= $router -> getRouteParam('2') ?>" data-tab="<?= $t['tab_token'] ?>">Nouvelle tache</div>
+                        <div class="col-6 offset-3 btn light-btn-bordered half-width color-primary text-align-center new-task" data-pro="<?= $router -> getRouteParam('2') ?>" data-tab="<?= $t['tab_token'] ?>"><i data-feather="plus-circle"></i> Nouvelle tache</div>
                     </div>
                 </div>
             </div>
@@ -97,7 +97,7 @@
 
 
             <div id="tp-<?= $t['tab_token'] ?>" class="hidden">
-                <ul class="margin-top">
+                <ul class="margin-top text-align-left">
                     <li> <a href="" data-action="tab-rename" data-ref="<?= $t['tab_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>" class="link dark-link">Renommer</a> </li>
                     <li> <a href="" data-action="tab-export" data-ref="<?= $t['tab_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>" class="link dark-link">Exporter le tableau</a> </li>
                     <li> <a href="" data-action="tab-delete" data-ref="<?= $t['tab_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>" class="link red-link">Supprimer</a> </li>
@@ -132,5 +132,5 @@
     }
 ?>
 <div class="tab-item">
-    <div class="btn primary-btn full-width text-align-center" id="new-tab" data-pro="<?= $router -> getRouteParam('2') ?>">Nouveau tableau</div>
+    <div class="btn primary-btn full-width text-align-center" id="new-tab" data-pro="<?= $router -> getRouteParam('2') ?>"><i data-feather="plus-circle"></i> Nouveau tableau</div>
 </div>
