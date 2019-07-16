@@ -40,10 +40,11 @@
                     <h3 class="title-sm bold color-dark margin-top"><?= $resultParam[1] ?></h3>
                 </div>
                 <div class="col-md-2 col-12 flex">
-                    <div> <div class="btn btn-sm dark-btn margin-right"><i class="fas fa-edit"></i></div> </div>
+                    <div> <a class="btn btn-sm dark-btn margin-right" href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/documents/edit?file_name=<?= $resultParam[1] ?>"><i class="fas fa-edit"></i></a> </div>
                     <div> <a class="btn btn-sm dark-btn margin-right" download href="<?= $config -> rootUrl() ;?>dist/uploads/p/<?= $router -> getRouteParam("2") ?>/docs/<?= $resultParam[1] ?>"><i class="fas fa-download"></i></a> </div>
-                    <div> <div class="btn btn-sm dark-btn margin-right" data-action="share" data-ref="<?= $resultParam[1] ?>"><i class="fas fa-share"></i></div> </div>
-                    <div> <div class="btn btn-sm dark-btn" id="full_screen"><i class="fas fa-expand"></i></div> </div>
+                    <div> <div class="btn btn-sm dark-btn margin-right" data-action="share" data-ref="<?= $resultParam[1] ?>" data-pro="<?= $router -> getRouteParam("2") ?>"><i class="fas fa-share"></i></div> </div>
+                    <div> <div class="btn btn-sm dark-btn margin-right" id="full_screen"><i class="fas fa-expand"></i></div> </div>
+                    <div> <div class="btn btn-sm red-btn" data-action="delete_document" data-ref="<?= $resultParam[1] ?>" data-pro="<?= $router -> getRouteParam("2") ?>"><i class="fas fa-trash-alt"></i></div> </div>
                 </div>
             </div>
 
@@ -116,6 +117,7 @@
     </div>
 </div>
 <div id="share_output"></div>
+<div id="delete_output" class="hidden"></div>
 
 
 <script>Prism.plugins.autoloader.languages_path = 'https://cdn.jsdelivr.net/npm/prismjs@1.16.0/components.js'</script>
@@ -130,8 +132,9 @@
 
 
     $(document).on("click", "[data-action='share']", function(e) {
+        let token = this.dataset.pro;
         event.preventDefault();
-        let url = rootUrl+'dist/uploads/p/<?= $router -> getRouteParam("2") ?>/docs/'+this.dataset.ref;
+        let url = 'dist/uploads/p/<?= $router -> getRouteParam("2") ?>/docs/'+this.dataset.ref;
 
         bootbox.confirm({
             backdrop: true,
@@ -153,7 +156,44 @@
                     $.ajax({
                         url:  rootUrl + 'controller/ajax/project/documents/share.php',
                         type: 'POST',
-                        data: {base_url: url},
+                        data: {base_url: url, token: token},
+                        success:function(data){
+                            $('#share_output').html(data);
+                        }
+                    });
+                }
+            }
+        });
+    });
+
+    $(document).on("click", "[data-action='delete_document']", function(e) {
+        event.preventDefault();
+        let token = this.dataset.pro;
+        let del_url = 'dist/uploads/p/'+token+'/docs/'+this.dataset.ref;
+        let url = '../../../../dist/uploads/p/'+token+'/docs/'+this.dataset.ref;
+        console.log(url);
+
+        bootbox.confirm({
+            backdrop: true,
+            closeButton: false,
+            title: "Êtes vous sûr ?",
+            message: "Vous êtes sur le point de supprimer ce document définitivement.",
+            buttons: {
+                cancel: {
+                    label: '<i class="fa fa-times"></i> Cancel',
+                    className: 'btn dark-btn'
+                },
+                confirm: {
+                    label: '<i class="fa fa-check"></i> Confirm',
+                    className: 'btn primary-btn'
+                }
+            },
+            callback: function (result) {
+                if(result == true){
+                    $.ajax({
+                        url:  rootUrl + 'controller/ajax/project/documents/delete.php',
+                        type: 'POST',
+                        data: {base_url: url, del_url: del_url, token: token},
                         success:function(data){
                             $('#share_output').html(data);
                         }

@@ -2,10 +2,10 @@
 
 
 /**
- * Script de partage de document
+ * Script de suppression de document
  * 
  * utilisé dans :
- *  (Direct) - view/app/project/tools/document/share/index.php
+ *  (Direct) - view/app/project/tools/document/home/index.php
  * 
  */
 
@@ -51,12 +51,14 @@ $shortener = new shortener($db);
  */
 if(isset($_POST['base_url'])){
 
-    $type = 'document';
     $base_url = $_POST['base_url'];
+    $del_url = $_POST['del_url'];
     $token = $_POST['token'];
-    $author_token = $main -> getToken();
+    unlink($base_url);
+    $errors = $shortener -> deleteShortenerUrl($del_url);
 
-    $errors = $shortener -> newShortenerUrl($token, $type, $base_url, $author_token);
+    ?><script> location.href = rootUrl + "app/project/<?= $token ?>/t/documents"; </script><?php
+
 }
 
 

@@ -150,6 +150,9 @@
             if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'bug-tracker.create')){
                 ?> <li class="nav-item" data-action="new_header_bug" data-ref="<?= $router -> getRouteParam("2") ?>"> <a class="link dark-link" href="">Rapport de bug</a> </li> <?php
             }
+            if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'document.create')){
+                ?> <li class="nav-item" > <a class="link dark-link" href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/documents/create">Document</a> </li> <?php
+            }
         ?>
     </ul>
 </div>

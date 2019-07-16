@@ -75,5 +75,39 @@ if(isset($_POST['create_doc'])){
 }
 
 
+
+
+
+
+if(isset($_POST['save_edit'])){
+	
+	if(isset($_POST['org_file_name']) AND !empty($_POST['org_file_name']) AND isset($_POST['doc_name']) AND !empty($_POST['doc_name']) AND isset($_POST['doc_content']) AND !empty($_POST['doc_content'])){
+
+        $org_file_name = cleanVar($_POST['org_file_name']);
+        $doc_name = cleanVar($_POST['doc_name']);
+        $doc_content = $_POST['doc_content'];
+
+		$file_path = 'dist/uploads/p/'.$router -> getRouteParam("2").'/docs/'.$org_file_name;
+		
+
+		// Edit
+		$file_handle = fopen($file_path, 'w'); 
+		fwrite($file_handle, $doc_content);
+		fclose($file_handle);
+
+
+		// Rename
+		rename ($file_path, 'dist/uploads/p/'.$router -> getRouteParam("2").'/docs/'.$doc_name);
+		header('Location: '.$config -> rootUrl().'app/project/'.$router -> getRouteParam("2").'/t/documents/viewer?file_name='.$doc_name);
+        $errors = ['success' => false, 'options' => ['content' => "Les modifications ont été sauvegardées !", 'theme' => 'success'] ];
+
+    }else{
+        $errors = ['success' => false, 'options' => ['content' => "Vous devez remplir tout les champs obligatoires !", 'theme' => 'error'] ];
+	}
+	
+}
+
+
+
 // End of file
 /******************************************************************************/

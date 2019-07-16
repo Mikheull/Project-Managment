@@ -132,7 +132,7 @@ $router -> addRoutes(
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/documents/import', 'dir_path' => 'view/app/project/tools/documents/import/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/documents/create', 'dir_path' => 'view/app/project/tools/documents/create/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/documents/viewer', 'dir_path' => 'view/app/project/tools/documents/view/'],
-        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/documents/{{DOCUMENTS_TOKEN}}/edit', 'dir_path' => 'view/app/project/tools/documents/edit/'],
+        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/documents/edit', 'dir_path' => 'view/app/project/tools/documents/edit/'],
 
     ]
 );
