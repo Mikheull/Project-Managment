@@ -76,6 +76,28 @@ class messenger extends db_connect {
 
 
     /**
+     * Créer un channel
+     * 
+     * Créer un channel dans le projet
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $project_token Token du projet
+     * @param string $name Nom du channel
+     * @param string $topic Topic du channel
+     * @return boolean
+     */
+
+    function newChannel($project_token = '', $name = '', $topic = ''){
+
+        $channel_token = $this -> generateToken(15, 'numbers');
+        $request = $this -> _db -> exec("INSERT INTO `pr_messenger_channels` (`project_token`, `channel_token`, `name`, `subject`) VALUES ('$project_token','$channel_token','$name','$topic')");
+        return (['success' => true, 'options' => ['content' => "Le channel a été créer !", 'theme' => 'success'] ]);
+    } 
+    
+
+
+    /**
      * Envoyer un message
      * 
      * Envoie un message dans un channel de projet
@@ -89,14 +111,11 @@ class messenger extends db_connect {
      */
 
     function newMessage($content = '', $project_token = '', $channel_token = ''){
-        setlocale(LC_TIME, "fr_FR");
-        $date = date("Y-m-d H:i:s");
 
         $author_token = main::getToken();
         $message_token = $this -> generateToken(20, 'numbers');
-        $request = $this -> _db -> exec("INSERT INTO `pr_messenger_message` (`project_token`, `channel_token`, `message_token`, `author_token`, `content`, `date_creation`) VALUES ('$project_token','$channel_token','$message_token','$author_token','$content','$date')");
+        $request = $this -> _db -> exec("INSERT INTO `pr_messenger_message` (`project_token`, `channel_token`, `message_token`, `author_token`, `content`) VALUES ('$project_token','$channel_token','$message_token','$author_token','$content')");
     } 
-    
 
 /******************************************************************************/
 

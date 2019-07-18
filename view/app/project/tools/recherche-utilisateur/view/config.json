@@ -14,17 +14,17 @@
 
 
     "meta": [ 
-        "<title>Improove - Messenger</title>",
-        "<meta name=\"description\" content=\"Discutez avec les membres de votre projet.\"/>",
-        "<meta property=\"og:title\" content=\"Improove - Messenger\"/>",
-        "<meta property=\"og:description\" content=\"Discutez avec les membres de votre projet.\"/>",
+        "<title>Improove - Recherche utilisateur</title>",
+        "<meta name=\"description\" content=\"Gérez vos actions de recherche.\"/>",
+        "<meta property=\"og:title\" content=\"Improove - Recherche utilisateur\"/>",
+        "<meta property=\"og:description\" content=\"Gérez vos actions de recherche.\"/>",
         "<meta property=\"og:image\" content=\"https://www.improove.tk/dist/images/og_bg.png\"/>",
         "<meta property=\"og:image:width\" content=\"128\"/>",
         "<meta property=\"og:image:height\" content=\"128\"/>",
 
         "<meta property=\"twitter:card\" content=\"summary_large_image\"/>",
-        "<meta property=\"twitter:title\" content=\"Improove - Messenger\"/>",
-        "<meta property=\"twitter:description\" content=\"Discutez avec les membres de votre projet.\"/>",
+        "<meta property=\"twitter:title\" content=\"Improove - Recherche utilisateur\"/>",
+        "<meta property=\"twitter:description\" content=\"Gérez vos actions de recherche.\"/>",
         "<meta property=\"twitter:image\" content=\"https://www.improove.tk/dist/images/og_bg.png\"/>"
 
     ],
@@ -32,17 +32,17 @@
     "css": [ 
         "app/main.min.css",
         "app/project/main.min.css",
-        "app/project/messenger.min.css",
+        "app/project/recherche-utilisateur.min.css",
         "bootstrap-modal.min.css"
+    ],
+     
+    "js": [ 
+        "recherche-utilisateur/recherche-utilisateur.min.js",
+        "project-fast-act.min.js"
     ],
 
     "online_css": [ 
         "https://cdn.jsdelivr.net/npm/tippy.js@4.3.1/themes/light-border.css"
-    ],
-
-    "js": [ 
-        "project-fast-act.min.js",
-        "messenger/messenger.min.js"
     ]
 
 }

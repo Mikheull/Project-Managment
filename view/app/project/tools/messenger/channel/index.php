@@ -41,6 +41,7 @@
                             <?php
                         }
                     ?>
+                    <a class="btn btn-sm primary-btn flex center" data-action="new_channel" data-pro="<?= $router -> getRouteParam('2') ?>" href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/messenger/<?= $router -> getRouteParam('5') ?>">Nouveau channel</a> 
                 </div>
 
                 <div class="col-md-9 col-12 conv_wrapper chat">
@@ -169,5 +170,9 @@ $(document).ready(function() {
         filtersPosition: "bottom",
         hidePickerOnBlur: false
     });
+    
 });
 </script>
+
+
+<div id="channel-list_output"></div>

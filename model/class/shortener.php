@@ -60,6 +60,26 @@ class shortener extends db_connect {
        $request = $this -> _db -> exec("UPDATE `pr_shortener` SET `enable` = 0 WHERE `base_url` = '$base_url' AND `enable` = '1' ");
        return (['success' => true, 'options' => ['content' => "Le fichier n\'est plus partagé !", 'theme' => 'success'] ]);
    }
+
+
+
+   /**
+     * Vérifie si un shortener partagé existe
+     * 
+     * Cherche dans la base de données une correspondace avec le short_url shortener partagé fourni
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $short_url Token du shortener partagé
+     * @return boolean
+     */
+
+    function shortenerExist($short_url = '') {
+        $request = $this -> _db -> query("SELECT * FROM `pr_shortener` WHERE `short_url` = '$short_url' AND `enable` = '1' ");
+        $res = $request->fetch();
+        
+        return ($res ? true : false);
+    }
     
 
     

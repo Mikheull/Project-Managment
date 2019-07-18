@@ -1,8 +1,6 @@
 <?php
     require_once ('controller/project.php') ;
     require_once ('controller/recherche_utilisateur.php') ;
-    
-    $allResearchs = $recherche_utilisateur -> getEtudes( $router -> getRouteParam('2') );
 ?>
 
 
@@ -28,10 +26,10 @@
 
             <?php
             if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'user-research.view')){
-                if($allResearchs['count'] !== 0){
-                    require_once ('view/app/project/tools/recherche-utilisateur/home/components/home.php');
+                if($recherche_utilisateur -> etudeExist($router -> getRouteParam("5"))){
+                    require_once ('view/app/project/tools/recherche-utilisateur/view/components/home.php');
                 }else{
-                    require_once ('view/app/project/tools/recherche-utilisateur/home/components/empty.php');
+                    require_once ('view/app/project/tools/recherche-utilisateur/view/components/not-found.php');
                 }
             }else{
                 ?>

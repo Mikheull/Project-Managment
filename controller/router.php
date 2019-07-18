@@ -116,6 +116,7 @@ $router -> addRoutes(
 
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/recherche-utilisateur', 'dir_path' => 'view/app/project/tools/recherche-utilisateur/home/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/recherche-utilisateur/create', 'dir_path' => 'view/app/project/tools/recherche-utilisateur/create/'],
+        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/recherche-utilisateur/{{TOKEN}}', 'dir_path' => 'view/app/project/tools/recherche-utilisateur/view/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/recherche-utilisateur/{{TOKEN}}/edit', 'dir_path' => 'view/app/project/tools/recherche-utilisateur/edit/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/recherche-utilisateur/{{TOKEN}}/create/affinity-diagram', 'dir_path' => 'view/app/project/tools/recherche-utilisateur/create/affinity-diagram/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/recherche-utilisateur/{{TOKEN}}/create/survey', 'dir_path' => 'view/app/project/tools/recherche-utilisateur/create/survey/'],

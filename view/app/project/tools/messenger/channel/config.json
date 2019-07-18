@@ -43,7 +43,8 @@
     ],
 
     "js": [ 
-        "project-fast-act.min.js"
+        "project-fast-act.min.js",
+        "messenger/messenger.min.js"
     ]
 
 }

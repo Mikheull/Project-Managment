@@ -21,9 +21,6 @@ $document = new document($db);
 if(isset($_POST['import_btn'])){
 	if(count($_FILES['import_files']['name']) > 0){
 
-
-
-
 		if(!is_dir('dist/uploads/p/'.$router -> getRouteParam("2").'/docs/')){
 			mkdir('dist/uploads/p/'.$router -> getRouteParam("2").'/docs/', 0777, true);
 		}
@@ -44,8 +41,6 @@ if(isset($_POST['import_btn'])){
 				$errors = ['success' => false, 'options' => ['content' => "Une erreur est survenue !", 'theme' => 'error'] ];
 			}
 		}
-
-		
 
     }else{
         $errors = ['success' => false, 'options' => ['content' => "Merci de télécharger un fichier !", 'theme' => 'error'] ];
