@@ -1,8 +1,8 @@
 <div class="row text-align-center">
-    <div class="col-8 offset-2 margin-top-lg">
+    <div class="col-8 offset-2 mr-top-lg">
         <img src="<?= $config -> rootUrl() ;?>dist/images/illustrations/empty_teams.svg" alt="" width="60%">
     </div>
-    <div class="col-8 offset-2 margin-top-lg margin-bot-lg">
+    <div class="col-8 offset-2 mr-top-lg mr-bot-lg">
         <?php
             if($router -> getRouteParam('0') == 'account'){
                 ?> <p class="color-black">Vous n'avez pas encore rejoins de projets !</p> <?php

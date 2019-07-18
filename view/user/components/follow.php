@@ -36,7 +36,7 @@
 
 <?php require_once ('view/components/navbar-header-light.php') ;?>
 
-<div class="container account margin-top-lg margin-bot-lg">
+<div class="container account mr-top-lg mr-bot-lg">
 
     <div class="row">
         <div class="col-md-3 col-12">
@@ -55,26 +55,26 @@
         if(empty($list)){
             ?>
                 <div class="row">
-                    <div class="col-6 offset-3 text-align-center margin-top-lg margin-bot-lg light-border">
-                        <h2 class="title-sm color-dark margin-bot margin-top">0 followers</h2>
+                    <div class="col-6 offset-3 text-align-center mr-top-lg mr-bot-lg light-border">
+                        <h2 class="title-sm color-dark mr-bot mr-top">0 followers</h2>
                     </div>
                 </div>
             <?php
         }else{
             ?>
             
-                <div class="row margin-top-lg margin-bot-lg">
+                <div class="row mr-top-lg mr-bot-lg">
                     <ul class="follow_content">
                         <?php
                         foreach($list as $res){
                             ?>
-                            <li class="item margin-bot col-6 light-border">
+                            <li class="item mr-bot col-6 light-border">
                                 <div class="container">
                                     <div class="row">
-                                        <div class="col-md-3 col-12 margin-bot margin-top">
+                                        <div class="col-md-3 col-12 mr-bot mr-top">
                                             <a href="<?= $config -> rootUrl() ;?>member/<?= $utils -> getData('imp_user', 'username', 'public_token', $res[$follow_mode] ) ?>" title="Accéder au compte de <?= $utils -> getData('imp_user', 'first_name', 'public_token', $res[$follow_mode] ) ?> <?= $utils -> getData('imp_user', 'last_name', 'public_token', $res[$follow_mode] ) ?>">
                                                 <div class="profil_picture-md">
-                                                    <div class="img light-border" style="background-image: url('<?= $config -> rootUrl() ;?>dist/<?= $utils -> getData('imp_user', 'profil_image', 'public_token', $res[$follow_mode] ) == NULL ? 'images/content/defaut_profil_pic.png' : 'uploads/u/'. $res[$follow_mode].'/profil_pic/'.$utils -> getData('imp_user', 'profil_image', 'public_token', $res[$follow_mode] ) ;?>');"></div>
+                                                    <div class="img light-border" style="background-image: url('<?= $config -> rootUrl() ;?>dist/<?= $utils -> getData('imp_user', 'profil_image', 'public_token', $res[$follow_mode] ) == NULL ? 'images/content/defaut_profil_pic.jpg' : 'uploads/u/'. $res[$follow_mode].'/profil_pic/'.$utils -> getData('imp_user', 'profil_image', 'public_token', $res[$follow_mode] ) ;?>');"></div>
                                                 </div>    
                                             </a>
                                         </div>

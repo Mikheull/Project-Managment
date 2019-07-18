@@ -449,7 +449,7 @@ class project extends db_connect {
         
         if(!$res){
             $request = $this -> _db -> exec("INSERT INTO `pr_project` (`name`, `description`, `public_token`, `public`, `founder_token`) VALUES ('$name', '$desc', '$token', '$status_team', '$owner')");
-            $request = $this -> _db -> exec("INSERT INTO `pr_project_member` (`user_public_token`, `project_token`, `role`) VALUES ('$owner', '$token', '1')");
+            $request = $this -> _db -> exec("INSERT INTO `pr_project_member` (`user_public_token`, `project_token`, `role`, `permissions`) VALUES ('$owner', '$token', '1', '*')");
             
             foreach($invitations as $invite){
                 $invite = cleanVar($invite);

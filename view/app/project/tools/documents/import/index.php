@@ -25,7 +25,7 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6 col-12 margin-top-lg">
+                <div class="col-md-6 col-12 mr-top-lg">
                     <form method="post" enctype="multipart/form-data">
                         <input type="file" class="filepond" name="import_files[]" multiple data-max-file-size="3MB" data-max-files="10" />
                         <button name="import_btn" class="btn btn-sm dark-btn">Importer</button>

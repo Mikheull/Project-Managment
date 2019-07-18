@@ -10,12 +10,12 @@
 
             <div class="col-md-7 col-12">
                 <div class="title">
-                    <h2 class="title-md bold color-light margin-bot">Rejoignez nous gratuitement dès maintenant.</h2>
+                    <h2 class="title-md bold color-light mr-bot">Rejoignez nous gratuitement dès maintenant.</h2>
                     <h3 class="title-xs color-gray">Profitez de la totalité des fonctionnalités de la plateforme en vous inscrivant.</h3>
                 </div>
 
-                <div class="form margin-top-lg margin-bot-lg">
-                    <form method="POST" class="margin-bot-lg">
+                <div class="form mr-top-lg mr-bot-lg">
+                    <form method="POST" class="mr-bot-lg">
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-6 col-12 input">
@@ -43,7 +43,7 @@
                                     </div>
                                 </div>
                                 
-                                <div class="col-md-6 col-12 input margin-bot">
+                                <div class="col-md-6 col-12 input mr-bot">
                                     <div class="input-field">
                                         <label for="confirm_password" class="color-gray">Confirmer le mot de passe</label>
                                         <input type="password" name="confirm_password" id="confirm_password">
@@ -51,7 +51,7 @@
                                 </div>
 
 
-                                <div class="col-12 input margin-bot-lg">
+                                <div class="col-12 input mr-bot-lg">
                                     <div class="input-checkbox">
                                         <input type="checkbox" name="accept_cgu" id="accept_cgu" <?= isset($_POST['accept_cgu']) ? 'checked' : '' ?> >
                                         <label for="accept_cgu" class="color-gray">J’ai accepté les <a href="cgu" class="primary-link" title="Lire les conditions d'utilisation" target="blank">conditions d’utilisations</a></label>

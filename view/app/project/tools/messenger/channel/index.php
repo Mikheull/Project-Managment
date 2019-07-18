@@ -14,7 +14,7 @@
     <div class="content_wrapper">
         <div class="container-fluid">
 
-            <div class="row tabs margin-top-lg light-border">
+            <div class="row tabs mr-top-lg light-border">
                 <div class="col-md-3 col-12 conv_list">
                     <?php
                         $allChannels = $messenger -> getProjectChannels($router -> getRouteParam("2"));
@@ -22,8 +22,8 @@
                             $lastMessage = $messenger -> getLastMessagePosted($channel['channel_token']);
 
                             ?> 
-                                <a class="conv-item row margin-top margin-bot" href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/messenger/<?= $channel['channel_token'] ;?>">
-                                    <div class="col-12 margin-bot color-lg-dark">#<?= $channel['name'] ;?></div> 
+                                <a class="conv-item row mr-top mr-bot" href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/messenger/<?= $channel['channel_token'] ;?>">
+                                    <div class="col-12 mr-bot color-lg-dark">#<?= $channel['name'] ;?></div> 
                                     <?php
                                     if($lastMessage['content'] == null){
                                         ?>
@@ -56,7 +56,7 @@
                                 $allMessages = $messenger -> getMessages($router -> getRouteParam("5"));
                                 $group_count = 1;
                                 foreach($allMessages['content'] as $message){
-                                    $mes = $parsedown -> text( $message['content_edited'] == null ? $message['content'] : $message['content_edited'] );
+                                    $mes = $message['content_edited'] == null ? $message['content'] : $message['content_edited'];
                                     $mes = $utils -> parsedownChannel($mes, $router -> getRouteParam("2"));
                                     
                                     
@@ -78,13 +78,13 @@
                                                         $group_count = 1;
                                                         ?>
                                                             <script> $( 'li[data-token="<?= $message['message_token'] ?>"]' ).prev( "li" ).children().removeClass( "my-message-middle" ).addClass( "my-message-bottom" );</script>
-                                                            <div class="message-data text-align-right margin-top"> <span class="message-data-time text-xs" ><?= $config -> time_elapsed_string($message['date_edited'] == null ? $message['date_creation'] : $message['date_edited']) ?></span> </div>
+                                                            <div class="message-data text-align-right mr-top"> <span class="message-data-time text-xs" ><?= $config -> time_elapsed_string($message['date_edited'] == null ? $message['date_creation'] : $message['date_edited']) ?></span> </div>
                                                         <?php
                                                     }
                                                 }
                                             }else{
                                                 ?>
-                                                    <div class="message-data text-align-right margin-top"> <span class="message-data-time text-xs" ><?= $config -> time_elapsed_string($message['date_edited'] == null ? $message['date_creation'] : $message['date_edited']) ?></span> </div>
+                                                    <div class="message-data text-align-right mr-top"> <span class="message-data-time text-xs" ><?= $config -> time_elapsed_string($message['date_edited'] == null ? $message['date_creation'] : $message['date_edited']) ?></span> </div>
                                                 <?php
                                             }
                                             ?>
@@ -118,10 +118,10 @@
                                             ?>
                                             <div class="message-data flex">
                                                 <span class="message-data-name flex text-xs">
-                                                    <div class="avatar avatar--sm margin-right"> 
+                                                    <div class="avatar avatar--sm mr-right"> 
                                                         <figure class="avatar__figure" role="img">
                                                             <svg class="avatar__placeholder" aria-hidden="true" viewBox="0 0 20 20" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="6" r="2.5" stroke="currentColor"/><path d="M10,10.5a4.487,4.487,0,0,0-4.471,4.21L5.5,15.5h9l-.029-.79A4.487,4.487,0,0,0,10,10.5Z" stroke="currentColor"/></svg>
-                                                            <img class="avatar__img" src="<?= $config -> rootUrl() ;?>dist/<?= $utils -> getData('imp_user', 'profil_image', 'public_token', $message['author_token']) == NULL ? 'images/content/defaut_profil_pic.png' : 'uploads/u/'. $message['author_token'].'/profil_pic/'.$utils -> getData('imp_user', 'profil_image', 'public_token', $message['author_token']) ;?>">
+                                                            <img class="avatar__img" src="<?= $config -> rootUrl() ;?>dist/<?= $utils -> getData('imp_user', 'profil_image', 'public_token', $message['author_token']) == NULL ? 'images/content/defaut_profil_pic.jpg' : 'uploads/u/'. $message['author_token'].'/profil_pic/'.$utils -> getData('imp_user', 'profil_image', 'public_token', $message['author_token']) ;?>">
                                                         </figure>
                                                     </div>
                                                     <?= $utils -> getData('imp_user', 'username', 'public_token', $message['author_token']) ?>

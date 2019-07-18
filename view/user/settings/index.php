@@ -7,7 +7,7 @@
 <?php // View Content ?>
 <?php require_once ('view/components/navbar-header-light.php') ;?>
 
-<div class="container account margin-top-lg margin-bot-lg">
+<div class="container account mr-top-lg mr-bot-lg">
 
     <div class="row">
         <div class="col-md-3 col-12">

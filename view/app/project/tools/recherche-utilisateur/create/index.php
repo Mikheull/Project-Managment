@@ -29,6 +29,10 @@
             <?php
             if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'user-research.create')){
                 ?>
+
+                    <div>
+                        <h3 class="title-sm bold color-dark mr-top mr-bot">Créer une étude</span></h3>
+                    </div>
                     <form method="POST">
                         <div class="input_group">
                             <div class="input-field input-half">

@@ -35,7 +35,7 @@ $(document).on("click", ".new-task", function(e) {
                 className: 'btn dark-btn',
             }
         },
-        message: '<form method="POST" class="margin-bot-lg"><div class="container"><div class="row"><div class="col-12 input"><div class="input-field"> <label for="task_name" class="color-dark">Titre de la tâche</label> <input type="text" placeholder="Tache x" name="task_name" id="task_name"></div></div><div class="col-12 input margin-bot"><div class="input-field"> <label for="deadline" class="color-dark">Deadline</label> <input type="date" name="deadline" id="deadline"></div></div><div class="col-12 input margin-bot"><div class="input-field"> <label for="duration" class="color-dark">Durée</label> <input type="time" name="duration" id="duration" value="01:00"></div></div></div></div></form>',
+        message: '<form method="POST" class="mr-bot-lg"><div class="container"><div class="row"><div class="col-12 input"><div class="input-field"> <label for="task_name" class="color-dark">Titre de la tâche</label> <input type="text" placeholder="Tache x" name="task_name" id="task_name"></div></div><div class="col-12 input mr-bot"><div class="input-field"> <label for="deadline" class="color-dark">Deadline</label> <input type="date" name="deadline" id="deadline"></div></div><div class="col-12 input mr-bot"><div class="input-field"> <label for="duration" class="color-dark">Durée</label> <input type="time" name="duration" id="duration" value="01:00"></div></div></div></div></form>',
         
     });
 });
@@ -74,7 +74,7 @@ $(document).on("click", "[data-action='edit_task']", function(e) {
                 className: 'btn dark-btn',
             }
         },
-        message: '<form method="POST" class="margin-bot-lg"><div class="container"><div class="row"><div class="col-12 input"><div class="input-field"> <label for="task_name" class="color-dark">Titre de la tâche</label> <input type="text" placeholder="Tache x" name="task_name" id="task_name"></div></div><div class="col-12 input margin-bot"><div class="input-field"> <label for="deadline" class="color-dark">Deadline</label> <input type="date" name="deadline" id="deadline"></div></div><div class="col-12 input margin-bot"><div class="input-field"> <label for="duration" class="color-dark">Durée</label> <input type="time" name="duration" id="duration" value="01:00"></div></div></div></div></form>',
+        message: '<form method="POST" class="mr-bot-lg"><div class="container"><div class="row"><div class="col-12 input"><div class="input-field"> <label for="task_name" class="color-dark">Titre de la tâche</label> <input type="text" placeholder="Tache x" name="task_name" id="task_name"></div></div><div class="col-12 input mr-bot"><div class="input-field"> <label for="deadline" class="color-dark">Deadline</label> <input type="date" name="deadline" id="deadline"></div></div><div class="col-12 input mr-bot"><div class="input-field"> <label for="duration" class="color-dark">Durée</label> <input type="time" name="duration" id="duration" value="01:00"></div></div></div></div></form>',
         
     });
 });

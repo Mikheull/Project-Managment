@@ -14,8 +14,8 @@
     <div class="content_wrapper">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-10 col-12 flex margin-top">
-                    <div style="width: 128px" class="margin-right">
+                <div class="col-md-10 col-12 flex mr-top">
+                    <div style="width: 128px" class="mr-right">
                         <a class="navbar-brand" href="<?= $config -> rootUrl() ;?>./" title="Improove">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 28">
                                 <defs><style>.cls-1,.cls-3{fill:#4c6cf6;}.cls-2{fill:none;stroke:#4c6cf6;stroke-linecap:round;stroke-miterlimit:10;stroke-width:2px;}.cls-3{font-size:16px;font-family:Nunito-Bold, Nunito;font-weight:700;}.cls-4{letter-spacing:-0.01em;}.cls-5{letter-spacing:-0.02em;}</style></defs>
@@ -34,7 +34,7 @@
                 </div>
             </div>
 
-            <div class="row margin-top-lg">
+            <div class="row mr-top-lg">
                 <div class="col-12">
                     <h2>Le document n'a pas été trouvé !</h2>
                 </div>

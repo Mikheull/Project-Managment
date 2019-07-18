@@ -4,7 +4,7 @@
         <div class="row navbar-nav nav-border-bot">
             <div class="col-md-8 col-12 nav-left">
                 <div class="nav-item link" id="sidebar_pro-btn"><i data-feather="sidebar"></i></div>
-                <div class="nav-item"> <a class="margin-right-lg margin-left bold" href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>"><?= $project -> getProjectData($router -> getRouteParam("2"), 'name') ;?></a> </div>
+                <div class="nav-item"> <a class="mr-right-lg mr-left bold" href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>"><?= $project -> getProjectData($router -> getRouteParam("2"), 'name') ;?></a> </div>
                 <?php
                     if(sizeof($router -> getRouteParam("all")) > 3){
                         if($router -> getRouteParam("3") == 'settings'){
@@ -58,8 +58,8 @@
 
 <div class="sidebar-project-container">
     <div class="menu-wrapper">
-        <div class="row margin-top margin-bot">
-            <div class="col col-4 offset-4 margin-top margin-bot">
+        <div class="row mr-top mr-bot">
+            <div class="col col-4 offset-4 mr-top mr-bot">
                 <a class="navbar-brand" href="<?= $config -> rootUrl() ;?>./" title="Aller a la page d'accueil">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 28">
                         <defs><style>.cls-1,.cls-3{fill:#4c6cf6;}.cls-2{fill:none;stroke:#4c6cf6;stroke-linecap:round;stroke-miterlimit:10;stroke-width:2px;}.cls-3{font-size:16px;font-family:Nunito-Bold, Nunito;font-weight:700;}.cls-4{letter-spacing:-0.01em;}.cls-5{letter-spacing:-0.02em;}</style></defs>
@@ -75,54 +75,54 @@
                     </svg>
                 </a>
             </div>
-            <ul class="nav col margin-left">
-                <li class="nav-item margin-bot flex nav-item-mr"> 
-                    <img class="icon margin-right" src="<?= $config -> rootUrl() ;?>dist/images/icons/overview_icon.svg" alt=""> 
-                    <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>" class="dark-link"> Dashboard </a> 
+            <ul class="nav col mr-left">
+                <li class="nav-item mr-bot flex nav-item-mr"> 
+                    <img class="icon mr-right" src="<?= $config -> rootUrl() ;?>dist/images/icons/overview_icon.svg" alt=""> 
+                    <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>" class="gray-link"> Dashboard </a> 
                 </li>
 
-                <li class="nav-item margin-bot flex nav-item-mr"> 
-                    <img class="icon margin-right" src="<?= $config -> rootUrl() ;?>dist/images/icons/project_icon.svg" alt=""> 
-                    <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/gestion-projet" class="dark-link"> Gestion de projet </a> 
+                <li class="nav-item mr-bot flex nav-item-mr"> 
+                    <img class="icon mr-right" src="<?= $config -> rootUrl() ;?>dist/images/icons/project_icon.svg" alt=""> 
+                    <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/gestion-projet" class="gray-link"> Gestion de projet </a> 
                 </li>
 
-                <li class="nav-item margin-bot flex nav-item-mr"> 
-                    <img class="icon margin-right" src="<?= $config -> rootUrl() ;?>dist/images/icons/team_icon.svg" alt=""> 
-                    <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/gestion-equipe" class="dark-link"> Gestion d'équipe </a> 
+                <li class="nav-item mr-bot flex nav-item-mr"> 
+                    <img class="icon mr-right" src="<?= $config -> rootUrl() ;?>dist/images/icons/team_icon.svg" alt=""> 
+                    <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/gestion-equipe" class="gray-link"> Gestion d'équipe </a> 
                 </li>
                     
-                <li class="nav-item margin-bot flex nav-item-mr"> 
-                    <img class="icon margin-right" src="<?= $config -> rootUrl() ;?>dist/images/icons/messenger_icon.svg" alt=""> 
-                    <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/messenger" class="dark-link"> Messenger </a> 
+                <li class="nav-item mr-bot flex nav-item-mr"> 
+                    <img class="icon mr-right" src="<?= $config -> rootUrl() ;?>dist/images/icons/messenger_icon.svg" alt=""> 
+                    <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/messenger" class="gray-link"> Messenger </a> 
                 </li>
 
-                <li class="nav-item margin-bot flex nav-item-mr"> 
-                    <img class="icon margin-right" src="<?= $config -> rootUrl() ;?>dist/images/icons/calendar_icon.svg" alt=""> 
-                    <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/calendar" class="dark-link"> Calendrier </a> 
+                <li class="nav-item mr-bot flex nav-item-mr"> 
+                    <img class="icon mr-right" src="<?= $config -> rootUrl() ;?>dist/images/icons/calendar_icon.svg" alt=""> 
+                    <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/calendar" class="gray-link"> Calendrier </a> 
                 </li>
 
-                <li class="nav-item margin-bot flex nav-item-mr"> 
-                    <img class="icon margin-right" src="<?= $config -> rootUrl() ;?>dist/images/icons/uml_icon.svg" alt=""> 
-                    <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/uml" class="dark-link"> UML </a> 
+                <li class="nav-item mr-bot flex nav-item-mr"> 
+                    <img class="icon mr-right" src="<?= $config -> rootUrl() ;?>dist/images/icons/uml_icon.svg" alt=""> 
+                    <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/uml" class="gray-link"> UML </a> 
                 </li>
 
-                <li class="nav-item margin-bot flex nav-item-mr"> 
-                    <img class="icon margin-right" src="<?= $config -> rootUrl() ;?>dist/images/icons/user_research_icon.svg" alt=""> 
-                    <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/recherche-utilisateur" class="dark-link"> Recherche utilisateur </a> 
+                <li class="nav-item mr-bot flex nav-item-mr"> 
+                    <img class="icon mr-right" src="<?= $config -> rootUrl() ;?>dist/images/icons/user_research_icon.svg" alt=""> 
+                    <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/recherche-utilisateur" class="gray-link"> Recherche utilisateur </a> 
                 </li>
 
-                <li class="nav-item margin-bot flex nav-item-mr"> 
-                    <img class="icon margin-right" src="<?= $config -> rootUrl() ;?>dist/images/icons/bug_tracker_icon.svg" alt=""> 
-                    <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/bug-tracker" class="dark-link"> Bug Tracker </a> 
+                <li class="nav-item mr-bot flex nav-item-mr"> 
+                    <img class="icon mr-right" src="<?= $config -> rootUrl() ;?>dist/images/icons/bug_tracker_icon.svg" alt=""> 
+                    <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/bug-tracker" class="gray-link"> Bug Tracker </a> 
                 </li>
 
-                <li class="nav-item margin-bot flex nav-item-mr"> 
-                    <img class="icon margin-right" src="<?= $config -> rootUrl() ;?>dist/images/icons/documents_icon.svg" alt=""> 
-                    <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/documents" class="dark-link"> Documents </a> 
+                <li class="nav-item mr-bot flex nav-item-mr"> 
+                    <img class="icon mr-right" src="<?= $config -> rootUrl() ;?>dist/images/icons/documents_icon.svg" alt=""> 
+                    <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/documents" class="gray-link"> Documents </a> 
                 </li>
             </ul>
             <div class="col-12 bot-lk">
-                <a href="<?= $config -> rootUrl() ;?>app" class="btn link light-link"> <i data-feather="corner-down-left"></i> Changer de projet</a>
+                <a href="<?= $config -> rootUrl() ;?>app" class="btn link gray-link"> <i data-feather="corner-down-left"></i> Changer de projet</a>
             </div>
         </div>
     </div>
@@ -136,10 +136,10 @@
 
 <!-- Menu + Actions -->
 <div id="rapid_actions_container" class="hidden">
-    <ul class="margin-bot margin-top text-align-left">
+    <ul class="mr-bot mr-top text-align-left">
         <?php
             if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'project.team.member.manage')){
-                ?> <li class="nav-item margin-bot" data-action="invite" data-ref="<?= $router -> getRouteParam("2") ?>"> <a class="link dark-link" href="">Invitation</a> </li> <?php
+                ?> <li class="nav-item mr-bot" data-action="invite" data-ref="<?= $router -> getRouteParam("2") ?>"> <a class="link dark-link" href="">Invitation</a> </li> <?php
             }
             if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'calendar.add.event')){
                 ?> <li class="nav-item" data-action="new_header_cal_event" data-ref="<?= $router -> getRouteParam("2") ?>"> <a class="link dark-link" href="">Évènement</a> </li> <?php
@@ -203,7 +203,7 @@ $(document).on("click", "[data-action='new_header_task']", function(e) {
                 className: 'btn dark-btn',
             }
         },
-        message: '<form method="POST" class="margin-bot-lg"> <div class="container"> <div class="row"> <div class="col-12 input"> <div class="input-field"> <label for="task_name" class="color-dark">Titre de la tâche</label> <input type="text" placeholder="Tache x" name="task_name" id="task_name"> </div></div><div class="col-12 input margin-bot"> <div class="input-field"> <label for="deadline" class="color-dark">Deadline</label> <input type="date" name="deadline" id="deadline"> </div></div><div class="col-12 input margin-bot"> <div class="input-field"> <label for="duration" class="color-dark">Durée</label> <input type="time" name="duration" id="duration" value="01:00"> </div></div><div class="col-12 input margin-bot"> <select name="tab_token"> <option disabled>Aucun</option> <?php require_once ("controller/task.php") ; $tabs=$task -> getTabs( $router -> getRouteParam("2") ); foreach($tabs["content"] as $t){echo "<option value=\"". $t["tab_token"] ."\">". $t["name"] ."</option>";}?> </select> </div></div></div></form>',
+        message: '<form method="POST" class="mr-bot-lg"> <div class="container"> <div class="row"> <div class="col-12 input"> <div class="input-field"> <label for="task_name" class="color-dark">Titre de la tâche</label> <input type="text" placeholder="Tache x" name="task_name" id="task_name"> </div></div><div class="col-12 input mr-bot"> <div class="input-field"> <label for="deadline" class="color-dark">Deadline</label> <input type="date" name="deadline" id="deadline"> </div></div><div class="col-12 input mr-bot"> <div class="input-field"> <label for="duration" class="color-dark">Durée</label> <input type="time" name="duration" id="duration" value="01:00"> </div></div><div class="col-12 input mr-bot"> <select name="tab_token"> <option disabled>Aucun</option> <?php require_once ("controller/task.php") ; $tabs=$task -> getTabs( $router -> getRouteParam("2") ); foreach($tabs["content"] as $t){echo "<option value=\"". $t["tab_token"] ."\">". $t["name"] ."</option>";}?> </select> </div></div></div></form>',
         
     });
 });

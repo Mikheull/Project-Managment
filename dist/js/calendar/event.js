@@ -31,7 +31,7 @@ $(document).on("click", "[data-action='edit_event']", function(e) {
                 className: 'btn dark-btn',
             }
         },
-        message: '<form method="POST" class="margin-bot-lg"> <div class="container"> <div class="row"> <div class="col-12 input"> <div class="input-field"> <label for="event_name" class="color-dark">Titre de l\'évènement</label> <input type="text" placeholder="Event x" name="event_name" id="event_name"> </div></div><div class="col-12 input"> <div class="input-field"> <label for="event_desc" class="color-dark">Description</label> <textarea placeholder="Lorem Ipsum" name="event_desc" id="event_desc"></textarea> </div></div></div></div></form>',
+        message: '<form method="POST" class="mr-bot-lg"> <div class="container"> <div class="row"> <div class="col-12 input"> <div class="input-field"> <label for="event_name" class="color-dark">Titre de l\'évènement</label> <input type="text" placeholder="Event x" name="event_name" id="event_name"> </div></div><div class="col-12 input"> <div class="input-field"> <label for="event_desc" class="color-dark">Description</label> <textarea placeholder="Lorem Ipsum" name="event_desc" id="event_desc"></textarea> </div></div></div></div></form>',
         
     });
 });

@@ -29,9 +29,9 @@
 
                 <div class="input_group status_team">
                     <input type="radio" name="status" id="private" value="private" <?= $utils -> getData('pr_project', 'public', 'public_token', $project_token) == false ? 'checked' : '' ?>>
-                    <label class="margin-left" for="private">Privée</label>
+                    <label class="mr-left" for="private">Privée</label>
                     <input type="radio" name="status" id="public" value="public" <?= $utils -> getData('pr_project', 'public', 'public_token', $project_token) == true ? 'checked' : '' ?>>
-                    <label class="margin-left" for="public">Publique</label>
+                    <label class="mr-left" for="public">Publique</label>
                 </div>
 
                 <button class="btn primary-btn" name="update_project_infos">Sauvegarder</button>

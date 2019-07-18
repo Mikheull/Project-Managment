@@ -9,14 +9,14 @@
                     ?>
                     <div class="col-md-8 col-12">
                         <div class="title">
-                            <h2 class="title-md bold color-light margin-bot">Votre nouveau mot de passe :</h2>
+                            <h2 class="title-md bold color-light mr-bot">Votre nouveau mot de passe :</h2>
                         </div>
 
                         <div class="form">
                             <form method="POST">
                                 <div class="container">
                                     <div class="row">
-                                        <div class="col-md-8 offset-md-2 col-12 input margin-bot margin-top">
+                                        <div class="col-md-8 offset-md-2 col-12 input mr-bot mr-top">
                                             <div class="input-field">
                                                 <label for="password" class="color-gray">Nouveau mot de passe</label>
                                                 <input type="password" name="password" id="password" value="<?= isset($_POST['password']) ? $_POST['password'] : '' ?>">

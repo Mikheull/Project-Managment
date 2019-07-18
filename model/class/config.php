@@ -297,7 +297,11 @@ class config extends router {
         );
         foreach ($string as $k => &$v) {
             if ($diff->$k) {
-                $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+                if($v != 'mois'){
+                    $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+                }else{
+                    $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? '' : '');
+                }
             } else {
                 unset($string[$k]);
             }

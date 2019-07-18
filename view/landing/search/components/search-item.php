@@ -1,13 +1,13 @@
 <?php
 if($type == 'member'){
 ?>
-    <div class="result_item margin-bot">
+    <div class="result_item mr-bot">
         <div class="container">
             <div class="row">
-                <div class="col-1 align-self-center margin-bot">
+                <div class="col-1 align-self-center mr-bot">
                     <a href="<?= $config -> rootUrl() ;?>member/<?= $utils -> getData('imp_user', 'username', 'public_token', $item ) ?>" title="Accéder au compte de <?= $utils -> getData('imp_user', 'first_name', 'public_token', $item )?> <?= $utils -> getData('imp_user', 'last_name', 'public_token', $item )?>">
                         <div class="col-md-3 profil_picture-sm">
-                            <div class="img light-border" style="background-image: url('<?= $config -> rootUrl() ;?>dist/<?= $utils -> getData('imp_user', 'profil_image', 'public_token', $item ) == NULL ? 'images/content/defaut_profil_pic.png' : 'uploads/u/'. $item .'/profil_pic/'.$utils -> getData('imp_user', 'profil_image', 'public_token', $item ) ;?>"></div>
+                            <div class="img light-border" style="background-image: url('<?= $config -> rootUrl() ;?>dist/<?= $utils -> getData('imp_user', 'profil_image', 'public_token', $item ) == NULL ? 'images/content/defaut_profil_pic.jpg' : 'uploads/u/'. $item .'/profil_pic/'.$utils -> getData('imp_user', 'profil_image', 'public_token', $item ) ;?>"></div>
                         </div>       
                     </a>
                 </div>
@@ -29,7 +29,7 @@ if($type == 'member'){
 <?php
 if($type == 'team'){
 ?>
-    <div class="result_item margin-bot">
+    <div class="result_item mr-bot">
         <div class="container">
             <div class="row">
                 <div class="col-8 align-self-center">
@@ -51,7 +51,7 @@ if($type == 'team'){
 <?php
 if($type == 'project'){
 ?>
-    <div class="result_item margin-bot">
+    <div class="result_item mr-bot">
         <div class="container">
             <div class="row">
                 <div class="col-8 align-self-center">

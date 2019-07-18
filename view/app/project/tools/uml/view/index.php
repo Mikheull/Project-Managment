@@ -30,16 +30,16 @@
                         <div class="row">
 
                             <div class="col-md-10 col-12">
-                                <h3 class="title-sm bold color-dark margin-top">Votre diagramme :</h3>
-                                <h2 class="text-md color-dark margin-bot-lg" id="diagram_name" contenteditable="true"><?= $utils -> getData('pr_uml', 'name', 'uml_token', $router -> getRouteParam("5") ) ?></h2>
+                                <h3 class="title-sm bold color-dark mr-top">Votre diagramme :</h3>
+                                <h2 class="text-md color-dark mr-bot-lg" id="diagram_name" contenteditable="true"><?= $utils -> getData('pr_uml', 'name', 'uml_token', $router -> getRouteParam("5") ) ?></h2>
                             </div>
                             <div class="col-md-2 col-12 flex">
                                 <?php if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'uml.export')){ ?>
-                                    <div> <div class="btn btn-sm dark-btn margin-right" onclick="exportSVG(document.getElementById('uml_diagram'));" data-action="export_uml" data-ref="<?= $router -> getRouteParam("5") ?>"><i class="fas fa-download"></i></div> </div>
+                                    <div> <div class="btn btn-sm dark-btn mr-right" onclick="exportSVG(document.getElementById('uml_diagram'));" data-action="export_uml" data-ref="<?= $router -> getRouteParam("5") ?>"><i class="fas fa-download"></i></div> </div>
                                     <div id="export_btn"></div>
                                 <?php } ?>
                                 <?php if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'uml.edit')){ ?>
-                                    <div> <div class="btn btn-sm dark-btn margin-right"><i class="fas fa-edit"></i></div> </div>
+                                    <div> <div class="btn btn-sm dark-btn mr-right"><i class="fas fa-edit"></i></div> </div>
                                 <?php } ?>
                                 <div> <div class="btn btn-sm dark-btn" id="full_screen"><i class="fas fa-expand"></i></div> </div>
                             </div>

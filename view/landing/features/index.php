@@ -3,8 +3,8 @@
     <section class="container-fluid p-0">
 
         <div class="page_head row justify-content-md-center">
-            <div class="col-12 margin-bot-lg margin-top-lg">
-                <h2 class="title-lg bold color-dark margin-bot">Nos Fonctionnalités</h2>
+            <div class="col-12 mr-bot-lg mr-top-lg">
+                <h2 class="title-lg bold color-dark mr-bot">Nos Fonctionnalités</h2>
                 <h3 class="title-sm color-gray">Découvrez les différentes fonctions d'Improove</h3>
             </div>
         </div>

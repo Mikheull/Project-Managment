@@ -10,17 +10,17 @@
 <div class="container">
 
     <div class="row title search_head">
-        <div class="col text-align-center margin-bot-lg margin-top-lg">
+        <div class="col text-align-center mr-bot-lg mr-top-lg">
             <h2 class="title-lg bold color-dark ">Recherche</h2>
             <h3 class="title-xs color-gray">Clematius nec hiscere nec loqui permissus</h3>
         </div>
     </div>
     
-    <div class="row search_container margin-bot-lg">
+    <div class="row search_container mr-bot-lg">
         <div class="col-md-8 col-10 search_bar">
             <form method="post">
                 <div class="input-field flex bg-white light-border">
-                    <input type="text" placeholder="Recherche" name="website-search" id="website-search" class="margin-right margin-left">
+                    <input type="text" placeholder="Recherche" name="website-search" id="website-search" class="mr-right mr-left">
                     <input type="hidden" name="search_filter" id="search_filter" value="member">
                     <button class="btn primary-btn" name="search_button">Rechercher</button>
                 </div>
@@ -28,9 +28,9 @@
         </div>
 
         <div class="col-md-8 offset-md-2 col-10 offset-1">
-            <ul class="flex margin-top justify-content-end">
-                <li> <a class="filter_btn btn btn-sm dark-btn margin-right" data-filter="member">Membres</a> </li>
-                <li> <a class="filter_btn btn btn-sm light-btn-bordered margin-right" data-filter="project">Projets</a> </li>
+            <ul class="flex mr-top justify-content-end">
+                <li> <a class="filter_btn btn btn-sm dark-btn mr-right" data-filter="member">Membres</a> </li>
+                <li> <a class="filter_btn btn btn-sm light-btn-bordered mr-right" data-filter="project">Projets</a> </li>
                 <li> <a class="filter_btn btn btn-sm light-btn-bordered" data-filter="article">Articles</a> </li>
             </ul>
         </div>
@@ -40,16 +40,16 @@
         <div class="col-12 flex justify-content-between" id="loading_data">
             <div class="card"></div>
         </div>
-        <div class="col-9 margin-top-lg">
+        <div class="col-9 mr-top-lg">
             <div class="row team-container justify-content-between" id="output_data">
             </div>
         </div>
     </div>
 
 
-    <div class="row margin-bot-lg margin-top-lg" id="public_data">
+    <div class="row mr-bot-lg mr-top-lg" id="public_data">
         
-        <div class="col-10 margin-top-lg">
+        <div class="col-10 mr-top-lg">
             <h2 class="title-xs bold color-dark ">Projets publics</h2>
             <h3 class="text-sm color-gray">Découvrez les projets libre accès</h3>
         </div>
@@ -57,7 +57,7 @@
             <a href="<?= $config -> rootUrl() ;?>search/projects" class="btn btn-sm dark-btn">Voir tout</a>
         </div>
 
-        <div class="col-9 margin-top-lg">
+        <div class="col-9 mr-top-lg">
             <div class="row team-container justify-content-between">
                 <?php
                 $allProjects = $project -> getPublicProjects();

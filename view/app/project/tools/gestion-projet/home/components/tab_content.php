@@ -3,7 +3,7 @@
         ?>
             <div class="tab-item light-border">
                 <div class="container">
-                    <div class="row margin-top margin-bot">
+                    <div class="row mr-top mr-bot">
                         <div class="col-10"><h3 class="title-sm" id="tab_title-<?= $t['tab_token'] ?>" data-ref="<?= $t['tab_token'] ?>" contenteditable="true" data-pro="<?= $router -> getRouteParam('2') ?>"><?= $t['name'] ?></h3></div>
                         <div class="col-2 text-align-right"> <i class="fas fa-ellipsis-h" id="act-<?= $t['tab_token'] ?>"></i> </div>
                     </div>
@@ -21,11 +21,11 @@
                                 
                                 ?>
                                     <div class="col-12 task_item">
-                                        <div class="container light-border margin-bot-lg <?= (!isset($task_item['date_end']) ? '' : 'ended') ;?>">
-                                            <div class="row margin-top">
+                                        <div class="container light-border mr-bot-lg <?= (!isset($task_item['date_end']) ? '' : 'ended') ;?>">
+                                            <div class="row mr-top">
                                                 <div class="col"> <h4 class="text-sm"><?= $task_item['name'] ?></h4> </div>
                                             </div>
-                                            <div class="row margin-top margin-bot">
+                                            <div class="row mr-top mr-bot">
                                                 <div class="col-10"> 
                                                     
                                                     <?php
@@ -45,20 +45,20 @@
                                                 </div>
                                                 <div class="col-2 text-align-right expand_btn link"><i class="fas fa-chevron-down"></i></div>
                                                 
-                                                <div class="col margin-top expand_content hidden">
+                                                <div class="col mr-top expand_content hidden">
                                                     <div class="container light-border">
-                                                        <div class="row margin-top margin-bot">
+                                                        <div class="row mr-top mr-bot">
                                                             <div class="col-12">Durée prévue : <span class="color-lg-dark"><?= $task_item['duration'] ;?></span> </div>
-                                                            <div class="col-12 margin-top">Crée le : <span class="color-lg-dark"><?= date_format($date_creation, 'd/m/Y à H:i') ;?></span> </div>
-                                                            <div class="col-12 margin-top">Fin prévu le : <span class="color-lg-dark"><?= date_format($date2, 'd/m/Y') ;?></span> </div>
+                                                            <div class="col-12 mr-top">Crée le : <span class="color-lg-dark"><?= date_format($date_creation, 'd/m/Y à H:i') ;?></span> </div>
+                                                            <div class="col-12 mr-top">Fin prévu le : <span class="color-lg-dark"><?= date_format($date2, 'd/m/Y') ;?></span> </div>
                                                             <?php
                                                                 if(isset($task_item['date_end'])){
                                                                     $date_end = new DateTime( $task_item['date_end'] );
-                                                                    ?> <div class="col-12 margin-top">Terminée le : <span class="color-lg-dark"><?= date_format($date_end, 'd/m/Y à H:i') ;?></span> </div> <?php
+                                                                    ?> <div class="col-12 mr-top">Terminée le : <span class="color-lg-dark"><?= date_format($date_end, 'd/m/Y à H:i') ;?></span> </div> <?php
                                                                 }
                                                             ?>
                                                             
-                                                            <div class="col-12 flex margin-top flex justify-content-between">
+                                                            <div class="col-12 flex mr-top flex justify-content-between">
                                                                 <div>
                                                                     <?php
                                                                     if(!isset($task_item['date_end'])){
@@ -70,7 +70,7 @@
                                                                 </div>
 
                                                                 <div class="flex">
-                                                                    <div class="btn btn-sm light-btn-bordered margin-left margin-right" data-action="edit_task" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>"><i data-feather="edit"></i></div>
+                                                                    <div class="btn btn-sm light-btn-bordered mr-left mr-right" data-action="edit_task" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>"><i data-feather="edit"></i></div>
                                                                     <div class="btn btn-sm red-btn" data-action="delete_task" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>"><i data-feather="trash-2"></i></div>
                                                                 </div>
                                                             </div>
@@ -97,7 +97,7 @@
 
 
             <div id="tp-<?= $t['tab_token'] ?>" class="hidden">
-                <ul class="margin-top text-align-left">
+                <ul class="mr-top text-align-left">
                     <li> <a href="" data-action="tab-rename" data-ref="<?= $t['tab_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>" class="link dark-link">Renommer</a> </li>
                     <li> <a href="" data-action="tab-export" data-ref="<?= $t['tab_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>" class="link dark-link">Exporter le tableau</a> </li>
                     <li> <a href="" data-action="tab-delete" data-ref="<?= $t['tab_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>" class="link red-link">Supprimer</a> </li>

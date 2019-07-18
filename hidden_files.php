@@ -1,0 +1,1 @@
+<?php if(!isset($secure_files)){ header('Location: https://improove.tk'); } ?>

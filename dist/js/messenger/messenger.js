@@ -37,7 +37,7 @@ $(document).on("click", "[data-action='new_channel']", function(e) {
                 className: 'btn dark-btn',
             }
         },
-        message: '<form method="POST" class="margin-bot-lg"> <div class="container"> <div class="row"> <div class="col-12 input"> <div class="input-field"> <label for="channel_name" class="color-dark">Nom du channel</label> <input type="text" placeholder="Debug" name="channel_name" id="channel_name"> </div></div><div class="col-12 input"> <div class="input-field"> <label for="channel_topic" class="color-dark">Topic du channel</label> <input type="text" placeholder="Lorem Ipsum" name="channel_topic" id="channel_topic"> </div></div></div></div></form>',
+        message: '<form method="POST" class="mr-bot-lg"> <div class="container"> <div class="row"> <div class="col-12 input"> <div class="input-field"> <label for="channel_name" class="color-dark">Nom du channel</label> <input type="text" placeholder="Debug" name="channel_name" id="channel_name"> </div></div><div class="col-12 input"> <div class="input-field"> <label for="channel_topic" class="color-dark">Topic du channel</label> <input type="text" placeholder="Lorem Ipsum" name="channel_topic" id="channel_topic"> </div></div></div></div></form>',
         
     });
 });

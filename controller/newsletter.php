@@ -43,7 +43,7 @@ if(isset($_POST['subscribe_newsletter'])){
                 $errors = ['success' => false, 'options' => ['content' => "Email invalide !", 'theme' => 'error'] ];
             }
         }else{
-            $errors = ['success' => false, 'options' => ['content' => "Vous devez être connecté ! <a class=\"margin-left btn primary-btn\" href=\"login\">Se connecter</a> ", 'theme' => 'error'] ];
+            $errors = ['success' => false, 'options' => ['content' => "Vous devez être connecté ! <a class=\"mr-left btn primary-btn\" href=\"login\">Se connecter</a> ", 'theme' => 'error'] ];
         }
 
     }else{

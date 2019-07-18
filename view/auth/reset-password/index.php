@@ -6,7 +6,7 @@
         <div class="row align-items-center justify-content-center c-content text-align-center">
             <div class="col-md-8 col-12">
                 <div class="title">
-                    <h2 class="title-md bold color-light margin-bot">Vous avez perdu votre mot de passe ?</h2>
+                    <h2 class="title-md bold color-light mr-bot">Vous avez perdu votre mot de passe ?</h2>
                     <h3 class="title-xs color-gray">Indiquez votre mail d’inscription et suivez les étapes.</h3>
                 </div>
 
@@ -14,7 +14,7 @@
                     <form method="POST">
                         <div class="container">
                             <div class="row">
-                                <div class="col-md-8 offset-md-2 col-12 input margin-bot-lg margin-top-lg">
+                                <div class="col-md-8 offset-md-2 col-12 input mr-bot-lg mr-top-lg">
                                     <div class="input-field">
                                         <label for="email" class="color-gray">Mail de récupération</label>
                                         <input type="email" placeholder="john-doe@domain.com" name="email" id="email" value="<?= isset($_POST['email']) ? $_POST['email'] : '' ?>">

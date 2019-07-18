@@ -14,8 +14,8 @@
     <div class="content_wrapper">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-10 col-12 flex margin-top">
-                    <div style="width: 128px" class="margin-right">
+                <div class="col-md-10 col-12 flex mr-top">
+                    <div style="width: 128px" class="mr-right">
                         <a class="navbar-brand" href="<?= $config -> rootUrl() ;?>./" title="Improove">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 28">
                                 <defs><style>.cls-1,.cls-3{fill:#4c6cf6;}.cls-2{fill:none;stroke:#4c6cf6;stroke-linecap:round;stroke-miterlimit:10;stroke-width:2px;}.cls-3{font-size:16px;font-family:Nunito-Bold, Nunito;font-weight:700;}.cls-4{letter-spacing:-0.01em;}.cls-5{letter-spacing:-0.02em;}</style></defs>
@@ -33,13 +33,13 @@
                     </div>
                     <h3 class="title-sm bold color-dark"><?= $file ?></h3>
                 </div>
-                <div class="col-md-2 col-12 flex margin-top">
-                    <div> <a class="btn btn-sm dark-btn margin-right" download href="<?= $config -> rootUrl() ;?><?= $utils -> getData('pr_shortener', 'base_url', 'short_url', $router -> getRouteParam("1")) ?>"><i class="fas fa-download"></i></a> </div>
+                <div class="col-md-2 col-12 flex mr-top">
+                    <div> <a class="btn btn-sm dark-btn mr-right" download href="<?= $config -> rootUrl() ;?><?= $utils -> getData('pr_shortener', 'base_url', 'short_url', $router -> getRouteParam("1")) ?>"><i class="fas fa-download"></i></a> </div>
                     <div> <div class="btn btn-sm dark-btn" id="full_screen"><i class="fas fa-expand"></i></div> </div>
                 </div>
             </div>
 
-            <div class="row margin-top-lg">
+            <div class="row mr-top-lg">
                 <div class="col-12">
                     <?php
                         if($ext == 'aif' OR $ext == 'cda' OR $ext == 'mid' OR $ext == 'midi' OR $ext == 'mp3' OR $ext == 'mpa' OR $ext == 'ogg' OR $ext == 'wav' OR $ext == 'wma' OR $ext == 'wpl'){

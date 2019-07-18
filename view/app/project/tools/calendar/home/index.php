@@ -15,7 +15,7 @@
     <?php require_once ('view/app/project/components/project_sidebar.php') ?>
 
     <div class="content_wrapper">
-        <div class="container-fluid margin-top-lg">
+        <div class="container-fluid mr-top-lg">
             <div class="row">
                 <div class="col">
                     <div id="calendar"></div>

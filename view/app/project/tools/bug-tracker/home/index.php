@@ -29,7 +29,7 @@
             if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'bug-tracker.view')){
                 $project_token = $router -> getRouteParam('2');
                 ?>
-                <div class="row margin-bot">
+                <div class="row mr-bot">
                     <div class="btn btn-sm primary-btn" id="new-bug" data-pro="<?= $router -> getRouteParam('2') ?>"><i class="fas fa-plus"></i> Nouveau bug</div>
                 </div>
 

@@ -34,9 +34,9 @@
                 
                     if(empty($dir_files)){
                         ?>
-                            <div class="col-8 offset-2 text-align-center margin-top-lg">
+                            <div class="col-8 offset-2 text-align-center mr-top-lg">
                                 <img src="<?= $config -> rootUrl() ;?>dist/images/illustrations/empty_doc.svg" alt="" width="50%">
-                                <h3 class="title-sm bold color-dark margin-bot-lg margin-top-lg">Aucun document pour le moment !</h3>
+                                <h3 class="title-sm bold color-dark mr-bot-lg mr-top-lg">Aucun document pour le moment !</h3>
                             </div>
                         <?php
                     }else{
@@ -68,7 +68,7 @@
 
                         }
                         ?>
-                        <div class="col-12 margin-top-lg file_container">
+                        <div class="col-12 mr-top-lg file_container">
 
                             <?php
                                 if(!empty($audioFiles)){

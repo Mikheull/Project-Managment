@@ -37,18 +37,18 @@
 
             <div class="row">
                 <div class="col-md-10 col-12">
-                    <h3 class="title-sm bold color-dark margin-top"><?= $resultParam[1] ?></h3>
+                    <h3 class="title-sm bold color-dark mr-top"><?= $resultParam[1] ?></h3>
                 </div>
                 <div class="col-md-2 col-12 flex">
-                    <div> <a class="btn btn-sm dark-btn margin-right" href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/documents/edit?file_name=<?= $resultParam[1] ?>"><i class="fas fa-edit"></i></a> </div>
-                    <div> <a class="btn btn-sm dark-btn margin-right" download href="<?= $config -> rootUrl() ;?>dist/uploads/p/<?= $router -> getRouteParam("2") ?>/docs/<?= $resultParam[1] ?>"><i class="fas fa-download"></i></a> </div>
-                    <div> <div class="btn btn-sm dark-btn margin-right" data-action="share" data-ref="<?= $resultParam[1] ?>" data-pro="<?= $router -> getRouteParam("2") ?>"><i class="fas fa-share"></i></div> </div>
-                    <div> <div class="btn btn-sm dark-btn margin-right" id="full_screen"><i class="fas fa-expand"></i></div> </div>
+                    <div> <a class="btn btn-sm dark-btn mr-right" href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/documents/edit?file_name=<?= $resultParam[1] ?>"><i class="fas fa-edit"></i></a> </div>
+                    <div> <a class="btn btn-sm dark-btn mr-right" download href="<?= $config -> rootUrl() ;?>dist/uploads/p/<?= $router -> getRouteParam("2") ?>/docs/<?= $resultParam[1] ?>"><i class="fas fa-download"></i></a> </div>
+                    <div> <div class="btn btn-sm dark-btn mr-right" data-action="share" data-ref="<?= $resultParam[1] ?>" data-pro="<?= $router -> getRouteParam("2") ?>"><i class="fas fa-share"></i></div> </div>
+                    <div> <div class="btn btn-sm dark-btn mr-right" id="full_screen"><i class="fas fa-expand"></i></div> </div>
                     <div> <div class="btn btn-sm red-btn" data-action="delete_document" data-ref="<?= $resultParam[1] ?>" data-pro="<?= $router -> getRouteParam("2") ?>"><i class="fas fa-trash-alt"></i></div> </div>
                 </div>
             </div>
 
-            <div class="row margin-top-lg">
+            <div class="row mr-top-lg">
                 <div class="col-12">
                     <?php
                         if($ext == 'aif' OR $ext == 'cda' OR $ext == 'mid' OR $ext == 'midi' OR $ext == 'mp3' OR $ext == 'mpa' OR $ext == 'ogg' OR $ext == 'wav' OR $ext == 'wma' OR $ext == 'wpl'){

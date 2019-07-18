@@ -31,3 +31,5 @@ require_once ('controller/permission.php') ;
 @error_reporting(E_ALL | E_STRICT);
 setlocale(LC_TIME, "fr_FR");
 
+$secure_files = 1;
+

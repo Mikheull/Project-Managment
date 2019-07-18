@@ -29,7 +29,7 @@
                     if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'uml.view')){
                         ?>
                             <div class="row tabs" id="tab_output">
-                                <div class="col-12 margin-top-lg file_container">
+                                <div class="col-12 mr-top-lg file_container">
                                     <?php
                                         $diagrams = $uml -> getDiagrams( $router -> getRouteParam("2") );
                                         foreach($diagrams['content'] as $diagram){

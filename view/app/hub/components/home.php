@@ -1,8 +1,8 @@
 <div class="back-bg-gray"></div>
 
-<div class="row hub_select margin-top-lg">
+<div class="row hub_select mr-top-lg">
     <div class="col-10 offset-1">
-        <h3 class="title-sm bold color-light margin-bot margin-top-lg">Selectionner un projet</h3>
+        <h3 class="title-sm bold color-light mr-bot mr-top-lg">Selectionner un projet</h3>
 
         <div class="col-12 flex justify-content-between" id="loading_data">
             <div class="card"></div>

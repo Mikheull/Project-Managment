@@ -4,7 +4,7 @@
 </div>
 
 
-<div class="col-12 margin-top">
+<div class="col-12 mr-top">
     <span id="ref" data-ref="<?= $router -> getRouteParam('2') ?>"></span>
     <div class="graph light-border">
         <ul class="months color-gray">

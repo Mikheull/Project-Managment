@@ -54,28 +54,28 @@
                     <a class="link light-link title-lg" id="resp-nav-header-close-btn"><i class="far fa-times-circle"></i></a>
 
                     <div class="menu-wrapper">
-                        <div class="row margin-top-lg margin-bot">
+                        <div class="row mr-top-lg mr-bot">
                                 <?php
                                 if($auth -> isConnected() == false){
                                     ?>
-                                    <ul class="nav col margin-left">
+                                    <ul class="nav col mr-left">
                                         <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>login" title="Connectez vous" class="link light-link">Connexion</a> </li>
                                         <li class="nav-item nav-item-btn"> <a href="<?= $config -> rootUrl() ;?>register" title="Inscrivez vous" class="link light-link">Inscription</a> </li>
                                     </ul>
                                     <?php
                                 }else{
                                     ?>
-                                    <ul class="nav col margin-left flex">
-                                        <li class="nav-item margin-right notification"> <a href="<?= $config -> rootUrl() ;?>notifications" title="notifications" class="link light-link"><i data-feather="bell"></i></a> </li>
-                                        <li class="nav-item margin-right"> <a href="<?= $config -> rootUrl() ;?>logout" title="Déconnnexion" class="link light-link"><i data-feather="log-out"></i></a> </li>
-                                        <li class="nav-item margin-right"> <a href="<?= $config -> rootUrl() ;?>account" title="Accédez a votre compte" class="link light-link"><i data-feather="user"></i></a> </li>
+                                    <ul class="nav col mr-left flex">
+                                        <li class="nav-item mr-right notification"> <a href="<?= $config -> rootUrl() ;?>notifications" title="notifications" class="link light-link"><i data-feather="bell"></i></a> </li>
+                                        <li class="nav-item mr-right"> <a href="<?= $config -> rootUrl() ;?>logout" title="Déconnnexion" class="link light-link"><i data-feather="log-out"></i></a> </li>
+                                        <li class="nav-item mr-right"> <a href="<?= $config -> rootUrl() ;?>account" title="Accédez a votre compte" class="link light-link"><i data-feather="user"></i></a> </li>
                                     </ul>
                                     <?php
                                 }
                                 ?>
                         </div>
-                        <div class="row margin-top-lg margin-bot">
-                            <ul class="nav col margin-left">
+                        <div class="row mr-top-lg mr-bot">
+                            <ul class="nav col mr-left">
                                 <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>features" title="Découvrir les fonctionnalités" class="link light-link">Fonctionnalités</a> </li>
                                 <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>pricing" title="Découvrez nos tarifs" class="link light-link">Tarifs</a> </li>
                                 <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>" title="Renseignez vous sur la doc" class="link light-link">Documentation</a> </li>

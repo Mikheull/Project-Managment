@@ -45,12 +45,12 @@
                     </div>
                     <div class="col-md-2 col-12 flex">
                         <div class="input-field input-half">
-                            <input type="submit" name="save_edit" class="btn primary-btn margin-right" value="Sauvegarder">
+                            <input type="submit" name="save_edit" class="btn primary-btn mr-right" value="Sauvegarder">
                         </div>
                     </div>
                 </div>
 
-                <div class="row margin-top-lg">
+                <div class="row mr-top-lg">
 <?php
     if($ext == 'csv' OR $ext == 'dat' OR $ext == 'db' OR $ext == 'dbf' OR $ext == 'log' OR $ext == 'mdb' OR $ext == 'sav' OR $ext == 'sql' OR $ext == 'tar' OR $ext == 'xml' OR $ext == 'asp' OR $ext == 'aspx' OR $ext == 'cgi' OR $ext == 'pl' OR $ext == 'css' OR $ext == 'sass' OR $ext == 'scss' OR $ext == 'less' OR $ext == 'html' OR $ext == 'htm' OR $ext == 'js' OR $ext == 'json' OR $ext == 'jsp' OR $ext == 'part' OR $ext == 'php' OR $ext == 'py' OR $ext == 'rss' OR $ext == 'xhtml' OR $ext == 'c' OR $ext == 'class' OR $ext == 'cpp' OR $ext == 'cs' OR $ext == 'h' OR $ext == 'java' OR $ext == 'sh' OR $ext == 'swift' OR $ext == 'vb' OR $ext == 'doc' OR $ext == 'docx' OR $ext == 'odt' OR $ext == 'tex' OR $ext == 'txt' OR $ext == 'wks' OR $ext == 'wps' OR $ext == 'wpd' OR $ext == 'md'){
         ?>

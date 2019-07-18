@@ -10,11 +10,11 @@
 
             <div class="col-md-7">
                 <div class="title">
-                    <h2 class="title-lg bold color-light margin-bot">Connectez vous.</h2>
+                    <h2 class="title-lg bold color-light mr-bot">Connectez vous.</h2>
                 </div>
 
-                <div class="form margin-top-lg margin-bot-lg">
-                    <form method="POST" class="margin-bot-lg">
+                <div class="form mr-top-lg mr-bot-lg">
+                    <form method="POST" class="mr-bot-lg">
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-6 col-12 input">
@@ -27,7 +27,7 @@
 
                                 <div class="col-1"></div>
                                 
-                                <div class="col-md-6 col-12 input margin-bot">
+                                <div class="col-md-6 col-12 input mr-bot">
                                     <div class="input-field">
                                         <label for="password" class="color-gray">Mot de passe</label>
                                         <input type="password" data-required="true" data-validate="password" name="password" id="password">
@@ -37,7 +37,7 @@
                                 </div>
 
                                 
-                                <div class="col-12 input margin-bot-lg">
+                                <div class="col-12 input mr-bot-lg">
                                     <div class="input-checkbox">
                                         <input type="checkbox" name="keep_session" id="keep_session" <?= isset($_POST['keep_session']) ? 'checked' : '' ?> >
                                         <label for="keep_session" class="color-gray">Restez connecté</label>

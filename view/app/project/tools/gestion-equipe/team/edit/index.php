@@ -28,7 +28,7 @@
             if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'project.team.edit')){
                 ?>
                 <div class="row">
-                    <div class="col-12"><h3 class="title-sm color-dark margin-bot-lg margin-top">Editer une équipe</h3></div>
+                    <div class="col-12"><h3 class="title-sm color-dark mr-bot-lg mr-top">Editer une équipe</h3></div>
 
                     <div class="col-12">
                         <form action="" method="post">
@@ -48,7 +48,7 @@
 
 
                             <div class="input_group">
-                                <h4 class="title-xs color-dark margin-bot margin-top">Permissions</h4>
+                                <h4 class="title-xs color-dark mr-bot mr-top">Permissions</h4>
                                 <div class="row">
                                     <?php
                                     $typeArray = ['gestion-projet', 'gestion-equipe', 'messenger', 'calendar', 'uml', 'recherche-utilisateur', 'bug-tracker', 'documents', 'project-settings'];
@@ -56,13 +56,13 @@
                                     $nb = 0;
                                     foreach($typeArray as $type){
                                         ?>
-                                        <div class="margin-bot col-md-4 col-12">
-                                            <h3 class="text-sm color-dark margin-bot margin-top"><?= $typeNameArray[$nb] ;?></h3>
+                                        <div class="mr-bot col-md-4 col-12">
+                                            <h3 class="text-sm color-dark mr-bot mr-top"><?= $typeNameArray[$nb] ;?></h3>
                                         <?php
                                             foreach($permission -> getPermissionsPerType($type) as $perm){
                                                 ?>
-                                                    <div class="tg-list-item flex margin-bot">
-                                                        <div class="margin-right">
+                                                    <div class="tg-list-item flex mr-bot">
+                                                        <div class="mr-right">
                                                             <input class="tgl tgl-light" name="permissions[]" value="<?= $perm['permission'] ;?>" id="<?= $perm['permission'] ;?>" type="checkbox" <?= $permission -> projectTeamHasPermission($router -> getRouteParam("6"), $perm['permission']) == true ? 'checked' : '' ?>/>
                                                             <label class="tgl-btn" for="<?= $perm['permission'] ;?>"></label>
                                                         </div>
@@ -83,7 +83,7 @@
         
                             </div>
 
-                            <div class="margin-bot">
+                            <div class="mr-bot">
                                 <button class="btn primary-btn" name="edit_team">Sauvegarder</button>
                             </div>
                         </form>
