@@ -113,6 +113,30 @@ class permission extends db_connect {
     }
 
 
+    
+    /**
+     * Vérifier qu'une équipe a une permission
+     * 
+     * Va vérifier si une équipe possède la permission donnée
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $team_token Token de l'équipe de projet
+     * @param string $permission Permission
+     * @return array
+     */
+    function projectTeamHasPermission($team_token, $permission){
+        $perms = $this -> getProjectTeamPermissions($team_token);
+        if (strpos($perms, "'*'") !== false) { 
+            return true; 
+        }
+        if (strpos($perms, $permission."|") !== false) {
+            return true;
+        }
+        return false;
+    }
+
+
     /**
      * Ajoute des permissions a un utilisateur pour un projet
      * 

@@ -31,31 +31,6 @@ class projectTeam extends db_connect {
     }
 
 
-
-     /**
-     * Récupère les équipes Limit
-     * 
-     * Va renvoyer toutes les équipes Limit
-     *
-     * @access public
-     * @author Mikhaël Bailly
-     * @param string $project_token Token de la team
-     * @param string $limit Limit
-     * @param string $offset Offset
-     * @return array
-     */
-    function getTeamsLimit($project_token, $limit, $offset){
-        $request = $this -> _db -> query("SELECT * FROM `pr_project_team` WHERE `project_token` = '$project_token' AND `enable` = '1' LIMIT $limit OFFSET $offset ");
-        $res = $request->fetchAll();
-        $count = $request->rowCount();
-
-        return ([ 
-            'count' => $count, 
-            'content' => $res
-        ]);
-    }
-
-
     /**
      * Récupère les utilisateurs d'une équipe
      * 

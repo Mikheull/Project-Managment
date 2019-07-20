@@ -75,6 +75,23 @@ if(isset($_POST['edit_team'])){
 
 
 /**
+ * Formulaire pour supprimer une équipe
+ * 
+ * @fichier d'execution = view/app/project/tool/gestion-equipe/team/edit/index.php
+ * @variable d'execution = $_POST['delete_team']                        : type = button
+ * 
+ * @variable obligatoire = $_POST['team_token']                         : type = text
+ * 
+ */
+if(isset($_POST['delete_team'])){
+    $team_token = $router -> getRouteParam('6');
+    $errors = $projectTeam -> disable($team_token);
+
+}
+
+
+
+/**
  * Formulaire pour ajouter des équipes a un membre
  * 
  * @fichier d'execution = view/app/project/tool/gestion-equipe/member/edit/index.php

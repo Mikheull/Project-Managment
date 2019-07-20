@@ -85,6 +85,7 @@
 
                             <div class="mr-bot">
                                 <button class="btn primary-btn" name="edit_team">Sauvegarder</button>
+                                <button class="btn red-btn mr-left-lg" name="delete_team">Supprimer</button>
                             </div>
                         </form>
                     </div>

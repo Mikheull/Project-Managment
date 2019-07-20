@@ -35,10 +35,6 @@
         "app/project/team.min.css",
         "bootstrap-modal.min.css"
     ],
-     
-    "js": [ 
-        "teams/team.min.js"
-    ],
 
     "online_css": [ 
         "https://cdn.jsdelivr.net/npm/tippy.js@4.3.1/themes/light-border.css"
