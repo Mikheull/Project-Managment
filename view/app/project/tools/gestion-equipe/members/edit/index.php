@@ -72,7 +72,7 @@
                                 <h4 class="title-xs color-dark mr-bot mr-top">Permissions</h4>
                                 <div class="row">
                                     <?php
-                                    $typeArray = ['gestion-projet', 'gestion-equipe', 'messenger', 'calendar', 'uml', 'recherche-utilisateur', 'bug-tracker', 'documents', 'project-settings'];
+                                    $typeArray = ['gestion-projet', 'gestion-equipe', 'messenger', 'calendar', 'uml', 'recherche-utilisateur', 'bug-tracker', 'documents', 'project'];
                                     $typeNameArray = ['Gestion de projet', 'Gestion d\'équipe', 'Messenger', 'Calendrier', 'Diagramme UML', 'Recherche utilisateur', 'Bug tracker', 'Documents', 'Réglages du projet'];
                                     $nb = 0;
                                     foreach($typeArray as $type){

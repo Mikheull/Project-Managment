@@ -118,11 +118,11 @@ class utils extends db_connect {
         }
 
 
-        // $text = preg_replace(
-        //     '/' . preg_quote('#') . '.*?' . preg_quote(' ') . '/', 
-        //     '<a href="LINK_HERE" class="btn dark-btn btn-xs">$0</a> ', 
-        //     $text
-        // );
+        $text = preg_replace(
+            '/' . preg_quote(' **') . '.*?' . preg_quote('** ') . '/', 
+            '<strong>$0</strong> ', 
+            $text
+        );
 
         return $text;
     }

@@ -9,11 +9,11 @@
 .chat .chat-history {padding: 30px 30px 20px;border-bottom: 2px solid white;overflow-y: scroll;height: 65vh;}
 .chat .chat-history .message-data {margin-bottom: 15px;}
 .chat .chat-history .message-data-time {color: #a8aab1;padding-left: 6px;}
-.chat .chat-history .message {background: #F2F2F2;color: #434651;padding: 18px 20px;line-height: 26px;font-size: 16px;border-radius: 13px;margin-bottom: 30px;max-width: 60%;min-width: 20%;position: relative;}
+.chat .chat-history .message {background: #F2F2F2;color: #434651;padding: 18px 20px;line-height: 26px;font-size: 16px;border-radius: 13px;margin-bottom: 30px;max-width: 60%;min-width: 20%;width: max-content;position: relative;}
 .chat .chat-history .message:hover .actions {opacity: 1;}
 .chat .chat-history .message .actions {opacity: 0}
 
-.chat .chat-history .other-message {background: #ececec;}
+.chat .chat-history .other-message {background: #ededed;}
 .chat .chat-history .other-message.message-top {border-bottom-left-radius: 1px;margin-bottom: 5px !important;background: #E8E8E8}
 .chat .chat-history .other-message.message-middle {border-radius: 3px 13px 13px 3px;margin-bottom: 5px !important;background: #eeeeee}
 .chat .chat-history .other-message.message-bottom {border-top-left-radius: 1px;margin-bottom: 5px !important;background: #F0F0F0}

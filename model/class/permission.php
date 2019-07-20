@@ -65,27 +65,23 @@ class permission extends db_connect {
 
 
     /**
-     * Vérifier qu'une équipe a une permission
+     * Test si l'utilisateur est le créateur du projet
      * 
-     * Va vérifier si une équipe possède la permission donnée
+     * Va tester si l'utilisateur est le créateur du projet, par conséquent il aura automatiquement toutes les permissions
      *
      * @access public
      * @author Mikhaël Bailly
-     * @param string $team_token Token de l'équipe de projet
-     * @param string $permission Permission
+     * @param string $user_token Token de l'équipe de projet
+     * @param string $project_token Token du projet
      * @return array
      */
-    function projectTeamHasPermission($team_token, $permission){
-        $perms = $this -> getProjectTeamPermissions($team_token);
-
-        if (strpos($perms, "'*'") !== false) { 
-            return true; 
-        }
-        if (strpos($perms, $permission."|") !== false) {
-            return true;
-        }
-        return false;
+    
+    function isProjectOwner($user_token = '', $project_token = '') {
+        $request = $this -> _db -> query("SELECT * FROM `pr_project_member` WHERE `user_public_token` = '$user_token' AND `project_token` = '$project_token' AND `enable` = '1' ");
+        $res = $request->fetch();
+        return $res['role'] == 1 ? true : false;
     }
+
 
 
     /**
@@ -102,6 +98,10 @@ class permission extends db_connect {
      */
     function hasPermission($user_token, $project_token, $permission){
         $perms = $this -> getMemberPermissions($user_token, $project_token);
+
+        if ($this -> isProjectOwner($user_token, $project_token) == true) { 
+            return true; 
+        }
 
         if (strpos($perms, "'*'") !== false) { 
             return true; 

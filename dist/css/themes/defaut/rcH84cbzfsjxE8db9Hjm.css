@@ -36,7 +36,7 @@
 .color-lg-green {color: var(--light-green-color) !important}
 
 /* Buttons */
-.btn {border: none;cursor: pointer;padding: 10px 15px;border-radius: 3px;width: max-content}
+.btn {border: none;cursor: pointer;padding: 10px 15px;border-radius: 3px;width: max-content;height: max-content}
 .btn-sm {padding: 5px 10px;font-size: .8em;}
 .btn-xs {padding: 2px 5px;font-size: .8em;}
 .primary-btn {background: var(--primary-color);color: var(--light-background-color) !important;}

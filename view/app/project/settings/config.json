@@ -35,7 +35,7 @@
     ],
 
     "online_css": [ 
-        "https://cdn.jsdelivr.net/npm/jquery-nice-select@1.1.0/css/nice-select.css"
+        "https://cdn.jsdelivr.net/npm/jq-fakeloader@2.0.1/css/fakeLoader.css"
     ],
 
     "js": [ 

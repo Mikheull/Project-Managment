@@ -271,11 +271,173 @@ class task extends project {
    * @return array
    */
 
-  function reopenTask($token = '') {
-        $now = date("Y-m-d H:i:s");
-        $request = $this -> _db -> exec("UPDATE `pr_task_item` SET `date_end` = null WHERE `task_token` = '$token' AND `enable` = '1' ");
-        return (['success' => true, 'options' => ['content' => "La tache a été réouverte !", 'theme' => 'success'] ]);
-  }
+    function reopenTask($token = '') {
+            $now = date("Y-m-d H:i:s");
+            $request = $this -> _db -> exec("UPDATE `pr_task_item` SET `date_end` = null WHERE `task_token` = '$token' AND `enable` = '1' ");
+            return (['success' => true, 'options' => ['content' => "La tache a été réouverte !", 'theme' => 'success'] ]);
+    }
+
+
+
+    /**
+     * Assigner une tache a des équipe
+     * 
+     * Va assigner une tache a des équipe
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $project_token Token du projet
+     * @param string $task_token Token de la tache
+     * @param string $assigned_teams Les équipes assignés
+     * @return array
+     */
+
+    function assignTeam($project_token = '', $task_token = '', $assigned_teams = '') {
+        if($assigned_teams !== ''){
+            $teams = '';
+            foreach($assigned_teams as $team){ 
+                $teams .= $team.'|';
+            }
+            $request = $this -> _db -> exec("UPDATE `pr_task_item` SET `assigned_teams` = '$teams' WHERE `project_token` = '$project_token' AND `task_token` = '$task_token' AND `enable` = '1' ");
+        }else{
+            $request = $this -> _db -> exec("UPDATE `pr_task_item` SET `assigned_teams` = '' WHERE `project_token` = '$project_token' AND `task_token` = '$task_token' AND `enable` = '1' ");
+
+        }
+       
+    }
+
+
+
+    /**
+     * Vérifier qu'une tache est assignée a une team
+     * 
+     * Va vérifier si une tache est assignée a une team donnée
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $project_token Token du projet
+     * @param string $task_token Token de la tache
+     * @param string $team_token Token de la team
+     * @return array
+     */
+    function teamIsAssigned($project_token, $task_token, $team_token){
+        $request = $this -> _db -> query("SELECT * FROM `pr_task_item` WHERE `project_token` = '$project_token' AND `task_token` = '$task_token' AND `enable` = '1' ");
+        $res = $request->fetch();
+        $teams = $res['assigned_teams'];
+
+        if (strpos($teams, $team_token."|") !== false) {
+            return true;
+        }
+        return false;
+    }
+
+
+
+    /**
+     * Récupérer les teams assignés a une tache
+     * 
+     * Va récupérer les équipes assignés a une tache
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $project_token Token du projet
+     * @param string $task_token Token de la tache
+     * @return array
+     */
+    function getTeamAssigned($project_token = '', $task_token = ''){
+        $request = $this -> _db -> query("SELECT * FROM `pr_task_item` WHERE `project_token` = '$project_token' AND `task_token` = '$task_token' AND `enable` = '1' ");
+        $res = $request->fetch();
+        $teams = $res['assigned_teams'];
+
+        $allTeams = array();
+        if (strpos($teams, "|") !== false) {
+            $allTeams = explode('|', $teams);
+        }
+        return ([ 
+            'count' => sizeof($allTeams), 
+            'content' => $allTeams,
+        ]);
+    }
+
+
+    /**
+     * Assigner une tache a des membres
+     * 
+     * Va assigner une tache a des membres
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $project_token Token du projet
+     * @param string $task_token Token de la tache
+     * @param string $assigned_teams Les membres assignés
+     * @return array
+     */
+
+    function assignMember($project_token = '', $task_token = '', $assigned_members = '') {
+        if($assigned_members !== ''){
+            $members = '';
+            foreach($assigned_members as $member){ 
+                $members .= $member.'|';
+            }
+            $request = $this -> _db -> exec("UPDATE `pr_task_item` SET `assigned_members` = '$members' WHERE `project_token` = '$project_token' AND `task_token` = '$task_token' AND `enable` = '1' ");
+        }else{
+            $request = $this -> _db -> exec("UPDATE `pr_task_item` SET `assigned_members` = '' WHERE `project_token` = '$project_token' AND `task_token` = '$task_token' AND `enable` = '1' ");
+
+        }
+    }
+
+
+
+    /**
+     * Vérifier qu'une tache est assignée a un membre
+     * 
+     * Va vérifier si une tache est assignée a un membre donnée
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $project_token Token du projet
+     * @param string $task_token Token de la tache
+     * @param string $team_token Token de l'utilisateur
+     * @return array
+     */
+    function memberIsAssigned($project_token, $task_token, $user_token){
+        $request = $this -> _db -> query("SELECT * FROM `pr_task_item` WHERE `project_token` = '$project_token' AND `task_token` = '$task_token' AND `enable` = '1' ");
+        $res = $request->fetch();
+        $users = $res['assigned_members'];
+
+        if (strpos($users, $user_token."|") !== false) {
+            return true;
+        }
+        return false;
+    }
+    
+
+
+    /**
+     * Récupérer les membres assignés a une tache
+     * 
+     * Va récupérer les membres assignés a une tache
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $project_token Token du projet
+     * @param string $task_token Token de la tache
+     * @return array
+     */
+    function getMemberassigned($project_token = '', $task_token = ''){
+        $request = $this -> _db -> query("SELECT * FROM `pr_task_item` WHERE `project_token` = '$project_token' AND `task_token` = '$task_token' AND `enable` = '1' ");
+        $res = $request->fetch();
+        $users = $res['assigned_members'];
+
+        $allUsers = array();
+        if (strpos($users, "|") !== false) {
+            $allUsers = explode('|', $users);
+        }
+        return ([ 
+            'count' => sizeof($allUsers), 
+            'content' => $allUsers,
+        ]);
+    }
 
 /******************************************************************************/
 
@@ -308,6 +470,43 @@ class task extends project {
             'tab_content' => $res,
             'task_content' => $task_res
         ]);
+    }
+
+
+    /**
+     * Récupère toutes les actions des taches
+     * 
+     * Va renvoyer toutes les actions des taches pour faire une timeline d'activité
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $project_token Token du projet
+     * @param string $status Status de la tache
+     * @param string $removeDay Nombre de jour a retirer
+     * @return array
+     */
+    
+    function getActivityPerDate($project_token = '', $status = '', $removeDay) {
+
+        if($status == 'created'){ 
+            if($removeDay == 0){
+                $request = $this -> _db -> query("SELECT * FROM `pr_task_item` WHERE `project_token` = '$project_token' AND `date_creation` >= CURDATE() AND `enable` = '1'");
+            }else{
+                $request = $this -> _db -> query("SELECT * FROM `pr_task_item` WHERE `project_token` = '$project_token' AND `date_creation` >= CURDATE() - $removeDay  AND `date_creation` <= CURDATE() - $removeDay + 1 AND `enable` = '1'");
+            }
+        }else if($status == 'ended'){
+            if($removeDay == 0){
+                $request = $this -> _db -> query("SELECT * FROM `pr_task_item` WHERE `project_token` = '$project_token' AND `date_end` >= CURDATE() AND `enable` = '1'");
+            }else{
+                $request = $this -> _db -> query("SELECT * FROM `pr_task_item` WHERE `project_token` = '$project_token' AND `date_end` >= CURDATE() - $removeDay AND `date_end` <= CURDATE() - $removeDay + 1 AND `enable` = '1'");
+            }
+
+        }else{
+            return ([ 'count' => 0, 'content' => [] ]);
+        }
+        $count = $request->rowCount();
+
+        return $count;
     }
 
 /******************************************************************************/

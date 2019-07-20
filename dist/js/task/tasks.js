@@ -192,7 +192,6 @@ $(document).on("click", "[data-action='reopen_task']", function(e) {
 });
 
 
-
 // Expandable task
 $(document).on('click', '.expand_btn', function() {
     $( this ).next('.expand_content').toggleClass( 'hidden' );

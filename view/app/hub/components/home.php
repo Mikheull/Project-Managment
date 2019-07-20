@@ -11,16 +11,16 @@
             <div class="card"></div>
         </div>
 
-        <form action="" method="post">
-            <select name="goto_project">
-                <option data-display="Select" disabled>Aucun</option>
+        <div id="output_data" class="col-12">
+            <div class="row flex">
                 <?php
                     foreach($allUserProjects['content'] as $all){
-                        ?> <option value="<?= $project -> getProjectData($all['project_token'], 'public_token') ?>"><?= $project -> getProjectData($all['project_token'], 'name') ?></option> <?php
+                        require ('view/app/hub/components/card.php');
                     }
                 ?>
-            </select>
-        </form>
+            </div>
+        </div>
+        
 
         <span class="color-light">OU</span>
         <div class="spacer-md"></div>
@@ -31,10 +31,11 @@
 
 
 <script>
+$('#output_data').hide();
 setTimeout(function() {
     $('#loading_data').fadeOut( 600 );
     setTimeout(function() {
         $('#output_data').show();
-    }, 300);
+    }, 587);
 }, 1000);
 </script>

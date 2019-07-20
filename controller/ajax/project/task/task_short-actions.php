@@ -117,6 +117,22 @@ if($action == 'reopen'){
 }
 
 
+if($action == 'assign_task'){
+    if($permission -> hasPermission($main -> getToken(), $project_token, 'task.assign')){
+        $assigned_teams = isset($_POST['assigned_teams']) ? $_POST['assigned_teams'] : '';
+        $errors = $task -> assignTeam($project_token, $task_token, $assigned_teams);
+
+        $assigned_members = isset($_POST['assigned_members']) ? $_POST['assigned_members'] : '';
+        $errors = $task -> assignMember($project_token, $task_token, $assigned_members);
+
+    }else{
+        $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
+    }
+
+    
+    ?> <script> location.reload(); </script> <?php
+}
+
 
 
 

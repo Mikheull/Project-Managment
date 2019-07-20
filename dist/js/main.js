@@ -49,12 +49,6 @@ $(document).ready(function() {
         $('select').niceSelect();
     }
 });
-$( "select[name='goto_project']" ).change(function() {
-    var href = $('select[name="goto_project"]').val();
-    location.href= "app/project/"+href;
-});
-
-
 
 
 // Partie du plugin fakeLoader

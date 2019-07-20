@@ -1,4 +1,4 @@
-.back-bg-gray {background: var(--black-background-color);height: 100vh;width: 100vw;position: absolute;right: 0;}
+.back-bg-gray {background: var(--black-background-color);height: 100vh;width: 100vw;position: fixed;right: 0;}
 
 /* html body {display: flex} */
 
@@ -75,3 +75,17 @@
 .wrapper_content .paging {width: 100%;text-align: center;margin: 20px 0}
 .wrapper_content .paging ul li {display: inline-block}
 .wrapper_content .paging ul li a {color: var(--primary-color);padding: 5px}
+
+
+/* Card*/
+.card-item {background: #FFF}
+.card-item .header {height: 150px}
+.card-item .header .head-bg {height: 150px;z-index: -9;}
+.card-item .header .options {top: 10px;right: 10px;display: flex;justify-content: end;opacity: 0;transition-duration: .5s}
+.card-item .header .status {top: 10px;left: 10px;padding: 5px 10px;border-radius: 25px;opacity: 0;transition-duration: .5s}
+.card-item:hover .header .options, .card-item:hover .header .status {opacity: 1;transition-duration: .3s}
+.card-item .header .heading {bottom: 0px;left: 30%}
+.card-item .header .heading .team_profilImage {margin: 0 auto;background: var(--primary-color);width: 48px;height: 48px;border-radius: 100%;color: #FFF;line-height: 48px;box-shadow: 0px 0px 9px 1px rgba(107, 106, 189, 0.43);}
+.card-item .header .heading .name {padding-bottom: 15px}
+
+.card-item .content {height: 100px}

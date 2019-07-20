@@ -8,7 +8,7 @@
         "feather-icons",
         "popper",
         "tippy",
-        "nice-select",
+        "bootbox",
         "fakeLoader"
     ],
 
@@ -31,12 +31,16 @@
     "css": [ 
         "app/main.min.css",
         "app/hub.min.css",
-        "app/project/main.min.css"
+        "app/project/main.min.css",
+        "bootstrap-modal.min.css"
     ],
 
     "online_css": [ 
-        "https://cdn.jsdelivr.net/npm/jquery-nice-select@1.1.0/css/nice-select.css",
         "https://cdn.jsdelivr.net/npm/jq-fakeloader@2.0.1/css/fakeLoader.css"
+    ],
+
+    "js": [ 
+        "project-fast-act.min.js"
     ]
 
 }

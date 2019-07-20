@@ -9,7 +9,9 @@
         "feather-icons",
         "popper",
         "tippy",
-        "bootbox"
+        "bootbox",
+        "chart",
+        "flickity"
     ],
 
     "meta": [ 
@@ -30,16 +32,19 @@
      
     "css": [ 
         "app/main.min.css",
+        "app/home.min.css",
         "app/project/main.min.css",
         "bootstrap-modal.min.css"
     ],
 
     "online_css": [ 
-        "https://cdn.jsdelivr.net/npm/tippy.js@4.3.1/themes/light-border.css"
+        "https://cdn.jsdelivr.net/npm/tippy.js@4.3.1/themes/light-border.css",
+        "https://cdn.jsdelivr.net/npm/flickity@2.2.1/dist/flickity.min.css"
     ],
 
     "js": [ 
-        "project-fast-act.min.js"
+        "project-fast-act.min.js",
+        "dashboard_chart.min.js"
     ]
 
 }

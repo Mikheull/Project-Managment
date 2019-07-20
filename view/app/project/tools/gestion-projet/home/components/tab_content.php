@@ -56,6 +56,38 @@
                                                                     $date_end = new DateTime( $task_item['date_end'] );
                                                                     ?> <div class="col-12 mr-top">Terminée le : <span class="color-lg-dark"><?= date_format($date_end, 'd/m/Y à H:i') ;?></span> </div> <?php
                                                                 }
+                                                                
+                                                                $allTeamsAssigned = $task -> getTeamAssigned($router -> getRouteParam('2'), $task_item['task_token']);
+                                                                $allMembersAssigned = $task -> getMemberAssigned($router -> getRouteParam('2'), $task_item['task_token']);
+                                                                
+                                                                if($allTeamsAssigned['count'] !== 0){
+                                                                    ?> 
+                                                                    <div class="col-12 mr-top">
+                                                                        Équipes assignées :
+                                                                        <ul>
+                                                                            <?php 
+                                                                            foreach($allTeamsAssigned['content'] as $ts){
+                                                                                ?> <li class="color-lg-dark mr-left"><?= $utils -> getData('pr_project_team', 'name', 'public_token', $ts ) ?></li> <?php
+                                                                            }
+                                                                            ?> 
+                                                                        </ul>
+                                                                    </div> 
+                                                                    <?php
+                                                                }
+                                                                if($allMembersAssigned['count'] !== 0){
+                                                                    ?> 
+                                                                    <div class="col-12 mr-top">
+                                                                        Membres assignés :
+                                                                        <ul>
+                                                                            <?php 
+                                                                            foreach($allMembersAssigned['content'] as $ms){
+                                                                                ?> <li class="color-lg-dark mr-left"><?= $utils -> getData('imp_user', 'username', 'public_token', $ms ) ?></li> <?php
+                                                                            }
+                                                                            ?> 
+                                                                        </ul>
+                                                                    </div> 
+                                                                    <?php
+                                                                }
                                                             ?>
                                                             
                                                             <div class="col-12 flex mr-top flex justify-content-between">
@@ -70,7 +102,8 @@
                                                                 </div>
 
                                                                 <div class="flex">
-                                                                    <div class="btn btn-sm light-btn-bordered mr-left mr-right" data-action="edit_task" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>"><i data-feather="edit"></i></div>
+                                                                    <div class="btn btn-sm light-btn-bordered mr-right" data-action="assign_task" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>"><i data-feather="user-plus"></i></div>
+                                                                    <div class="btn btn-sm light-btn-bordered mr-right" data-action="edit_task" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>"><i data-feather="edit"></i></div>
                                                                     <div class="btn btn-sm red-btn" data-action="delete_task" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>"><i data-feather="trash-2"></i></div>
                                                                 </div>
                                                             </div>
@@ -134,3 +167,48 @@
 <div class="tab-item">
     <div class="btn primary-btn full-width text-align-center" id="new-tab" data-pro="<?= $router -> getRouteParam('2') ?>"><i data-feather="plus-circle"></i> Nouveau tableau</div>
 </div>
+
+
+
+<script>
+
+// Assign
+$(document).on("click", "[data-action='assign_task']", function(e) {
+    let ref = this.dataset.ref;
+    let project = this.dataset.pro;
+
+    bootbox.dialog({
+        backdrop: true,
+        closeButton: false,
+        title: "Assigner la tâche",
+        buttons: {
+            confirm: {
+                label: 'Ok',
+                className: 'btn primary-btn',
+                callback: function(){
+                    let assigned_teams = [];
+                    let assigned_members = [];
+                    $("input:checkbox[name=assigned_teams]:checked").each(function(){ assigned_teams.push($(this).val()); });
+                    $("input:checkbox[name=assigned_members]:checked").each(function(){ assigned_members.push($(this).val()); });
+                    
+                    $.ajax({
+                        url:  rootUrl + 'controller/ajax/project/task/task_short-actions.php',
+                        type: 'POST',
+                        data: {assigned_teams: assigned_teams, assigned_members: assigned_members, task_token: ref, project_token: project, action: 'assign_task'},
+                        success:function(data){
+                            $('#tab_output').html(data);
+                        }
+                    });
+                   
+                }
+            },
+            cancel: {
+                label: 'Annuler',
+                className: 'btn dark-btn',
+            }
+        },
+        message: '<div class="row"> <div class="mr-bot-lg col-12"> <h3 class="text-sm color-dark mr-bot mr-top">Assigner des équipes</h3> <?php require_once ("controller/projectTeam.php"); $teams=$projectTeam -> getTeams( $router -> getRouteParam("2") ); foreach($teams["content"] as $t){?> <div class="tg-list-item flex mr-bot"> <div class="mr-right"> <input class="tgl tgl-light" name="assigned_teams" value="<?=$t["public_token"] ;?>" id="<?=$t["public_token"] ;?>" type="checkbox"/> <label class="tgl-btn" for="<?=$t["public_token"] ;?>"></label> </div><div> <small><?=$t["name"] ;?></small> </div></div><?php } ?> </div><div class="col-12"> <h3 class="text-sm color-dark mr-bot mr-top">Assigner des membres</h3> <?php require_once ("controller/project.php"); $teams=$project -> getProjectMembers( $router -> getRouteParam("2") ); foreach($teams["content"] as $t){?> <div class="tg-list-item flex mr-bot"> <div class="mr-right"> <input class="tgl tgl-light" name="assigned_members" value="<?=$t["user_public_token"] ;?>" id="<?=$t["user_public_token"] ;?>" type="checkbox"/> <label class="tgl-btn" for="<?=$t["user_public_token"] ;?>"></label> </div><div> <small><?=$utils -> getData('imp_user', 'username', 'public_token', $t["user_public_token"] ) ;?></small> </div></div><?php } ?> </div></div>',
+        
+    });
+});
+</script>
