@@ -130,6 +130,7 @@ $router -> addRoutes(
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/bug-tracker/reports', 'dir_path' => 'view/app/project/tools/bug-tracker/reports/'],
         
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/documents', 'dir_path' => 'view/app/project/tools/documents/home/'],
+        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/documents/share', 'dir_path' => 'view/app/project/tools/documents/share/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/documents/import', 'dir_path' => 'view/app/project/tools/documents/import/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/documents/create', 'dir_path' => 'view/app/project/tools/documents/create/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/documents/viewer', 'dir_path' => 'view/app/project/tools/documents/view/'],

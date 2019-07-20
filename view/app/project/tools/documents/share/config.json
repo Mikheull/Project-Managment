@@ -1,0 +1,50 @@
+{
+    "use_generic_meta": false,
+    "must_be_logged": true,
+    "project_can_access": true,
+
+    "libs": [
+        "jquery",
+        "fontawesome",
+        "feather-icons",
+        "popper",
+        "tippy",
+        "bootbox",
+        "filepond"
+    ],
+
+
+    "meta": [ 
+        "<title>Improove - Documents</title>",
+        "<meta name=\"description\" content=\"Importez des documents sur votre projet.\"/>",
+        "<meta property=\"og:title\" content=\"Improove - Documents\"/>",
+        "<meta property=\"og:description\" content=\"Importez des documents sur votre projet.\"/>",
+        "<meta property=\"og:image\" content=\"https://www.improove.tk/dist/images/og_bg.jpg\"/>",
+        "<meta property=\"og:image:width\" content=\"672\"/>",
+        "<meta property=\"og:image:height\" content=\"350\"/>",
+
+        "<meta property=\"twitter:card\" content=\"summary_large_image\"/>",
+        "<meta property=\"twitter:title\" content=\"Improove - Documents\"/>",
+        "<meta property=\"twitter:description\" content=\"Importez des documents sur votre projet.\"/>",
+        "<meta property=\"twitter:image\" content=\"https://www.improove.tk/dist/images/og_bg.jpg\"/>"
+
+    ],
+     
+    "css": [ 
+        "app/main.min.css",
+        "app/project/main.min.css",
+        "app/project/document.min.css",
+        "bootstrap-modal.min.css"
+    ],
+
+    "online_css": [ 
+        "https://cdn.jsdelivr.net/npm/tippy.js@4.3.1/themes/light-border.css",
+        "https://cdn.jsdelivr.net/npm/filepond@4.4.10/dist/filepond.min.css",
+        "https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css"
+    ],
+
+    "js": [ 
+        "project-fast-act.min.js"
+    ]
+
+}
