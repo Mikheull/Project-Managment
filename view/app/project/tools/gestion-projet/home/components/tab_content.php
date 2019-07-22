@@ -20,8 +20,8 @@
                                 $date_creation = new DateTime( $task_item['date_creation'] );
                                 
                                 ?>
-                                    <div class="col-12 task_item">
-                                        <div class="container light-border mr-bot-lg <?= (!isset($task_item['date_end']) ? '' : 'ended') ;?>">
+                                    <div class="col-12 task_item" data-ref="<?= $task_item['task_token'] ?>">
+                                        <div class="task_item_content container light-border mr-bot-lg <?= (!isset($task_item['date_end']) ? '' : 'ended') ;?>">
                                             <div class="row mr-top">
                                                 <div class="col"> <h4 class="text-sm"><?= $task_item['name'] ?></h4> </div>
                                             </div>

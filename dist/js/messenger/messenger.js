@@ -41,3 +41,39 @@ $(document).on("click", "[data-action='new_channel']", function(e) {
         
     });
 });
+
+
+// Delete message
+$(document).on("click", "[data-action='delete_message']", function(e) {
+    event.preventDefault();
+    let message = this.dataset.message;
+
+    $.ajax({
+        url:  rootUrl + 'controller/ajax/project/messenger/messenger-actions.php',
+        type: 'POST',
+        data: {message_token: message, action: 'delete_message'},
+        success:function(data){
+            $('#channel-list_output').html(data);
+        }
+    });
+});
+
+// Edit message
+$(document).on("click", "[data-action='edit_message']", function(e) {
+    event.preventDefault();
+    let message = this.dataset.message;
+
+    $( 'button[name="message_send"]' ).attr('name', 'message_edit')
+    $( 'input[name="edit_id"]' ).val(message)
+    $.ajax({
+        url:  rootUrl + 'controller/ajax/project/messenger/messenger-actions.php',
+        type: 'POST',
+        data: {message_token: message, action: 'edit_message-part1'},
+        success:function(data){
+            $("#emojionearea5")[0].emojioneArea.setFocus();
+            $("#emojionearea5")[0].emojioneArea.setText(data);
+        }
+    });
+
+   
+});

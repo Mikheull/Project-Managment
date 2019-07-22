@@ -18,7 +18,6 @@
                         <ul class="text-align-left">
                             <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/uml" class="link dark-link"> Home </a> </li>
                             <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/uml/create" class="link dark-link"> Nouveau </a> </li>
-                            <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/uml/import" class="link dark-link"> Importer </a> </li>
                         </ul>
                     </div>
                 </div>
@@ -39,7 +38,7 @@
                                     <div id="export_btn"></div>
                                 <?php } ?>
                                 <?php if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'uml.edit')){ ?>
-                                    <div> <div class="btn btn-sm dark-btn mr-right"><i class="fas fa-edit"></i></div> </div>
+                                    <div> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/uml/<?= $router -> getRouteParam("5") ?>/edit" class="btn btn-sm dark-btn mr-right"> <i class="fas fa-edit"></i> </a> </div>
                                 <?php } ?>
                                 <div> <div class="btn btn-sm dark-btn" id="full_screen"><i class="fas fa-expand"></i></div> </div>
                             </div>

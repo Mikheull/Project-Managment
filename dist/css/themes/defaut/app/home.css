@@ -5,3 +5,8 @@
 .tab_task-pr-slide-item {width: 100%}
 .tab_task-pr-slide .flickity-page-dots {padding-bottom: 15px}
 .tab_task-pr-slide canvas {margin: 20px auto}
+
+.inf_container .inf_item {background: #262E3E;height: 200px;margin-bottom: 20px;text-align: center;border-radius: 6px;}
+.inf_container .inf_item .inf {margin: 30px auto;color: #FFF ;}
+.inf_container .inf_item .inf .feather {width: 32px;height: 32px;stroke-width: 1;}
+.inf_container .inf_item .val {color: #FFF}

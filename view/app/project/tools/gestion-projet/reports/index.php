@@ -33,7 +33,6 @@
                 if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'task.report.view')){
                     if($activity['count'] !== 0){
                         require_once ('view/app/project/tools/gestion-projet/reports/components/contrib_chart_month.php');
-                        require_once ('view/app/project/tools/gestion-projet/reports/components/contrib_graph.php');
                         
                     }else{
                         ?>

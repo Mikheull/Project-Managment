@@ -66,7 +66,7 @@
                         }
                         else if($ext == 'bmp' OR $ext == 'gif' OR $ext == 'ico' OR $ext == 'jpeg' OR $ext == 'jpg' OR $ext == 'png' OR $ext == 'ps' OR $ext == 'psd' OR $ext == 'svg' OR $ext == 'tif' OR $ext == 'tiff'){
                             ?>
-                                <div id="doc_content" class="bg-white"> <img src="<?= $config -> rootUrl() . 'dist/uploads/p/' . $project_token . '/docs/' . $file ;?>"> </div>
+                                <div id="doc_content" class="bg-white"> <img src="<?= $config -> rootUrl() . 'dist/uploads/p/' . $project_token . '/docs/' . $file ;?>" width="100%"> </div>
                             <?php    
                         }
                         else if($ext == 'asp' OR $ext == 'aspx' OR $ext == 'cgi' OR $ext == 'pl' OR $ext == 'css' OR $ext == 'sass' OR $ext == 'scss' OR $ext == 'less' OR $ext == 'html' OR $ext == 'htm' OR $ext == 'js' OR $ext == 'json' OR $ext == 'jsp' OR $ext == 'part' OR $ext == 'php' OR $ext == 'py' OR $ext == 'rss' OR $ext == 'xhtml' OR $ext == 'c' OR $ext == 'class' OR $ext == 'cpp' OR $ext == 'cs' OR $ext == 'h' OR $ext == 'java' OR $ext == 'sh' OR $ext == 'swift' OR $ext == 'vb'){

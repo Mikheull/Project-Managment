@@ -192,7 +192,27 @@ $(document).on("click", "[data-action='reopen_task']", function(e) {
 });
 
 
+
+
 // Expandable task
 $(document).on('click', '.expand_btn', function() {
     $( this ).next('.expand_content').toggleClass( 'hidden' );
+});
+
+// Task link viewer
+$(document).ready(function() {
+    var urlParams = new URLSearchParams(location.search);
+
+
+    if(urlParams.has('task') == true){
+        let taskToken = urlParams.get('task');
+        $("[data-ref='"+ taskToken +"']").addClass('selected_item-task')
+
+        setTimeout(function() {
+
+            $("[data-ref='"+ taskToken +"']").removeClass('selected_item-task')
+
+        }, 3000);
+    }
+
 });

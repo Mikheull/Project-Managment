@@ -2,10 +2,13 @@
 
 
 /**
- * Script de gestion de messenger
+ * Script des actions rapides des taches
+ * relié a des boutons en ajax, il fera certaines actions rapides
+ * depuis le panel des taches
  * 
  * utilisé dans :
- *  (Direct) - view/app/project/tools/messenger/home/index.php
+ *  (Direct) - dist/js/task/task.js
+ *  (Direct) - dist/js/task/task.min.js
  * 
  */
 
@@ -26,21 +29,25 @@ require_once ('../../../../model/class/router.php');
 require_once ('../../../../model/class/config.php');
 require_once ('../../../../model/class/user.php');
 require_once ('../../../../model/class/project.php');
-require_once ('../../../../model/class/messenger.php');
+require_once ('../../../../model/class/bug.php');
 require_once ('../../../../model/class/authentication.php');
-require_once ('../../../../model/class/permission.php');
 require_once ('../../../../model/class/utils.php');
+require_once ('../../../../model/class/permission.php');
 
 $main = new main();
 $router = new router($db);
 $config = new config();
 $user = new user($db);
 $project = new project($db);
-$messenger = new messenger($db);
+$bug = new bug($db);
 $auth = new authentication($db);
-$permission = new permission($db);
 $utils = new utils($db);
+$permission = new permission($db);
 
+if(isset($_POST['result'])){ $result = $_POST['result']; }
+$bug_token = $_POST['bug_token'];
+$action = $_POST['action'];
+if(isset($_POST['project_token'])){ $project_token = $_POST['project_token']; }
 
 
 
@@ -49,39 +56,22 @@ $utils = new utils($db);
 /**
  * Test de l'envoi en ajax
  */
-if(isset($_POST['action']) AND $_POST['action'] == 'new_channel'){
 
-    if(isset($_POST['channel_name']) AND !empty($_POST['channel_name']) AND isset($_POST['channel_topic']) AND !empty($_POST['channel_topic']) AND isset($_POST['project_token']) AND !empty($_POST['project_token'])){
-        $channel_name = cleanVar($_POST['channel_name']);
-        $channel_topic = (isset($_POST['channel_topic']) ? cleanVar($_POST['channel_topic']) : 'Aucun topic défini');
-        $project_token = cleanVar($_POST['project_token']);
-        
-        if($permission -> hasPermission($main -> getToken(), $project_token, 'messenger.channel.create')){
-            $errors = $messenger -> newChannel($project_token, $channel_name, $channel_topic);
-        }else{
-            $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
-        }
+
+if($action == 'assign_bug'){
+    if($permission -> hasPermission($main -> getToken(), $project_token, 'bug-tracker.assign')){
+        $assigned_teams = isset($_POST['assigned_teams']) ? $_POST['assigned_teams'] : '';
+        $errors = $bug -> assignTeam($project_token, $bug_token, $assigned_teams);
+
+        $assigned_members = isset($_POST['assigned_members']) ? $_POST['assigned_members'] : '';
+        $errors = $bug -> assignMember($project_token, $bug_token, $assigned_members);
 
     }else{
-        $errors = ['success' => false, 'options' => ['content' => "Vous devez remplir tout les champs obligatoires !", 'theme' => 'error'] ];
+        $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
     }
 
-}
-
-
-
-if(isset($_POST['action']) AND $_POST['action'] == 'delete_message'){
-    $message_token = cleanVar($_POST['message_token']);
-
-    $errors = $messenger -> deleteMessage($message_token);
-    echo '<script> document.location.reload(true); </script>';
-}
-
-
-if(isset($_POST['action']) AND $_POST['action'] == 'edit_message-part1'){
-    $message_token = cleanVar($_POST['message_token']);
-
-    echo $utils -> getData('pr_messenger_message', 'content', 'message_token', $message_token);
+    
+    ?> <script> location.reload(); </script> <?php
 }
 
 

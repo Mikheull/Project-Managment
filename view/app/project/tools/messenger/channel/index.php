@@ -1,7 +1,6 @@
 <?php
     require_once ('controller/project.php') ;
     require_once ('controller/messenger.php') ;
-    require_once ('controller/parsedown.php') ;
 ?>
 
 
@@ -57,13 +56,13 @@
                                 $group_count = 1;
                                 foreach($allMessages['content'] as $message){
                                     $mes = $message['content_edited'] == null ? $message['content'] : $message['content_edited'];
-                                    $mes = $utils -> parsedownChannel($mes, $router -> getRouteParam("2"));
+                                    $mes = $messenger -> convertMarkdown($mes, $router -> getRouteParam("2"));
                                     
                                     
 
                                     if($message['author_token'] == $main -> getToken()){
                                         ?>
-                                        <li class="clearfix" data-token="<?= $message['message_token'] ?>">
+                                        <li class="clearfix message-item" data-token="<?= $message['message_token'] ?>">
                                             <?php
                                             if(isset($pre_sender)){
                                                 if($pre_sender == $message['author_token']){
@@ -84,7 +83,7 @@
                                                 }
                                             }else{
                                                 ?>
-                                                    <div class="message-data text-align-right mr-top"> <span class="message-data-time text-xs" ><?= $config -> time_elapsed_string($message['date_edited'] == null ? $message['date_creation'] : $message['date_edited']) ?></span> </div>
+                                                    <div class="message-data text-align-right mr-top"> <span class="message-data-time text-xs" ><?= $config -> time_elapsed_string($message['date_creation']) ?></span> </div>
                                                 <?php
                                             }
                                             ?>
@@ -93,7 +92,7 @@
                                                 <?= $mes ;?>
                                                 <?php
                                                     if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'messenger.tchat.manage')){
-                                                        ?> <span class="actions"><i class="fas fa-ellipsis-v color-dark"></i></span> <?php
+                                                        ?> <span class="actions link" data-tippy-content='<span class="message-data-time text-xs" ><?= $message['date_creation'] ?></span><br class="mr-bot"><a class="link dark-link" data-action="edit_message" data-message="<?= $message['message_token'] ?>">Éditer</a><br><a class="link dark-link" data-action="delete_message" data-message="<?= $message['message_token'] ?>">Supprimer</a>'><i class="fas fa-ellipsis-v color-dark"></i></span> <?php
                                                     }
                                                 ?>
                                             </div>
@@ -103,7 +102,7 @@
 
                                     }else{
                                         ?>
-                                        <li>
+                                        <li class="message-item" data-token="<?= $message['message_token'] ?>">
                                             <?php
                                             if(isset($pre_sender)){
                                                 if($pre_sender == $message['author_token']){
@@ -132,7 +131,7 @@
                                                 <?= $mes ;?>
                                                 <?php
                                                     if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'messenger.tchat.manage.other')){
-                                                        ?> <span class="actions"><i class="fas fa-ellipsis-v color-dark"></i></span> <?php
+                                                        ?> <span class="actions link" data-tippy-content='<span class="message-data-time text-xs" ><?= $message['date_creation'] ?></span><br class="mr-bot"><a class="link dark-link" data-action="delete_message" data-message="<?= $message['message_token'] ?>">Supprimer</a>'><i class="fas fa-ellipsis-v color-dark"></i></span> <?php
                                                     }
                                                 ?>
                                             </div>
@@ -151,6 +150,7 @@
                     <div class="chat-message clearfix">
                         <form method="post">
                             <textarea name="message_content" id="emojionearea5" placeholder="Ecrivez un message" rows="3"></textarea>
+                            <input type="hidden" name="edit_id" value="">
                             <button name="message_send" class="link primary-link">Envoyer</button>
                         </form>
                     </div>
@@ -172,6 +172,16 @@ $(document).ready(function() {
     });
     $("#emojionearea5")[0].emojioneArea.setFocus();
 });
+
+tippy('.message-item .actions', {
+    animation: 'fade',
+    theme: 'light-border',
+    interactive: true,
+    placement: 'bottom',
+    arrowType: 'round',
+    arrow: true,
+
+})
 
 </script>
 

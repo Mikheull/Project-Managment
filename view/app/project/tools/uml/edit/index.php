@@ -16,8 +16,8 @@
                 <div class="col-md-8 col-12 navbar-app">
                     <div class="navbar-nav">
                         <ul class="text-align-left">
-                            <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/uml" class="link dark-link"> Home </a> </li>
-                            <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/uml/create" class="link dark-link active"> Nouveau </a> </li>
+                            <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/uml" class="link dark-link active"> Home </a> </li>
+                            <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/uml/create" class="link dark-link"> Nouveau </a> </li>
                         </ul>
                     </div>
                 </div>
@@ -25,10 +25,10 @@
 
             <div class="row">
                 <?php
-                    if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'uml.create')){
+                    if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'uml.edit')){
                         ?>
                             <div class="col-12">
-                                <h2 class="title-sm color-dark">Création</h2>
+                                <h2 class="title-sm color-dark">Édition</h2>
                             </div>
 
                             <div class="col-md-6 col-12">
@@ -36,28 +36,29 @@
                                     <div class="input_group">
                                         <div class="input-field input-half">
                                             <label for="diagram_name">Nom</label>
-                                            <input type="text" name="diagram_name" id="diagram_name" placeholder="Nom" value="<?= isset($_POST['diagram_name']) ? $_POST['diagram_name'] : '' ?>">
+                                            <input type="text" name="diagram_name" id="diagram_name" placeholder="Nom" value="<?= $utils -> getData('pr_uml', 'name', 'uml_token', $router -> getRouteParam("5") ) ?>">
                                         </div>
                                     </div>
                                     <div class="input_group">
                                         <div class="input-field input-half">
                                             <select name="diagram_type">
                                                 <option data-display="select" disabled>Aucun</option>
-                                                <option value="flowchart">Flowchart</option>
-                                                <option value="sequenceDiagram">Sequence diagram</option>
-                                                <option value="gantt">Gantt diagram</option>
-                                                <option value="classDiagram">Class diagram</option>
+                                                <option value="flowchart" <?= ($utils -> getData('pr_uml', 'type', 'uml_token', $router -> getRouteParam("5") == 'flowchart') ? 'selected' : '' ) ?>>Flowchart</option>
+                                                <option value="sequenceDiagram" <?= ($utils -> getData('pr_uml', 'type', 'uml_token', $router -> getRouteParam("5") == 'sequenceDiagram') ? 'selected' : '' ) ?>>Sequence diagram</option>
+                                                <option value="gantt" <?= ($utils -> getData('pr_uml', 'type', 'uml_token', $router -> getRouteParam("5") == 'gantt') ? 'selected' : '' ) ?>>Gantt diagram</option>
+                                                <option value="classDiagram" <?= ($utils -> getData('pr_uml', 'type', 'uml_token', $router -> getRouteParam("5") == 'classDiagram') ? 'selected' : '' ) ?>>Class diagram</option>
                                             </select>
                                         </div>
                                     </div>
 
                                     <div class="input_group">
                                         <div class="input-field">
-                                            <textarea name="diagram_content" id="diagram_content" placeholder="Contenu"></textarea>
+                                            <textarea name="diagram_content" id="diagram_content" placeholder="Contenu"><?= $utils -> getData('pr_uml', 'content', 'uml_token', $router -> getRouteParam("5") ) ?></textarea>
                                         </div>
                                     </div>
 
-                                    <button class="btn primary-btn" name="create_uml">Créer</button>
+                                    <button class="btn primary-btn" name="edit_uml">Éditer</button>
+                                    <button class="btn red-btn" name="delete_uml">Supprimer</button>
                                 </form>
                             </div>
 
@@ -99,6 +100,7 @@ if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2
                     $( '#diagram_live-output' ).html(svgCode);
                 });
             });
+
         </script>
     <?php
 }

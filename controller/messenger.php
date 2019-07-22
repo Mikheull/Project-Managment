@@ -41,5 +41,29 @@ if(isset($_POST['message_send'])){
     }
 }
 
+
+
+/**
+ * Formulaire pour Editer un message
+ * 
+ * @fichier d'execution = view/app/project/tool/messenger/conv/index.php
+ * @variable d'execution = $_POST['message_edit']                       : type = button
+ * 
+ * @variable obligatoire = $_POST['message_content']                    : type = textarea
+ * 
+ */
+if(isset($_POST['message_edit'])){
+    if(isset($_POST['message_content']) AND !empty($_POST['message_content'])){
+
+        $content = $_POST['message_content'];
+        $message_content = $_POST['edit_id'];
+
+        $errors = $messenger -> editMessage($content, $message_content);
+
+    }else{
+        $errors = ['success' => false, 'options' => ['content' => "Vous devez remplir le champ !", 'theme' => 'error'] ];
+    }
+}
+
 // End of file
 /******************************************************************************/

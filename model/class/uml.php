@@ -36,7 +36,7 @@ class uml extends db_connect {
     /**
      * Importer un diagram
      * 
-     * Va importe un diagramme dans le projet
+     * Va importer un diagramme dans le projet
      *
      * @access public
      * @author Mikhaël Bailly
@@ -67,6 +67,57 @@ class uml extends db_connect {
         return (['success' => true, 'options' => ['content' => "Le diagramme a été importé !", 'theme' => 'success'] ]);
 
     } 
+
+
+
+    /**
+     * Editer un diagram
+     * 
+     * Va editer le diagramme
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $name Nom du diagramme
+     * @param string $type Type de diagramme
+     * @param string $content Contenu brut
+     * @param string $uml_token Token du projet
+     * @return array
+     */
+    
+    function editDiagram($name = '', $type = '', $content = '', $uml_token = '') {
+        $req = $this -> _db -> prepare("UPDATE `pr_uml` (`name`, `type`, `content`) VALUES (:name, :type, :content) WHERE `uml_token` = '$uml_token' AND `enable` = '1'");
+
+        $req->bindParam(':name', $name);
+        $req->bindParam(':type', $type);
+        $req->bindParam(':content', $content);
+        
+        $req->execute();
+
+        return (['success' => true, 'options' => ['content' => "Le diagramme a été edité !", 'theme' => 'success'] ]);
+
+    } 
+
+
+
+    /**
+     * Supprimer un diagram
+     * 
+     * Va supprimer le diagramme
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $uml_token Token de l'uml
+     * @return array
+     */
+    
+    function deleteDiagram($uml_token = '') {
+        $request = $this -> _db -> exec("DELETE FROM `pr_uml` WHERE `uml_token` = '$uml_token' AND `enable` = '1' ");
+        return (['success' => true, 'options' => ['content' => "Le diagramme a été supprimé !", 'theme' => 'success'] ]);
+
+    } 
+    
+
+
     
 
 
