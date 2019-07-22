@@ -457,6 +457,12 @@ class project extends db_connect {
             }
 
             header('location: ../project/'. $token);
+
+            if(!is_dir('dist/uploads/p/'.$token.'/docs/')){
+                mkdir('dist/uploads/p/'.$token.'/docs/', 0777, true);
+                fopen('dist/uploads/p/'.$token.'/docs/index.php', "w");
+            }
+
             return (['success' => true, 'options' => ['content' => "Le projet a été crée !", 'theme' => 'success'] ]);
         }else{
             return (['success' => false, 'options' => ['content' => "Un projet avec ce même nom existe déjà !", 'theme' => 'error'] ]);

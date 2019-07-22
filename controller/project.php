@@ -117,6 +117,22 @@ if(isset($_POST['create_project'])){
 
 
 /**
+ * Formulaire pour Supprimer un projet
+ * 
+ * @fichier d'execution = view/app/project/settings/index.php
+ * @variable d'execution = $_POST['delete_project']                     : type = button
+ * 
+ * @variable obligatoire = $_POST['name']                               : type = text
+ * 
+ */
+if(isset($_POST['delete_project'])){
+    $project_token = $router -> getRouteParam('2');
+    $errors = $project -> disable($project_token);
+}
+
+
+
+/**
  * Formulaire pour editer les informations d'un projet
  * 
  * @fichier d'execution = view/content/app/project/settings/index.php
