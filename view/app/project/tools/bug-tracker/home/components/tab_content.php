@@ -12,8 +12,8 @@
                 foreach($bugsList['content'] as $bug_item){
                     $date_creation = new DateTime( $bug_item['date_creation'] );
                     ?>
-                        <div class="col-12 ">
-                            <div class="container light-border mr-bot-lg">
+                        <div class="col-12 bug_item" data-ref="<?= $bug_item['bug_token'] ?>">
+                            <div class="bug_item_content container light-border mr-bot-lg">
                                 <div class="row mr-top mr-bot">
                                     <div class="col-10"> 
                                         <h4 class="text-sm">[<span style="color: #9c36b5"><?= $bug_item['bug_token'] ?></span>] - <?= $bug_item['name'] ?></h4> 
@@ -100,8 +100,8 @@
                     $date_working = new DateTime( $bug_item['date_working'] );
 
                     ?>
-                        <div class="col-12 ">
-                            <div class="container light-border mr-bot-lg">
+                        <div class="col-12 bug_item" data-ref="<?= $bug_item['bug_token'] ?>">
+                            <div class="bug_item_content container light-border mr-bot-lg">
                                 <div class="row mr-top mr-bot">
                                     <div class="col-10"> 
                                         <h4 class="text-sm">[<span style="color: #d9480f"><?= $bug_item['bug_token'] ?></span>] - <?= $bug_item['name'] ?></h4> 
@@ -189,8 +189,8 @@
                     $date_working = new DateTime( $bug_item['date_working'] );
                     $date_end = new DateTime( $bug_item['date_end'] );
                     ?>
-                        <div class="col-12 ">
-                            <div class="container light-border mr-bot-lg">
+                        <div class="col-12 bug_item" data-ref="<?= $bug_item['bug_token'] ?>">
+                            <div class="bug_item_content container light-border mr-bot-lg">
                                 <div class="row mr-top mr-bot">
                                     <div class="col-10"> 
                                         <h4 class="text-sm">[<span style="color: #2b8a3e"><?= $bug_item['bug_token'] ?></span>] - <?= $bug_item['name'] ?></h4> 

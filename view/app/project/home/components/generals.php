@@ -76,10 +76,21 @@ function format_size($size) {
                     <div class="col-lg-2 col-md-6 col-12">
                         <div class="p-3 inf_item">
                             <div class="inf">
-                                <i data-feather="bookmark"></i>
+                                <i data-feather="check-circle"></i>
                             </div>
                             <div class="val">
                                <span><?= $allTasks['count'] ?> Tache<?= ($allTasks['count'] > 1) ? 's' : '' ?></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-2 col-md-6 col-12">
+                        <div class="p-3 inf_item">
+                            <div class="inf">
+                                <i data-feather="disc"></i>
+                            </div>
+                            <div class="val">
+                               <span><?= $allBugs['count'] ?> Rapport<?= ($allBugs['count'] > 1) ? 's' : '' ?> de bug<?= ($allBugs['count'] > 1) ? 's' : '' ?></span>
                             </div>
                         </div>
                     </div>

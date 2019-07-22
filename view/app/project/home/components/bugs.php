@@ -3,7 +3,6 @@
         <div class="heading mr-bot"> <span class="color-dark text-sm">Gestion des bugs</span> </div>
         <div class="body">
             <?php
-                $allBugs = $bug -> getBugs($router -> getRouteParam('2'));
                 $allBugsLvl1 = $bug -> getBugsPerLevel($router -> getRouteParam('2'), 1);
                 $allBugsLvl2 = $bug -> getBugsPerLevel($router -> getRouteParam('2'), 2);
                 $allBugsLvl3 = $bug -> getBugsPerLevel($router -> getRouteParam('2'), 3);
@@ -74,20 +73,18 @@
 
                     <ul class="pt-3">
                         <?php
-                        foreach($taskTabs['content'] as $tab){
-                            $tasks = $task -> getTabTasks($tab['tab_token']);
 
-                            foreach($tasks['content'] as $task_item){
-                                $allMembersAssigned = $task -> getTeamAssigned($router -> getRouteParam('2'), $task_item['task_token']);
+                            foreach($allBugsLvl1['content'] as $bug_item){
+                                $allMembersAssigned = $bug -> getTeamAssigned($router -> getRouteParam('2'), $bug_item['bug_token']);
                                 
                                 foreach($allMembersAssigned['content'] as $ms){
                                     if($projectTeam -> memberHasTeam($ms, $main -> getToken()) == true){
                                         ?> 
                                             <li>
-                                                <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/bug-tracker?bug=<?= $task_item['task_token'] ?>">
+                                                <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/bug-tracker?bug=<?= $bug_item['bug_token'] ?>">
                                                     <div class="pt-3 pb-3 container light-border mr-bot">
                                                         <div class="row">
-                                                            <div class="col-10"> <i data-feather="check-circle" class="color-primary"></i> <span class="text-sm"><?= $utils -> getData('pr_task_item', 'name', 'task_token', $task_item['task_token'] ) ?></span> </div>
+                                                            <div class="col-10"> <i data-feather="circle" style="color: #9c36b5"></i> <span class="text-sm"><?= $utils -> getData('pr_bug', 'name', 'bug_token', $bug_item['bug_token'] ) ?></span> </div>
                                                             <div class="col-2 text-align-right"> <i data-feather="help-circle" class="color-dark"></i> </div>
                                                         </div>
                                                     </div>
@@ -97,30 +94,48 @@
                                     }
                                 }
                             }
+                            foreach($allBugsLvl2['content'] as $bug_item){
+                                $allMembersAssigned = $bug -> getTeamAssigned($router -> getRouteParam('2'), $bug_item['bug_token']);
+                                
+                                foreach($allMembersAssigned['content'] as $ms){
+                                    if($projectTeam -> memberHasTeam($ms, $main -> getToken()) == true){
+                                        ?> 
+                                            <li>
+                                                <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/bug-tracker?bug=<?= $bug_item['bug_token'] ?>">
+                                                    <div class="pt-3 pb-3 container light-border mr-bot">
+                                                        <div class="row">
+                                                            <div class="col-10"> <i data-feather="disc" style="color: #d9480f"></i> <span class="text-sm"><?= $utils -> getData('pr_bug', 'name', 'bug_token', $bug_item['bug_token'] ) ?></span> </div>
+                                                            <div class="col-2 text-align-right"> <i data-feather="help-circle" class="color-dark"></i> </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li> 
+                                        <?php
+                                    }
+                                }
 
-                        }
+                            }
                         ?>
                     </ul>
                 </div>
+
                 <div class="col-md-6 col-12 assigned_part">
-                    <h3 class="color-dark text-sm">En solo</h3> 
+                    <h3 class="color-dark text-sm">En solo</h3>
 
                     <ul class="pt-3">
                         <?php
-                        foreach($taskTabs['content'] as $tab){
-                            $tasks = $task -> getTabTasks($tab['tab_token']);
 
-                            foreach($tasks['content'] as $task_item){
-                                $allMembersAssigned = $task -> getMemberAssigned($router -> getRouteParam('2'), $task_item['task_token']);
+                            foreach($allBugsLvl1['content'] as $bug_item){
+                                $allMembersAssigned = $bug -> getMemberAssigned($router -> getRouteParam('2'), $bug_item['bug_token']);
                                 
                                 foreach($allMembersAssigned['content'] as $ms){
                                     if($ms == $main -> getToken()){
                                         ?> 
                                             <li>
-                                                <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/gestion-projet?task=<?= $task_item['task_token'] ?>">
+                                                <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/bug-tracker?bug=<?= $bug_item['bug_token'] ?>">
                                                     <div class="pt-3 pb-3 container light-border mr-bot">
                                                         <div class="row">
-                                                            <div class="col-10"> <i data-feather="check-circle" class="color-primary"></i> <span class="text-sm"><?= $utils -> getData('pr_task_item', 'name', 'task_token', $task_item['task_token'] ) ?></span> </div>
+                                                            <div class="col-10"> <i data-feather="circle" style="color: #9c36b5"></i> <span class="text-sm"><?= $utils -> getData('pr_bug', 'name', 'bug_token', $bug_item['bug_token'] ) ?></span> </div>
                                                             <div class="col-2 text-align-right"> <i data-feather="help-circle" class="color-dark"></i> </div>
                                                         </div>
                                                     </div>
@@ -130,8 +145,27 @@
                                     }
                                 }
                             }
+                            foreach($allBugsLvl2['content'] as $bug_item){
+                                $allMembersAssigned = $bug -> getMemberAssigned($router -> getRouteParam('2'), $bug_item['bug_token']);
+                                
+                                foreach($allMembersAssigned['content'] as $ms){
+                                    if($ms == $main -> getToken()){
+                                        ?> 
+                                            <li>
+                                                <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/bug-tracker?bug=<?= $bug_item['bug_token'] ?>">
+                                                    <div class="pt-3 pb-3 container light-border mr-bot">
+                                                        <div class="row">
+                                                            <div class="col-10"> <i data-feather="disc" style="color: #d9480f"></i> <span class="text-sm"><?= $utils -> getData('pr_bug', 'name', 'bug_token', $bug_item['bug_token'] ) ?></span> </div>
+                                                            <div class="col-2 text-align-right"> <i data-feather="help-circle" class="color-dark"></i> </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li> 
+                                        <?php
+                                    }
+                                }
 
-                        }
+                            }
                         ?>
                     </ul>
                 </div>

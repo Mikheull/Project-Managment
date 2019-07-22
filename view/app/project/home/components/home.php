@@ -3,6 +3,7 @@
 $taskTabs = $task -> getTabs( $router -> getRouteParam('2') );
 $allMembers = $project -> getProjectUser( $router -> getRouteParam('2') );
 $allTasks = $task -> getAllTasks( $router -> getRouteParam('2') );
+$allBugs = $bug -> getBugs($router -> getRouteParam('2'));
 
 
 ?>

@@ -314,4 +314,72 @@ class bug extends project {
 
 /******************************************************************************/
 
+    /**
+     * Récupère toutes les actions des bugs
+     * 
+     * Va renvoyer toutes les actions des bugs pour faire une timeline d'activité
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $project_token Token du projet
+     * @return array
+     */
+    
+    function getActivity($project_token = '') {
+        $task_request = $this -> _db -> query("SELECT * FROM `pr_bug` WHERE `project_token` = '$project_token' AND `enable` = '1' ORDER BY date_creation DESC");
+        $count = $task_request->fetchAll();
+        $res = $task_request->rowCount();
+
+        return ([ 
+            'count' => $count, 
+            'content' => $res,
+        ]);
+    }
+
+
+    /**
+     * Récupère toutes les actions des taches
+     * 
+     * Va renvoyer toutes les actions des taches pour faire une timeline d'activité
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $project_token Token du projet
+     * @param string $status Status du rapport de bug
+     * @param string $removeDay Nombre de jour a retirer
+     * @return array
+     */
+    
+    function getActivityPerDate($project_token = '', $status = '', $removeDay) {
+
+        if($status == 'undefined'){ 
+            if($removeDay == 0){
+                $request = $this -> _db -> query("SELECT * FROM `pr_bug` WHERE `project_token` = '$project_token' AND `date_creation` >= CURDATE() AND `date_working` IS NULL AND `enable` = '1'");
+            }else{
+                $request = $this -> _db -> query("SELECT * FROM `pr_bug` WHERE `project_token` = '$project_token' AND `date_creation` >= CURDATE() - $removeDay  AND `date_creation` <= CURDATE() - $removeDay + 1 AND `date_working` IS NULL AND `enable` = '1'");
+            }
+        }else if($status == 'working'){
+            if($removeDay == 0){
+                $request = $this -> _db -> query("SELECT * FROM `pr_bug` WHERE `project_token` = '$project_token' AND `date_working` >= CURDATE() AND `date_end` IS NULL AND `enable` = '1'");
+            }else{
+                $request = $this -> _db -> query("SELECT * FROM `pr_bug` WHERE `project_token` = '$project_token' AND `date_working` >= CURDATE() - $removeDay AND `date_working` <= CURDATE() - $removeDay + 1 AND `date_end` IS NULL AND `enable` = '1'");
+            }
+
+        }else if($status == 'ended'){
+            if($removeDay == 0){
+                $request = $this -> _db -> query("SELECT * FROM `pr_bug` WHERE `project_token` = '$project_token' AND `date_end` >= CURDATE() AND `date_end` IS NOT NULL AND `enable` = '1'");
+            }else{
+                $request = $this -> _db -> query("SELECT * FROM `pr_bug` WHERE `project_token` = '$project_token' AND `date_end` >= CURDATE() - $removeDay AND `date_end` <= CURDATE() - $removeDay + 1 AND `date_end` IS NOT NULL AND `enable` = '1'");
+            }
+
+        }else{
+            return ([ 'count' => 0, 'content' => [] ]);
+        }
+        $count = $request->rowCount();
+
+        return $count;
+    }
+
+/******************************************************************************/
+
 }

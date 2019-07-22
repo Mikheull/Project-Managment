@@ -8,7 +8,7 @@
                         <div class="col-2 text-align-right"> <i class="fas fa-ellipsis-h" id="act-<?= $t['tab_token'] ?>"></i> </div>
                     </div>
 
-                    <div class="row task_container dragscroll">
+                    <div class="row task_container">
                         <?php
                             $tasks = $task -> getTabTasks($t['tab_token']);
                             foreach($tasks['content'] as $task_item){

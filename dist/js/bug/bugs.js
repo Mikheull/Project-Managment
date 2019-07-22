@@ -47,6 +47,25 @@ $(document).on('click', '.expand_btn', function() {
     $( this ).next('.expand_content').toggleClass( 'hidden' );
 });
 
+// Bug link viewer
+$(document).ready(function() {
+    var urlParams = new URLSearchParams(location.search);
+
+
+    if(urlParams.has('bug') == true){
+        let bugToken = urlParams.get('bug');
+        $("[data-ref='"+ bugToken +"']").addClass('selected_item-bug')
+
+        setTimeout(function() {
+
+            $("[data-ref='"+ bugToken +"']").removeClass('selected_item-bug')
+
+        }, 3000);
+    }
+
+});
+
+
 
 // Move to in working
 $(document).on("click", "#move-to-working", function(e) {
