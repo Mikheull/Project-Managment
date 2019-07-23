@@ -9,7 +9,15 @@
                 </div>
 
                 <div class="body">
-                    Liste des sondages
+                    <?php
+                        $allSurvey = $recherche_utilisateur -> getSurvey( $router -> getRouteParam("2") );
+                        foreach($allSurvey['content'] as $surv){
+                            ?> 
+                                <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/recherche-utilisateur/<?= $router -> getRouteParam("5") ?>/survey/<?= $surv['survey_token'] ?>"><?= $surv['name'] ?></a> 
+                                <a href="<?= $config -> rootUrl() ;?>survey/<?= $surv['survey_token'] ?>" target="blank"> <i data-feather="link"></i> </a>
+                            <?php
+                        }
+                    ?>
                 </div>
             </div>
         </div>

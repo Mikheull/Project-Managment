@@ -90,9 +90,9 @@ class recherche_utilisateur extends db_connect {
 
 
     /**
-     * Créer une sondage
+     * Créer un sondage
      * 
-     * Va créer une sondage de recherche utilisateur pour le projet
+     * Va créer un sondage de recherche utilisateur pour le projet
      *
      * @access public
      * @author Mikhaël Bailly
@@ -124,30 +124,105 @@ class recherche_utilisateur extends db_connect {
 
             $question_token = main::generateToken(10, 'uuid');
 
-            $question_name = addslashes(htmlentities($_POST['question'.$i]));
-            $question_type = addslashes(htmlentities($_POST['answer_type'.$i]));
-            $question_answers = "";
-            foreach($_POST['answer'.$i] as $answer){
-                $question_answers .= $answer.'[|-*-|]';
+            if(isset($_POST['question'.$i]) AND !empty($_POST['question'.$i]) AND isset($_POST['answer_type'.$i]) AND !empty($_POST['answer_type'.$i]) ){
+
+                $question_name = addslashes(htmlentities($_POST['question'.$i]));
+                $question_type = addslashes(htmlentities($_POST['answer_type'.$i]));
+                $question_answers = "";
+                foreach($_POST['answer'.$i] as $answer){
+                    $question_answers .= $answer.'[|-*-|]';
+                }
+
+                $req = $this -> _db -> prepare("INSERT INTO `pr_user_research_survey_question` (`project_token`, `research_token`, `survey_token`, `question_token`, `question`, `type`, `answers`) VALUES (:project_token, :research_token, :survey_token, :question_token, :question, :type, :answers)");
+
+                $req->bindParam(':project_token', $project_token);
+                $req->bindParam(':research_token', $etude_token);
+                $req->bindParam(':survey_token', $survey_token);
+                $req->bindParam(':question_token', $question_token);
+                $req->bindParam(':question', $question_name);
+                $req->bindParam(':type', $question_type);
+                $req->bindParam(':answers', $question_answers);
+
+                $req->execute();
             }
-
-            $req = $this -> _db -> prepare("INSERT INTO `pr_user_research_survey_question` (`project_token`, `research_token`, `survey_token`, `question_token`, `question`, `type`, `answers`) VALUES (:project_token, :research_token, :survey_token, :question_token, :question, :type, :answers)");
-
-            $req->bindParam(':project_token', $project_token);
-            $req->bindParam(':research_token', $etude_token);
-            $req->bindParam(':survey_token', $survey_token);
-            $req->bindParam(':question_token', $question_token);
-            $req->bindParam(':question', $question_name);
-            $req->bindParam(':type', $question_type);
-            $req->bindParam(':answers', $question_answers);
-
-            $req->execute();
         }
 
         return (['success' => true, 'options' => ['content' => "Le sondage a été crée !", 'theme' => 'success'] ]);
 
     } 
 
+
+
+     /**
+     * Répondre a un sondage
+     * 
+     * Va répondre a un sondage
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $survey_token Token du sondage
+     * @param string $question_token Token de la question
+     * @param string $user_session_token Token de la session user
+     * @param string $answer Réponse
+     * @return array
+     */
+
+    function setSurveyAnswer($survey_token = '', $question_token = '', $user_session_token = '', $answer = '') {
+        // $request = $this -> _db -> exec("DELETE FROM `pr_user_research_survey_answer` WHERE `survey_token` = '$survey_token' AND `question_token` = '$question_token' AND `user_session_token` = '$user_session_token' AND `enable` = '1' ");
+        
+        $req = $this -> _db -> prepare("INSERT INTO `pr_user_research_survey_answer` (`survey_token`, `question_token`, `user_session_token`, `answer`) VALUES (:survey_token, :question_token, :user_session_token, :answer)");
+
+        $req->bindParam(':survey_token', $survey_token);
+        $req->bindParam(':question_token', $question_token);
+        $req->bindParam(':user_session_token', $user_session_token);
+        $req->bindParam(':answer', $answer);
+
+        $req->execute();
+    }
+
+
+
+    /**
+     * Récupère les réponse d'un sondage
+     * 
+     * Va renvoyer toutes les réponses d'un sondage
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $question_token Token de la question
+     * @return array
+     */
+    
+    function getQuestionAnswers($question_token = '') {
+        $request = $this -> _db -> query("SELECT * FROM `pr_user_research_survey_answer` WHERE `question_token` = '$question_token' AND `enable` = '1' ");
+        $res = $request->fetchAll();
+        $count = $request->rowCount();
+
+        return ([ 
+            'count' => $count, 
+            'content' => $res
+        ]);
+    }
+    
+
+    /**
+     * Récupère les réponse d'un sondage selon la réponse
+     * 
+     * Va renvoyer toutes les réponses d'un sondage selon la réponse
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $question_token Token de la question
+     * @param string $answer Réponse
+     * @return array
+     */
+    
+    function getQuestionAnswersPerTitle($question_token = '', $answer = '') {
+        $request = $this -> _db -> query("SELECT * FROM `pr_user_research_survey_answer` WHERE `question_token` = '$question_token' AND `answer` = '$answer' AND `enable` = '1' ");
+        $count = $request->rowCount();
+
+        return $count;
+    }
 
 
     /**
@@ -192,6 +267,29 @@ class recherche_utilisateur extends db_connect {
         ]);
     }
     
+
+
+    /**
+     * Récupère les sondage d'une étude
+     * 
+     * Va renvoyer tout les sondages d'une étude d'un projet
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $project_token Token du projet
+     * @return array
+     */
+    
+    function getSurvey($project_token = '') {
+        $request = $this -> _db -> query("SELECT * FROM `pr_user_research_survey` WHERE `project_token` = '$project_token' AND `enable` = '1' ");
+        $res = $request->fetchAll();
+        $count = $request->rowCount();
+
+        return ([ 
+            'count' => $count, 
+            'content' => $res
+        ]);
+    }
     
 
 /******************************************************************************/
