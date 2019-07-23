@@ -44,5 +44,36 @@ if(isset($_POST['create_research'])){
 }
 
 
+
+/**
+ * Formulaire pour créer un sondage
+ * 
+ * @fichier d'execution = view/app/project/t/recherche-utilisatuer/survey/create/index.php
+ * @variable d'execution = $_POST['create_survey']                      : type = button
+ * 
+ * @variable obligatoire = $_POST['name']                               : type = text
+ * @variable obligatoire = $_POST['topic']                              : type = text
+ * @variable obligatoire = $_POST['nb']                                 : type = hidden
+ * @variable obligatoire = $_POST['question1']                          : type = text
+ * @variable obligatoire = $_POST['answer_type1']                       : type = text
+ * @variable obligatoire = $_POST['answser1']                           : type = text
+ * 
+ */
+if(isset($_POST['create_survey'])){
+    if(isset($_POST['name']) AND !empty($_POST['name']) AND isset($_POST['nb']) AND !empty($_POST['nb']) AND isset($_POST['question1']) AND !empty($_POST['question1']) AND isset($_POST['answer_type1']) AND !empty($_POST['answer_type1']) AND isset($_POST['answer1']) AND !empty($_POST['answer1'])){
+
+        $project_token = $router -> getRouteParam('2');
+        $etude_token = $router -> getRouteParam('5');
+        $name = cleanVar($_POST['name']);
+        $topic = isset($_POST['topic']) ? $_POST['topic'] : '';
+        $nb = cleanVar($_POST['nb']);
+
+        $errors = $recherche_utilisateur -> createSurvey($project_token, $etude_token, $name, $topic, $nb);
+
+    }else{
+        $errors = ['success' => false, 'options' => ['content' => "Vous devez remplir tout les champs obligatoires !", 'theme' => 'error'] ];
+    }
+}
+
 // End of file
 /******************************************************************************/

@@ -27,7 +27,7 @@
 
             <div class="row mr-top-lg">
                 <div class="col-12">
-                    <h2>Le document n'a pas été trouvé !</h2>
+                    <h2>Le sondage n'a pas été trouvé !</h2>
                 </div>
             </div>
 

@@ -56,7 +56,7 @@
     <?php if($config -> getConfigLib($exec_router['config_path'],'chart') == true){?> <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script><?php } ;?>
     <?php if($config -> getConfigLib($exec_router['config_path'],'prism') == true){?> <script src="<?= $config -> rootUrl() ?>dist/js/prism.min.js"></script><?php } ;?>
     <?php if($config -> getConfigLib($exec_router['config_path'],'emojionearea') == true){?> <script src="https://cdn.jsdelivr.net/npm/emojionearea@3.4.1/dist/emojionearea.min.js"></script><?php } ;?>
-    
+        
         
     <?php 
         // CSS generated Begin

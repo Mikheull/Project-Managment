@@ -81,8 +81,8 @@ $router -> addRoutes(
 
         // Application
         [ 'route' => 'sharing/{{TOKEN}}', 'dir_path' => 'view/app/sharing/'],
-        [ 'route' => 'ur/{{TOKEN}}/ad', 'dir_path' => 'view/app/survey/affinity-diagram', 'rendering_html' => false],
-        [ 'route' => 'ur/{{TOKEN}}/sv', 'dir_path' => 'view/app/survey/survey', 'rendering_html' => false],
+        [ 'route' => 'aff/{{TOKEN}}', 'dir_path' => 'view/app/ur/affinity-diagram/'],
+        [ 'route' => 'survey/{{TOKEN}}', 'dir_path' => 'view/app/ur/survey/'],
 
         [ 'route' => 'app', 'dir_path' => 'view/app/hub/'],
         [ 'route' => 'app/new/project', 'dir_path' => 'view/app/project/new/'],
@@ -119,11 +119,13 @@ $router -> addRoutes(
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/recherche-utilisateur/create', 'dir_path' => 'view/app/project/tools/recherche-utilisateur/create/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/recherche-utilisateur/{{TOKEN}}', 'dir_path' => 'view/app/project/tools/recherche-utilisateur/view/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/recherche-utilisateur/{{TOKEN}}/edit', 'dir_path' => 'view/app/project/tools/recherche-utilisateur/edit/'],
-        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/recherche-utilisateur/{{TOKEN}}/create/affinity-diagram', 'dir_path' => 'view/app/project/tools/recherche-utilisateur/create/affinity-diagram/'],
-        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/recherche-utilisateur/{{TOKEN}}/create/survey', 'dir_path' => 'view/app/project/tools/recherche-utilisateur/create/survey/'],
+        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/recherche-utilisateur/{{TOKEN}}/affinity-diagram/create', 'dir_path' => 'view/app/project/tools/recherche-utilisateur/affinity-diagram/create/'],
+        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/recherche-utilisateur/{{TOKEN}}/affinity-diagram/{{TOKEN}}', 'dir_path' => 'view/app/project/tools/recherche-utilisateur/affinity-diagram/view/'],
+        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/recherche-utilisateur/{{TOKEN}}/survey/create', 'dir_path' => 'view/app/project/tools/recherche-utilisateur/survey/create/'],
+        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/recherche-utilisateur/{{TOKEN}}/survey/{{TOKEN}}', 'dir_path' => 'view/app/project/tools/recherche-utilisateur/survey/view/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/recherche-utilisateur/{{TOKEN}}/report', 'dir_path' => 'view/app/project/tools/recherche-utilisateur/report/'],
-        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/recherche-utilisateur/{{TOKEN}}/report/affinity-diagram', 'dir_path' => 'view/app/project/tools/recherche-utilisateur/report/affinity-diagram'],
-        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/recherche-utilisateur/{{TOKEN}}/report/survey', 'dir_path' => 'view/app/project/tools/recherche-utilisateur/report/survey'],
+        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/recherche-utilisateur/{{TOKEN}}/affinity-diagram/report', 'dir_path' => 'view/app/project/tools/recherche-utilisateur/affinity-diagram/report/'],
+        [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/recherche-utilisateur/{{TOKEN}}/survey/report', 'dir_path' => 'view/app/project/tools/recherche-utilisateur/survey/report/'],
 
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/bug-tracker', 'dir_path' => 'view/app/project/tools/bug-tracker/home/'],
         [ 'route' => 'app/project/{{PROJECT_TOKEN}}/t/bug-tracker/new', 'dir_path' => 'view/app/project/tools/bug-tracker/bug-new/'],

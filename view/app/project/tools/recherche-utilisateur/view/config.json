@@ -37,7 +37,6 @@
     ],
      
     "js": [ 
-        "recherche-utilisateur/recherche-utilisateur.min.js",
         "project-fast-act.min.js"
     ],
 
