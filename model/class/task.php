@@ -253,8 +253,7 @@ class task extends project {
     */
 
    function closeTask($token = '') {
-        $now = date("Y-m-d H:i:s");
-        $request = $this -> _db -> exec("UPDATE `pr_task_item` SET `date_end` = '$now' WHERE `task_token` = '$token' AND `enable` = '1' ");
+        $request = $this -> _db -> exec("UPDATE `pr_task_item` SET `date_end` = NOW() WHERE `task_token` = '$token' AND `enable` = '1' ");
         return (['success' => true, 'options' => ['content' => "La tache a été close !", 'theme' => 'success'] ]);
    }
     
@@ -272,9 +271,8 @@ class task extends project {
    */
 
     function reopenTask($token = '') {
-            $now = date("Y-m-d H:i:s");
-            $request = $this -> _db -> exec("UPDATE `pr_task_item` SET `date_end` = null WHERE `task_token` = '$token' AND `enable` = '1' ");
-            return (['success' => true, 'options' => ['content' => "La tache a été réouverte !", 'theme' => 'success'] ]);
+        $request = $this -> _db -> exec("UPDATE `pr_task_item` SET `date_end` = null WHERE `task_token` = '$token' AND `enable` = '1' ");
+        return (['success' => true, 'options' => ['content' => "La tache a été réouverte !", 'theme' => 'success'] ]);
     }
 
 

@@ -405,13 +405,12 @@ class project extends db_connect {
 
     function setInvitationAnswer($token = '', $user_token = '', $choose = '') {
         setlocale(LC_TIME, "fr_FR");
-        $date = date("Y-m-d H:i:s");
 
         $request = $this -> _db -> query("SELECT * FROM `pr_invitation_project` WHERE `project_token` = '$token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
         $res = $request->fetch();
         
         if($res){
-            $request = $this -> _db -> exec("UPDATE `pr_invitation_project` SET `enable`= 0, `date_end`= '$date' WHERE `project_token` = '$token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
+            $request = $this -> _db -> exec("UPDATE `pr_invitation_project` SET `enable`= 0, `date_end`= NOW() WHERE `project_token` = '$token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
             
             if($choose == 'accept'){
                 $request = $this -> _db -> exec("INSERT INTO `pr_project_member` (`project_token`, `user_public_token`) VALUES ('$token', '$user_token')");

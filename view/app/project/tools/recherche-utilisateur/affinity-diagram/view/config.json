@@ -1,0 +1,49 @@
+{
+    "use_generic_meta": false,
+    "must_be_logged": true,
+    "project_can_access": true,
+
+    "libs": [
+        "jquery",
+        "fontawesome",
+        "feather-icons",
+        "popper",
+        "tippy",
+        "bootbox",
+        "chart"
+    ],
+
+
+    "meta": [ 
+        "<title>Improove - Création de diagrammes d'affinité</title>",
+        "<meta name=\"description\" content=\"Créez vos diagrammes d'affinités et partagez les à vos utilisateur.\"/>",
+        "<meta property=\"og:title\" content=\"Improove - Création de diagrammes d'affinité\"/>",
+        "<meta property=\"og:description\" content=\"Créez vos diagrammes d'affinités et partagez les à vos utilisateur.\"/>",
+        "<meta property=\"og:image\" content=\"https://www.improove.tk/dist/images/og_bg.jpg\"/>",
+        "<meta property=\"og:image:width\" content=\"672\"/>",
+        "<meta property=\"og:image:height\" content=\"350\"/>",
+
+        "<meta property=\"twitter:card\" content=\"summary_large_image\"/>",
+        "<meta property=\"twitter:title\" content=\"Improove - Création de diagrammes d'affinité\"/>",
+        "<meta property=\"twitter:description\" content=\"Créez vos diagrammes d'affinités et partagez les à vos utilisateur.\"/>",
+        "<meta property=\"twitter:image\" content=\"https://www.improove.tk/dist/images/og_bg.jpg\"/>"
+
+    ],
+     
+    "css": [ 
+        "app/main.min.css",
+        "app/project/main.min.css",
+        "app/project/recherche-utilisateur.min.css",
+        "bootstrap-modal.min.css"
+    ],
+     
+    "js": [ 
+        "recherche-utilisateur/affinity-diagram.min.js",
+        "project-fast-act.min.js"
+    ],
+
+    "online_css": [ 
+        "https://cdn.jsdelivr.net/npm/tippy.js@4.3.1/themes/light-border.css"
+    ]
+
+}

@@ -92,26 +92,28 @@ if(isset($_POST['send_survey'])){
     $question_group_token = $main -> generateToken(10, 'uuid');
 
     $nb = 1;
-    foreach($allSurveys['content'] as $surv){
-        $userSessionToken = 'demo_user_token5';
+    if($recherche_utilisateur -> surveyIsOpen($survey_token) == true){
+        foreach($allSurveys['content'] as $surv){
+            $userSessionToken = 'demo_user_token6';
 
-        if($surv['type'] == 'text'){
-            $answer = cleanVar($_POST['answer'.$nb]);
-            if(isset($answer) AND !empty($answer)){
-                $recherche_utilisateur -> setSurveyAnswer( $router -> getRouteParam('1'), $surv['question_token'], $userSessionToken, $answer );
-            }else{
-                $recherche_utilisateur -> setSurveyAnswer( $router -> getRouteParam('1'), $surv['question_token'], $userSessionToken, 'undefined' );
-            }
+            if($surv['type'] == 'text'){
+                $answer = cleanVar($_POST['answer'.$nb]);
+                if(isset($answer) AND !empty($answer)){
+                    $recherche_utilisateur -> setSurveyAnswer( $router -> getRouteParam('1'), $surv['question_token'], $userSessionToken, $answer );
+                }else{
+                    $recherche_utilisateur -> setSurveyAnswer( $router -> getRouteParam('1'), $surv['question_token'], $userSessionToken, 'undefined' );
+                }
 
-        }else if($surv['type'] == 'checkbox'){
-            foreach($_POST['answer'.$nb] as $ans){
-                $recherche_utilisateur -> setSurveyAnswer( $router -> getRouteParam('1'), $surv['question_token'], $userSessionToken, cleanVar($ans) );
-            }
+            }else if($surv['type'] == 'checkbox'){
+                foreach($_POST['answer'.$nb] as $ans){
+                    $recherche_utilisateur -> setSurveyAnswer( $router -> getRouteParam('1'), $surv['question_token'], $userSessionToken, cleanVar($ans) );
+                }
 
-        }else if($surv['type'] == 'radio'){
-            $answer = cleanVar($_POST['answer'.$nb]);
-            if(isset($answer) AND !empty($answer)){
-                $recherche_utilisateur -> setSurveyAnswer( $router -> getRouteParam('1'), $surv['question_token'], $userSessionToken, $answer );
+            }else if($surv['type'] == 'radio'){
+                $answer = cleanVar($_POST['answer'.$nb]);
+                if(isset($answer) AND !empty($answer)){
+                    $recherche_utilisateur -> setSurveyAnswer( $router -> getRouteParam('1'), $surv['question_token'], $userSessionToken, $answer );
+                }
             }
         }
 

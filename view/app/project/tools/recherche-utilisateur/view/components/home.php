@@ -15,6 +15,7 @@
                             ?> 
                                 <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/recherche-utilisateur/<?= $router -> getRouteParam("5") ?>/survey/<?= $surv['survey_token'] ?>"><?= $surv['name'] ?></a> 
                                 <a href="<?= $config -> rootUrl() ;?>survey/<?= $surv['survey_token'] ?>" target="blank"> <i data-feather="link"></i> </a>
+                                <br>
                             <?php
                         }
                     ?>
@@ -30,7 +31,16 @@
                 </div>
 
                 <div class="body">
-                    Liste des diagrammes
+                    <?php
+                        $allAffinityDiagram = $recherche_utilisateur -> getAffinityDiagram( $router -> getRouteParam("2") );
+                        foreach($allAffinityDiagram['content'] as $aff){
+                            ?> 
+                                <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/recherche-utilisateur/<?= $router -> getRouteParam("5") ?>/affinity-diagram/<?= $surv['affinity_token'] ?>"><?= $surv['name'] ?></a> 
+                                <a href="<?= $config -> rootUrl() ;?>affinity-diagram/<?= $aff['affinity_token'] ?>" target="blank"> <i data-feather="link"></i> </a>
+                                <br>
+                            <?php
+                        }
+                    ?>
                 </div>
             </div>
         </div>

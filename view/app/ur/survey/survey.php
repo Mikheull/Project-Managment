@@ -25,6 +25,15 @@
                 </div>
             </div>
 
+            <?php
+            if($recherche_utilisateur -> surveyIsOpen($router -> getRouteParam("1")) == false){
+                ?>
+                <div class="row mr-top-lg">
+                    <div class="no-access">Ce sondage n'est plus ouvert a d'autres réponses !</div>
+                </div>
+                <?php
+            }
+            ?>
             <div class="row mr-top-lg">
                 <div class="col-md-3 col-12 light-border p-2 text-align-center center">
                    <h2 class="title-sm bold color-lg-dark"><?= $utils -> getData('pr_user_research_survey', 'name', 'survey_token', $router -> getRouteParam("1")) ?></h2>
@@ -115,7 +124,19 @@
                             }
                         ?>
 
-                        <button class="btn primary-btn" name="send_survey">Confirmer</button>
+                        <?php
+                        if($recherche_utilisateur -> surveyIsOpen($router -> getRouteParam("1")) == false){
+                            ?>
+                            <div class="row mr-top-lg">
+                                <div class="no-access">Ce sondage n'est plus ouvert a d'autres réponses !</div>
+                            </div>
+                            <?php
+                        }else{
+                            ?>
+                                <button class="btn primary-btn" name="send_survey">Confirmer</button>
+                            <?php
+                        }
+                        ?>
                     </form>
                 </div>
             </div>

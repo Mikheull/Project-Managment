@@ -125,8 +125,7 @@ class bug extends project {
     */
 
    function setWorkinBug($token = '') {
-        $now = date("Y-m-d H:i:s");
-        $request = $this -> _db -> exec("UPDATE `pr_bug` SET `date_working` = '$now', `level` = '2' WHERE `bug_token` = '$token' AND `enable` = '1' ");
+        $request = $this -> _db -> exec("UPDATE `pr_bug` SET `date_working` = NOW(), `level` = '2' WHERE `bug_token` = '$token' AND `enable` = '1' ");
         return (['success' => true, 'options' => ['content' => "Le bug a été mis en statut (en cours) !", 'theme' => 'success'] ]);
    }
     
@@ -143,8 +142,7 @@ class bug extends project {
    */
 
   function setEndBug($token = '') {
-       $now = date("Y-m-d H:i:s");
-       $request = $this -> _db -> exec("UPDATE `pr_bug` SET `date_end` = '$now', `level` = '3' WHERE `bug_token` = '$token' AND `enable` = '1' ");
+       $request = $this -> _db -> exec("UPDATE `pr_bug` SET `date_end` = NOW(), `level` = '3' WHERE `bug_token` = '$token' AND `enable` = '1' ");
        return (['success' => true, 'options' => ['content' => "Le bug a été mis en statut (terminé) !", 'theme' => 'success'] ]);
   }
 

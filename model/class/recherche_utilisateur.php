@@ -87,7 +87,11 @@ class recherche_utilisateur extends db_connect {
         return ($res ? true : false);
     }
 
+/******************************************************************************/
 
+
+
+/******************************************************************************/
 
     /**
      * Créer un sondage
@@ -228,8 +232,6 @@ class recherche_utilisateur extends db_connect {
     /**
      * Vérifie si un sondage existe
      * 
-     * Cherche dans la base de données une correspondace avec le token sondage fourni
-     *
      * @access public
      * @author Mikhaël Bailly
      * @param string $token Token du sondage
@@ -243,6 +245,22 @@ class recherche_utilisateur extends db_connect {
         return ($res ? true : false);
     }
 
+
+    /**
+     * Vérifie si un sondage est ouvert
+     * 
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $token Token du sondage
+     * @return boolean
+     */
+
+    function surveyIsOpen($token = '') {
+        $request = $this -> _db -> query("SELECT * FROM `pr_user_research_survey` WHERE `survey_token` = '$token' AND `enable` = '1' AND `date_end` IS NULL");
+        $res = $request->fetch();
+        
+        return ($res ? true : false);
+    }
 
 
     /**
@@ -290,7 +308,91 @@ class recherche_utilisateur extends db_connect {
             'content' => $res
         ]);
     }
+
+
     
+    /**
+    * Clore un sondage d'un tableau
+    * 
+    * Clore un sondage d'un tableau
+    *
+    * @access public
+    * @author Mikhaël Bailly
+    * @param string $survey_token Token du sondage
+    * @return array
+    */
+
+    function closeSurvey($survey_token = '') {
+        $request = $this -> _db -> exec("UPDATE `pr_user_research_survey` SET `date_end` = NOW(), `enable` = '0' WHERE `survey_token` = '$survey_token' AND `enable` = '1' ");
+        return (['success' => true, 'options' => ['content' => "Le sondage a été terminé !", 'theme' => 'success'] ]);
+   }
+
+
+    
+   /**
+   * Ré-ouvrir un sondage d'un tableau
+   * 
+   * Ré-ouvrir un sondage d'un tableau
+   *
+   * @access public
+   * @author Mikhaël Bailly
+   * @param string $survey_token Token du sondage
+   * @return array
+   */
+
+   function reopenSurvey($survey_token = '') {
+        $request = $this -> _db -> exec("UPDATE `pr_user_research_survey` SET `date_end` = null, `enable` = '1' WHERE `survey_token` = '$survey_token' AND `enable` = '0' ");
+        return (['success' => true, 'options' => ['content' => "Le sondage a été réouvert !", 'theme' => 'success'] ]);
+    }
+
+    
+
+
+    /**
+     * Supprimer un sondage
+     * 
+     * Supprimer un sondage en supprimant les questions et réponses
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $survey_token Token du sondage
+     * @return array
+     */
+
+    function disableSurvey($survey_token = '') {
+        $request = $this -> _db -> exec("DELETE FROM `pr_user_research_survey` WHERE `survey_token` = '$survey_token'");
+        $request = $this -> _db -> exec("DELETE FROM `pr_user_research_survey_answer` WHERE `survey_token` = '$survey_token'");
+        $request = $this -> _db -> exec("DELETE FROM `pr_user_research_survey_question` WHERE `survey_token` = '$survey_token'");
+        return (['success' => true, 'options' => ['content' => "Le sondage a été supprimé !", 'theme' => 'success'] ]);
+    }
+    
+/******************************************************************************/
+ 
+
+
+/******************************************************************************/
+
+    /**
+     * Récupère les diagrammes d'affinité d'une étude
+     * 
+     * Va renvoyer tout les diagrammes d'affinité d'une étude d'un projet
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $project_token Token du projet
+     * @return array
+     */
+    
+    function getAffinityDiagram($project_token = '') {
+        $request = $this -> _db -> query("SELECT * FROM `pr_user_research_affinity_diagram` WHERE `project_token` = '$project_token' AND `enable` = '1' ");
+        $res = $request->fetchAll();
+        $count = $request->rowCount();
+
+        return ([ 
+            'count' => $count, 
+            'content' => $res
+        ]);
+    }
 
 /******************************************************************************/
 

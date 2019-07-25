@@ -25,19 +25,19 @@
                             data: {
                                 labels: [<?= ($allBugsLvl1['count'] !== 0) ? '\'Non défini \',' : '' ?> <?= ($allBugsLvl2['count'] !== 0) ? '\'En cours\',' : '' ?> <?= ($allBugsLvl3['count'] !== 0) ? '\'Terminé \'' : '' ?>],
                                 datasets: [{
-                                label: 'Les tâches',
-                                data: [<?= ($allBugsLvl1['count'] !== 0) ? 'ctx.getAttribute("data-level-1"),' : '' ?> <?= ($allBugsLvl2['count'] !== 0) ? 'ctx.getAttribute("data-level-2"),' : '' ?> <?= ($allBugsLvl3['count'] !== 0) ? 'ctx.getAttribute("data-level-3")' : '' ?>],
-                                backgroundColor: [
-                                    <?= ($allBugsLvl1['count'] !== 0) ? '\'rgba(156,54,181, 0.8)\',' : '' ?>
-                                    <?= ($allBugsLvl2['count'] !== 0) ? '\'rgba(217,72,15, 0.8)\',' : '' ?>
-                                    <?= ($allBugsLvl3['count'] !== 0) ? '\'rgba(43,138,62, 0.8)\',' : '' ?>
-                                ],
-                                borderColor: [
-                                    <?= ($allBugsLvl1['count'] !== 0) ? '\'rgba(156,54,181, 1)\',' : '' ?>
-                                    <?= ($allBugsLvl2['count'] !== 0) ? '\'rgba(217,72,15, 1)\',' : '' ?>
-                                    <?= ($allBugsLvl3['count'] !== 0) ? '\'rgba(43,138,62, 1)\',' : '' ?>
-                                ],
-                                borderWidth: 1
+                                    label: 'Les tâches',
+                                    data: [<?= ($allBugsLvl1['count'] !== 0) ? 'ctx.getAttribute("data-level-1"),' : '' ?> <?= ($allBugsLvl2['count'] !== 0) ? 'ctx.getAttribute("data-level-2"),' : '' ?> <?= ($allBugsLvl3['count'] !== 0) ? 'ctx.getAttribute("data-level-3")' : '' ?>],
+                                    backgroundColor: [
+                                        <?= ($allBugsLvl1['count'] !== 0) ? '\'rgba(156,54,181, 0.8)\',' : '' ?>
+                                        <?= ($allBugsLvl2['count'] !== 0) ? '\'rgba(217,72,15, 0.8)\',' : '' ?>
+                                        <?= ($allBugsLvl3['count'] !== 0) ? '\'rgba(43,138,62, 0.8)\',' : '' ?>
+                                    ],
+                                    borderColor: [
+                                        <?= ($allBugsLvl1['count'] !== 0) ? '\'rgba(156,54,181, 1)\',' : '' ?>
+                                        <?= ($allBugsLvl2['count'] !== 0) ? '\'rgba(217,72,15, 1)\',' : '' ?>
+                                        <?= ($allBugsLvl3['count'] !== 0) ? '\'rgba(43,138,62, 1)\',' : '' ?>
+                                    ],
+                                    borderWidth: 1
                                 }]
                             },
                             options: {

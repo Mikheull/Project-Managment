@@ -69,10 +69,7 @@ class utils extends db_connect {
      */
     
     function addlog($user = '', $ref = '', $table = '', $type = '', $options = null){
-        setlocale(LC_TIME, "fr_FR");
-        $date = date("Y-m-d H:i:s");
-
-        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `ref_token`, `ref_table`, `type`, `optional`, `date`) VALUES ('$user', '$ref', '$table', '$type', '$options', '$date') ");
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `ref_token`, `ref_table`, `type`, `optional`, `date`) VALUES ('$user', '$ref', '$table', '$type', '$options', NOW()) ");
     }
 
 /******************************************************************************/
