@@ -582,6 +582,44 @@ class recherche_utilisateur extends db_connect {
 
 
 
+   /**
+    * Approuve une idée d'un diagramme d'affinité
+    * 
+    * Va approuver une idée d'un diagramme d'une étude d'un projet
+    *
+    * @access public
+    * @author Mikhaël Bailly
+    * @param string $diagram_token Token du diagramme
+    * @param string $idea_token Token de l'idée
+    * @return array
+    */
+   
+    function approveIdea($diagram_token = '', $idea_token = '') {
+        $request = $this -> _db -> exec("UPDATE `pr_user_research_affinity_diagram_item` SET `approved` = 1 WHERE `diagram_token` = '$diagram_token' AND `item_token` = '$idea_token' ");
+        return (['success' => true, 'options' => ['content' => "L\idée a été approuvée !", 'theme' => 'success'] ]);
+    }
+
+
+   
+    /**
+    * Remove une idée d'un diagramme d'affinité
+    * 
+    * Va supprimer une idée d'un diagramme d'une étude d'un projet
+    *
+    * @access public
+    * @author Mikhaël Bailly
+    * @param string $diagram_token Token du diagramme
+    * @param string $idea_token Token de l'idée
+    * @return array
+    */
+   
+   function removeIdea($diagram_token = '', $idea_token = '') {
+        $request = $this -> _db -> exec("DELETE FROM `pr_user_research_affinity_diagram_item` WHERE `diagram_token` = '$diagram_token' AND `item_token` = '$idea_token'");
+        return (['success' => true, 'options' => ['content' => "L\idée a été supprimée !", 'theme' => 'success'] ]);
+    }
+
+
+
     /**
      * Récupère les idées d'un diagramme d'une étude
      * 
@@ -618,6 +656,29 @@ class recherche_utilisateur extends db_connect {
     
     function getApprovedIdea($diagram_token = '') {
         $request = $this -> _db -> query("SELECT * FROM `pr_user_research_affinity_diagram_item` WHERE `diagram_token` = '$diagram_token' AND `approved` = '1' AND `enable` = '1' ");
+        $res = $request->fetchAll();
+        $count = $request->rowCount();
+
+        return ([ 
+            'count' => $count, 
+            'content' => $res
+        ]);
+    }
+
+
+    /**
+     * Récupère les idées en attente d'approbation d'un diagramme d'une étude
+     * 
+     * Va renvoyer tout les idées en attente d'approbation d'un diagramme d'une étude d'un projet
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $diagram_token Token du diagramme
+     * @return array
+     */
+    
+    function getPendingIdea($diagram_token = '') {
+        $request = $this -> _db -> query("SELECT * FROM `pr_user_research_affinity_diagram_item` WHERE `diagram_token` = '$diagram_token' AND `approved` = '0' AND `enable` = '1' ");
         $res = $request->fetchAll();
         $count = $request->rowCount();
 

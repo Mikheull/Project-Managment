@@ -89,6 +89,28 @@ if($action == 'new_idea'){
     require ('../../../../view/app/ur/affinity-diagram/components/idea_item.php');
 }
 
+if($action == 'approve_idea'){
+    if(isset($_POST['idea'])){ $idea_token = $_POST['idea']; }
+
+    if($permission -> hasPermission($main -> getToken(), $project_token, 'user-research.affinity.approve')){
+        $errors = $recherche_utilisateur -> approveIdea($diagram_token, $idea_token);
+    }else{
+        $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
+    }
+}
+
+if($action == 'remove_idea'){
+    if(isset($_POST['idea'])){ $idea_token = $_POST['idea']; }
+
+    if($permission -> hasPermission($main -> getToken(), $project_token, 'user-research.affinity.approve')){
+        $errors = $recherche_utilisateur -> removeIdea($diagram_token, $idea_token);
+    }else{
+        $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
+    }
+}
+
+
+
 
 
 if(isset($errors)){

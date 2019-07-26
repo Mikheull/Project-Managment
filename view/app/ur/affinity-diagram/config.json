@@ -30,7 +30,7 @@
      
     "css": [ 
         "app/main.min.css",
-        "app/user-research.min.css"
+        "app/project/recherche-utilisateur.min.css"
     ],
      
     "js": [ 

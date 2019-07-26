@@ -36,8 +36,60 @@
 
 
             <div class="row mr-top-lg">
-                <div class="col-md-8 col-12">
-                   a
+                <?php
+                    $allIdeas = $recherche_utilisateur -> getPendingIdea($router -> getRouteParam("7"));
+                    if($utils -> getData('pr_user_research_affinity_diagram', 'need_approved', 'diagram_token', $router -> getRouteParam("7")) == true && $allIdeas['count'] !== 0 && $permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'user-research.affinity.approve')){
+                        ?>
+                            <div class="col-md-8 col-12 mr-bot-lg">
+                                <h3 class="title-xs bold color-lg-dark mr-bot">Les idées en attente d'approbation</h3>
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <?php
+                                        foreach($allIdeas['content'] as $idea){
+                                            ?>
+                                                <div class="col-3 content light-border p-2">
+                                                    <div class="heading flex justify-content-between"> 
+                                                        <span class="color-dark text-sm"><?= $idea['name'] ?></span> 
+
+                                                        <div>
+                                                            <a href="" class="link dark-link" data-action="idea-approve" data-ref="<?= $router -> getRouteParam("7") ?>" data-pro="<?= $router -> getRouteParam("2") ?>" data-idea="<?= $idea['item_token'] ?>"> <i data-feather="check"></i> </a>
+                                                            <a href="" class="link red-link" data-action="idea-remove" data-ref="<?= $router -> getRouteParam("7") ?>" data-pro="<?= $router -> getRouteParam("2") ?>" data-idea="<?= $idea['item_token'] ?>"> <i data-feather="x"></i> </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <?php
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php
+                    }
+                ?>
+                
+                <div class="col-md-8 col-12 mr-bot">
+                    <h3 class="title-xs bold color-lg-dark mr-bot">Les idées postées</h3>
+                    <div class="container-fluid">
+                        <div class="row">
+
+                            <?php
+                                if($utils -> getData('pr_user_research_affinity_diagram', 'need_approved', 'diagram_token', $router -> getRouteParam("7")) == true){
+                                    $allIdeas = $recherche_utilisateur -> getApprovedIdea($router -> getRouteParam("7"));
+                                }else{
+                                    $allIdeas = $recherche_utilisateur -> getIdea($router -> getRouteParam("7"));
+                                }
+
+                                foreach($allIdeas['content'] as $idea){
+                                    ?>
+                                        <div class="col-lg-2 col-md-5 col-12 post-it-note mr-right mr-bot-lg color-dark">
+                                            <p><?= $idea['name'] ?></p>
+                                        </div>
+                                    <?php
+                                }
+                            ?>
+
+                        </div>
+                    </div>
                 </div>
             </div>
 
