@@ -153,6 +153,16 @@
             if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'document.create')){
                 ?> <li class="nav-item" > <a class="link dark-link" href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/documents/create">Document</a> </li> <?php
             }
+
+            if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'user-research.create')){
+                ?> <li class="nav-item mr-top" > <a class="link dark-link" href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/recherche-utilisateur/create">Étude</a> </li> <?php
+            }
+            if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'user-research.survey.create')){
+                ?> <li class="nav-item" > <a class="link dark-link" href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/recherche-utilisateur/<?= $router -> getRouteParam("5") ?>/survey/create">Sondage</a> </li> <?php
+            }
+            if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'user-research.affinity.create')){
+                ?> <li class="nav-item" > <a class="link dark-link" href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/recherche-utilisateur/<?= $router -> getRouteParam("5") ?>/affinity-diagram/create">Diagramme d'affinité</a> </li> <?php
+            }
         ?>
     </ul>
 </div>
