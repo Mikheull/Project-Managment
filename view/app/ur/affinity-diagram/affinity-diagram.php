@@ -37,20 +37,32 @@
             ?>
                 <div class="row mr-top-lg">
                     <div class="col-md-3 col-12 light-border p-2 text-align-center center">
-                    <h2 class="title-sm bold color-lg-dark"><?= $utils -> getData('pr_user_research_affinity_diagram', 'name', 'diagram_token', $router -> getRouteParam("1")) ?></h2>
+                        <h2 class="title-sm bold color-lg-dark"><?= $utils -> getData('pr_user_research_affinity_diagram', 'name', 'diagram_token', $router -> getRouteParam("1")) ?></h2>
                     </div>
                 </div>
 
                 <div class="row mr-top-lg">
                     <div class="col-md-8 col-12 bg-light p-3 rounded">
-                    <p><?= $utils -> getData('pr_user_research_affinity_diagram', 'topic', 'diagram_token', $router -> getRouteParam("1")) ?></p>
+                        <?php
+                            if($utils -> getData('pr_user_research_affinity_diagram', 'need_approved', 'diagram_token', $router -> getRouteParam("1")) == true){
+                              ?><span class="text-xs color-red">Ce sondage requiert l'approbation des réponses par l'équipe</span><?php  
+                            }
+                        ?>
+                        <p><?= $utils -> getData('pr_user_research_affinity_diagram', 'topic', 'diagram_token', $router -> getRouteParam("1")) ?></p>
                     </div>
                 </div>
                 
 
                 <div class="row mr-top-lg">
-                    <div class="col-md-8 col-12">
-                        asaasasasa
+                    <div class="col-md-8 col-12 flex mr-bot-lg">
+                        <div class="post-it-note bluecl link color-dark" id="new-idea" contenteditable="true" data-ref="<?= $router -> getRouteParam("1") ?>" data-pro="<?= $utils -> getData('pr_user_research_affinity_diagram', 'project_token', 'diagram_token', $router -> getRouteParam("1")) ?>">Ecrivez votre idée ici ...</div>
+                    </div>
+
+                    <div class="col-12 flex mr-top-lg" id="diagram_output">
+                        <?php 
+                            $diagram_token = $router -> getRouteParam("1");
+                            require_once ('view/app/ur/affinity-diagram/components/idea_item.php') 
+                        ?>
                     </div>
                 </div>
             <?php

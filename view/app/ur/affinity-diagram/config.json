@@ -29,7 +29,12 @@
     ],
      
     "css": [ 
-        "app/main.min.css"
+        "app/main.min.css",
+        "app/user-research.min.css"
+    ],
+     
+    "js": [ 
+        "recherche-utilisateur/affinity-diagram.min.js"
     ]
 
 }

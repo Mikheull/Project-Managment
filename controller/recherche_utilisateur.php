@@ -144,7 +144,7 @@ if(isset($_POST['create_diagram-affinity'])){
         $etude_token = $router -> getRouteParam('5');
         $name = cleanVar($_POST['name']);
         $topic = cleanVar($_POST['topic']);
-        if(isset($_POST['approve_idea']) ? $approve_idea = 'true' : $approve_idea = '0');
+        if(isset($_POST['approve_idea']) ? $approve_idea = '1' : $approve_idea = '0');
 
         $errors = $recherche_utilisateur -> createAffinityDiagram($project_token, $etude_token, $name, $topic, $approve_idea);
 

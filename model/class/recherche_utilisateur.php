@@ -223,7 +223,7 @@ class recherche_utilisateur extends db_connect {
     
     function getQuestionAnswersPerTitle($question_token = '', $answer = '') {
         $request = $this -> _db -> query("SELECT * FROM `pr_user_research_survey_answer` WHERE `question_token` = '$question_token' AND `answer` = '$answer' AND `enable` = '1' ");
-        $count = $request->rowCount();
+            $count = $request->rowCount();
 
         return $count;
     }
@@ -543,6 +543,91 @@ class recherche_utilisateur extends db_connect {
         $request = $this -> _db -> exec("DELETE FROM `pr_user_research_affinity_diagram_item` WHERE `diagram_token` = '$diagram_token'");
         return (['success' => true, 'options' => ['content' => "Le diagramme a été supprimé !", 'theme' => 'success'] ]);
     }
+
+
+
+    /**
+    * Envoyer une idée
+    * 
+    * Va envoyer une idée
+    *
+    * @access public
+    * @author Mikhaël Bailly
+    * @param string $project_token Token du projet
+    * @param string $diagram_token Token du diagramme
+    * @param string $user_session_token Token de la session user
+    * @param string $idea Idée
+    * @return array
+    */
+
+   function sendIdea($project_token = '', $diagram_token = '', $user_session_token = '', $idea = '') {
+        $item_token = main::generateToken(10, 'uuid');
+       
+        $req = $this -> _db -> prepare("INSERT INTO `pr_user_research_affinity_diagram_item` (`project_token`, `diagram_token`, `item_token`, `user_session_token`, `name`) VALUES (:project_token, :diagram_token, :item_token, :user_session_token, :idea)");
+
+        $req->bindParam(':project_token', $project_token);
+        $req->bindParam(':diagram_token', $diagram_token);
+        $req->bindParam(':item_token', $item_token);
+        $req->bindParam(':user_session_token', $user_session_token);
+        $req->bindParam(':idea', $idea);
+
+        $req->execute();
+        $count = $req->rowCount();
+
+        if($count !== 1){
+            return (['success' => false, 'options' => ['content' => "Une erreur est survenue !", 'theme' => 'error'] ]);
+        }
+        return (['success' => true, 'options' => ['content' => "L\'idée a été ajoutée !", 'theme' => 'success'] ]);
+   }
+
+
+
+    /**
+     * Récupère les idées d'un diagramme d'une étude
+     * 
+     * Va renvoyer tout les idées d'un diagramme d'une étude d'un projet
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $diagram_token Token du diagramme
+     * @return array
+     */
+    
+    function getIdea($diagram_token = '') {
+        $request = $this -> _db -> query("SELECT * FROM `pr_user_research_affinity_diagram_item` WHERE `diagram_token` = '$diagram_token' AND `enable` = '1' ");
+        $res = $request->fetchAll();
+        $count = $request->rowCount();
+
+        return ([ 
+            'count' => $count, 
+            'content' => $res
+        ]);
+    }
+
+
+    /**
+     * Récupère les idées approuvées d'un diagramme d'une étude
+     * 
+     * Va renvoyer tout les idées approuvées d'un diagramme d'une étude d'un projet
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $diagram_token Token du diagramme
+     * @return array
+     */
+    
+    function getApprovedIdea($diagram_token = '') {
+        $request = $this -> _db -> query("SELECT * FROM `pr_user_research_affinity_diagram_item` WHERE `diagram_token` = '$diagram_token' AND `approved` = '1' AND `enable` = '1' ");
+        $res = $request->fetchAll();
+        $count = $request->rowCount();
+
+        return ([ 
+            'count' => $count, 
+            'content' => $res
+        ]);
+    }
+
+    
 /******************************************************************************/
 
 }

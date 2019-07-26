@@ -47,6 +47,7 @@ $permission = new permission($db);
 $diagram_token = $_POST['diagram_token'];
 $project_token = $_POST['project_token'];
 $action = $_POST['action'];
+if(isset($_POST['result'])){ $result = $_POST['result']; }
 
 
 
@@ -77,6 +78,15 @@ if($action == 'delete'){
     }else{
         $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
     }
+}
+
+if($action == 'new_idea'){
+    $userSessionToken = 'demo_user_token1';
+    $errors = $recherche_utilisateur -> sendIdea($project_token, $diagram_token, $userSessionToken, $result);
+
+    
+    // Refresh ajax
+    require ('../../../../view/app/ur/affinity-diagram/components/idea_item.php');
 }
 
 

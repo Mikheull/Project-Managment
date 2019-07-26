@@ -106,3 +106,38 @@ $(document).on("click", "[data-action='affinity_diagram-delete']", function(e) {
         }
     });
 });
+
+
+
+
+
+
+let defaut_postitName = $( '#new-idea' ).html();
+
+$(document).on("focusout", "#new-idea", function(e) {
+    new_postitName = $( '#new-idea' ).html();
+    if(new_postitName !== defaut_postitName && new_postitName !== ''){
+
+        let ref = this.dataset.ref;
+        let project = this.dataset.pro;
+    
+        $.ajax({
+            url:  rootUrl + 'controller/ajax/project/recherche-utilisateur/affinity-diagram.php',
+            type: 'POST',
+            data: {result: new_postitName, diagram_token: ref, project_token: project, action: 'new_idea'},
+            success:function(data){
+                $('#diagram_output').html(data);
+                $('#new-idea').html('Ecrivez votre idée ici ...');
+            }
+        });
+    }else{
+        $('#new-idea').html('Ecrivez votre idée ici ...');
+    }
+});
+
+$(document).on("focusin", "#new-idea", function(e) {
+    new_postitName = $( '#new-idea' ).html();
+    if(new_postitName == defaut_postitName){
+        $('#new-idea').html('');
+    }
+});
