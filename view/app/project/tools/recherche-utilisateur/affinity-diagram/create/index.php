@@ -39,6 +39,11 @@
                                 </div>
                             </div>
 
+                            <div class="input-checkbox">
+                                <input type="checkbox" name="approve_idea" id="approve_idea" <?= isset($_POST['approve_idea']) ? 'checked' : '' ?> >
+                                <label for="approve_idea">Approuver les idées</label>
+                            </div>
+
 
                             <div class="mr-top-lg">
                                 <button class="btn primary-btn" name="create_diagram-affinity">Créer le diagramme</button>

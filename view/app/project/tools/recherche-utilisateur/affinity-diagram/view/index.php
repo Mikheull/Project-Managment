@@ -13,173 +13,48 @@
     <div class="content_wrapper">
 
         <?php
-        if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'user-research.survey.view')){
+        if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'user-research.affinity.view')){
 
-            if($recherche_utilisateur -> surveyIsOpen($router -> getRouteParam("7")) == false){
+            if($recherche_utilisateur -> affinityDiagramIsOpen($router -> getRouteParam("7")) == false){
                 ?>
                 <div class="row mr-top-lg">
-                    <div class="no-access">Ce sondage n'est plus ouvert a d'autres réponses !</div>
+                    <div class="no-access">Ce diagramme n'est plus ouvert a d'autres réponses !</div>
                 </div>
                 <?php
             }
             ?>
             <div class="row mr-top-lg">
                 <div class="col-md-3 col-12 light-border p-2">
-                   <h2 class="title-sm bold color-lg-dark"><?= $utils -> getData('pr_user_research_survey', 'name', 'survey_token', $router -> getRouteParam("7")) ?></h2>
+                   <h2 class="title-sm bold color-lg-dark"><?= $utils -> getData('pr_user_research_affinity_diagram', 'name', 'diagram_token', $router -> getRouteParam("7")) ?></h2>
                 </div>
             </div>
             <div class="row mr-top-lg">
                 <div class="col-md-8 col-12 bg-light p-3 rounded">
-                   <p><?= $utils -> getData('pr_user_research_survey', 'topic', 'survey_token', $router -> getRouteParam("7")) ?></p>
+                   <p><?= $utils -> getData('pr_user_research_affinity_diagram', 'topic', 'diagram_token', $router -> getRouteParam("7")) ?></p>
                 </div>
             </div>
 
 
             <div class="row mr-top-lg">
                 <div class="col-md-8 col-12">
-                    <?php
-                        $allQuestions = $recherche_utilisateur -> getSurveyQuestions($router -> getRouteParam("7"));
-                        $nb = 1;
-
-                        foreach($allQuestions['content'] as $quest){
-                            ?>
-                            <div class="sond_item mr-bot-lg">
-                                <div class="question">
-                                    <span class="color-primary title-xs"><?= $quest['question'] ?></span>
-                                </div>
-                                <div class="answer" style="height=400px;width:400px">
-                                    <?php
-                                    if($quest['type'] == 'checkbox'){
-                                        ?>
-                                            <canvas 
-                                                id="answer_pie-<?= $nb ?>" width="200" height="200"
-                                            >
-                                            </canvas>
-                                            <script>
-                                                // Les bugs
-                                                var ctx = document.getElementById("answer_pie-<?= $nb ?>");
-
-                                                var myChart = new Chart(ctx, {
-                                                    type: 'doughnut',
-                                                    data: {
-                                                        datasets: [{ }]
-                                                    },
-                                                    options: {
-                                                        cutoutPercentage: 40,
-                                                        responsive: true,
-
-                                                    }
-                                                });
-                                                <?php
-                                                    $answers = $utils -> getData('pr_user_research_survey_question', 'answers', 'question_token', $quest['question_token'] );
-                                                    $explAns = explode('[|-*-|]', $answers);
-                                                    if(sizeof($explAns) !== 0){
-                                                        foreach($explAns as $ans){
-                                                            if($ans !== ''){
-                                                                $c = $recherche_utilisateur -> getQuestionAnswersPerTitle( $quest['question_token'], $ans )
-                                                                ?>
-                                                                    addData(myChart, '<?= $ans ?>', <?= $c ?>);
-                                                                <?php
-                                                            }
-                                                        }
-                                                    }
-                                                ?>
-
-                                                function addData(chart, label, data) {
-                                                    chart.data.labels.push(label);
-                                                    chart.data.datasets.forEach((dataset) => {
-                                                        dataset.data.push(data);
-                                                    });
-                                                    chart.update();
-                                                }
-                                            </script>
-                                        <?php
-                                        
-                                    }else if($quest['type'] == 'radio'){
-                                        ?>
-                                            <canvas 
-                                                id="answer_pie-<?= $nb ?>" width="200" height="200"
-                                            >
-                                            </canvas>
-                                            <script>
-                                                // Les bugs
-                                                var ctx = document.getElementById("answer_pie-<?= $nb ?>");
-
-                                                var myChart = new Chart(ctx, {
-                                                    type: 'doughnut',
-                                                    data: {
-                                                        datasets: [{ }]
-                                                    },
-                                                    options: {
-                                                        cutoutPercentage: 40,
-                                                        responsive: true,
-                                                    }
-                                                });
-                                                <?php
-                                                    $answers = $utils -> getData('pr_user_research_survey_question', 'answers', 'question_token', $quest['question_token'] );
-                                                    $explAns = explode('[|-*-|]', $answers);
-                                                    if(sizeof($explAns) !== 0){
-                                                        foreach($explAns as $ans){
-                                                            if($ans !== ''){
-                                                                $c = $recherche_utilisateur -> getQuestionAnswersPerTitle( $quest['question_token'], $ans )
-                                                                ?>
-                                                                    addData(myChart, '<?= $ans ?>', <?= $c ?>);
-                                                                <?php
-                                                            }
-                                                        }
-                                                    }
-                                                ?>
-
-                                                function addData(chart, label, data) {
-                                                    chart.data.labels.push(label);
-                                                    chart.data.datasets.forEach((dataset) => {
-                                                        dataset.data.push(data);
-                                                    });
-                                                    chart.update();
-                                                }
-                                            </script>
-                                        <?php
-
-                                    }else if($quest['type'] == 'text'){
-                                        ?>
-                                        <ul class="list-reslut">
-                                            <?php
-                                                $answers = $recherche_utilisateur -> getQuestionAnswers( $quest['question_token'] );
-                                                foreach($answers['content'] as $ans){
-                                                    if($ans['answer'] !== 'undefined'){
-                                                        $c = $recherche_utilisateur -> getQuestionAnswersPerTitle( $quest['question_token'], $ans['answer'] )
-                                                        ?><li class="mr-top mr-left color-lg-dark">- (<?= $c ?>) <?= $ans['answer'] ?></li><?php
-                                                    }
-                                                }
-                                            ?>
-                                        </ul>
-                                        <?php
-                                    }
-                                    ?>
-                                </div>
-                            </div>
-                            <?php
-                            $nb ++;
-                            }
-                        ?>
-
+                   a
                 </div>
             </div>
 
             <div class="mr-top-lg mr-bot-lg">
                 <?php
-                if($recherche_utilisateur -> surveyIsOpen($router -> getRouteParam("7")) == false){
+                if($recherche_utilisateur -> affinityDiagramIsOpen($router -> getRouteParam("7")) == false){
                     ?>
-                        <a class="btn btn-sm primary-btn mr-right" href="" data-action="survey-reopen" data-ref="<?= $router -> getRouteParam("7") ?>" data-pro="<?= $router -> getRouteParam("2") ?>">Ré-ouvrir le sondage</a>
+                        <a class="btn btn-sm primary-btn mr-right" href="" data-action="affinity_diagram-reopen" data-ref="<?= $router -> getRouteParam("7") ?>" data-pro="<?= $router -> getRouteParam("2") ?>">Ré-ouvrir le diagramme</a>
                     <?php
                 }else{
                     ?>
-                        <a class="btn btn-sm primary-btn mr-right" href="" data-action="survey-end" data-ref="<?= $router -> getRouteParam("7") ?>" data-pro="<?= $router -> getRouteParam("2") ?>">Fermer le sondage</a>
+                        <a class="btn btn-sm primary-btn mr-right" href="" data-action="affinity_diagram-end" data-ref="<?= $router -> getRouteParam("7") ?>" data-pro="<?= $router -> getRouteParam("2") ?>">Fermer le diagramme</a>
                     <?php
                 }
                 ?>
-                <a class="btn btn-sm dark-btn mr-right" href="<?= $config -> rootUrl() ;?>survey/<?= $router -> getRouteParam("7") ?>" target="blank"> <i data-feather="link"></i> </a>
-                <a class="btn btn-sm red-btn" href="" data-action="survey-delete" data-ref="<?= $router -> getRouteParam("7") ?>" data-pro="<?= $router -> getRouteParam("2") ?>">Supprimer le sondage</a>
+                <a class="btn btn-sm dark-btn mr-right" href="<?= $config -> rootUrl() ;?>affinity-diagram/<?= $router -> getRouteParam("7") ?>" target="blank"> <i data-feather="link"></i> </a>
+                <a class="btn btn-sm red-btn" href="" data-action="affinity_diagram-delete" data-ref="<?= $router -> getRouteParam("7") ?>" data-pro="<?= $router -> getRouteParam("2") ?>">Supprimer le diagramme</a>
             </div>
                 
             <?php
@@ -195,4 +70,4 @@
 </div>
 
 
-<div id="survey_output"></div>
+<div id="diagram_output"></div>

@@ -81,7 +81,7 @@ $router -> addRoutes(
 
         // Application
         [ 'route' => 'sharing/{{TOKEN}}', 'dir_path' => 'view/app/sharing/'],
-        [ 'route' => 'aff/{{TOKEN}}', 'dir_path' => 'view/app/ur/affinity-diagram/'],
+        [ 'route' => 'affinity-diagram/{{TOKEN}}', 'dir_path' => 'view/app/ur/affinity-diagram/'],
         [ 'route' => 'survey/{{TOKEN}}', 'dir_path' => 'view/app/ur/survey/'],
 
         [ 'route' => 'app', 'dir_path' => 'view/app/hub/'],

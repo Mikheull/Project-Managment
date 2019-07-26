@@ -136,7 +136,7 @@ $(document).on("click", "[data-action='survey-delete']", function(e) {
         backdrop: true,
         closeButton: false,
         title: "Êtes vous sûr ?",
-        message: "Vous êtes sur le point de supprimer la tâche définitivement.",
+        message: "Vous êtes sur le point de supprimer le sondage définitivement.",
         buttons: {
             cancel: {
                 label: '<i class="fa fa-times"></i> Cancel',

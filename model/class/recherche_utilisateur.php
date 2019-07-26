@@ -264,6 +264,31 @@ class recherche_utilisateur extends db_connect {
 
 
     /**
+     * Vérifie si l'utilisateur a déjà répondu au sondage
+     * 
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $user_id Identifiant de l'user
+     * @param string $token Token du sondage
+     * @return boolean
+     */
+
+    function checkIfSurveyIsAlreadySend($user_id = '', $token = '') {
+        $request = $this -> _db -> query("SELECT * FROM `pr_user_research_survey_answer` WHERE `user_session_token` = '$user_id' AND `survey_token` = '$token' AND `enable` = '1'");
+        $count = $request->rowCount();
+        if($count !== 0){
+            $request = $this -> _db -> exec("DELETE FROM `pr_user_research_survey_answer` WHERE `user_session_token` = '$user_id' AND `survey_token` = '$token' AND `enable` = '1'");
+            return (['success' => true, 'options' => ['content' => "L\'utilisateur a déjà répondu, ses anciennes réponses ont été éffacées !", 'theme' => 'error'] ]);
+        }
+        
+    }
+
+
+
+    
+
+
+    /**
      * Récupère les questions d'un sondage
      * 
      * Va renvoyer toutes les questions d'un sondage
@@ -394,6 +419,130 @@ class recherche_utilisateur extends db_connect {
         ]);
     }
 
+
+    /**
+     * Créer un sondage
+     * 
+     * Va créer un sondage de recherche utilisateur pour le projet
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $project_token Token du projet
+     * @param string $etude_token Token de l'étude
+     * @param string $name Nom de la recherche
+     * @param string $topic Topic de la recherche
+     * @param string $approve_idea Status de la checkbox need-approve
+     * @return array
+     */
+    
+    function createAffinityDiagram($project_token = '', $etude_token = '', $name = '', $topic = '', $approve_idea = '') {
+        $diagram_token = main::generateToken(10, 'uuid');
+
+        $req = $this -> _db -> prepare("INSERT INTO `pr_user_research_affinity_diagram` (`project_token`, `research_token`, `diagram_token`, `name`, `topic`, `need_approved`) VALUES (:project_token, :research_token, :diagram_token, :name, :topic, :need_approved)");
+
+        $req->bindParam(':project_token', $project_token);
+        $req->bindParam(':research_token', $etude_token);
+        $req->bindParam(':diagram_token', $diagram_token);
+        $req->bindParam(':name', $name);
+        $req->bindParam(':topic', $topic);
+        $req->bindParam(':need_approved', $approve_idea);
+
+        $req->execute();
+
+        return (['success' => true, 'options' => ['content' => "Le diagramme d\'affinité a été crée !", 'theme' => 'success'] ]);
+
+    } 
+
+
+
+    /**
+     * Vérifie si un diagramme d'afinité existe
+     * 
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $token Token du diagramme
+     * @return boolean
+     */
+
+    function affinityDiagramExist($token = '') {
+        $request = $this -> _db -> query("SELECT * FROM `pr_user_research_affinity_diagram` WHERE `diagram_token` = '$token' ");
+        $res = $request->fetch();
+        
+        return ($res ? true : false);
+    }
+
+
+    /**
+     * Vérifie si un diagramme d'afinité est ouvert
+     * 
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $token Token du diagramme
+     * @return boolean
+     */
+
+    function affinityDiagramIsOpen($token = '') {
+        $request = $this -> _db -> query("SELECT * FROM `pr_user_research_affinity_diagram` WHERE `diagram_token` = '$token' AND `enable` = '1' AND `date_end` IS NULL");
+        $res = $request->fetch();
+        
+        return ($res ? true : false);
+    }
+
+
+
+    /**
+    * Clore un diagramme d'un tableau
+    * 
+    * Clore un diagramme d'un tableau
+    *
+    * @access public
+    * @author Mikhaël Bailly
+    * @param string $diagram_token Token du diagramme
+    * @return array
+    */
+
+    function closeAffinityDiagram($diagram_token = '') {
+        $request = $this -> _db -> exec("UPDATE `pr_user_research_affinity_diagram` SET `date_end` = NOW(), `enable` = '0' WHERE `diagram_token` = '$diagram_token' AND `enable` = '1' ");
+        return (['success' => true, 'options' => ['content' => "Le diagramme a été terminé !", 'theme' => 'success'] ]);
+   }
+
+
+    
+   /**
+   * Ré-ouvrir un diagramme d'un tableau
+   * 
+   * Ré-ouvrir un diagramme d'un tableau
+   *
+   * @access public
+   * @author Mikhaël Bailly
+   * @param string $diagram_token Token du diagramme
+   * @return array
+   */
+
+   function reopenAffinityDiagram($diagram_token = '') {
+        $request = $this -> _db -> exec("UPDATE `pr_user_research_affinity_diagram` SET `date_end` = null, `enable` = '1' WHERE `diagram_token` = '$diagram_token' AND `enable` = '0' ");
+        return (['success' => true, 'options' => ['content' => "Le diagramme a été réouvert !", 'theme' => 'success'] ]);
+    }
+
+    
+
+
+    /**
+     * Supprimer un diagramme
+     * 
+     * Supprimer un diagramme en supprimant les réponses
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $diagram_token Token du diagramme
+     * @return array
+     */
+
+    function disableAffinityDiagram($diagram_token = '') {
+        $request = $this -> _db -> exec("DELETE FROM `pr_user_research_affinity_diagram` WHERE `diagram_token` = '$diagram_token'");
+        $request = $this -> _db -> exec("DELETE FROM `pr_user_research_affinity_diagram_item` WHERE `diagram_token` = '$diagram_token'");
+        return (['success' => true, 'options' => ['content' => "Le diagramme a été supprimé !", 'theme' => 'success'] ]);
+    }
 /******************************************************************************/
 
 }

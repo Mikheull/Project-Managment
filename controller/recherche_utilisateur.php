@@ -86,15 +86,15 @@ if(isset($_POST['create_survey'])){
  * 
  */
 if(isset($_POST['send_survey'])){
-
     $survey_token = $router -> getRouteParam('1');
     $allSurveys = $recherche_utilisateur -> getSurveyQuestions( $router -> getRouteParam('1') );
-    $question_group_token = $main -> generateToken(10, 'uuid');
 
-    $nb = 1;
     if($recherche_utilisateur -> surveyIsOpen($survey_token) == true){
+        $nb = 1;
+        $userSessionToken = 'demo_user_token6';
+        $recherche_utilisateur -> checkIfSurveyIsAlreadySend($userSessionToken, $survey_token);
+        
         foreach($allSurveys['content'] as $surv){
-            $userSessionToken = 'demo_user_token6';
 
             if($surv['type'] == 'text'){
                 $answer = cleanVar($_POST['answer'.$nb]);
@@ -115,15 +115,43 @@ if(isset($_POST['send_survey'])){
                     $recherche_utilisateur -> setSurveyAnswer( $router -> getRouteParam('1'), $surv['question_token'], $userSessionToken, $answer );
                 }
             }
+            $nb ++;
         }
 
-        $nb ++;
     }
-
-    // $errors = $recherche_utilisateur -> createSurvey($project_token, $etude_token, $name, $topic, $nb);
 
 }
 
+
+
+
+
+/**
+ * Formulaire pour créer un diagramme d'affinité
+ * 
+ * @fichier d'execution = view/app/project/t/recherche-utilisatuer/index.php
+ * @variable d'execution = $_POST['create_diagram-affinity']            : type = button
+ * 
+ * @variable obligatoire = $_POST['name']                               : type = text
+ * @variable obligatoire = $_POST['topic']                              : type = text
+ * @variable obligatoire = $_POST['approve_idea']                       : type = checkbox
+ * 
+ */
+if(isset($_POST['create_diagram-affinity'])){
+    if(isset($_POST['name']) AND !empty($_POST['name']) AND isset($_POST['topic']) AND !empty($_POST['topic'])){
+
+        $project_token = $router -> getRouteParam('2');
+        $etude_token = $router -> getRouteParam('5');
+        $name = cleanVar($_POST['name']);
+        $topic = cleanVar($_POST['topic']);
+        if(isset($_POST['approve_idea']) ? $approve_idea = 'true' : $approve_idea = '0');
+
+        $errors = $recherche_utilisateur -> createAffinityDiagram($project_token, $etude_token, $name, $topic, $approve_idea);
+
+    }else{
+        $errors = ['success' => false, 'options' => ['content' => "Vous devez remplir tout les champs obligatoires !", 'theme' => 'error'] ];
+    }
+}
 
 // End of file
 /******************************************************************************/

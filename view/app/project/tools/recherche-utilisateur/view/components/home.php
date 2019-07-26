@@ -35,8 +35,8 @@
                         $allAffinityDiagram = $recherche_utilisateur -> getAffinityDiagram( $router -> getRouteParam("2") );
                         foreach($allAffinityDiagram['content'] as $aff){
                             ?> 
-                                <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/recherche-utilisateur/<?= $router -> getRouteParam("5") ?>/affinity-diagram/<?= $surv['affinity_token'] ?>"><?= $surv['name'] ?></a> 
-                                <a href="<?= $config -> rootUrl() ;?>affinity-diagram/<?= $aff['affinity_token'] ?>" target="blank"> <i data-feather="link"></i> </a>
+                                <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/recherche-utilisateur/<?= $router -> getRouteParam("5") ?>/affinity-diagram/<?= $aff['diagram_token'] ?>"><?= $aff['name'] ?></a> 
+                                <a href="<?= $config -> rootUrl() ;?>affinity-diagram/<?= $aff['diagram_token'] ?>" target="blank"> <i data-feather="link"></i> </a>
                                 <br>
                             <?php
                         }
