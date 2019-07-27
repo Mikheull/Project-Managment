@@ -104,6 +104,32 @@ if(isset($_POST['update_user_infos'])){
 
 
 /**
+ * Formulaire pour editer sa photo de profil
+ * 
+ * @fichier d'execution = view/account/edit/index.php
+ * @variable d'execution = $_POST['update_profil_pic']                  : type = button
+ * 
+ */
+if(isset($_POST['update_profil_pic'])){
+    
+    if(!is_dir('dist/uploads/u/'.$main -> getToken().'/profil_pic/')){
+        mkdir('dist/uploads/u/'.$main -> getToken().'/profil_pic/', 0777, true);
+    }
+    $tmpFilePath = $_FILES['imported_file']['tmp_name'];
+    $shortname = $_FILES['imported_file']['name'];
+    $filePath = "dist/uploads/u/".$main -> getToken()."/profil_pic/".$_FILES['imported_file']['name'];
+
+    if(move_uploaded_file($tmpFilePath, $filePath)) {
+        $errors = ['success' => false, 'options' => ['content' => "L'image a été téléchargée !", 'theme' => 'success'] ];
+        $utils -> setData('imp_user', 'profil_image', $shortname, 'public_token', $main -> getToken());
+    }else{
+        $errors = ['success' => false, 'options' => ['content' => "Une erreur est survenue !", 'theme' => 'error'] ];
+    }
+
+}
+
+
+/**
  * Formulaire pour bloquer un utilisateur
  * 
  * @fichier d'execution = view/member/(*)/index.php

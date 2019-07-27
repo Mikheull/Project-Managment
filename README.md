@@ -1,4 +1,3 @@
-- Editer sa photo de profil
 - Bouton pour quitter un projet depuis le panel
 
 

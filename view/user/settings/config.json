@@ -7,7 +7,8 @@
         "fontawesome",
         "feather-icons",
         "popper",
-        "tippy"
+        "tippy",
+        "filepond"
     ],
 
     "meta": [ 
@@ -28,6 +29,11 @@
      
     "css": [ 
         "account.min.css"
+    ],
+
+    "online_css": [ 
+        "https://cdn.jsdelivr.net/npm/filepond@4.4.10/dist/filepond.min.css",
+        "https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css"
     ]
 
 }

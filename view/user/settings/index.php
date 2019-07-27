@@ -46,6 +46,19 @@
 
             <div class="spacer-lg"></div>
 
+            <form method="POST" enctype="multipart/form-data">
+                <div class="input_group">
+                    <div class="input-field input-half-al">
+                        <label for="imported_file">Votre photo de profil</label>
+                        <input type="file" class="filepond" name="imported_file" data-max-file-size="2MB"/>
+                    </div>
+                </div>
+
+                <button class="btn primary-btn" name="update_profil_pic">Sauvegarder</button>
+            </form>
+
+            <div class="spacer-lg"></div>
+
             <form method="POST">
                 <div class="input_group">
                     <div class="input-field input-half-al">
