@@ -81,7 +81,7 @@ if($action == 'delete'){
 }
 
 if($action == 'new_idea'){
-    $userSessionToken = 'demo_user_token1';
+    $userSessionToken = session_id();
     $errors = $recherche_utilisateur -> sendIdea($project_token, $diagram_token, $userSessionToken, $result);
 
     

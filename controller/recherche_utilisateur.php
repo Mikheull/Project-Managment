@@ -91,7 +91,7 @@ if(isset($_POST['send_survey'])){
 
     if($recherche_utilisateur -> surveyIsOpen($survey_token) == true){
         $nb = 1;
-        $userSessionToken = 'demo_user_token6';
+        $userSessionToken = session_id();
         $recherche_utilisateur -> checkIfSurveyIsAlreadySend($userSessionToken, $survey_token);
         
         foreach($allSurveys['content'] as $surv){
