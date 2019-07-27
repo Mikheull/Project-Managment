@@ -48,7 +48,7 @@
 
 
                             <div class="input_group">
-                                <h4 class="title-xs color-dark mr-bot mr-top">Permissions</h4>
+                                <h4 class="title-xs color-dark mr-bot mr-top">Permissions <span class="text-xs mr-left check-all"><i data-feather="check-square"></i>Tout cocher</span></h4>
                                 <div class="row">
                                     <?php
                                     $typeArray = ['gestion-projet', 'gestion-equipe', 'messenger', 'calendar', 'uml', 'recherche-utilisateur', 'bug-tracker', 'documents', 'project'];
@@ -57,7 +57,7 @@
                                     foreach($typeArray as $type){
                                         ?>
                                         <div class="mr-bot col-md-4 col-12">
-                                            <h3 class="text-sm color-dark mr-bot mr-top"><?= $typeNameArray[$nb] ;?></h3>
+                                            <h3 class="text-sm color-dark mr-bot mr-top"><?= $typeNameArray[$nb] ;?> <span class="text-xs mr-left check-group"><i data-feather="check-square"></i>Tout cocher</span></h3>
                                         <?php
                                             foreach($permission -> getPermissionsPerType($type) as $perm){
                                                 ?>

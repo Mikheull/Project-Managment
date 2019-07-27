@@ -41,6 +41,7 @@
     ],
 
     "js": [ 
+        "team/team.min.js",
         "project-fast-act.min.js"
     ]
 

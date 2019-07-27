@@ -37,7 +37,7 @@
     ],
      
     "js": [ 
-        "teams/team.min.js"
+        "team/team.min.js"
     ],
 
     "online_css": [ 
