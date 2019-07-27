@@ -68,34 +68,35 @@ if(isset($_POST['update_user_pass'])){
  * @fichier d'execution = view/account/edit/index.php
  * @variable d'execution = $_POST['update_user_infos']                  : type = button
  * 
- * @variable obligatoire = $_POST['first_name']                         : type = text
- * @variable obligatoire = $_POST['last_name']                          : type = text
- * @variable obligatoire = $_POST['username']                           : type = text
- * @variable obligatoire = $_POST['bio']                                : type = text
- * 
  */
 if(isset($_POST['update_user_infos'])){
     
-    if(isset($_POST['first_name']) AND !empty($_POST['first_name']) AND isset($_POST['last_name']) AND !empty($_POST['last_name']) AND isset($_POST['username']) AND !empty($_POST['username']) AND isset($_POST['bio']) AND !empty($_POST['bio'])){
+    if(isset($_POST['first_name']) AND !empty($_POST['first_name'])){
         $first_name = cleanVar($_POST['first_name']);
+        $utils -> setData('imp_user', 'first_name', $first_name, 'public_token', $main -> getToken());
+    }
+
+    if(isset($_POST['last_name']) AND !empty($_POST['last_name'])){
         $last_name = cleanVar($_POST['last_name']);
+        $utils -> setData('imp_user', 'last_name', $last_name, 'public_token', $main -> getToken());
+    }
+
+    if(isset($_POST['username']) AND !empty($_POST['username'])){
         $username = cleanVar($_POST['username']);
-        $bio = cleanVar($_POST['bio']);
-
         if($utils -> getData('imp_user', 'username', 'public_token', $main -> getToken()) == $username OR $user -> usernameExist($username) == false){
-
-            if(strlen($bio) <= 255){
-                $errors = $user -> editUserInfos($first_name, $last_name, $username, $bio);
-            }else{
-                $errors = ['success' => false, 'options' => ['content' => "La bio est trop longue (".strlen($bio)."/255) !", 'theme' => 'error'] ];
-            }
-
+            $utils -> setData('imp_user', 'username', $username, 'public_token', $main -> getToken());
         }else{
             $errors = ['success' => false, 'options' => ['content' => "Cet username est déjà utilisé !", 'theme' => 'error'] ];
         }
+    }
 
-    }else{
-        $errors = ['success' => false, 'options' => ['content' => "Vous devez remplir tout les champs obligatoires ", 'theme' => 'error'] ];
+    if(isset($_POST['bio'])){
+        $bio = cleanVar($_POST['bio']);
+        if(strlen($bio) <= 255){
+            $utils -> setData('imp_user', 'bio', $bio, 'public_token', $main -> getToken());
+        }else{
+            $errors = ['success' => false, 'options' => ['content' => "La bio est trop longue (".strlen($bio)."/255) !", 'theme' => 'error'] ];
+        }
     }
 
 }

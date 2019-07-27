@@ -138,30 +138,43 @@
 <div id="rapid_actions_container" class="hidden">
     <ul class="mr-bot mr-top text-align-left">
         <?php
+            $perm_check = false;
             if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'project.team.member.manage')){
+                $perm_check = true
                 ?> <li class="nav-item mr-bot" data-action="invite" data-ref="<?= $router -> getRouteParam("2") ?>"> <a class="link dark-link" href="">Invitation</a> </li> <?php
             }
             if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'calendar.add.event')){
+                $perm_check = true
                 ?> <li class="nav-item" data-action="new_header_cal_event" data-ref="<?= $router -> getRouteParam("2") ?>"> <a class="link dark-link" href="">Évènement</a> </li> <?php
             }
             if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'task.create')){
+                $perm_check = true
                 ?> <li class="nav-item" data-action="new_header_task" data-ref="<?= $router -> getRouteParam("2") ?>"> <a class="link dark-link" href="">Tâche</a> </li> <?php
             }
             if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'bug-tracker.create')){
+                $perm_check = true
                 ?> <li class="nav-item" data-action="new_header_bug" data-ref="<?= $router -> getRouteParam("2") ?>"> <a class="link dark-link" href="">Rapport de bug</a> </li> <?php
             }
             if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'document.create')){
+                $perm_check = true
                 ?> <li class="nav-item" > <a class="link dark-link" href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/documents/create">Document</a> </li> <?php
             }
 
             if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'user-research.create')){
+                $perm_check = true
                 ?> <li class="nav-item mr-top" > <a class="link dark-link" href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/recherche-utilisateur/create">Étude</a> </li> <?php
             }
             if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'user-research.survey.create')){
+                $perm_check = true
                 ?> <li class="nav-item" > <a class="link dark-link" href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/recherche-utilisateur/<?= $router -> getRouteParam("5") ?>/survey/create">Sondage</a> </li> <?php
             }
             if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'user-research.affinity.create')){
+                $perm_check = true
                 ?> <li class="nav-item" > <a class="link dark-link" href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/recherche-utilisateur/<?= $router -> getRouteParam("5") ?>/affinity-diagram/create">Diagramme d'affinité</a> </li> <?php
+            }
+
+            if($perm_check == false){
+                ?> <li class="nav-item" > <a class="link dark-link">Permissions insuffisante</a> </li> <?php
             }
         ?>
     </ul>

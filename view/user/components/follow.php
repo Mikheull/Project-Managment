@@ -47,7 +47,7 @@
             <?php require_once ('view/user/components/navbar_'. $mode .'.php') ;?>
             <div class="row head-bar">
             <div class="col">
-                <h3 class="title-sm bold color-dark"><?= $follow_mode == 'followers' ? 'Abonnés' : 'Abonnements' ;?></h3>
+                <h3 class="title-sm bold color-dark"><?= $follow_mode == 'follower' ? 'Abonnés' : 'Abonnements' ;?></h3>
             </div>
         </div>
         

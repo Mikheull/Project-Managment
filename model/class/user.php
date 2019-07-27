@@ -154,30 +154,7 @@ class user extends db_connect {
         $res = $request->fetch();
 
         return ($res ? true : false);
-    }
-
-
-
-    /**
-     * Modifie les infos
-     * 
-     * Va modifier les infos de l'utilisateur
-     *
-     * @access public
-     * @author Mikhaël Bailly
-     * @param string $first_name prénom
-     * @param string $last_name nom
-     * @param string $username pseudo
-     * @param string $bio bio
-     * @return array
-     */
-    
-    function editUserInfos($first_name = '', $last_name = '', $username = '', $bio = '') {
-        $token = $this -> getToken();
-        $exec = $this -> _db -> exec("UPDATE `imp_user` SET `first_name` = '$first_name', `last_name` = '$last_name', `username` = '$username', `bio` = '$bio' WHERE `public_token` = '$token' ");
-
-        return (['success' => true, 'options' => ['content' => "Les informations on été modifiés !", 'theme' => 'success'] ]);
-    }     
+    }  
 
 /******************************************************************************/
 
