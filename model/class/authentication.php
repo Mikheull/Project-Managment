@@ -121,6 +121,10 @@ class authentication extends db_connect {
 
                 $request = $this -> _db -> exec("INSERT INTO `imp_user` (`username`, `mail`, `password`, `public_token`) VALUES ('$username', '$email', '$password', '$token') ");
                 mkdir("dist/uploads/u/".$token."/", 0700);
+                $path = "dist/uploads/u/".$token."/index.php";
+                $file = fopen($path,"w");
+                fwrite($file,"");
+                fclose($file);
 
 ob_start();
 ?>

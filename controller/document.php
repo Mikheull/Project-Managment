@@ -23,6 +23,11 @@ if(isset($_POST['import_btn'])){
 
 		if(!is_dir('dist/uploads/p/'.$router -> getRouteParam("2").'/docs/')){
 			mkdir('dist/uploads/p/'.$router -> getRouteParam("2").'/docs/', 0777, true);
+
+			$path = "dist/uploads/p/".$router -> getRouteParam("2")."/docs/index.php";
+			$file = fopen($path,"w");
+			fwrite($file,"");
+			fclose($file);
 		}
 
 		for($i=0; $i<count($_FILES['import_files']['name']); $i++) {
@@ -54,6 +59,11 @@ if(isset($_POST['create_doc'])){
 
 	if(!is_dir('dist/uploads/p/'.$router -> getRouteParam("2").'/docs/')){
 		mkdir('dist/uploads/p/'.$router -> getRouteParam("2").'/docs/', 0777, true);
+
+		$path = "dist/uploads/p/".$router -> getRouteParam("2")."/docs/index.php";
+		$file = fopen($path,"w");
+		fwrite($file,"");
+		fclose($file);
 	}
 		
 	if(isset($_POST['doc_name']) AND !empty($_POST['doc_name']) AND isset($_POST['doc_content']) AND !empty($_POST['doc_content'])){

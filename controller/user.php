@@ -114,6 +114,12 @@ if(isset($_POST['update_profil_pic'])){
     
     if(!is_dir('dist/uploads/u/'.$main -> getToken().'/profil_pic/')){
         mkdir('dist/uploads/u/'.$main -> getToken().'/profil_pic/', 0777, true);
+        
+        $path = "dist/uploads/u/".$main -> getToken()."/index.php";
+        $file = fopen($path,"w");
+        fwrite($file,"");
+        fclose($file);
+
     }
     $tmpFilePath = $_FILES['imported_file']['tmp_name'];
     $shortname = $_FILES['imported_file']['name'];
