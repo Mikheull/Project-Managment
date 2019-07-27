@@ -131,9 +131,10 @@
 
             <div id="tp-<?= $t['tab_token'] ?>" class="hidden">
                 <ul class="mr-top text-align-left">
-                    <li> <a href="" data-action="tab-rename" data-ref="<?= $t['tab_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>" class="link dark-link">Renommer</a> </li>
-                    <li> <a href="" data-action="tab-export" data-ref="<?= $t['tab_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>" class="link dark-link">Exporter le tableau</a> </li>
-                    <li> <a href="" data-action="tab-delete" data-ref="<?= $t['tab_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>" class="link red-link">Supprimer</a> </li>
+                    <li> <a data-action="tab-rename" data-ref="<?= $t['tab_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>" class="link dark-link">Renommer</a> </li>
+                    <li> <a data-action="tab-assign" data-ref="<?= $t['tab_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>" class="link dark-link">Assigner le tableau</a> </li>
+                    <li> <a data-action="tab-export" data-ref="<?= $t['tab_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>" class="link dark-link">Exporter le tableau</a> </li>
+                    <li> <a data-action="tab-delete" data-ref="<?= $t['tab_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>" class="link red-link">Supprimer</a> </li>
                 </ul>
             </div>
 
@@ -172,7 +173,7 @@
 
 <script>
 
-// Assign
+// Assign task
 $(document).on("click", "[data-action='assign_task']", function(e) {
     let ref = this.dataset.ref;
     let project = this.dataset.pro;
@@ -195,6 +196,47 @@ $(document).on("click", "[data-action='assign_task']", function(e) {
                         url:  rootUrl + 'controller/ajax/project/task/task_short-actions.php',
                         type: 'POST',
                         data: {assigned_teams: assigned_teams, assigned_members: assigned_members, task_token: ref, project_token: project, action: 'assign_task'},
+                        success:function(data){
+                            $('#tab_output').html(data);
+                        }
+                    });
+                   
+                }
+            },
+            cancel: {
+                label: 'Annuler',
+                className: 'btn dark-btn',
+            }
+        },
+        message: '<div class="row"> <div class="mr-bot-lg col-12"> <h3 class="text-sm color-dark mr-bot mr-top">Assigner des équipes</h3> <?php require_once ("controller/projectTeam.php"); $teams=$projectTeam -> getTeams( $router -> getRouteParam("2") ); foreach($teams["content"] as $t){?> <div class="tg-list-item flex mr-bot"> <div class="mr-right"> <input class="tgl tgl-light" name="assigned_teams" value="<?=$t["public_token"] ;?>" id="<?=$t["public_token"] ;?>" type="checkbox"/> <label class="tgl-btn" for="<?=$t["public_token"] ;?>"></label> </div><div> <small><?=$t["name"] ;?></small> </div></div><?php } ?> </div><div class="col-12"> <h3 class="text-sm color-dark mr-bot mr-top">Assigner des membres</h3> <?php require_once ("controller/project.php"); $teams=$project -> getProjectMembers( $router -> getRouteParam("2") ); foreach($teams["content"] as $t){?> <div class="tg-list-item flex mr-bot"> <div class="mr-right"> <input class="tgl tgl-light" name="assigned_members" value="<?=$t["user_public_token"] ;?>" id="<?=$t["user_public_token"] ;?>" type="checkbox"/> <label class="tgl-btn" for="<?=$t["user_public_token"] ;?>"></label> </div><div> <small><?=$utils -> getData('imp_user', 'username', 'public_token', $t["user_public_token"] ) ;?></small> </div></div><?php } ?> </div></div>',
+        
+    });
+});
+
+
+// Assign tab
+$(document).on("click", "[data-action='tab-assign']", function(e) {
+    let ref = this.dataset.ref;
+    let project = this.dataset.pro;
+
+    bootbox.dialog({
+        backdrop: true,
+        closeButton: false,
+        title: "Assigner le tableau",
+        buttons: {
+            confirm: {
+                label: 'Ok',
+                className: 'btn primary-btn',
+                callback: function(){
+                    let assigned_teams = [];
+                    let assigned_members = [];
+                    $("input:checkbox[name=assigned_teams]:checked").each(function(){ assigned_teams.push($(this).val()); });
+                    $("input:checkbox[name=assigned_members]:checked").each(function(){ assigned_members.push($(this).val()); });
+                    
+                    $.ajax({
+                        url:  rootUrl + 'controller/ajax/project/task/tabs_short-actions.php',
+                        type: 'POST',
+                        data: {assigned_teams: assigned_teams, assigned_members: assigned_members, tab_token: ref, project_token: project, action: 'assign_tab'},
                         success:function(data){
                             $('#tab_output').html(data);
                         }

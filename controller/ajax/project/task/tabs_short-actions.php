@@ -49,6 +49,7 @@ if(isset($_POST['result'])){ $result = $_POST['result']; }
 $tab_token = $_POST['tab_token'];
 $action = $_POST['action'];
 if(isset($_POST['project_token'])){ $project_token = $_POST['project_token']; }
+if(isset($_POST['tab_token'])){ $tab_token = $_POST['tab_token']; }
 
 
 
@@ -99,6 +100,22 @@ if($action == 'export'){
     }
 }
 
+
+if($action == 'assign_tab'){
+    if($permission -> hasPermission($main -> getToken(), $project_token, 'task.assign')){
+        $assigned_teams = isset($_POST['assigned_teams']) ? $_POST['assigned_teams'] : '';
+        $errors = $task -> tabAssignTeam($project_token, $tab_token, $assigned_teams);
+
+        $assigned_members = isset($_POST['assigned_members']) ? $_POST['assigned_members'] : '';
+        $errors = $task -> tabAssignMember($project_token, $tab_token, $assigned_members);
+
+    }else{
+        $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
+    }
+
+    
+    ?> <script> location.reload(); </script> <?php
+}
 
 if(isset($errors)){
     ?>

@@ -105,6 +105,168 @@ class task extends project {
         }
         return (['success' => false, 'options' => ['content' => "Le nom est vide !", 'theme' => 'error'] ]);
     }
+
+
+    /**
+     * Assigner un tableau a des équipe
+     * 
+     * Va assigner un tableau a des équipe
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $project_token Token du projet
+     * @param string $tab_token Token du tableau
+     * @param string $assigned_teams Les équipes assignés
+     * @return array
+     */
+
+    function tabAssignTeam($project_token = '', $tab_token = '', $assigned_teams = '') {
+        if($assigned_teams !== ''){
+            $teams = '';
+            foreach($assigned_teams as $team){ 
+                $teams .= $team.'|';
+            }
+            $request = $this -> _db -> exec("UPDATE `pr_task_tab` SET `assigned_teams` = '$teams' WHERE `project_token` = '$project_token' AND `tab_token` = '$tab_token' AND `enable` = '1' ");
+        }else{
+            $request = $this -> _db -> exec("UPDATE `pr_task_tab` SET `assigned_teams` = '' WHERE `project_token` = '$project_token' AND `tab_token` = '$tab_token' AND `enable` = '1' ");
+
+        }
+       
+    }
+
+
+
+
+    /**
+     * Vérifier qu'un tableau est assignée a une team
+     * 
+     * Va vérifier si un tableau est assignée a une team donnée
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $project_token Token du projet
+     * @param string $tab_token Token du tableau
+     * @param string $team_token Token de la team
+     * @return array
+     */
+    function tabTeamIsAssigned($project_token, $tab_token, $team_token){
+        $request = $this -> _db -> query("SELECT * FROM `pr_task_tab` WHERE `project_token` = '$project_token' AND `tab_token` = '$tab_token' AND `enable` = '1' ");
+        $res = $request->fetch();
+        $teams = $res['assigned_teams'];
+
+        if (strpos($teams, $team_token."|") !== false) {
+            return true;
+        }
+        return false;
+    }
+
+
+
+    /**
+     * Récupérer les teams assignés a un tableau
+     * 
+     * Va récupérer les équipes assignés a un tableau
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $project_token Token du projet
+     * @param string $tab_token Token du tableau
+     * @return array
+     */
+    function getTeamAssignedTab($project_token = '', $tab_token = ''){
+        $request = $this -> _db -> query("SELECT * FROM `pr_task_tab` WHERE `project_token` = '$project_token' AND `tab_token` = '$tab_token' AND `enable` = '1' ");
+        $res = $request->fetch();
+        $teams = $res['assigned_teams'];
+
+        $allTeams = array();
+        if (strpos($teams, "|") !== false) {
+            $allTeams = explode('|', $teams);
+        }
+        return ([ 
+            'count' => sizeof($allTeams), 
+            'content' => $allTeams,
+        ]);
+    }
+
+
+    /**
+     * Assigner un tableau a des membres
+     * 
+     * Va assigner un tableau a des membres
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $project_token Token du projet
+     * @param string $tab_token Token du tableau
+     * @param string $assigned_teams Les membres assignés
+     * @return array
+     */
+
+    function tabAssignMember($project_token = '', $tab_token = '', $assigned_members = '') {
+        if($assigned_members !== ''){
+            $members = '';
+            foreach($assigned_members as $member){ 
+                $members .= $member.'|';
+            }
+            $request = $this -> _db -> exec("UPDATE `pr_task_tab` SET `assigned_members` = '$members' WHERE `project_token` = '$project_token' AND `tab_token` = '$tab_token' AND `enable` = '1' ");
+        }else{
+            $request = $this -> _db -> exec("UPDATE `pr_task_tab` SET `assigned_members` = '' WHERE `project_token` = '$project_token' AND `tab_token` = '$tab_token' AND `enable` = '1' ");
+
+        }
+    }
+
+
+
+    /**
+     * Vérifier qu'un tableau est assignée a un membre
+     * 
+     * Va vérifier si un tableau est assignée a un membre donnée
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $project_token Token du projet
+     * @param string $tab_token Token du tableau
+     * @param string $team_token Token de l'utilisateur
+     * @return array
+     */
+    function tabMemberIsAssigned($project_token, $tab_token, $user_token){
+        $request = $this -> _db -> query("SELECT * FROM `pr_task_tab` WHERE `project_token` = '$project_token' AND `tab_token` = '$tab_token' AND `enable` = '1' ");
+        $res = $request->fetch();
+        $users = $res['assigned_members'];
+
+        if (strpos($users, $user_token."|") !== false) {
+            return true;
+        }
+        return false;
+    }
+    
+
+
+    /**
+     * Récupérer les membres assignés a un tableau
+     * 
+     * Va récupérer les membres assignés a un tableau
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $project_token Token du projet
+     * @param string $tab_token Token du tableau
+     * @return array
+     */
+    function getMemberassignedTab($project_token = '', $tab_token = ''){
+        $request = $this -> _db -> query("SELECT * FROM `pr_task_tab` WHERE `project_token` = '$project_token' AND `tab_token` = '$tab_token' AND `enable` = '1' ");
+        $res = $request->fetch();
+        $users = $res['assigned_members'];
+
+        $allUsers = array();
+        if (strpos($users, "|") !== false) {
+            $allUsers = explode('|', $users);
+        }
+        return ([ 
+            'count' => sizeof($allUsers), 
+            'content' => $allUsers,
+        ]);
+    }
  
 /******************************************************************************/
 
@@ -343,7 +505,7 @@ class task extends project {
      * @return array
      */
     function getTeamAssigned($project_token = '', $task_token = ''){
-        $request = $this -> _db -> query("SELECT * FROM `pr_task_item` WHERE `project_token` = '$project_token' AND `task_token` = '$task_token' AND `enable` = '1' ");
+        $request = $this -> _db -> query("SELECT * FROM `pr_task_item` WHERE `project_token` = '$project_token' AND `task_token` = '$task_token' AND `date_end` IS NULL AND `enable` = '1' ");
         $res = $request->fetch();
         $teams = $res['assigned_teams'];
 
@@ -423,7 +585,7 @@ class task extends project {
      * @return array
      */
     function getMemberassigned($project_token = '', $task_token = ''){
-        $request = $this -> _db -> query("SELECT * FROM `pr_task_item` WHERE `project_token` = '$project_token' AND `task_token` = '$task_token' AND `enable` = '1' ");
+        $request = $this -> _db -> query("SELECT * FROM `pr_task_item` WHERE `project_token` = '$project_token' AND `task_token` = '$task_token' AND `date_end` IS NULL AND `enable` = '1' ");
         $res = $request->fetch();
         $users = $res['assigned_members'];
 

@@ -72,6 +72,72 @@
             </div>
         </div>
     </div>
+    
+    <div class="content light-border p-3 mr-top">
+        <div class="heading mr-bot"> <span class="color-dark text-sm">Vos tableaux assignées</span> </div>
+        <div class="body assigned_task-cont">
+            <div class="row">
+                <div class="col-md-6 col-12 assigned_part">
+                    <h3 class="color-dark text-sm">En équipes</h3>
+
+                    <ul class="pt-3">
+                        <?php
+                        foreach($taskTabs['content'] as $tab){
+                            $allMembersAssigned = $task -> getTeamassignedTab($router -> getRouteParam('2'), $tab['tab_token']);
+                                
+                            foreach($allMembersAssigned['content'] as $ms){
+                                if($projectTeam -> memberHasTeam($ms, $main -> getToken()) == true){
+                                    ?> 
+                                        <li>
+                                            <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/gestion-projet">
+                                                <div class="pt-3 pb-3 container light-border mr-bot">
+                                                    <div class="row">
+                                                        <div class="col-10"> <i data-feather="check-circle" class="color-primary"></i> <span class="text-sm"><?= $utils -> getData('pr_task_tab', 'name', 'tab_token', $tab['tab_token'] ) ?></span> </div>
+                                                        <div class="col-2 text-align-right"> <i data-feather="help-circle" class="color-dark"></i> </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li> 
+                                    <?php
+                                }
+                            }
+
+                        }
+                        ?>
+                    </ul>
+                </div>
+                <div class="col-md-6 col-12 assigned_part">
+                    <h3 class="color-dark text-sm">En solo</h3> 
+
+                    <ul class="pt-3">
+                        <?php
+                        foreach($taskTabs['content'] as $tab){
+                            $allMembersAssigned = $task -> getMemberassignedTab($router -> getRouteParam('2'), $tab['tab_token']);
+                            
+                            foreach($allMembersAssigned['content'] as $ms){
+                                if($ms == $main -> getToken()){
+                                    ?> 
+                                        <li>
+                                            <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/gestion-projet">
+                                                <div class="pt-3 pb-3 container light-border mr-bot">
+                                                    <div class="row">
+                                                        <div class="col-10"> <i data-feather="check-circle" class="color-primary"></i> <span class="text-sm"><?= $utils -> getData('pr_task_tab', 'name', 'tab_token', $tab['tab_token'] ) ?></span> </div>
+                                                        <div class="col-2 text-align-right"> <i data-feather="help-circle" class="color-dark"></i> </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li> 
+                                    <?php
+                                }
+                            }
+
+                        }
+                        ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="col-lg-4 col-md-6 col-12 zone_item">
