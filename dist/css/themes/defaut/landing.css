@@ -11,8 +11,8 @@
 
 /* Partie Home - Partners */
 .home_partners .partners-content {padding: 1vh 0 3vh;}
-.home_partners img {transition-duration: .5s;width: 80%}
-.home_partners img:hover {transform: scale(1.07);transition-duration: .5s}
+.home_partners .partner-item {transition-duration: .5s;width: 80%}
+.home_partners .partner-item:hover {transform: scale(1.07);transition-duration: .5s}
 
 
 /* Partie Home - Head Presentation */

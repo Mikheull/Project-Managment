@@ -23,9 +23,9 @@
                 <div class="container">
                     <h3 class="title-sm bold color-dark mr-bot-lg mr-top-lg">Ils nous font confiance</h3>
                     <div class="row justify-content-around">
-                        <div class="col"> <img src="dist/images/content/logos/netflix.svg" alt="" height="64px"> </div>
-                        <div class="col"> <img src="dist/images/content/logos/tesla.svg" alt="" height="64px"> </div>
-                        <div class="col"> <img src="dist/images/content/logos/facebook.svg" alt="" height="64px"> </div>
+                        <div class="col partner-item" style="height:64px ;background-image: url('dist/images/content/logos/netflix.svg');background-size: contain;background-repeat: no-repeat; background-position: center"> </div>
+                        <div class="col partner-item" style="height:64px ;background-image: url('dist/images/content/logos/tesla.svg');background-size: contain;background-repeat: no-repeat; background-position: center"> </div>
+                        <div class="col partner-item" style="height:64px ;background-image: url('dist/images/content/logos/facebook.svg');background-size: contain;background-repeat: no-repeat; background-position: center"> </div>
                     </div>
                 </div>
             </div>
