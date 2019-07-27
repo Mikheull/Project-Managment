@@ -424,8 +424,6 @@ em {font-style: italic}
 .accordion .content {opacity: 0;padding: 0 1rem;max-height: 0;transition-duration: .2s;}
 .accordion .content.active {opacity: 1;padding: 1rem;max-height: 100%;transition-duration: .4s;}
 
-
-
 /* Typography
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 

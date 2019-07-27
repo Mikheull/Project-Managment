@@ -45,7 +45,7 @@
                     <div class="col-md-8 col-12 bg-light p-3 rounded">
                         <?php
                             if($utils -> getData('pr_user_research_affinity_diagram', 'need_approved', 'diagram_token', $router -> getRouteParam("1")) == true){
-                              ?><span class="text-xs color-red">Ce sondage requiert l'approbation des réponses par l'équipe</span><?php  
+                              ?><span class="text-xs color-red">Ce diagramme requiert l'approbation des réponses par l'équipe</span><?php  
                             }
                         ?>
                         <p><?= $utils -> getData('pr_user_research_affinity_diagram', 'topic', 'diagram_token', $router -> getRouteParam("1")) ?></p>
