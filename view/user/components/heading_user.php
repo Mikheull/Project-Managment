@@ -1,7 +1,7 @@
 <div>
     <div class="row">
         <div class="col-10 offset-1 mr-bot">
-            <div class="image_bloc" style="background-image: url('<?= $config -> rootUrl() ;?>dist/<?= $utils -> getData('imp_user', 'profil_image', 'public_token', $userToken ) == NULL ? 'images/content/defaut_profil_pic.jpg' : 'uploads/u/'. $userToken.'/profil_pic/'.$utils -> getData('imp_user', 'profil_image', 'public_token', $userToken ) ;?>');"></div>
+            <div class="image_bloc" style="background-image: url('<?= $config -> rootUrl() ;?>dist/<?= $utils -> getData('imp_user', 'profil_image', 'public_token', $userToken ) == NULL ? 'images/content/defaut_profil_pic.jpg' : 'uploads/u/'. $userToken.'/profil_pic/'.$utils -> getData('imp_user', 'profil_image', 'public_token', $userToken ) ;?>');background-size: contain;background-repeat: no-repeat;"></div>
         </div>
         <div class="col-10 offset-1 text-align-center">
             <h2 class="title-md bold color-dark">
