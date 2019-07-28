@@ -3,6 +3,7 @@
     require_once ('controller/task.php') ;
 
     $tabs = $task -> getTabs( $router -> getRouteParam('2') );
+    $project_token = $router -> getRouteParam('2');
 ?>
 
 

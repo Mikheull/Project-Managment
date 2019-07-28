@@ -440,6 +440,136 @@ class task extends project {
 
 
     /**
+     * Lance un timer 
+     * 
+     * Va lancer un timer pour une tache
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $project_token Token du projet
+     * @param string $task_token Token de la tache
+     * @return array
+     */
+
+    function launchTimer($project_token = '', $task_token = '') {
+        $user_token = main::getToken();
+        $this -> stopAllUserTimer($project_token, $task_token);
+
+        $req = $this -> _db -> prepare("INSERT INTO `pr_task_timer` (`project_token`, `task_token`, `user_token`) VALUES (:project_token, :task_token, :user_token)");
+
+        $req->bindParam(':project_token', $project_token);
+        $req->bindParam(':task_token', $task_token);
+        $req->bindParam(':user_token', $user_token);
+
+        $req->execute();
+        $count = $req->rowCount();
+
+        if($count !== 1){
+            return (['success' => false, 'options' => ['content' => "Une erreur est survenue !", 'theme' => 'error'] ]);
+        }
+    }
+
+
+
+    /**
+     * Arrete un timer 
+     * 
+     * Va arreter le dernier timer de l'user pour une tache
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $project_token Token du projet
+     * @param string $task_token Token de la tache
+     * @param string $time_duration Temps passé
+     * @return array
+     */
+
+    function stopTimer($project_token = '', $task_token = '', $time_duration = '') {
+        $user_token = main::getToken();
+        $request = $this -> _db -> exec("UPDATE `pr_task_timer` SET `date_end` = NOW(), `time_duration` = '$time_duration' WHERE `project_token` = '$project_token' AND `task_token` = '$task_token' AND `user_token` = '$user_token' AND `enable` = '1' ORDER BY ID DESC LIMIT 1");
+    }
+
+
+    /**
+     * Arrete les timers d'un user 
+     * 
+     * Va arreter les timers de taches d'un utilisateur
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $project_token Token du projet
+     * @param string $task_token Token de la tache
+     * @return array
+     */
+
+    function stopAllUserTimer($project_token = '', $task_token = '') {
+        $user_token = main::getToken();
+        $request = $this -> _db -> exec("UPDATE `pr_task_timer` SET `date_end` = NOW(), `time_duration` = '00:00:00' WHERE `project_token` = '$project_token' AND `task_token` = '$task_token' AND `user_token` = '$user_token' AND `enable` = '1' AND `date_end` IS NULL");
+    }
+
+
+    /**
+     * Récupérer le timer d'une tache
+     * 
+     * Va récupérer le timer d'une tache
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $project_token Token du projet
+     * @param string $task_token Token de la tache
+     * @return array
+     */
+    function getTaskTimer($project_token = '', $task_token = ''){
+        $request = $this -> _db -> query("SELECT * FROM `pr_task_timer` WHERE `project_token` = '$project_token' AND `task_token` = '$task_token' AND `date_end` IS NOT NULL AND `enable` = '1' ");
+        $res = $request->fetchAll();
+        $count = $request->rowCount();
+
+        $time = date("H:i:s", strtotime('00:00:00'));
+        if($count == 0){
+            return $time;
+        }else{
+            foreach($res as $t){
+                $time = date("H:i:s", strtotime($time) + strtotime($t['time_duration']) );
+            }
+            return $time;
+        }
+    }
+
+
+
+    /**
+     * Detecte si un timer est lancé pour un user
+     * 
+     * Va detecter si un timer est lancé pour un user et va retourner le task_token
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $project_token Token du projet
+     * @return array
+     */
+    function timerIsLaunched($project_token = ''){
+        $user_token = main::getToken();
+        $request = $this -> _db -> query("SELECT * FROM `pr_task_timer` WHERE `project_token` = '$project_token' AND `user_token` = '$user_token' AND `date_end` IS NULL AND `enable` = '1' ORDER BY ID DESC LIMIT 1");
+        $res = $request->fetch();
+        $count = $request->rowCount();
+
+        if($count == 0){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    function getLastTimer($project_token = ''){
+        $user_token = main::getToken();
+        $request = $this -> _db -> query("SELECT * FROM `pr_task_timer` WHERE `project_token` = '$project_token' AND `user_token` = '$user_token' AND `date_end` IS NULL AND `enable` = '1' ORDER BY ID DESC LIMIT 1");
+        $res = $request->fetch();
+
+        return $res['task_token'];
+    }
+
+    
+
+    /**
      * Assigner une tache a des équipe
      * 
      * Va assigner une tache a des équipe

@@ -57,6 +57,7 @@
     <?php if($config -> getConfigLib($exec_router['config_path'],'prism') == true){?> <script src="<?= $config -> rootUrl() ?>dist/js/prism.min.js"></script><?php } ;?>
     <?php if($config -> getConfigLib($exec_router['config_path'],'emojionearea') == true){?> <script src="https://cdn.jsdelivr.net/npm/emojionearea@3.4.1/dist/emojionearea.min.js"></script><?php } ;?>
     <?php if($config -> getConfigLib($exec_router['config_path'],'draggabilly') == true){?> <script src="https://cdn.jsdelivr.net/npm/draggabilly@2.2.0/dist/draggabilly.pkgd.min.js"></script><?php } ;?>
+    <?php if($config -> getConfigLib($exec_router['config_path'],'easytimer') == true){?> <script src="https://cdn.jsdelivr.net/npm/easytimer.js@4.0.1/dist/easytimer.min.js"></script><?php } ;?>
         
         
     <?php 

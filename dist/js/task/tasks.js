@@ -216,3 +216,54 @@ $(document).ready(function() {
     }
 
 });
+
+
+
+var timer = new easytimer.Timer();
+
+// Launch Timer
+$(document).on("click", "[data-action='launch-timer']", function(e) {
+
+    let ref = this.dataset.ref;
+    let project = this.dataset.pro;
+    $( this ).toggleClass( 'hidden' );
+    $( this ).next("[data-action='stop-timer']").toggleClass( 'hidden' );
+    $( this ).parent().next(".timer-content").toggleClass( 'hidden' );
+
+    $.ajax({
+        url:  rootUrl + 'controller/ajax/project/task/task_short-actions.php',
+        type: 'POST',
+        data: {task_token: ref, project_token: project, action: 'launch_timer'},
+        success:function(data){
+            $('#timer_output').html(data);
+        }
+    });
+
+    timer.stop();
+    timer.start();
+    timer.addEventListener('secondsUpdated', function (e) {
+        $('.timer-content').html(timer.getTimeValues().toString());
+    });
+});
+
+// Stop Timer
+$(document).on("click", "[data-action='stop-timer']", function(e) {
+
+    let ref = this.dataset.ref;
+    let project = this.dataset.pro;
+    let time = timer.getTimeValues().toString();
+    $( this ).toggleClass( 'hidden' );
+    $( this ).prev("[data-action='launch-timer']").toggleClass( 'hidden' );
+    $( this ).parent().next(".timer-content").toggleClass( 'hidden' );
+
+    $.ajax({
+        url:  rootUrl + 'controller/ajax/project/task/task_short-actions.php',
+        type: 'POST',
+        data: {task_token: ref, project_token: project, time: time, action: 'stop_timer'},
+        success:function(data){
+            $('#timer_output').html(data);
+        }
+    });
+
+    timer.stop();
+});

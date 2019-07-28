@@ -189,6 +189,16 @@
                         <a href="https://github.com/mervick/emojionearea" target="blank" title="Github de la librairie"><i data-feather="github"></i></a>
                     </div>
                 </div>
+                
+                <div class="col-md-2 col-12 text-align-center light-border mr-bot mr-left">
+                    <h5 class="bold color-dark mr-bot mr-top">EasyTimer</h5>
+                    <p class="color-lg-dark mr-bot-lg">Timer</p>
+                    <div class="mr-bot">
+                        <a href="http://albert-gonzalez.github.io/easytimer.js/" target="blank" title="Site de la librairie"><i data-feather="link"></i></a>
+                        <a href="https://github.com/albert-gonzalez/easytimer.js" target="blank" title="Github de la librairie"><i data-feather="github"></i></a>
+                    </div>
+                </div>
+                
             </div>
         </div>
         

@@ -51,6 +51,34 @@
 .btn:disabled {background: #313847 !important;color: #212733 !important;}
 .green-btn {background: var(--green-color);color: var(--light-background-color) !important}
 .green-btn:hover {background: var(--light-green-color);color: var(--light-background-color);}
+.btn-play {padding: 7.5px 10px 7.5px 15px;font-size: .9em;background: #fff2f2;color: #fe4142 !important;border-radius: 50%;}
+.btn-pause {padding: 7.5px 10px 7.5px 12px;font-size: .9em;background: #fe4142;color: #fff2f2 !important;border-radius: 50%;box-shadow: 0 0 0 rgba(254, 65, 66, 0.4);animation: pulse 1.5s infinite;}
+
+@-webkit-keyframes pulse {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 rgba(254, 65, 66, 0.4);
+  }
+  70% {
+      -webkit-box-shadow: 0 0 0 10px rgba(254, 65, 66, 0);
+  }
+  100% {
+      -webkit-box-shadow: 0 0 0 0 rgba(254, 65, 66, 0);
+  }
+}
+@keyframes pulse {
+  0% {
+    -moz-box-shadow: 0 0 0 0 rgba(254, 65, 66, 0.4);
+    box-shadow: 0 0 0 0 rgba(254, 65, 66, 0.4);
+  }
+  70% {
+      -moz-box-shadow: 0 0 0 10px rgba(254, 65, 66, 0);
+      box-shadow: 0 0 0 10px rgba(254, 65, 66, 0);
+  }
+  100% {
+      -moz-box-shadow: 0 0 0 0 rgba(254, 65, 66, 0);
+      box-shadow: 0 0 0 0 rgba(254, 65, 66, 0);
+  }
+}
 
 /* Links */
 a, a:link {color: var(--black-color)}

@@ -1,10 +1,14 @@
 <?php
+    if($task -> timerIsLaunched($project_token) == true){
+        echo $task -> getLastTimer($project_token);
+    } 
+
     foreach($tabs['content'] as $t){
         ?>
             <div class="tab-item light-border">
                 <div class="container">
                     <div class="row mr-top mr-bot">
-                        <div class="col-10"><h3 class="title-sm" id="tab_title-<?= $t['tab_token'] ?>" data-ref="<?= $t['tab_token'] ?>" contenteditable="true" data-pro="<?= $router -> getRouteParam('2') ?>"><?= $t['name'] ?></h3></div>
+                        <div class="col-10"><h3 class="title-sm"><?= $t['name'] ?></h3></div>
                         <div class="col-2 text-align-right"> <i class="fas fa-ellipsis-h" id="act-<?= $t['tab_token'] ?>"></i> </div>
                     </div>
 
@@ -23,7 +27,24 @@
                                     <div class="col-12 task_item" data-ref="<?= $task_item['task_token'] ?>">
                                         <div class="task_item_content container light-border mr-bot-lg <?= (!isset($task_item['date_end']) ? '' : 'ended') ;?>">
                                             <div class="row mr-top">
-                                                <div class="col"> <h4 class="text-sm"><?= $task_item['name'] ?></h4> </div>
+                                                <div class="col-12 flex"> 
+                                                    <?php
+                                                    if(!isset($task_item['date_end'])){
+                                                        ?> 
+                                                            <a class="btn-play link" data-action="launch-timer" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $project_token ?>"> <i class="fas fa-play"></i> </a>
+                                                            <a class="btn-pause link hidden" data-action="stop-timer" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $project_token ?>"> <i class="fas fa-pause"></i> </a>
+                                                            <h4 class="ml-2 mt-2 text-sm"><?= $task_item['name'] ?></h4>
+
+                                                        <?php
+                                                    }else{
+                                                        ?> 
+                                                        <h4 class="text-sm"><?= $task_item['name'] ?></h4> 
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                </div>
+                                                <div class="col-12 ml-2 mt-2 color-red hidden timer-content">Lancement du timer</div>
+                                                <div id="timer_output"></div>
                                             </div>
                                             <div class="row mr-top mr-bot">
                                                 <div class="col-10"> 
@@ -49,16 +70,17 @@
                                                     <div class="container light-border">
                                                         <div class="row mr-top mr-bot">
                                                             <div class="col-12">Durée prévue : <span class="color-lg-dark"><?= $task_item['duration'] ;?></span> </div>
+                                                            <div class="col-12">Durée : <span class="color-lg-dark"><?= $task -> getTaskTimer($project_token, $task_item['task_token']) ?></span> </div>
                                                             <div class="col-12 mr-top">Crée le : <span class="color-lg-dark"><?= date_format($date_creation, 'd/m/Y à H:i') ;?></span> </div>
                                                             <div class="col-12 mr-top">Fin prévu le : <span class="color-lg-dark"><?= date_format($date2, 'd/m/Y') ;?></span> </div>
                                                             <?php
                                                                 if(isset($task_item['date_end'])){
                                                                     $date_end = new DateTime( $task_item['date_end'] );
-                                                                    ?> <div class="col-12 mr-top">Terminée le : <span class="color-lg-dark"><?= date_format($date_end, 'd/m/Y à H:i') ;?></span> </div> <?php
+                                                                    ?> <div class="col-12">Terminée le : <span class="color-lg-dark"><?= date_format($date_end, 'd/m/Y à H:i') ;?></span> </div> <?php
                                                                 }
                                                                 
-                                                                $allTeamsAssigned = $task -> getTeamAssigned($router -> getRouteParam('2'), $task_item['task_token']);
-                                                                $allMembersAssigned = $task -> getMemberAssigned($router -> getRouteParam('2'), $task_item['task_token']);
+                                                                $allTeamsAssigned = $task -> getTeamAssigned($project_token, $task_item['task_token']);
+                                                                $allMembersAssigned = $task -> getMemberAssigned($project_token, $task_item['task_token']);
                                                                 
                                                                 if($allTeamsAssigned['count'] !== 0){
                                                                     ?> 
@@ -94,17 +116,17 @@
                                                                 <div>
                                                                     <?php
                                                                     if(!isset($task_item['date_end'])){
-                                                                        ?> <div class="btn btn-sm primary-btn" data-action="close_task" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>"><i data-feather="eye-off"></i> Terminer</div> <?php
+                                                                        ?> <div class="btn btn-sm primary-btn" data-action="close_task" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $project_token ?>"><i data-feather="eye-off"></i> Terminer</div> <?php
                                                                     }else{
-                                                                        ?> <div class="btn btn-sm primary-btn" data-action="reopen_task" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>"><i data-feather="eye"></i> Réouvrir</div> <?php
+                                                                        ?> <div class="btn btn-sm primary-btn" data-action="reopen_task" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $project_token ?>"><i data-feather="eye"></i> Réouvrir</div> <?php
                                                                     }
                                                                     ?>
                                                                 </div>
 
                                                                 <div class="flex">
-                                                                    <div class="btn btn-sm light-btn-bordered mr-right" data-action="assign_task" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>"><i data-feather="user-plus"></i></div>
-                                                                    <div class="btn btn-sm light-btn-bordered mr-right" data-action="edit_task" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>"><i data-feather="edit"></i></div>
-                                                                    <div class="btn btn-sm red-btn" data-action="delete_task" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>"><i data-feather="trash-2"></i></div>
+                                                                    <div class="btn btn-sm light-btn-bordered mr-right" data-action="assign_task" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $project_token ?>"><i data-feather="user-plus"></i></div>
+                                                                    <div class="btn btn-sm light-btn-bordered mr-right" data-action="edit_task" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $project_token ?>"><i data-feather="edit"></i></div>
+                                                                    <div class="btn btn-sm red-btn" data-action="delete_task" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $project_token ?>"><i data-feather="trash-2"></i></div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -121,7 +143,7 @@
 
 
                     <div class="row">
-                        <div class="col-6 offset-3 btn light-btn-bordered half-width color-primary text-align-center new-task" data-pro="<?= $router -> getRouteParam('2') ?>" data-tab="<?= $t['tab_token'] ?>"><i data-feather="plus-circle"></i> Nouvelle tache</div>
+                        <div class="col-6 offset-3 btn light-btn-bordered half-width color-primary text-align-center new-task" data-pro="<?= $project_token ?>" data-tab="<?= $t['tab_token'] ?>"><i data-feather="plus-circle"></i> Nouvelle tache</div>
                     </div>
                 </div>
             </div>
@@ -131,42 +153,22 @@
 
             <div id="tp-<?= $t['tab_token'] ?>" class="hidden">
                 <ul class="mr-top text-align-left">
-                    <li> <a data-action="tab-rename" data-ref="<?= $t['tab_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>" class="link dark-link">Renommer</a> </li>
-                    <li> <a data-action="tab-assign" data-ref="<?= $t['tab_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>" class="link dark-link">Assigner le tableau</a> </li>
-                    <li> <a data-action="tab-export" data-ref="<?= $t['tab_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>" class="link dark-link">Exporter le tableau</a> </li>
-                    <li> <a data-action="tab-delete" data-ref="<?= $t['tab_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>" class="link red-link">Supprimer</a> </li>
+                    <li> <a data-action="tab-rename" data-ref="<?= $t['tab_token'] ?>" data-pro="<?= $project_token ?>" class="link dark-link">Renommer</a> </li>
+                    <li> <a data-action="tab-assign" data-ref="<?= $t['tab_token'] ?>" data-pro="<?= $project_token ?>" class="link dark-link">Assigner le tableau</a> </li>
+                    <li> <a data-action="tab-export" data-ref="<?= $t['tab_token'] ?>" data-pro="<?= $project_token ?>" class="link dark-link">Exporter le tableau</a> </li>
+                    <li> <a data-action="tab-delete" data-ref="<?= $t['tab_token'] ?>" data-pro="<?= $project_token ?>" class="link red-link">Supprimer</a> </li>
                 </ul>
             </div>
 
             <script>
                 var template = document.getElementById('tp-<?= $t['tab_token'] ?>')
                 tippy('#act-<?= $t['tab_token'] ?>', { content: template.innerHTML, animation: 'fade', theme: 'light-border', interactive: true, placement: 'bottom', arrowType: 'round', arrow: true, })
-                
-
-                let defautTabName_<?= $t['tab_token'] ?> = $( '#tab_title-<?= $t['tab_token'] ?>' ).html();
-                
-                $(document).on("focusout", "#tab_title-<?= $t['tab_token'] ?>", function(e) {
-                    if($( '#tab_title-<?= $t['tab_token'] ?>' ).html() !== defautTabName_<?= $t['tab_token'] ?>){
-                        defautTabName_<?= $t['tab_token'] ?> = $( '#tab_title-<?= $t['tab_token'] ?>' ).html();
-                        let ref = this.dataset.ref;
-                        let project = this.dataset.pro;
-                    
-                        $.ajax({
-                            url:  rootUrl + 'controller/ajax/project/task/tabs_short-actions.php',
-                            type: 'POST',
-                            data: {result: defautTabName_<?= $t['tab_token'] ?>, tab_token: ref, project_token: project, action: 'rename'},
-                            success:function(data){
-                                $('#tab_output').html(data);
-                            }
-                        });
-                    }
-                });
             </script>
         <?php
     }
 ?>
 <div class="tab-item">
-    <div class="btn primary-btn full-width text-align-center" id="new-tab" data-pro="<?= $router -> getRouteParam('2') ?>"><i data-feather="plus-circle"></i> Nouveau tableau</div>
+    <div class="btn primary-btn full-width text-align-center" id="new-tab" data-pro="<?= $project_token ?>"><i data-feather="plus-circle"></i> Nouveau tableau</div>
 </div>
 
 
@@ -208,7 +210,7 @@ $(document).on("click", "[data-action='assign_task']", function(e) {
                 className: 'btn dark-btn',
             }
         },
-        message: '<div class="row"> <div class="mr-bot-lg col-12"> <h3 class="text-sm color-dark mr-bot mr-top">Assigner des équipes</h3> <?php require_once ("controller/projectTeam.php"); $teams=$projectTeam -> getTeams( $router -> getRouteParam("2") ); foreach($teams["content"] as $t){?> <div class="tg-list-item flex mr-bot"> <div class="mr-right"> <input class="tgl tgl-light" name="assigned_teams" value="<?=$t["public_token"] ;?>" id="<?=$t["public_token"] ;?>" type="checkbox"/> <label class="tgl-btn" for="<?=$t["public_token"] ;?>"></label> </div><div> <small><?=$t["name"] ;?></small> </div></div><?php } ?> </div><div class="col-12"> <h3 class="text-sm color-dark mr-bot mr-top">Assigner des membres</h3> <?php require_once ("controller/project.php"); $teams=$project -> getProjectMembers( $router -> getRouteParam("2") ); foreach($teams["content"] as $t){?> <div class="tg-list-item flex mr-bot"> <div class="mr-right"> <input class="tgl tgl-light" name="assigned_members" value="<?=$t["user_public_token"] ;?>" id="<?=$t["user_public_token"] ;?>" type="checkbox"/> <label class="tgl-btn" for="<?=$t["user_public_token"] ;?>"></label> </div><div> <small><?=$utils -> getData('imp_user', 'username', 'public_token', $t["user_public_token"] ) ;?></small> </div></div><?php } ?> </div></div>',
+        message: '<div class="row"> <div class="mr-bot-lg col-12"> <h3 class="text-sm color-dark mr-bot mr-top">Assigner des équipes</h3> <?php require_once ("controller/projectTeam.php"); $teams=$projectTeam -> getTeams( $project_token ); foreach($teams["content"] as $t){?> <div class="tg-list-item flex mr-bot"> <div class="mr-right"> <input class="tgl tgl-light" name="assigned_teams" value="<?=$t["public_token"] ;?>" id="<?=$t["public_token"] ;?>" type="checkbox"/> <label class="tgl-btn" for="<?=$t["public_token"] ;?>"></label> </div><div> <small><?=$t["name"] ;?></small> </div></div><?php } ?> </div><div class="col-12"> <h3 class="text-sm color-dark mr-bot mr-top">Assigner des membres</h3> <?php require_once ("controller/project.php"); $teams=$project -> getProjectMembers( $project_token ); foreach($teams["content"] as $t){?> <div class="tg-list-item flex mr-bot"> <div class="mr-right"> <input class="tgl tgl-light" name="assigned_members" value="<?=$t["user_public_token"] ;?>" id="<?=$t["user_public_token"] ;?>" type="checkbox"/> <label class="tgl-btn" for="<?=$t["user_public_token"] ;?>"></label> </div><div> <small><?=$utils -> getData('imp_user', 'username', 'public_token', $t["user_public_token"] ) ;?></small> </div></div><?php } ?> </div></div>',
         
     });
 });
@@ -249,7 +251,7 @@ $(document).on("click", "[data-action='tab-assign']", function(e) {
                 className: 'btn dark-btn',
             }
         },
-        message: '<div class="row"> <div class="mr-bot-lg col-12"> <h3 class="text-sm color-dark mr-bot mr-top">Assigner des équipes</h3> <?php require_once ("controller/projectTeam.php"); $teams=$projectTeam -> getTeams( $router -> getRouteParam("2") ); foreach($teams["content"] as $t){?> <div class="tg-list-item flex mr-bot"> <div class="mr-right"> <input class="tgl tgl-light" name="assigned_teams" value="<?=$t["public_token"] ;?>" id="<?=$t["public_token"] ;?>" type="checkbox"/> <label class="tgl-btn" for="<?=$t["public_token"] ;?>"></label> </div><div> <small><?=$t["name"] ;?></small> </div></div><?php } ?> </div><div class="col-12"> <h3 class="text-sm color-dark mr-bot mr-top">Assigner des membres</h3> <?php require_once ("controller/project.php"); $teams=$project -> getProjectMembers( $router -> getRouteParam("2") ); foreach($teams["content"] as $t){?> <div class="tg-list-item flex mr-bot"> <div class="mr-right"> <input class="tgl tgl-light" name="assigned_members" value="<?=$t["user_public_token"] ;?>" id="<?=$t["user_public_token"] ;?>" type="checkbox"/> <label class="tgl-btn" for="<?=$t["user_public_token"] ;?>"></label> </div><div> <small><?=$utils -> getData('imp_user', 'username', 'public_token', $t["user_public_token"] ) ;?></small> </div></div><?php } ?> </div></div>',
+        message: '<div class="row"> <div class="mr-bot-lg col-12"> <h3 class="text-sm color-dark mr-bot mr-top">Assigner des équipes</h3> <?php require_once ("controller/projectTeam.php"); $teams=$projectTeam -> getTeams( $project_token ); foreach($teams["content"] as $t){?> <div class="tg-list-item flex mr-bot"> <div class="mr-right"> <input class="tgl tgl-light" name="assigned_teams" value="<?=$t["public_token"] ;?>" id="<?=$t["public_token"] ;?>" type="checkbox"/> <label class="tgl-btn" for="<?=$t["public_token"] ;?>"></label> </div><div> <small><?=$t["name"] ;?></small> </div></div><?php } ?> </div><div class="col-12"> <h3 class="text-sm color-dark mr-bot mr-top">Assigner des membres</h3> <?php require_once ("controller/project.php"); $teams=$project -> getProjectMembers( $project_token ); foreach($teams["content"] as $t){?> <div class="tg-list-item flex mr-bot"> <div class="mr-right"> <input class="tgl tgl-light" name="assigned_members" value="<?=$t["user_public_token"] ;?>" id="<?=$t["user_public_token"] ;?>" type="checkbox"/> <label class="tgl-btn" for="<?=$t["user_public_token"] ;?>"></label> </div><div> <small><?=$utils -> getData('imp_user', 'username', 'public_token', $t["user_public_token"] ) ;?></small> </div></div><?php } ?> </div></div>',
         
     });
 });

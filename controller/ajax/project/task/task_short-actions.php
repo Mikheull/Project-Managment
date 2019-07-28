@@ -128,11 +128,29 @@ if($action == 'assign_task'){
     }else{
         $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
     }
-
     
     ?> <script> location.reload(); </script> <?php
 }
 
+
+if($action == 'launch_timer'){
+    if($permission -> hasPermission($main -> getToken(), $project_token, 'task.edit')){
+        $errors = $task -> launchTimer($project_token, $task_token);
+
+    }else{
+        $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
+    }
+}
+
+if($action == 'stop_timer'){
+    if($permission -> hasPermission($main -> getToken(), $project_token, 'task.edit')){
+        if(isset($_POST['time'])){ $time = $_POST['time']; }
+        $errors = $task -> stopTimer($project_token, $task_token, $time);
+
+    }else{
+        $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
+    }
+}
 
 
 
