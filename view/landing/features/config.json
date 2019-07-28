@@ -32,7 +32,8 @@
     ],
     
     "js":[
-        "modernizr.min.js"
+        "modernizr.min.js",
+        "landing.min.js"
     ]
 
 }

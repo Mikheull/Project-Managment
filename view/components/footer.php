@@ -25,6 +25,7 @@
                 <ul>
                     <li> <a href="<?= $config -> rootUrl() ;?>features#gestion-de-projet" title="Outil Gestion de projet">Gestion de projet</a> </li>
                     <li> <a href="<?= $config -> rootUrl() ;?>features#gestion-equipe" title="Outil Gestion d’équipe">Gestion d’équipe</a> </li>
+                    <li> <a href="<?= $config -> rootUrl() ;?>features#messenger" title="Outil Messagenger">Messenger</a> </li>
                     <li> <a href="<?= $config -> rootUrl() ;?>features#calendrier" title="Outil Calendrier">Calendrier</a> </li>
                     <li> <a href="<?= $config -> rootUrl() ;?>features#uml" title="Outil UML">UML</a> </li>
                     <li> <a href="<?= $config -> rootUrl() ;?>features#recherche-utilisateur" title="Outil Recherche utilisateur">Recherche utilisateur</a> </li>
