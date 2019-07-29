@@ -1,3 +1,5 @@
+<div id="popup-task-wrapper" class="hidden"></div>
+
 <?php
     
     foreach($tabs['content'] as $t){
@@ -22,7 +24,7 @@
                                 
                                 ?>
                                     <div class="col-12 task_item" data-ref="<?= $task_item['task_token'] ?>">
-                                        <div class="task_item_content container light-border mr-bot-lg <?= (!isset($task_item['date_end']) ? '' : 'ended') ;?>">
+                                        <div class="task_item_content container light-gray-border mr-bot-lg <?= (!isset($task_item['date_end']) ? '' : 'ended') ;?>">
                                             <div class="row mr-top">
                                                 <div class="col-12 flex"> 
                                                     <?php
@@ -69,74 +71,7 @@
                                                         }
                                                     ?>
                                                 </div>
-                                                <div class="col-2 text-align-right expand_btn link"><i class="fas fa-chevron-down"></i></div>
-                                                
-                                                <div class="col mr-top expand_content hidden">
-                                                    <div class="container light-border">
-                                                        <div class="row mr-top mr-bot">
-                                                            <div class="col-12">Durée prévue : <span class="color-lg-dark"><?= $task_item['duration'] ;?></span> </div>
-                                                            <div class="col-12">Durée : <span class="color-lg-dark"><?= $task -> getTaskTimer($project_token, $task_item['task_token']) ?></span> </div>
-                                                            <div class="col-12 mr-top">Crée le : <span class="color-lg-dark"><?= date_format($date_creation, 'd/m/Y à H:i') ;?></span> </div>
-                                                            <div class="col-12 mr-top">Fin prévu le : <span class="color-lg-dark"><?= date_format($date2, 'd/m/Y') ;?></span> </div>
-                                                            <?php
-                                                                if(isset($task_item['date_end'])){
-                                                                    $date_end = new DateTime( $task_item['date_end'] );
-                                                                    ?> <div class="col-12">Terminée le : <span class="color-lg-dark"><?= date_format($date_end, 'd/m/Y à H:i') ;?></span> </div> <?php
-                                                                }
-                                                                
-                                                                $allTeamsAssigned = $task -> getTeamAssigned($project_token, $task_item['task_token']);
-                                                                $allMembersAssigned = $task -> getMemberAssigned($project_token, $task_item['task_token']);
-                                                                
-                                                                if($allTeamsAssigned['count'] !== 0){
-                                                                    ?> 
-                                                                    <div class="col-12 mr-top">
-                                                                        Équipes assignées :
-                                                                        <ul>
-                                                                            <?php 
-                                                                            foreach($allTeamsAssigned['content'] as $ts){
-                                                                                ?> <li class="color-lg-dark mr-left"><?= $utils -> getData('pr_project_team', 'name', 'public_token', $ts ) ?></li> <?php
-                                                                            }
-                                                                            ?> 
-                                                                        </ul>
-                                                                    </div> 
-                                                                    <?php
-                                                                }
-                                                                if($allMembersAssigned['count'] !== 0){
-                                                                    ?> 
-                                                                    <div class="col-12 mr-top">
-                                                                        Membres assignés :
-                                                                        <ul>
-                                                                            <?php 
-                                                                            foreach($allMembersAssigned['content'] as $ms){
-                                                                                ?> <li class="color-lg-dark mr-left"><?= $utils -> getData('imp_user', 'username', 'public_token', $ms ) ?></li> <?php
-                                                                            }
-                                                                            ?> 
-                                                                        </ul>
-                                                                    </div> 
-                                                                    <?php
-                                                                }
-                                                            ?>
-                                                            
-                                                            <div class="col-12 flex mr-top flex justify-content-between">
-                                                                <div>
-                                                                    <?php
-                                                                    if(!isset($task_item['date_end'])){
-                                                                        ?> <div class="btn btn-sm primary-btn" data-action="close_task" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $project_token ?>"><i data-feather="eye-off"></i> Terminer</div> <?php
-                                                                    }else{
-                                                                        ?> <div class="btn btn-sm primary-btn" data-action="reopen_task" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $project_token ?>"><i data-feather="eye"></i> Réouvrir</div> <?php
-                                                                    }
-                                                                    ?>
-                                                                </div>
-
-                                                                <div class="flex">
-                                                                    <div class="btn btn-sm light-btn-bordered mr-right" data-action="assign_task" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $project_token ?>"><i data-feather="user-plus"></i></div>
-                                                                    <div class="btn btn-sm light-btn-bordered mr-right" data-action="edit_task" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $project_token ?>"><i data-feather="edit"></i></div>
-                                                                    <div class="btn btn-sm red-btn" data-action="delete_task" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $project_token ?>"><i data-feather="trash-2"></i></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <div id="popup-task-btn" class="col-2 text-align-right link" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $project_token ?>"> <i data-feather="maximize" class="color-lg-dark"></i> </div>
                                             </div>
                                         </div>
                                         
@@ -182,8 +117,9 @@
 
 // Assign task
 $(document).on("click", "[data-action='assign_task']", function(e) {
-    let ref = this.dataset.ref;
-    let project = this.dataset.pro;
+    var ctx = document.getElementById("task-if");
+    var ref = ctx.getAttribute("data-ref")
+    var project = ctx.getAttribute("data-pro")
 
     bootbox.dialog({
         backdrop: true,
@@ -223,8 +159,9 @@ $(document).on("click", "[data-action='assign_task']", function(e) {
 
 // Assign tab
 $(document).on("click", "[data-action='tab-assign']", function(e) {
-    let ref = this.dataset.ref;
-    let project = this.dataset.pro;
+    var ctx = document.getElementById("task-if");
+    var ref = ctx.getAttribute("data-ref")
+    var project = ctx.getAttribute("data-pro")
 
     bootbox.dialog({
         backdrop: true,

@@ -536,6 +536,29 @@ class task extends project {
     }
 
 
+    /**
+     * Récupérer les timer d'une tache
+     * 
+     * Va récupérer les timer d'une tache
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $project_token Token du projet
+     * @param string $task_token Token de la tache
+     * @return array
+     */
+    function getAllTasksTimers($project_token = '', $task_token = ''){
+        $request = $this -> _db -> query("SELECT * FROM `pr_task_timer` WHERE `project_token` = '$project_token' AND `task_token` = '$task_token' AND `date_end` IS NOT NULL AND `enable` = '1' ");
+        $res = $request->fetchAll();
+        $count = $request->rowCount();
+
+        return ([ 
+            'count' => $count, 
+            'content' => $res,
+        ]);
+    }
+
+
 
     /**
      * Detecte si un timer est lancé pour un user

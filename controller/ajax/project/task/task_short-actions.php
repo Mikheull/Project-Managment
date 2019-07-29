@@ -154,6 +154,12 @@ if($action == 'stop_timer'){
 
 
 
+if($action == 'popup-task'){
+    require ('../../../../view/app/project/tools/gestion-projet/home/components/overlay-task-info.php');
+}
+
+
+
 if(isset($errors)){
     ?>
     <script>

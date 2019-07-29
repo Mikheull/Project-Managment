@@ -1,5 +1,7 @@
-feather.replace()
 
+$(document).ready(function() {
+    feather.replace()
+});
 
 
 const rootUrl = 'http://localhost:8888/Improove/';

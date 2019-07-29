@@ -1,6 +1,5 @@
 
 
-
 // NEW
 $(document).on("click", ".new-task", function(e) {
     let ref = this.dataset.pro;
@@ -42,8 +41,9 @@ $(document).on("click", ".new-task", function(e) {
 
 // Edit
 $(document).on("click", "[data-action='edit_task']", function(e) {
-    let ref = this.dataset.ref;
-    let project = this.dataset.pro;
+    var ctx = document.getElementById("task-if");
+    var ref = ctx.getAttribute("data-ref")
+    var project = ctx.getAttribute("data-pro")
 
     bootbox.dialog({
         backdrop: true,
@@ -84,8 +84,9 @@ $(document).on("click", "[data-action='edit_task']", function(e) {
 // Suppression
 $(document).on("click", "[data-action='delete_task']", function(e) {
     event.preventDefault();
-    let ref = this.dataset.ref;
-    let project = this.dataset.pro;
+    var ctx = document.getElementById("task-if");
+    var ref = ctx.getAttribute("data-ref")
+    var project = ctx.getAttribute("data-pro")
 
     bootbox.confirm({
         backdrop: true,
@@ -121,8 +122,9 @@ $(document).on("click", "[data-action='delete_task']", function(e) {
 // Clore
 $(document).on("click", "[data-action='close_task']", function(e) {
     event.preventDefault();
-    let ref = this.dataset.ref;
-    let project = this.dataset.pro;
+    var ctx = document.getElementById("task-if");
+    var ref = ctx.getAttribute("data-ref")
+    var project = ctx.getAttribute("data-pro")
 
     bootbox.confirm({
         backdrop: true,
@@ -158,8 +160,9 @@ $(document).on("click", "[data-action='close_task']", function(e) {
 // Re-open
 $(document).on("click", "[data-action='reopen_task']", function(e) {
     event.preventDefault();
-    let ref = this.dataset.ref;
-    let project = this.dataset.pro;
+    var ctx = document.getElementById("task-if");
+    var ref = ctx.getAttribute("data-ref")
+    var project = ctx.getAttribute("data-pro")
 
     bootbox.confirm({
         backdrop: true,
@@ -190,6 +193,57 @@ $(document).on("click", "[data-action='reopen_task']", function(e) {
         }
     });
 });
+
+
+
+// Open popup task
+$(document).on('click', '#popup-task-btn', function() {
+    let ref = this.dataset.ref;
+    let project = this.dataset.pro;
+    console.log('launch');
+    console.log(ref, project);
+    $( '#popup-task-wrapper' ).toggleClass( 'hidden' );
+    
+    $.ajax({
+        url:  rootUrl + 'controller/ajax/project/task/task_short-actions.php',
+        type: 'POST',
+        data: {task_token: ref, project_token: project, action: 'popup-task'},
+        success:function(data){
+            console.log('success');
+            $('#popup-task-wrapper').html(data);
+        }
+    });
+
+});
+$(document).ready(function() {
+    $(document).on("click", "#close-task-popup", function(e) {
+        $( '#popup-task-wrapper' ).empty();
+        $( '#popup-task-wrapper' ).toggleClass( 'hidden' );
+    });
+});
+$(document).bind('keydown', function(e) {
+    if(e.which == 27) {
+        if ( $( "#popup-task-wrapper #task-if" ).length ) {
+            e.preventDefault();
+            $( '#popup-task-wrapper' ).empty();
+            $( '#popup-task-wrapper' ).toggleClass( 'hidden' );
+        }
+        return false;
+    }
+});
+
+$(document).on('click', '.head_menu li', function() {
+    $( '.head_menu li').removeClass( 'active' );
+    $( this ).addClass( 'active' );
+
+    let page = this.dataset.page;
+    $( '.page_el').removeClass( 'hidden' );
+    $( '.page_el').toggleClass( 'hidden' );
+    $( '.page_el#'+page).toggleClass( 'hidden' );
+
+});
+
+
 
 
 
