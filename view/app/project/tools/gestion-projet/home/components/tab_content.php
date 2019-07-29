@@ -27,12 +27,20 @@
                                                 <div class="col-12 flex"> 
                                                     <?php
                                                     if(!isset($task_item['date_end'])){
-                                                        ?> 
-                                                            <a class="btn-play link" data-action="launch-timer" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $project_token ?>"> <i class="fas fa-play"></i> </a>
-                                                            <a class="btn-pause link hidden" data-action="stop-timer" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $project_token ?>"> <i class="fas fa-pause"></i> </a>
-                                                            <h4 class="ml-2 mt-2 text-sm"><?= $task_item['name'] ?></h4>
-
-                                                        <?php
+                                                        if($task -> timerIsLaunched($project_token) == true){
+                                                            if($task_timer_token == $task_item['task_token']){
+                                                                ?> 
+                                                                    <a class="btn-pause link"> <i class="fas fa-pause"></i> </a>
+                                                                    <h4 class="ml-2 mt-2 text-sm"><?= $task_item['name'] ?></h4>
+                                                                <?php
+                                                            }
+                                                        }else{
+                                                            ?> 
+                                                                <a class="btn-play link" data-action="launch-timer" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $project_token ?>"> <i class="fas fa-play"></i> </a>
+                                                                <a class="btn-pause link hidden" data-action="stop-timer" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $project_token ?>"> <i class="fas fa-pause"></i> </a>
+                                                                <h4 class="ml-2 mt-2 text-sm"><?= $task_item['name'] ?></h4>
+                                                            <?php
+                                                        }
                                                     }else{
                                                         ?> 
                                                         <h4 class="text-sm"><?= $task_item['name'] ?></h4> 

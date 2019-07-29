@@ -226,9 +226,10 @@ $(document).on("click", "[data-action='launch-timer']", function(e) {
 
     let ref = this.dataset.ref;
     let project = this.dataset.pro;
-    $( this ).toggleClass( 'hidden' );
+    $( '.btn-play' ).hide();
     $( this ).next("[data-action='stop-timer']").toggleClass( 'hidden' );
     $( this ).parent().next(".timer-content").toggleClass( 'hidden' );
+
 
     $.ajax({
         url:  rootUrl + 'controller/ajax/project/task/task_short-actions.php',
@@ -252,8 +253,8 @@ $(document).on("click", "[data-action='stop-timer']", function(e) {
     let ref = this.dataset.ref;
     let project = this.dataset.pro;
     let time = timer.getTimeValues().toString();
+    $( '.btn-play' ).show();
     $( this ).toggleClass( 'hidden' );
-    $( this ).prev("[data-action='launch-timer']").toggleClass( 'hidden' );
     $( this ).parent().next(".timer-content").toggleClass( 'hidden' );
 
     $.ajax({

@@ -7,7 +7,7 @@ function TimeToSec($time) {
 
 if($task -> timerIsLaunched($project_token) == true){
     $task_timer_id = $task -> getLastTimer($project_token);
-    $task_token = $utils -> getData('pr_task_timer', 'task_token', 'ID', $task_timer_id );
+    $task_timer_token = $utils -> getData('pr_task_timer', 'task_token', 'ID', $task_timer_id );
     $date_begin = new DateTime( $utils -> getData('pr_task_timer', 'date_creation', 'ID', $task_timer_id ) );
     $date_end = new DateTime();
     // $date_end->add(new DateInterval('PT2H'));
@@ -61,11 +61,11 @@ if($task -> timerIsLaunched($project_token) == true){
 ?>
 <div id="timer-bar" class="hidden">
     <div>
-        <a class="btn-pause link" data-action="bar-stop-timer" data-ref="<?= $task_token ?>" data-pro="<?= $router -> getRouteParam("2") ?>"> <i class="fas fa-pause"></i> </a>
+        <a class="btn-pause link" data-action="bar-stop-timer" data-ref="<?= $task_timer_token ?>" data-pro="<?= $router -> getRouteParam("2") ?>"> <i class="fas fa-pause"></i> </a>
         <span class="mr-left color-light" id="timer-count"></span>
     </div>
     <div>
-        <p class="mr-top text-xs color-light">Le timer de la tâche <strong> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/gestion-projet?task=<?= $task_token ?>"><?= $utils -> getData('pr_task_item', 'name', 'task_token', $task_token ) ?></a> </strong> est en cours, arrétez le avant de lancer un nouveau timer ! Un timer ne dépasse pas 24H !</p>
+        <p class="mr-top text-xs color-light">Le timer de la tâche <strong> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/gestion-projet?task=<?= $task_timer_token ?>"><?= $utils -> getData('pr_task_item', 'name', 'task_token', $task_timer_token ) ?></a> </strong> est en cours, arrétez le avant de lancer un nouveau timer ! Un timer ne dépasse pas 24H !</p>
     </div>
 </div>
 

@@ -3,7 +3,7 @@
 /* html body {display: flex} */
 
 /* navbar */
-.sidebar-project-container {display: none;overflow-x: hidden;width: 20vw;height: 100vh;position: fixed;background: #212733;top: 0;left: 0;z-index: 999;display: none}
+.sidebar-project-container {display: none;overflow-x: hidden;width: 20vw;height: 100vh;position: fixed;background: #212733;box-shadow: 11px 0px 16px 3px rgba(0, 0, 0, 0.2);top: 0;left: 0;z-index: 999;display: none}
 .menu-wrapper {clear: both;float: left;}
 .bot-lk {margin-top: 5vh}
 @media (max-width: 767px) { .sidebar-project-container {width: 50vw;} }
