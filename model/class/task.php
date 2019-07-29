@@ -564,7 +564,7 @@ class task extends project {
         $request = $this -> _db -> query("SELECT * FROM `pr_task_timer` WHERE `project_token` = '$project_token' AND `user_token` = '$user_token' AND `date_end` IS NULL AND `enable` = '1' ORDER BY ID DESC LIMIT 1");
         $res = $request->fetch();
 
-        return $res['task_token'];
+        return $res['ID'];
     }
 
     

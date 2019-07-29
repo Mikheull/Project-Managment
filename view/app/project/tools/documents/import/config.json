@@ -10,7 +10,8 @@
         "popper",
         "tippy",
         "bootbox",
-        "filepond"
+        "filepond",
+        "easytimer"
     ],
 
 

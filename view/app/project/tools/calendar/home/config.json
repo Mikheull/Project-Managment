@@ -10,7 +10,8 @@
         "popper",
         "tippy",
         "fullcalendar",
-        "bootbox"
+        "bootbox",
+        "easytimer"
     ],
 
     "meta": [ 

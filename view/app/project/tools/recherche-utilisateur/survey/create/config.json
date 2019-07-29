@@ -10,7 +10,8 @@
         "popper",
         "tippy",
         "bootbox",
-        "nice-select"
+        "nice-select",
+        "easytimer"
     ],
 
 

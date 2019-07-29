@@ -10,7 +10,8 @@
         "popper",
         "tippy",
         "bootbox",
-        "mermaid"
+        "mermaid",
+        "easytimer"
     ],
 
 

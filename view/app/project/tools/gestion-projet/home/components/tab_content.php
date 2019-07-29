@@ -1,8 +1,5 @@
 <?php
-    if($task -> timerIsLaunched($project_token) == true){
-        echo $task -> getLastTimer($project_token);
-    } 
-
+    
     foreach($tabs['content'] as $t){
         ?>
             <div class="tab-item light-border">

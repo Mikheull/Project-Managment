@@ -1,3 +1,74 @@
+<?php
+function TimeToSec($time) {
+    $sec = 0;
+    foreach (array_reverse(explode(':', $time)) as $k => $v) $sec += pow(60, $k) * $v;
+    return $sec;
+}
+
+if($task -> timerIsLaunched($project_token) == true){
+    $task_timer_id = $task -> getLastTimer($project_token);
+    $task_token = $utils -> getData('pr_task_timer', 'task_token', 'ID', $task_timer_id );
+    $date_begin = new DateTime( $utils -> getData('pr_task_timer', 'date_creation', 'ID', $task_timer_id ) );
+    $date_end = new DateTime();
+    // $date_end->add(new DateInterval('PT2H'));
+
+    if($date_begin->format('d') == $date_end->format('d')){
+        $dteDiff  = $date_begin->diff($date_end); 
+        $second = TimeToSec($dteDiff->format("%H:%I:%S"));
+        ?>
+
+        <script>
+            $(document).ready(function() {
+                $( '#timer-bar' ).toggleClass( 'hidden' );
+
+                var retimer = new easytimer.Timer();
+                retimer.start({precision: 'seconds', startValues: {seconds: <?= $second ?>}});
+
+                retimer.addEventListener('secondsUpdated', function (e) {
+                    $('#timer-bar #timer-count').html(retimer.getTimeValues().toString());
+                });
+
+
+                // Stop Timer
+                $(document).on("click", "[data-action='bar-stop-timer']", function(e) {
+
+                    let ref = this.dataset.ref;
+                    let project = this.dataset.pro;
+                    let time = retimer.getTimeValues().toString();
+
+                    $.ajax({
+                        url:  rootUrl + 'controller/ajax/project/task/task_short-actions.php',
+                        type: 'POST',
+                        data: {task_token: ref, project_token: project, time: time, action: 'stop_timer'},
+                        success:function(data){
+                            $('#bar-timer_output').html(data);
+                            $( '#timer-bar' ).toggleClass( 'hidden' );
+                        }
+                    });
+
+                    retimer.stop();
+                });
+             });
+
+        </script>
+        
+        <?php
+    }else{
+        echo '['. $task_timer_id .'] on finis le timer sur 00:00:00 parcque +1 jour ('.$date_begin->format('d').' - '.$date_end->format('d').')';
+    }
+
+} 
+?>
+<div id="timer-bar" class="hidden">
+    <div>
+        <a class="btn-pause link" data-action="bar-stop-timer" data-ref="<?= $task_token ?>" data-pro="<?= $router -> getRouteParam("2") ?>"> <i class="fas fa-pause"></i> </a>
+        <span class="mr-left color-light" id="timer-count"></span>
+    </div>
+    <div>
+        <p class="mr-top text-xs color-light">Le timer de la tâche <strong> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/gestion-projet?task=<?= $task_token ?>"><?= $utils -> getData('pr_task_item', 'name', 'task_token', $task_token ) ?></a> </strong> est en cours, arrétez le avant de lancer un nouveau timer ! Un timer ne dépasse pas 24H !</p>
+    </div>
+</div>
+
 <div class="navbar-app">
 
     <div class="container-fluid">
