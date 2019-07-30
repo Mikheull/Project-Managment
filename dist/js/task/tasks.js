@@ -39,45 +39,6 @@ $(document).on("click", ".new-task", function(e) {
     });
 });
 
-// Edit
-$(document).on("click", "[data-action='edit_task']", function(e) {
-    var ctx = document.getElementById("task-if");
-    var ref = ctx.getAttribute("data-ref")
-    var project = ctx.getAttribute("data-pro")
-
-    bootbox.dialog({
-        backdrop: true,
-        closeButton: false,
-        title: "Editer la tâche",
-        buttons: {
-            confirm: {
-                label: 'Ok',
-                className: 'btn primary-btn',
-                callback: function(){
-                    let task_name = $( 'input[name="task_name"]' ).val();
-                    let deadline = $( 'input[name="deadline"]' ).val();
-                    let duration = $( 'input[name="duration"]' ).val();
-                    
-                    $.ajax({
-                        url:  rootUrl + 'controller/ajax/project/task/task_short-actions.php',
-                        type: 'POST',
-                        data: {task_name: task_name, deadline: deadline, duration: duration, task_token: ref, project_token: project, action: 'edit'},
-                        success:function(data){
-                            $('#tab_output').html(data);
-                        }
-                    });
-                   
-                }
-            },
-            cancel: {
-                label: 'Annuler',
-                className: 'btn dark-btn',
-            }
-        },
-        message: '<form method="POST" class="mr-bot-lg"><div class="container"><div class="row"><div class="col-12 input"><div class="input-field"> <label for="task_name" class="color-dark">Titre de la tâche</label> <input type="text" placeholder="Tache x" name="task_name" id="task_name"></div></div><div class="col-12 input mr-bot"><div class="input-field"> <label for="deadline" class="color-dark">Deadline</label> <input type="date" name="deadline" id="deadline"></div></div><div class="col-12 input mr-bot"><div class="input-field"> <label for="duration" class="color-dark">Durée</label> <input type="time" name="duration" id="duration" value="01:00"></div></div></div></div></form>',
-        
-    });
-});
 
 
 
@@ -200,7 +161,6 @@ $(document).on("click", "[data-action='reopen_task']", function(e) {
 $(document).on('click', '#popup-task-btn', function() {
     let ref = this.dataset.ref;
     let project = this.dataset.pro;
-    console.log('launch');
     console.log(ref, project);
     $( '#popup-task-wrapper' ).toggleClass( 'hidden' );
     
@@ -209,7 +169,6 @@ $(document).on('click', '#popup-task-btn', function() {
         type: 'POST',
         data: {task_token: ref, project_token: project, action: 'popup-task'},
         success:function(data){
-            console.log('success');
             $('#popup-task-wrapper').html(data);
         }
     });
@@ -231,6 +190,16 @@ $(document).bind('keydown', function(e) {
         return false;
     }
 });
+$('#popup-task-wrapper').mouseup(function(e){
+    var container = $(".task_popup");
+    if ( $( ".task_popup" ).length ) {
+        if (!container.is(e.target) && container.has(e.target).length === 0) {
+            $( '#popup-task-wrapper' ).empty();
+            $( '#popup-task-wrapper' ).toggleClass( 'hidden' );
+        }
+    }
+});
+
 
 $(document).on('click', '.head_menu li', function() {
     $( '.head_menu li').removeClass( 'active' );
@@ -247,11 +216,6 @@ $(document).on('click', '.head_menu li', function() {
 
 
 
-
-// Expandable task
-$(document).on('click', '.expand_btn', function() {
-    $( this ).next('.expand_content').toggleClass( 'hidden' );
-});
 
 // Task link viewer
 $(document).ready(function() {

@@ -19,6 +19,7 @@
         "end_date",
         "deadline",
         "duration",
+        "percent",
         "assigned_members",
         "assigned_teams",
         "level"
@@ -34,6 +35,7 @@
             $row['date_end'],
             $row['deadline'],
             $row['duration'],
+            $row['percent'],
             $row['assigned_members'],
             $row['assigned_teams'],
             $row['level'],

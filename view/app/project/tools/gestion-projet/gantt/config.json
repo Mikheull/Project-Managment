@@ -10,6 +10,7 @@
         "popper",
         "tippy",
         "bootbox",
+        "mermaid",
         "easytimer"
     ],
 
@@ -38,7 +39,6 @@
     ],
      
     "js": [ 
-        "task/reports.js",
         "project-fast-act.min.js"
     ],
 
