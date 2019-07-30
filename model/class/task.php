@@ -672,6 +672,32 @@ class task extends project {
         ]);
     }
 
+    /**
+     * Récupérer les teams assignés a une tache
+     * 
+     * Va récupérer les équipes assignés a une tache
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $project_token Token du projet
+     * @param string $task_token Token de la tache
+     * @return array
+     */
+    function getAllTeamAssigned($project_token = '', $task_token = ''){
+        $request = $this -> _db -> query("SELECT * FROM `pr_task_item` WHERE `project_token` = '$project_token' AND `task_token` = '$task_token' AND `enable` = '1' ");
+        $res = $request->fetch();
+        $teams = $res['assigned_teams'];
+
+        $allTeams = array();
+        if (strpos($teams, "|") !== false) {
+            $allTeams = explode('|', $teams);
+        }
+        return ([ 
+            'count' => sizeof($allTeams), 
+            'content' => $allTeams,
+        ]);
+    }
+
 
     /**
      * Assigner une tache a des membres
@@ -752,6 +778,31 @@ class task extends project {
         ]);
     }
 
+    /**
+     * Récupérer les membres assignés a une tache
+     * 
+     * Va récupérer les membres assignés a une tache
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $project_token Token du projet
+     * @param string $task_token Token de la tache
+     * @return array
+     */
+    function getAllMemberassigned($project_token = '', $task_token = ''){
+        $request = $this -> _db -> query("SELECT * FROM `pr_task_item` WHERE `project_token` = '$project_token' AND `task_token` = '$task_token' AND `enable` = '1' ");
+        $res = $request->fetch();
+        $users = $res['assigned_members'];
+
+        $allUsers = array();
+        if (strpos($users, "|") !== false) {
+            $allUsers = explode('|', $users);
+        }
+        return ([ 
+            'count' => sizeof($allUsers), 
+            'content' => $allUsers,
+        ]);
+    }
 /******************************************************************************/
 
 

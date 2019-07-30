@@ -348,6 +348,7 @@ em {font-style: italic}
 
 
 :root {
+  --avatar-xs: 1em;
   --avatar-sm: 1em;
   --avatar-md: 2em;
   --avatar-lg: 3em;
@@ -358,6 +359,7 @@ em {font-style: italic}
 .avatar__img, .avatar__placeholder {position: absolute;display: block;top: 0;left: 0;width: 1em;height: 1em;border-radius: inherit;}
 .avatar__placeholder {background-color: var(--light-background-color);color: var(--primary-color);fill: transparent;}
 .avatar--btn {cursor: pointer;}
+.avatar--xs {font-size: var(--avatar-xs);}
 .avatar--sm {font-size: var(--avatar-sm);}
 .avatar--md {font-size: var(--avatar-md);}
 .avatar--lg {font-size: var(--avatar-lg);}

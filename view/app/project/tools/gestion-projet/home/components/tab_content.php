@@ -71,7 +71,15 @@
                                                         }
                                                     ?>
                                                 </div>
-                                                <div id="popup-task-btn" class="col-2 text-align-right link" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $project_token ?>"> <i data-feather="maximize" class="color-lg-dark"></i> </div>
+
+                                                <div class="col-2 flex">
+                                                    <?php
+                                                        if($task -> memberIsAssigned($project_token, $task_item['task_token'], $main -> getToken()) == true){
+                                                            ?> <div class="text-align-right link mr-2" data-tippy="Vous êtes assigné a cette tâche"> <i data-feather="at-sign" class="color-red"></i> </div> <?php
+                                                        }
+                                                    ?>
+                                                    <div id="popup-task-btn" class="text-align-right link" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $project_token ?>"> <i data-feather="maximize" class="color-lg-dark"></i> </div>
+                                                </div>
                                             </div>
                                         </div>
                                         
@@ -110,3 +118,90 @@
 <div class="tab-item">
     <div class="btn primary-btn full-width text-align-center" id="new-tab" data-pro="<?= $project_token ?>"><i data-feather="plus-circle"></i> Nouveau tableau</div>
 </div>
+
+
+<script>
+
+// Assign task
+$(document).on("click", "[data-action='assign_task']", function(e) {
+    var ctx = document.getElementById("task-if");
+    var ref = ctx.getAttribute("data-ref")
+    var project = ctx.getAttribute("data-pro")
+
+    bootbox.dialog({
+        backdrop: true,
+        closeButton: false,
+        title: "Assigner la tâche",
+        buttons: {
+            confirm: {
+                label: 'Ok',
+                className: 'btn primary-btn',
+                callback: function(){
+                    let assigned_teams = [];
+                    let assigned_members = [];
+                    $("input:checkbox[name=assigned_teams]:checked").each(function(){ assigned_teams.push($(this).val()); });
+                    $("input:checkbox[name=assigned_members]:checked").each(function(){ assigned_members.push($(this).val()); });
+                    
+                    $.ajax({
+                        url:  rootUrl + 'controller/ajax/project/task/task_short-actions.php',
+                        type: 'POST',
+                        data: {assigned_teams: assigned_teams, assigned_members: assigned_members, task_token: ref, project_token: project, action: 'assign_task'},
+                        success:function(data){
+                            $('#tab_output').html(data);
+                        }
+                    });
+                   
+                }
+            },
+            cancel: {
+                label: 'Annuler',
+                className: 'btn dark-btn',
+            }
+        },
+        message: '<div class="row"> <div class="mr-bot-lg col-12"> <h3 class="text-sm color-dark mr-bot mr-top">Assigner des équipes</h3> <?php require_once ("controller/projectTeam.php"); $teams=$projectTeam -> getTeams( $project_token ); foreach($teams["content"] as $t){?> <div class="tg-list-item flex mr-bot"> <div class="mr-right"> <input class="tgl tgl-light" name="assigned_teams" value="<?=$t["public_token"] ;?>" id="<?=$t["public_token"] ;?>" type="checkbox"/> <label class="tgl-btn" for="<?=$t["public_token"] ;?>"></label> </div><div> <small><?=$t["name"] ;?></small> </div></div><?php } ?> </div><div class="col-12"> <h3 class="text-sm color-dark mr-bot mr-top">Assigner des membres</h3> <?php require_once ("controller/project.php"); $teams=$project -> getProjectMembers( $project_token ); foreach($teams["content"] as $t){?> <div class="tg-list-item flex mr-bot"> <div class="mr-right"> <input class="tgl tgl-light" name="assigned_members" value="<?=$t["user_public_token"] ;?>" id="<?=$t["user_public_token"] ;?>" type="checkbox"/> <label class="tgl-btn" for="<?=$t["user_public_token"] ;?>"></label> </div><div> <small><?=$utils -> getData('imp_user', 'username', 'public_token', $t["user_public_token"] ) ;?></small> </div></div><?php } ?> </div></div>',
+        
+    });
+});
+
+
+// Assign tab
+$(document).on("click", "[data-action='tab-assign']", function(e) {
+    var ctx = document.getElementById("task-if");
+    var ref = ctx.getAttribute("data-ref")
+    var project = ctx.getAttribute("data-pro")
+
+    bootbox.dialog({
+        backdrop: true,
+        closeButton: false,
+        title: "Assigner le tableau",
+        buttons: {
+            confirm: {
+                label: 'Ok',
+                className: 'btn primary-btn',
+                callback: function(){
+                    let assigned_teams = [];
+                    let assigned_members = [];
+                    $("input:checkbox[name=assigned_teams]:checked").each(function(){ assigned_teams.push($(this).val()); });
+                    $("input:checkbox[name=assigned_members]:checked").each(function(){ assigned_members.push($(this).val()); });
+                    
+                    $.ajax({
+                        url:  rootUrl + 'controller/ajax/project/task/tabs_short-actions.php',
+                        type: 'POST',
+                        data: {assigned_teams: assigned_teams, assigned_members: assigned_members, tab_token: ref, project_token: project, action: 'assign_tab'},
+                        success:function(data){
+                            $('#tab_output').html(data);
+                        }
+                    });
+                   
+                }
+            },
+            cancel: {
+                label: 'Annuler',
+                className: 'btn dark-btn',
+            }
+        },
+        message: '<div class="row"> <div class="mr-bot-lg col-12"> <h3 class="text-sm color-dark mr-bot mr-top">Assigner des équipes</h3> <?php require_once ("controller/projectTeam.php"); $teams=$projectTeam -> getTeams( $project_token ); foreach($teams["content"] as $t){?> <div class="tg-list-item flex mr-bot"> <div class="mr-right"> <input class="tgl tgl-light" name="assigned_teams" value="<?=$t["public_token"] ;?>" id="<?=$t["public_token"] ;?>" type="checkbox"/> <label class="tgl-btn" for="<?=$t["public_token"] ;?>"></label> </div><div> <small><?=$t["name"] ;?></small> </div></div><?php } ?> </div><div class="col-12"> <h3 class="text-sm color-dark mr-bot mr-top">Assigner des membres</h3> <?php require_once ("controller/project.php"); $teams=$project -> getProjectMembers( $project_token ); foreach($teams["content"] as $t){?> <div class="tg-list-item flex mr-bot"> <div class="mr-right"> <input class="tgl tgl-light" name="assigned_members" value="<?=$t["user_public_token"] ;?>" id="<?=$t["user_public_token"] ;?>" type="checkbox"/> <label class="tgl-btn" for="<?=$t["user_public_token"] ;?>"></label> </div><div> <small><?=$utils -> getData('imp_user', 'username', 'public_token', $t["user_public_token"] ) ;?></small> </div></div><?php } ?> </div></div>',
+        
+    });
+});
+</script>
