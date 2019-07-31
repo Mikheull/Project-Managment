@@ -33,6 +33,7 @@ require_once ('../../../../model/class/task.php');
 require_once ('../../../../model/class/authentication.php');
 require_once ('../../../../model/class/utils.php');
 require_once ('../../../../model/class/permission.php');
+require_once ('../../../../model/class/activity.php');
 
 
 $main = new main();
@@ -44,6 +45,7 @@ $task = new task($db);
 $auth = new authentication($db);
 $utils = new utils($db);
 $permission = new permission($db);
+$activity = new activity($db);
 
 if(isset($_POST['result'])){ $result = $_POST['result']; }
 $task_token = $_POST['task_token'];
@@ -60,7 +62,7 @@ if(isset($_POST['project_token'])){ $project_token = $_POST['project_token']; }
 
 if($action == 'delete'){
     if($permission -> hasPermission($main -> getToken(), $project_token, 'task.delete')){
-        $errors = $task -> disableTask($task_token);
+        $errors = $task -> disableTask($project_token, $task_token);
     }else{
         $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
     }
@@ -78,7 +80,7 @@ if($action == 'edit'){
         $duration = cleanVar($_POST['duration']);
 
         if($permission -> hasPermission($main -> getToken(), $project_token, 'task.edit')){
-            $errors = $task -> editTask($task_name, $deadline, $duration, $task_token);
+            $errors = $task -> editTask($task_name, $deadline, $duration, $task_token, $project_token);
         }else{
             $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
         }
@@ -95,7 +97,7 @@ if($action == 'edit'){
 
 if($action == 'close'){
     if($permission -> hasPermission($main -> getToken(), $project_token, 'task.finish')){
-        $errors = $task -> closeTask($task_token);
+        $errors = $task -> closeTask($project_token, $task_token);
     }else{
         $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
     }
@@ -106,7 +108,7 @@ if($action == 'close'){
 }
 if($action == 'reopen'){
     if($permission -> hasPermission($main -> getToken(), $project_token, 'task.finish')){
-        $errors = $task -> reopenTask($task_token);
+        $errors = $task -> reopenTask($project_token, $task_token);
     }else{
         $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
     }

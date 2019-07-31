@@ -61,6 +61,10 @@ class task extends project {
         if($count !== 1){
             return (['success' => false, 'options' => ['content' => "Une erreur est survenue !", 'theme' => 'error'] ]);
         }
+        
+        // Log
+        $user = main::getToken();
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$tab_token', 'create-tab', '') ");
         return (['success' => true, 'options' => ['content' => "Le tableau a été crée !", 'theme' => 'success'] ]);
 
     } 
@@ -75,12 +79,17 @@ class task extends project {
      * @access public
      * @author Mikhaël Bailly
      * @param string $token Token du tableau
+     * @param string $project_token Token du projet
      * @return array
      */
 
-    function disableTab($token = '') {
-        $request = $this -> _db -> exec("UPDATE `pr_task_tab` SET `enable` = 0 WHERE `tab_token` = '$token' AND `enable` = '1' ");
-        $request = $this -> _db -> exec("UPDATE `pr_task_item` SET `enable` = 0 WHERE `tab_token` = '$token' AND `enable` = '1' ");
+    function disableTab($tab_token = '', $project_token = '') {
+        $request = $this -> _db -> exec("UPDATE `pr_task_tab` SET `enable` = 0 WHERE `tab_token` = '$tab_token' AND `enable` = '1' ");
+        $request = $this -> _db -> exec("UPDATE `pr_task_item` SET `enable` = 0 WHERE `tab_token` = '$tab_token' AND `enable` = '1' ");
+
+        // Log
+        $user = main::getToken();
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$tab_token', 'disable-tab', '') ");
         return (['success' => true, 'options' => ['content' => "Le tableau a été supprimée !", 'theme' => 'success'] ]);
     }
 
@@ -94,13 +103,18 @@ class task extends project {
      * @access public
      * @author Mikhaël Bailly
      * @param string $tab_token Token du tableau
+     * @param string $project_token Token du projet
      * @param string $new_name Nouveau nom
      * @return array
      */
 
-    function tabRename($tab_token = '', $new_name = '') {
+    function tabRename($tab_token = '', $project_token = '', $new_name = '') {
         if($new_name !== ''){
             $request = $this -> _db -> exec("UPDATE `pr_task_tab` SET `name` = '$new_name' WHERE `tab_token` = '$tab_token' AND `enable` = '1' ");
+            
+            // Log
+            $user = main::getToken();
+            $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$tab_token', 'rename-tab', '$new_name') ");
             return (['success' => true, 'options' => ['content' => "Le nom a été changé !", 'theme' => 'success'] ]);
         }
         return (['success' => false, 'options' => ['content' => "Le nom est vide !", 'theme' => 'error'] ]);
@@ -127,6 +141,10 @@ class task extends project {
                 $teams .= $team.'|';
             }
             $request = $this -> _db -> exec("UPDATE `pr_task_tab` SET `assigned_teams` = '$teams' WHERE `project_token` = '$project_token' AND `tab_token` = '$tab_token' AND `enable` = '1' ");
+
+            // Log
+            $user = main::getToken();
+            $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$tab_token', 'assign-team-tab', '$teams') ");
         }else{
             $request = $this -> _db -> exec("UPDATE `pr_task_tab` SET `assigned_teams` = '' WHERE `project_token` = '$project_token' AND `tab_token` = '$tab_token' AND `enable` = '1' ");
 
@@ -209,6 +227,10 @@ class task extends project {
                 $members .= $member.'|';
             }
             $request = $this -> _db -> exec("UPDATE `pr_task_tab` SET `assigned_members` = '$members' WHERE `project_token` = '$project_token' AND `tab_token` = '$tab_token' AND `enable` = '1' ");
+
+            // Log
+            $user = main::getToken();
+            $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$tab_token', 'assign-member-tab', '$members') ");
         }else{
             $request = $this -> _db -> exec("UPDATE `pr_task_tab` SET `assigned_members` = '' WHERE `project_token` = '$project_token' AND `tab_token` = '$tab_token' AND `enable` = '1' ");
 
@@ -358,8 +380,12 @@ class task extends project {
         if($count !== 1){
             return (['success' => false, 'options' => ['content' => "Une erreur est survenue !", 'theme' => 'error'] ]);
         }
-        return (['success' => true, 'options' => ['content' => "La tâche a été crée !", 'theme' => 'success'] ]);
 
+        // Log
+        $user = main::getToken();
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$task_token', 'create-task', '') ");
+
+        return (['success' => true, 'options' => ['content' => "La tâche a été crée !", 'theme' => 'success'] ]);
     } 
     
     
@@ -371,13 +397,19 @@ class task extends project {
     *
     * @access public
     * @author Mikhaël Bailly
-    * @param string $token Token de la tache
+     * @param string $project_token Token du projet
+    * @param string $task_token Token de la tache
     * @return array
     */
 
-   function disableTask($token = '') {
-       $request = $this -> _db -> exec("UPDATE `pr_task_item` SET `enable` = 0 WHERE `task_token` = '$token' AND `enable` = '1' ");
-       return (['success' => true, 'options' => ['content' => "La tache a été supprimée !", 'theme' => 'success'] ]);
+   function disableTask($project_token = '', $task_token = '') {
+        $request = $this -> _db -> exec("UPDATE `pr_task_item` SET `enable` = 0 WHERE `task_token` = '$task_token' AND `enable` = '1' ");
+
+        // Log
+        $user = main::getToken();
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$task_token', 'disable-task', '') ");
+        return (['success' => true, 'options' => ['content' => "La tache a été supprimée !", 'theme' => 'success'] ]);
+
    }
 
 
@@ -392,12 +424,17 @@ class task extends project {
      * @param string $name nom
      * @param string $deadline Date de fin attendue
      * @param string $duration Durée prévue
-     * @param string $token Token de la tache
+     * @param string $task_token Token de la tache
+     * @param string $project_token Token du projet
      * @return array
      */
     
-    function editTask($name = '', $deadline = '', $duration = '', $token = '') {
-        $exec = $this -> _db -> exec("UPDATE `pr_task_item` SET `name` = '$name', `deadline` = '$deadline', `duration` = '$duration' WHERE `task_token` = '$token' ");
+    function editTask($name = '', $deadline = '', $duration = '', $task_token = '', $project_token = '') {
+        $exec = $this -> _db -> exec("UPDATE `pr_task_item` SET `name` = '$name', `deadline` = '$deadline', `duration` = '$duration' WHERE `task_token` = '$task_token' ");
+
+        // Log
+        $user = main::getToken();
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$task_token', 'edit-task', '') ");
         return (['success' => true, 'options' => ['content' => "Les informations on été modifiés !", 'theme' => 'success'] ]);
     }
     
@@ -410,12 +447,17 @@ class task extends project {
     *
     * @access public
     * @author Mikhaël Bailly
-    * @param string $token Token de la tache
+    * @param string $project_token Token du projet
+    * @param string $task_token Token de la tache
     * @return array
     */
 
-   function closeTask($token = '') {
-        $request = $this -> _db -> exec("UPDATE `pr_task_item` SET `date_end` = NOW() WHERE `task_token` = '$token' AND `enable` = '1' ");
+   function closeTask($project_token = '', $task_token = '') {
+        $request = $this -> _db -> exec("UPDATE `pr_task_item` SET `date_end` = NOW() WHERE `task_token` = '$task_token' AND `enable` = '1' ");
+        
+        // Log
+        $user = main::getToken();
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$task_token', 'close-task', '') ");
         return (['success' => true, 'options' => ['content' => "La tache a été close !", 'theme' => 'success'] ]);
    }
     
@@ -428,12 +470,17 @@ class task extends project {
    *
    * @access public
    * @author Mikhaël Bailly
-   * @param string $token Token de la tache
+    * @param string $project_token Token du projet
+   * @param string $task_token Token de la tache
    * @return array
    */
 
-    function reopenTask($token = '') {
-        $request = $this -> _db -> exec("UPDATE `pr_task_item` SET `date_end` = null WHERE `task_token` = '$token' AND `enable` = '1' ");
+    function reopenTask($project_token = '', $task_token = '') {
+        $request = $this -> _db -> exec("UPDATE `pr_task_item` SET `date_end` = null WHERE `task_token` = '$task_token' AND `enable` = '1' ");
+
+        // Log
+        $user = main::getToken();
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$task_token', 'reopen-task', '') ");
         return (['success' => true, 'options' => ['content' => "La tache a été réouverte !", 'theme' => 'success'] ]);
     }
 
@@ -467,6 +514,10 @@ class task extends project {
         if($count !== 1){
             return (['success' => false, 'options' => ['content' => "Une erreur est survenue !", 'theme' => 'error'] ]);
         }
+
+        // Log
+        $user = main::getToken();
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$task_token', 'launch-timer-task', '') ");
     }
 
 
@@ -487,6 +538,10 @@ class task extends project {
     function stopTimer($project_token = '', $task_token = '', $time_duration = '') {
         $user_token = main::getToken();
         $request = $this -> _db -> exec("UPDATE `pr_task_timer` SET `date_end` = NOW(), `time_duration` = '$time_duration' WHERE `project_token` = '$project_token' AND `task_token` = '$task_token' AND `user_token` = '$user_token' AND `enable` = '1' ORDER BY ID DESC LIMIT 1");
+
+        // Log
+        $user = main::getToken();
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$task_token', 'stop-timer-task', '$time_duration') ");
     }
 
 
@@ -612,6 +667,10 @@ class task extends project {
                 $teams .= $team.'|';
             }
             $request = $this -> _db -> exec("UPDATE `pr_task_item` SET `assigned_teams` = '$teams' WHERE `project_token` = '$project_token' AND `task_token` = '$task_token' AND `enable` = '1' ");
+
+            // Log
+            $user = main::getToken();
+            $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$task_token', 'assign-team-task', '$teams') ");
         }else{
             $request = $this -> _db -> exec("UPDATE `pr_task_item` SET `assigned_teams` = '' WHERE `project_token` = '$project_token' AND `task_token` = '$task_token' AND `enable` = '1' ");
 
@@ -719,6 +778,10 @@ class task extends project {
                 $members .= $member.'|';
             }
             $request = $this -> _db -> exec("UPDATE `pr_task_item` SET `assigned_members` = '$members' WHERE `project_token` = '$project_token' AND `task_token` = '$task_token' AND `enable` = '1' ");
+
+            // Log
+            $user = main::getToken();
+            $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$task_token', 'assign-member-task', '$members') ");
         }else{
             $request = $this -> _db -> exec("UPDATE `pr_task_item` SET `assigned_members` = '' WHERE `project_token` = '$project_token' AND `task_token` = '$task_token' AND `enable` = '1' ");
 

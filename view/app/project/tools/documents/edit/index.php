@@ -74,4 +74,6 @@
     </div>
 </div>
 
+<?php require_once ('view/app/project/components/footer.php') ?>
+
 <script>Prism.plugins.autoloader.languages_path = 'https://cdn.jsdelivr.net/npm/prismjs@1.16.0/components.js'</script>

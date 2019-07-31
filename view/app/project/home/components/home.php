@@ -24,3 +24,4 @@ $allBugs = $bug -> getBugs($router -> getRouteParam('2'));
         </div>
     </div>
 </div>
+

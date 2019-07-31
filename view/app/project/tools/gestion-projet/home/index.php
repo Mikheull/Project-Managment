@@ -1,6 +1,7 @@
 <?php
     require_once ('controller/project.php') ;
     require_once ('controller/task.php') ;
+    require_once ('controller/activity.php') ;
 
     $tabs = $task -> getTabs( $router -> getRouteParam('2') );
     $project_token = $router -> getRouteParam('2');
@@ -26,8 +27,7 @@
                     </div>
                 </div>
             </div>
-
-
+            
             <?php
             if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'task.view')){
                 ?>
@@ -45,3 +45,5 @@
         </div>
     </div>
 </div>
+
+<?php require_once ('view/app/project/components/footer.php') ?>

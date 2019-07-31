@@ -30,6 +30,7 @@
             $row['project_token'],
             $row['tab_token'],
             $row['task_token'],
+            $row['name'],
             $row['position'],
             $row['date_creation'],
             $row['date_end'],

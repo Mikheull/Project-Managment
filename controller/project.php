@@ -153,7 +153,7 @@ if(isset($_POST['update_project_infos'])){
         $project_token = $router -> getRouteParam('2');
         if(strlen($desc) <= 255){
             $errors = $project -> editProjectInfos($name, $desc, $status, $project_token);
-            $utils -> addlog($main -> getToken(), $project_token, 'pr_project', 'project-edit-settings');
+            // $utils -> addlog($main -> getToken(), $project_token, 'pr_project', 'project-edit-settings');
         }else{
             $errors = ['success' => false, 'options' => ['content' => "La description est trop longue (".strlen($bio)."/255) !", 'theme' => 'error'] ];
         }

@@ -31,6 +31,8 @@
 
 </div>
 
+<?php require_once ('view/app/project/components/footer.php') ?>
+
 
 
 <script>

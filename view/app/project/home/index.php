@@ -12,3 +12,5 @@
 <div class="container-fluid main_wrapper">
     <?php require ('view/app/project/home/components/home.php'); ?>
 </div>
+
+<?php require_once ('view/app/project/components/footer.php') ?>

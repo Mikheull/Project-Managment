@@ -191,11 +191,12 @@ h1, h2, h3, h4, h5, h6 {font-family: 'Poppins', sans-serif}
 .title-xs-shadow {text-shadow: 12px -7px 0px rgba(7, 24, 40, 0.03);}
 
 
-/* Hide */
-@media (max-width: 1140px) {.lg-hide {display: none}}
-@media (max-width: 960px) {.md-hide {display: none}}
-@media (max-width: 720px) {.sm-hide {display: none}}
-@media (max-width: 568px) {.xs-hide {display: none}}
+/* Hide / show */
+.lg-show, .md-show, .sm-show, .xs-show {display: none !important;}
+@media (max-width: 1140px) {.lg-hide {display: none !important} .lg-show {display: block !important}}
+@media (max-width: 960px) {.md-hide {display: none !important} .md-show {display: block !important}}
+@media (max-width: 720px) {.sm-hide {display: none !important} .sm-show {display: block !important}}
+@media (max-width: 568px) {.xs-hide {display: none !important} .xs-show {display: block !important}}
 
 /* Media Queries Mobile */
 @media (max-width: 568px) {
@@ -281,7 +282,6 @@ h1, h2, h3, h4, h5, h6 {font-family: 'Poppins', sans-serif}
 #footer .link-box ul li {font-size: .9em;margin-bottom: 1rem}
 #footer .link-box ul li a {color: #6F849C;font-weight: 200}
 #footer .copyright {font-size: .7em;margin: 1rem auto 0}
-
 
 
 

@@ -38,6 +38,7 @@ $date_creation = new DateTime( $utils -> getData('pr_task_item', 'date_creation'
                         <ul>
                             <li class="mr-3 active" data-page="informations"> <a class="link">Informations</a> </li>
                             <li class="mr-3" data-page="timer"> <a class="link">Timer</a> </li>
+                            <li class="mr-3" data-page="activity"> <a class="link">Activité</a> </li>
                             <li class="mr-3" data-page="assigned_members"> <a class="link">Membres assignés</a> </li>
                             <li class="" data-page="assigned_teams"> <a class="link">Équipes assignées</a> </li>
                         </ul>
@@ -113,7 +114,7 @@ $date_creation = new DateTime( $utils -> getData('pr_task_item', 'date_creation'
                                                     ?>
                                                         <li class="mr-bot">
                                                             <div class="flex">
-                                                                <div class="avatar avatar--xs mr-right"> 
+                                                                <div class="avatar avatar--md mr-right"> 
                                                                     <figure class="avatar__figure" role="img">
                                                                         <svg class="avatar__placeholder" aria-hidden="true" viewBox="0 0 20 20" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="6" r="2.5" stroke="currentColor"/><path d="M10,10.5a4.487,4.487,0,0,0-4.471,4.21L5.5,15.5h9l-.029-.79A4.487,4.487,0,0,0,10,10.5Z" stroke="currentColor"/></svg>
                                                                         <img class="avatar__img" src="../../../../dist/<?= $utils -> getData('imp_user', 'profil_image', 'public_token', $timer['user_token']) == NULL ? 'images/content/defaut_profil_pic.jpg' : 'uploads/u/'. $timer['user_token'].'/profil_pic/'.$utils -> getData('imp_user', 'profil_image', 'public_token', $timer['user_token']) ;?>">
@@ -133,6 +134,71 @@ $date_creation = new DateTime( $utils -> getData('pr_task_item', 'date_creation'
                             </div>
                         </div>
 
+                        <div id="activity" class="page_el hidden">
+                            <ul class="list-activity">
+                                <?php
+                                $task_activity = $activity -> getTaskActivity($project_token, $task_token);
+                                if($task_activity['count'] !== 0){
+                                    foreach($task_activity['content'] as $act_item){
+                                        $date = new DateTime( $act_item['date'] );
+                                        ?>
+                                        <li class="mr-bot">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-12 flex">
+                                                        <div class="avatar avatar--md mr-right"> 
+                                                            <figure class="avatar__figure" role="img">
+                                                                <svg class="avatar__placeholder" aria-hidden="true" viewBox="0 0 20 20" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="6" r="2.5" stroke="currentColor"/><path d="M10,10.5a4.487,4.487,0,0,0-4.471,4.21L5.5,15.5h9l-.029-.79A4.487,4.487,0,0,0,10,10.5Z" stroke="currentColor"/></svg>
+                                                                <img class="avatar__img" src="../../../../dist/<?= $utils -> getData('imp_user', 'profil_image', 'public_token', $act_item['user_public_token']) == NULL ? 'images/content/defaut_profil_pic.jpg' : 'uploads/u/'. $act_item['user_public_token'].'/profil_pic/'.$utils -> getData('imp_user', 'profil_image', 'public_token', $act_item['user_public_token']) ;?>">
+                                                            </figure>
+                                                        </div>
+                                                        <span class="mt-1 color-lg-dark"> <?= $utils -> getData('imp_user', 'username', 'public_token', $act_item['user_public_token'] ) ?>
+                                                            <?php
+                                                                if($act_item['type'] == 'create-task'){
+                                                                    ?> <span> à créer la tâche </span><?php
+                                                                }
+                                                                if($act_item['type'] == 'edit-task'){
+                                                                    ?> <span> à modifier la tâche </span><?php
+                                                                }
+                                                                if($act_item['type'] == 'close-task'){
+                                                                    ?> <span> à clos la tâche </span><?php
+                                                                }
+                                                                if($act_item['type'] == 'reopen-task'){
+                                                                    ?> <span> à réouvert la tâche </span><?php
+                                                                }
+                                                                if($act_item['type'] == 'launch-timer-task'){
+                                                                    ?> <span> à commencé a travailler sur la tâche </span><?php
+                                                                }
+                                                                if($act_item['type'] == 'stop-timer-task'){
+                                                                    ?> <span> à travaillé pendant <?= $act_item['optional'] ?> sur la tâche </span><?php
+                                                                }
+                                                                if($act_item['type'] == 'assign-team-task'){
+                                                                    ?> <span> à assigner la tâche aux équipes : <?= $act_item['optional'] ?> </span><?php
+                                                                }
+                                                                if($act_item['type'] == 'assign-member-task'){
+                                                                    ?> <span> à assigner la tâche aux membres : <?= $act_item['optional'] ?> </span><?php
+                                                                }
+                                                            ?>
+                                                        </span>
+                                                    </div>
+                                                    <div class="col-12 ml-5">
+                                                        <span class="color-gray text-xs"> le <?= date_format($date, 'd/m/Y à H:i') ;?> </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="spacebar mr-top"><div class="spacebar-lg"></div></div>
+                                        </li>
+                                            
+                                        <?php
+                                        
+                                    }
+                                }else{
+                                    ?>Aucune activité pour cette tâche<?php
+                                }
+                                ?>
+                            </ul>
+                        </div>
+
                         <div id="assigned_members" class="page_el hidden">
                             <?php
                                 $allMembersAssigned = $task -> getAllMemberAssigned($project_token, $task_token);
@@ -143,14 +209,14 @@ $date_creation = new DateTime( $utils -> getData('pr_task_item', 'date_creation'
                                         foreach($allMembersAssigned['content'] as $ms){
                                             if($ms !== ''){
                                                 ?> 
-                                                <li class="color-lg-dark flex">
-                                                    <div class="avatar avatar--xs mr-right"> 
+                                                <li class="mr-bot color-lg-dark flex">
+                                                    <div class="avatar avatar--md mr-right"> 
                                                         <figure class="avatar__figure" role="img">
                                                             <svg class="avatar__placeholder" aria-hidden="true" viewBox="0 0 20 20" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="6" r="2.5" stroke="currentColor"/><path d="M10,10.5a4.487,4.487,0,0,0-4.471,4.21L5.5,15.5h9l-.029-.79A4.487,4.487,0,0,0,10,10.5Z" stroke="currentColor"/></svg>
                                                             <img class="avatar__img" src="../../../../dist/<?= $utils -> getData('imp_user', 'profil_image', 'public_token', $ms) == NULL ? 'images/content/defaut_profil_pic.jpg' : 'uploads/u/'. $ms.'/profil_pic/'.$utils -> getData('imp_user', 'profil_image', 'public_token', $ms) ;?>">
                                                         </figure>
                                                     </div>
-                                                    <span> <?= $utils -> getData('imp_user', 'username', 'public_token', $ms ) ?> </span>
+                                                    <span class="mt-1 color-lg-dark"> <?= $utils -> getData('imp_user', 'username', 'public_token', $ms ) ?> </span>
                                                 </li> 
                                                 <?php
                                             }
@@ -207,6 +273,4 @@ $date_creation = new DateTime( $utils -> getData('pr_task_item', 'date_creation'
 $(document).ready(function() {
     feather.replace()
 });
-
-
 </script>

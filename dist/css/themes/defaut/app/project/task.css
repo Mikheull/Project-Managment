@@ -24,11 +24,11 @@
 #popup-task-wrapper .task_popup {height: 90vh;margin: 5vh auto;background: #FFF;border-radius: 6px;}
 .task_popup .head {border-bottom: solid 1px #e9e9e9;padding-bottom: 5px}
 .task_popup .head_menu {width: 100%;overflow-x: scroll;}
-.task_popup .head_menu ul {display: ruby;}
+.task_popup .head_menu ul {display: -webkit-inline-box;}
 .task_popup .head_menu li {font-size: .9em;}
 .task_popup .head_menu li.active {font-weight: bold;border-bottom: solid 2px var(--primary-color);padding-bottom: 5px}
 .task_popup .head_settings {border-left: solid 1px #e9e9e9;padding-bottom: 5px}
-.task_popup .list-timers {max-height: 50vh;overflow-y: scroll;}
+.task_popup .list-timers, .task_popup .list-activity {max-height: 60vh;overflow-y: scroll;}
 
 
 

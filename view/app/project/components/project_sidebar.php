@@ -72,47 +72,51 @@ if($task -> timerIsLaunched($project_token) == true){
 <div class="navbar-app">
 
     <div class="container-fluid">
-        <div class="row navbar-nav nav-border-bot">
-            <div class="col-md-8 col-12 nav-left">
+        <div class="row navbar-nav nav-border-bot flex justify-content-between">
+            <div>
                 <div class="nav-item link" id="sidebar_pro-btn"><i data-feather="sidebar"></i></div>
-                <div class="nav-item"> <a class="mr-right-lg mr-left bold" href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>"><?= $project -> getProjectData($router -> getRouteParam("2"), 'name') ;?></a> </div>
-                <?php
-                    if(sizeof($router -> getRouteParam("all")) > 3){
-                        if($router -> getRouteParam("3") == 'settings'){
-                            ?>
-                                <div class="nav-item"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/settings" class="dark-link"> Réglages </a> </div>
-                            <?php 
+                <div class="nav-item"> <a class="mr-right mr-left bold" href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>"><?= $project -> getProjectData($router -> getRouteParam("2"), 'name') ;?></a> </div>
+                <div class="nav-item mr-left-lg sm-hide">
+
+                    <?php
+                        if(sizeof($router -> getRouteParam("all")) > 3){
+                            if($router -> getRouteParam("3") == 'settings'){
+                                ?>
+                                    <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/settings" class="dark-link"> Réglages </a>
+                                <?php 
+                            }else{
+                                if($router -> getRouteParam("4") == 'gestion-projet'){$page_name = 'Gestion de projet' ;}
+                                else if($router -> getRouteParam("4") == 'gestion-equipe'){ $page_name = 'Gestion d\'équipe' ; }
+                                else if($router -> getRouteParam("4") == 'messenger'){ $page_name = 'Messenger' ; }
+                                else if($router -> getRouteParam("4") == 'calendar'){ $page_name = 'Calendrier' ; }
+                                else if($router -> getRouteParam("4") == 'uml'){ $page_name = 'UML' ; }
+                                else if($router -> getRouteParam("4") == 'recherche-utilisateur'){ $page_name = 'Recherche utilisateur' ; }
+                                else if($router -> getRouteParam("4") == 'bug-tracker'){ $page_name = 'Bug tracker' ; }
+                                else if($router -> getRouteParam("4") == 'documents'){ $page_name = 'Documents' ; }
+                                else{ $page_name = '' ; }
+                                ?>
+                                    <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/<?= $router -> getRouteParam("4") ?>" class="dark-link"> <?= $page_name ?> </a>
+                                <?php
+                            }
                         }else{
-                            if($router -> getRouteParam("4") == 'gestion-projet'){$page_name = 'Gestion de projet' ;}
-                            else if($router -> getRouteParam("4") == 'gestion-equipe'){ $page_name = 'Gestion d\'équipe' ; }
-                            else if($router -> getRouteParam("4") == 'messenger'){ $page_name = 'Messenger' ; }
-                            else if($router -> getRouteParam("4") == 'calendar'){ $page_name = 'Calendrier' ; }
-                            else if($router -> getRouteParam("4") == 'uml'){ $page_name = 'UML' ; }
-                            else if($router -> getRouteParam("4") == 'recherche-utilisateur'){ $page_name = 'Recherche utilisateur' ; }
-                            else if($router -> getRouteParam("4") == 'bug-tracker'){ $page_name = 'Bug tracker' ; }
-                            else if($router -> getRouteParam("4") == 'documents'){ $page_name = 'Documents' ; }
-                            else{ $page_name = '' ; }
                             ?>
-                                <div class="nav-item"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/<?= $router -> getRouteParam("4") ?>" class="dark-link"> <?= $page_name ?> </a> </div>
+                                <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>" class="dark-link"> Dashboard </a>
                             <?php
                         }
-                    }else{
-                        ?>
-                            <div class="nav-item"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>" class="dark-link"> Dashboard </a> </div>
-                        <?php
-                    }
-                    
-                ?>
+                        
+                    ?>
+                </div>
             </div>
 
-            <div class="col-md-4 col-12 nav-right">
+            <div>
                 <ul class="text-align-right">
                     <li class="nav-item" id="rapid_actions"> <a class="btn btn-sm primary-btn"> <i data-feather="plus-circle"></i></a> </li>
-                    <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/settings" title="Réglages"><i data-feather="settings"></i></a> </li>
+                    <li class="nav-item sm-hide"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/settings" title="Réglages"><i data-feather="settings"></i></a> </li>
                         
-                    <li class="nav-item notification"> <a href="<?= $config -> rootUrl() ;?>notifications" title="notifications"><i data-feather="bell"></i></a> </li>
-                    <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>logout" title="Déconnnexion"><i data-feather="log-out"></i></a> </li>
-                    <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>account" title="Accédez a votre compte">Mon compte</a> </li>
+                    <li class="nav-item sm-hide notification"> <a href="<?= $config -> rootUrl() ;?>notifications" title="notifications"><i data-feather="bell"></i></a> </li>
+                    <li class="nav-item sm-hide"> <a href="<?= $config -> rootUrl() ;?>logout" title="Déconnnexion"><i data-feather="log-out"></i></a> </li>
+                    <li class="nav-item sm-hide"> <a href="<?= $config -> rootUrl() ;?>account" title="Accédez a votre compte">Mon compte</a> </li>
+                    <li class="nav-item link" id="sidebar_pro-right-btn"> <i data-feather="sidebar" style="transform: rotate(180deg);"></i> </li>
                 </ul>
             </div>
         </div>
@@ -201,6 +205,15 @@ if($task -> timerIsLaunched($project_token) == true){
 
 
 
+
+<div class="sidebar-project-container-right">
+    <p class="color-light">
+        menu avec :
+        - Informations
+        - Membres
+        - Admin
+    </p>
+</div>
 
 
 

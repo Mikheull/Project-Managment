@@ -53,25 +53,6 @@ class utils extends db_connect {
     }
 
 
-
-    /**
-     * Créer un log
-     * 
-     * Générer un log, qui gardera une trace de l'action effectué
-     *
-     * @access public
-     * @author Mikhaël Bailly
-     * @param int $user Token de l'utilisateur
-     * @param int $ref Token de reference
-     * @param int $table Table SQL de l'action
-     * @param int $type Type d'action
-     * @return null
-     */
-    
-    function addlog($user = '', $ref = '', $table = '', $type = '', $options = null){
-        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `ref_token`, `ref_table`, `type`, `optional`, `date`) VALUES ('$user', '$ref', '$table', '$type', '$options', NOW()) ");
-    }
-
 /******************************************************************************/
 
 

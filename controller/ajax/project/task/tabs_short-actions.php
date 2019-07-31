@@ -61,7 +61,7 @@ if(isset($_POST['tab_token'])){ $tab_token = $_POST['tab_token']; }
 
 if($action == 'delete'){
     if($permission -> hasPermission($main -> getToken(), $project_token, 'task.tab.delete')){
-        $errors = $task -> disableTab($tab_token);
+        $errors = $task -> disableTab($tab_token, $project_token);
     }else{
         $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
     }
@@ -76,7 +76,7 @@ if($action == 'delete'){
 if($action == 'rename'){
     if($permission -> hasPermission($main -> getToken(), $project_token, 'task.tab.edit')){
         $new_name = cleanVar($result);
-        $errors = $task -> tabRename($tab_token, $new_name);
+        $errors = $task -> tabRename($tab_token, $project_token, $new_name);
     }else{
         $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
     }

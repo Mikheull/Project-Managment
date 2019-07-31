@@ -27,14 +27,12 @@
                 if($u['user_public_token'] !== $auth -> getToken()){
                     ?>
                         <li class="mr-top mr-bot"> <a href="<?= $config -> rootUrl() ;?>member/<?= $utils -> getData('imp_user', 'username', 'public_token', $u['user_public_token']) ?>" class="btn btn-sm dark-btn">Accéder a son profil</a> </li>
-                        <li> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam('2') ;?>/t/gestion-equipe/members/<?= $utils -> getData('imp_user', 'public_token', 'public_token', $u['user_public_token']) ?>/activity" class="dark-link">Activité</a> </li>
                         <li> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam('2') ;?>/t/gestion-equipe/members/<?= $utils -> getData('imp_user', 'public_token', 'public_token', $u['user_public_token']) ?>/edit" class="dark-link">Editer</a> </li>
                         <li> <a href="" data-action="kick" data-ref="<?= $router -> getRouteParam('2') ?>" data-mem="<?= $u['user_public_token'] ?>" class="link red-link">Retirer</a> </li>
                     <?php
                 }else{
                     ?>
                         <li class="mr-top mr-bot"> <a href="<?= $config -> rootUrl() ;?>account" class="btn btn-sm dark-btn">Accéder a mon profil</a> </li>
-                        <li> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam('2') ;?>/t/gestion-equipe/members/<?= $utils -> getData('imp_user', 'public_token', 'public_token', $u['user_public_token']) ?>/activity" class="dark-link">Activité</a> </li>
                         <li> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam('2') ;?>/t/gestion-equipe/members/<?= $utils -> getData('imp_user', 'public_token', 'public_token', $u['user_public_token']) ?>/edit" class="dark-link">Editer</a> </li>
                     <?php
                 }

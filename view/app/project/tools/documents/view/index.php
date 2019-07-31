@@ -120,6 +120,8 @@
 <div id="share_output"></div>
 <div id="delete_output" class="hidden"></div>
 
+<?php require_once ('view/app/project/components/footer.php') ?>
+
 
 <script>Prism.plugins.autoloader.languages_path = 'https://cdn.jsdelivr.net/npm/prismjs@1.16.0/components.js'</script>
 <script>
