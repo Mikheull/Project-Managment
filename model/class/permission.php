@@ -64,6 +64,37 @@ class permission extends db_connect {
     }
 
 
+
+    /**
+     * Récupère les équipes d'un utilisateur
+     * 
+     * Va renvoyer toutes les équipes d'un utilisateur
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $user_token Token de l'équipe de projet
+     * @param string $project_token Token du projet
+     * @return array
+     */
+    
+    function getMemberTeams($user_token = '', $project_token = '') {
+        $array = [];
+        $request = $this -> _db -> query("SELECT * FROM `pr_project_team` WHERE `project_token` = '$project_token' AND `enable` = '1'");
+        $allTeams = $request->fetchAll();
+
+        foreach($allTeams as $team){
+            $team_token = $team['public_token'];
+
+            $request = $this -> _db -> query("SELECT * FROM `pr_project_team_member` WHERE `project_team_token` = '$team_token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
+            $res = $request->fetch();
+            if($res){
+                array_push($array, $team['public_token']);
+            }
+        }
+        return $array;
+    }
+
+
     /**
      * Test si l'utilisateur est le créateur du projet
      * 
@@ -99,6 +130,15 @@ class permission extends db_connect {
     function hasPermission($user_token, $project_token, $permission){
         $perms = $this -> getMemberPermissions($user_token, $project_token);
 
+
+        $allTeams = $this -> getMemberTeams($user_token, $project_token);
+        foreach($allTeams as $team){
+            if($this -> projectTeamHasPermission($team, $permission) == true){
+                return true;
+            }
+        }
+
+
         if ($this -> isProjectOwner($user_token, $project_token) == true) { 
             return true; 
         }
@@ -109,6 +149,7 @@ class permission extends db_connect {
         if (strpos($perms, $permission."|") !== false) {
             return true;
         }
+        
         return false;
     }
 
