@@ -111,6 +111,25 @@ class bug extends project {
        $request = $this -> _db -> exec("UPDATE `pr_bug` SET `enable` = 0 WHERE `bug_token` = '$token' AND `enable` = '1' ");
        return (['success' => true, 'options' => ['content' => "Le rapport de bug a été supprimé !", 'theme' => 'success'] ]);
    }
+
+
+
+   /**
+     * Modifie les infos
+     * 
+     * Va modifier les infos de la tache
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $name nom
+     * @param string $token Token de la tache
+     * @return array
+     */
+    
+    function editBug($name = '', $token = '') {
+        $exec = $this -> _db -> exec("UPDATE `pr_bug` SET `name` = '$name' WHERE `bug_token` = '$token' ");
+        return (['success' => true, 'options' => ['content' => "Les informations on été modifiés !", 'theme' => 'success'] ]);
+    }
     
     
     /**
@@ -229,6 +248,32 @@ class bug extends project {
         ]);
     }
 
+    /**
+     * Récupérer les teams assignés a une bug
+     * 
+     * Va récupérer les équipes assignés a une bug
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $project_token Token du projet
+     * @param string $bug_token Token du bug
+     * @return array
+     */
+    function getAllTeamAssigned($project_token = '', $bug_token = ''){
+        $request = $this -> _db -> query("SELECT * FROM `pr_bug` WHERE `project_token` = '$project_token' AND `bug_token` = '$bug_token' AND `enable` = '1' ");
+        $res = $request->fetch();
+        $teams = $res['assigned_teams'];
+
+        $allTeams = array();
+        if (strpos($teams, "|") !== false) {
+            $allTeams = explode('|', $teams);
+        }
+        return ([ 
+            'count' => sizeof($allTeams), 
+            'content' => $allTeams,
+        ]);
+    }
+
 
 
     /**
@@ -296,6 +341,32 @@ class bug extends project {
      * @return array
      */
     function getMemberassigned($project_token = '', $bug_token = ''){
+        $request = $this -> _db -> query("SELECT * FROM `pr_bug` WHERE `project_token` = '$project_token' AND `bug_token` = '$bug_token' AND `enable` = '1' ");
+        $res = $request->fetch();
+        $users = $res['assigned_members'];
+
+        $allUsers = array();
+        if (strpos($users, "|") !== false) {
+            $allUsers = explode('|', $users);
+        }
+        return ([ 
+            'count' => sizeof($allUsers), 
+            'content' => $allUsers,
+        ]);
+    }
+
+    /**
+     * Récupérer les membres assignés a un bug
+     * 
+     * Va récupérer les membres assignés a un bug
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $project_token Token du projet
+     * @param string $bug_token Token du bug
+     * @return array
+     */
+    function getAllMemberassigned($project_token = '', $bug_token = ''){
         $request = $this -> _db -> query("SELECT * FROM `pr_bug` WHERE `project_token` = '$project_token' AND `bug_token` = '$bug_token' AND `enable` = '1' ");
         $res = $request->fetch();
         $users = $res['assigned_members'];

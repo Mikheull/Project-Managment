@@ -1,3 +1,6 @@
+<div id="popup-bug-wrapper" class="hidden"></div>
+
+
 <div class="tab-item light-border">
     <div class="container">
         <div class="row mr-top mr-bot">
@@ -19,59 +22,13 @@
                                         <h4 class="text-sm">[<span style="color: #9c36b5"><?= $bug_item['bug_token'] ?></span>] - <?= $bug_item['name'] ?></h4> 
                                     </div>
 
-                                    <div class="col-2 text-align-right expand_btn link"><i class="fas fa-chevron-down"></i></div>
-                                    <div class="col-12 mr-top expand_content hidden">
-                                        <div class="color-lg-dark mr-bot"> <?= $bug_item['description'] ?> </div>
-                                        <div class="spacebar spacebar-xl"></div>
-                                        
-                                        <div class="row mr-top mr-bot">
-                                            <div class="col-12">Crée le : <span class="color-lg-dark"><?= date_format($date_creation, 'd/m/Y à H:i') ;?></span> </div>
-                                        </div>
-
-
+                                    <div class="col-2 flex">
                                         <?php
-                                            $allTeamsAssigned = $bug -> getTeamAssigned($router -> getRouteParam('2'), $bug_item['bug_token']);
-                                            $allMembersAssigned = $bug -> getMemberAssigned($router -> getRouteParam('2'), $bug_item['bug_token']);
-                                            
-                                            if($allTeamsAssigned['count'] !== 0){
-                                                ?> 
-                                                <div class="spacebar spacebar-xl"></div>
-                                                <div class="row mr-top mr-bot">
-                                                    <div class="col-12 mr-top">
-                                                        Équipes assignées :
-                                                        <ul>
-                                                            <?php 
-                                                            foreach($allTeamsAssigned['content'] as $ts){
-                                                                ?> <li class="color-lg-dark mr-left"><?= $utils -> getData('pr_project_team', 'name', 'public_token', $ts ) ?></li> <?php
-                                                            }
-                                                            ?> 
-                                                        </ul>
-                                                    </div> 
-                                                </div> 
-                                                <?php
-                                            }
-                                            if($allMembersAssigned['count'] !== 0){
-                                                ?> 
-                                                <div class="spacebar spacebar-xl"></div>
-                                                <div class="row mr-top mr-bot">
-                                                    <div class="col-12 mr-top">
-                                                        Membres assignés :
-                                                        <ul>
-                                                            <?php 
-                                                            foreach($allMembersAssigned['content'] as $ms){
-                                                                ?> <li class="color-lg-dark mr-left"><?= $utils -> getData('imp_user', 'username', 'public_token', $ms ) ?></li> <?php
-                                                            }
-                                                            ?> 
-                                                        </ul>
-                                                    </div> 
-                                                </div> 
-                                                <?php
+                                            if($bug -> memberIsAssigned($project_token, $bug_item['bug_token'], $main -> getToken()) == true){
+                                                ?> <div class="text-align-right link mr-2" data-tippy="Vous êtes assigné a ce bug"> <i data-feather="at-sign" class="color-red"></i> </div> <?php
                                             }
                                         ?>
-                                                            
-                                        <div class="spacebar spacebar-xl"></div>
-                                        <div class="btn btn-sm light-btn-bordered mr-top text-align-right" data-action="assign_bug" data-ref="<?= $bug_item['bug_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>"><i data-feather="user-plus"></i></div>
-                                        <div class="mr-top text-align-right link" style="color: #d9480f" id="move-to-working" data-bug="<?= $bug_item['bug_token'] ?>" data-pro="<?= $project_token ?>">En cours <i class="fas fa-arrow-right"></i></div>
+                                        <div id="popup-bug-btn" class="text-align-right link" data-ref="<?= $bug_item['bug_token'] ?>" data-pro="<?= $project_token ?>"> <i data-feather="maximize" class="color-lg-dark"></i> </div>
                                     </div>
                                 </div>
                             </div>
@@ -107,60 +64,13 @@
                                         <h4 class="text-sm">[<span style="color: #d9480f"><?= $bug_item['bug_token'] ?></span>] - <?= $bug_item['name'] ?></h4> 
                                     </div>
 
-                                    <div class="col-2 text-align-right expand_btn link"><i class="fas fa-chevron-down"></i></div>
-                                    <div class="col-12 mr-top expand_content hidden">
-                                        <div class="color-lg-dark mr-bot"> <?= $bug_item['description'] ?> </div>
-                                        <div class="spacebar spacebar-xl"></div>
-                                        
-                                        <div class="row mr-top mr-bot">
-                                            <div class="col-12">Crée le : <span class="color-lg-dark"><?= date_format($date_creation, 'd/m/Y à H:i') ;?></span> </div>
-                                            <div class="col-12 mr-top">"En cours" le : <span class="color-lg-dark"><?= date_format($date_working, 'd/m/Y à H:i') ;?></span> </div>
-                                        </div>
-
-
+                                    <div class="col-2 flex">
                                         <?php
-                                            $allTeamsAssigned = $bug -> getTeamAssigned($router -> getRouteParam('2'), $bug_item['bug_token']);
-                                            $allMembersAssigned = $bug -> getMemberAssigned($router -> getRouteParam('2'), $bug_item['bug_token']);
-                                            
-                                            if($allTeamsAssigned['count'] !== 0){
-                                                ?> 
-                                                <div class="spacebar spacebar-xl"></div>
-                                                <div class="row mr-top mr-bot">
-                                                    <div class="col-12 mr-top">
-                                                        Équipes assignées :
-                                                        <ul>
-                                                            <?php 
-                                                            foreach($allTeamsAssigned['content'] as $ts){
-                                                                ?> <li class="color-lg-dark mr-left"><?= $utils -> getData('pr_project_team', 'name', 'public_token', $ts ) ?></li> <?php
-                                                            }
-                                                            ?> 
-                                                        </ul>
-                                                    </div> 
-                                                </div> 
-                                                <?php
-                                            }
-                                            if($allMembersAssigned['count'] !== 0){
-                                                ?> 
-                                                <div class="spacebar spacebar-xl"></div>
-                                                <div class="row mr-top mr-bot">
-                                                    <div class="col-12 mr-top">
-                                                        Membres assignés :
-                                                        <ul>
-                                                            <?php 
-                                                            foreach($allMembersAssigned['content'] as $ms){
-                                                                ?> <li class="color-lg-dark mr-left"><?= $utils -> getData('imp_user', 'username', 'public_token', $ms ) ?></li> <?php
-                                                            }
-                                                            ?> 
-                                                        </ul>
-                                                    </div> 
-                                                </div> 
-                                                <?php
+                                            if($bug -> memberIsAssigned($project_token, $bug_item['bug_token'], $main -> getToken()) == true){
+                                                ?> <div class="text-align-right link mr-2" data-tippy="Vous êtes assigné a ce bug"> <i data-feather="at-sign" class="color-red"></i> </div> <?php
                                             }
                                         ?>
-                                                            
-                                        <div class="spacebar spacebar-xl"></div>
-                                        <div class="btn btn-sm light-btn-bordered mr-top text-align-right" data-action="assign_bug" data-ref="<?= $bug_item['bug_token'] ?>" data-pro="<?= $router -> getRouteParam('2') ?>"><i data-feather="user-plus"></i></div>
-                                        <div class="mr-top text-align-right link" style="color: #2b8a3e" id="move-to-end" data-bug="<?= $bug_item['bug_token'] ?>" data-pro="<?= $project_token ?>">Terminé <i class="fas fa-arrow-right"></i></div>
+                                        <div id="popup-bug-btn" class="text-align-right link" data-ref="<?= $bug_item['bug_token'] ?>" data-pro="<?= $project_token ?>"> <i data-feather="maximize" class="color-lg-dark"></i> </div>
                                     </div>
                                 </div>
                             </div>
@@ -196,57 +106,13 @@
                                         <h4 class="text-sm">[<span style="color: #2b8a3e"><?= $bug_item['bug_token'] ?></span>] - <?= $bug_item['name'] ?></h4> 
                                     </div>
 
-                                    <div class="col-2 text-align-right expand_btn link"><i class="fas fa-chevron-down"></i></div>
-                                        <div class="col-12 mr-top expand_content hidden">
-                                        <div class="color-lg-dark mr-bot"> <?= $bug_item['description'] ?> </div>
-                                        <div class="spacebar spacebar-xl"></div>
-                                        
-                                        <div class="row mr-top mr-bot">
-                                            <div class="col-12">Crée le : <span class="color-lg-dark"><?= date_format($date_creation, 'd/m/Y à H:i') ;?></span> </div>
-                                            <div class="col-12 mr-top">"En cours" le : <span class="color-lg-dark"><?= date_format($date_working, 'd/m/Y à H:i') ;?></span> </div>
-                                            <div class="col-12 mr-top">Terminé le : <span class="color-lg-dark"><?= date_format($date_end, 'd/m/Y à H:i') ;?></span> </div>
-                                        </div>
-
-
+                                    <div class="col-2 flex">
                                         <?php
-                                            $allTeamsAssigned = $bug -> getTeamAssigned($router -> getRouteParam('2'), $bug_item['bug_token']);
-                                            $allMembersAssigned = $bug -> getMemberAssigned($router -> getRouteParam('2'), $bug_item['bug_token']);
-                                            
-                                            if($allTeamsAssigned['count'] !== 0){
-                                                ?> 
-                                                <div class="spacebar spacebar-xl"></div>
-                                                <div class="row mr-top mr-bot">
-                                                    <div class="col-12 mr-top">
-                                                        Équipes assignées :
-                                                        <ul>
-                                                            <?php 
-                                                            foreach($allTeamsAssigned['content'] as $ts){
-                                                                ?> <li class="color-lg-dark mr-left"><?= $utils -> getData('pr_project_team', 'name', 'public_token', $ts ) ?></li> <?php
-                                                            }
-                                                            ?> 
-                                                        </ul>
-                                                    </div> 
-                                                </div> 
-                                                <?php
-                                            }
-                                            if($allMembersAssigned['count'] !== 0){
-                                                ?> 
-                                                <div class="spacebar spacebar-xl"></div>
-                                                <div class="row mr-top mr-bot">
-                                                    <div class="col-12 mr-top">
-                                                        Membres assignés :
-                                                        <ul>
-                                                            <?php 
-                                                            foreach($allMembersAssigned['content'] as $ms){
-                                                                ?> <li class="color-lg-dark mr-left"><?= $utils -> getData('imp_user', 'username', 'public_token', $ms ) ?></li> <?php
-                                                            }
-                                                            ?> 
-                                                        </ul>
-                                                    </div> 
-                                                </div> 
-                                                <?php
+                                            if($bug -> memberIsAssigned($project_token, $bug_item['bug_token'], $main -> getToken()) == true){
+                                                ?> <div class="text-align-right link mr-2" data-tippy="Vous êtes assigné a ce bug"> <i data-feather="at-sign" class="color-red"></i> </div> <?php
                                             }
                                         ?>
+                                        <div id="popup-bug-btn" class="text-align-right link" data-ref="<?= $bug_item['bug_token'] ?>" data-pro="<?= $project_token ?>"> <i data-feather="maximize" class="color-lg-dark"></i> </div>
                                     </div>
                                 </div>
                             </div>
@@ -266,8 +132,9 @@
 
 // Assign
 $(document).on("click", "[data-action='assign_bug']", function(e) {
-    let ref = this.dataset.ref;
-    let project = this.dataset.pro;
+    var ctx = document.getElementById("bug-if");
+    var ref = ctx.getAttribute("data-ref")
+    var project = ctx.getAttribute("data-pro")
 
     bootbox.dialog({
         backdrop: true,

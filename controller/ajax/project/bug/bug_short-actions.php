@@ -75,6 +75,41 @@ if($action == 'assign_bug'){
 }
 
 
+if($action == 'delete'){
+    if($permission -> hasPermission($main -> getToken(), $project_token, 'bug-tracker.delete')){
+        $errors = $bug -> disableBug($bug_token);
+    }else{
+        $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
+    }
+
+    ?> <script> location.reload(); </script> <?php
+
+}
+
+
+if($action == 'edit'){
+    if(!empty($_POST['bug_name'])){
+        $bug_name = cleanVar($_POST['bug_name']);
+
+        if($permission -> hasPermission($main -> getToken(), $project_token, 'bug-tracker.edit')){
+            $errors = $bug -> editBug($bug_name, $bug_token);
+        }else{
+            $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
+        }
+    }else{
+        $errors = ['success' => false, 'options' => ['content' => "Remplissez tout les champs !", 'theme' => 'error'] ];
+    }
+
+    ?> <script> location.reload(); </script> <?php
+
+}
+
+
+if($action == 'popup-bug'){
+    require ('../../../../view/app/project/tools/bug-tracker/home/components/overlay-bug-info.php');
+}
+
+
 
 
 if(isset($errors)){
