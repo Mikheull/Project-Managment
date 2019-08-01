@@ -1,7 +1,9 @@
 
 // Edit
 $(document).on("click", "[data-action='edit_event']", function(e) {
-    let ref = this.dataset.ref;
+    var ctx = document.getElementById("event-if");
+    var ref = ctx.getAttribute("data-ref")
+    var project = ctx.getAttribute("data-pro")
 
     bootbox.dialog({
         backdrop: true,
@@ -18,7 +20,7 @@ $(document).on("click", "[data-action='edit_event']", function(e) {
                     $.ajax({
                         url:  rootUrl + 'controller/ajax/project/calendar/event_short-actions.php',
                         type: 'POST',
-                        data: {event_name: event_name, event_desc: event_desc, event_token: ref, action: 'edit'},
+                        data: {project_token : project, event_name: event_name, event_desc: event_desc, event_token: ref, action: 'edit'},
                         success:function(data){
                             $('#calendar_details_output').html(data);
                         }
@@ -41,7 +43,9 @@ $(document).on("click", "[data-action='edit_event']", function(e) {
 // Suppression
 $(document).on("click", "[data-action='delete_event']", function(e) {
     event.preventDefault();
-    let ref = this.dataset.ref;
+    var ctx = document.getElementById("event-if");
+    var ref = ctx.getAttribute("data-ref")
+    var project = ctx.getAttribute("data-pro")
 
     bootbox.confirm({
         backdrop: true,
@@ -63,7 +67,7 @@ $(document).on("click", "[data-action='delete_event']", function(e) {
                 $.ajax({
                     url:  rootUrl + 'controller/ajax/project/calendar/event_short-actions.php',
                     type: 'POST',
-                    data: {event_token: ref, action: 'delete'},
+                    data: {project_token : project, event_token: ref, action: 'delete'},
                     success:function(data){
                         $('#calendar_details_output').html(data);
                     }
@@ -71,4 +75,45 @@ $(document).on("click", "[data-action='delete_event']", function(e) {
             }
         }
     });
+});
+
+
+
+
+$(document).ready(function() {
+    $(document).on("click", "#close-event-popup", function(e) {
+        $( '#popup-event-wrapper' ).empty();
+        $( '#popup-event-wrapper' ).toggleClass( 'hidden' );
+    });
+});
+$(document).bind('keydown', function(e) {
+    if(e.which == 27) {
+        if ( $( "#popup-event-wrapper #event-if" ).length ) {
+            e.preventDefault();
+            $( '#popup-event-wrapper' ).empty();
+            $( '#popup-event-wrapper' ).toggleClass( 'hidden' );
+        }
+        return false;
+    }
+});
+$('#popup-event-wrapper').mouseup(function(e){
+    var container = $(".event_popup");
+    if ( $( ".event_popup" ).length ) {
+        if (!container.is(e.target) && container.has(e.target).length === 0) {
+            $( '#popup-event-wrapper' ).empty();
+            $( '#popup-event-wrapper' ).toggleClass( 'hidden' );
+        }
+    }
+});
+
+
+$(document).on('click', '.head_menu li', function() {
+    $( '.head_menu li').removeClass( 'active' );
+    $( this ).addClass( 'active' );
+
+    let page = this.dataset.page;
+    $( '.page_el').removeClass( 'hidden' );
+    $( '.page_el').toggleClass( 'hidden' );
+    $( '.page_el#'+page).toggleClass( 'hidden' );
+
 });

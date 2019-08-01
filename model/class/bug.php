@@ -90,6 +90,10 @@ class bug extends project {
         if($count !== 1){
             return (['success' => false, 'options' => ['content' => "Une erreur est survenue !", 'theme' => 'error'] ]);
         }
+
+        // Log
+        $user = main::getToken();
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$bug_token', 'create-bug', '') ");
         return (['success' => true, 'options' => ['content' => "Le rapport de bug a été crée !", 'theme' => 'success'] ]);
 
     } 
@@ -103,13 +107,18 @@ class bug extends project {
     *
     * @access public
     * @author Mikhaël Bailly
-    * @param string $token Token de la tache
+    * @param string $bug_token Token de la tache
+    * @param string $project_token Token du projet
     * @return array
     */
 
-   function disableBug($token = '') {
-       $request = $this -> _db -> exec("UPDATE `pr_bug` SET `enable` = 0 WHERE `bug_token` = '$token' AND `enable` = '1' ");
-       return (['success' => true, 'options' => ['content' => "Le rapport de bug a été supprimé !", 'theme' => 'success'] ]);
+   function disableBug($bug_token = '', $project_token = '') {
+        $request = $this -> _db -> exec("UPDATE `pr_bug` SET `enable` = 0 WHERE `bug_token` = '$bug_token' AND `enable` = '1' ");
+       
+        // Log
+        $user = main::getToken();
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$bug_token', 'disable-bug', '') ");
+        return (['success' => true, 'options' => ['content' => "Le rapport de bug a été supprimé !", 'theme' => 'success'] ]);
    }
 
 
@@ -122,12 +131,17 @@ class bug extends project {
      * @access public
      * @author Mikhaël Bailly
      * @param string $name nom
-     * @param string $token Token de la tache
+     * @param string $bug_token Token de la tache
+     * @param string $project_token Token du projet
      * @return array
      */
     
-    function editBug($name = '', $token = '') {
-        $exec = $this -> _db -> exec("UPDATE `pr_bug` SET `name` = '$name' WHERE `bug_token` = '$token' ");
+    function editBug($name = '', $bug_token = '', $project_token = '') {
+        $exec = $this -> _db -> exec("UPDATE `pr_bug` SET `name` = '$name' WHERE `bug_token` = '$bug_token' ");
+
+        // Log
+        $user = main::getToken();
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$bug_token', 'edit-bug', '$name') ");
         return (['success' => true, 'options' => ['content' => "Les informations on été modifiés !", 'theme' => 'success'] ]);
     }
     
@@ -139,12 +153,17 @@ class bug extends project {
     *
     * @access public
     * @author Mikhaël Bailly
-    * @param string $token Token de la tache
+    * @param string $bug_token Token de la tache
+    * @param string $project_token Token du projet
     * @return array
     */
 
-   function setWorkinBug($token = '') {
-        $request = $this -> _db -> exec("UPDATE `pr_bug` SET `date_working` = NOW(), `level` = '2' WHERE `bug_token` = '$token' AND `enable` = '1' ");
+   function setWorkinBug($bug_token = '', $project_token = '') {
+        $request = $this -> _db -> exec("UPDATE `pr_bug` SET `date_working` = NOW(), `level` = '2' WHERE `bug_token` = '$bug_token' AND `enable` = '1' ");
+
+        // Log
+        $user = main::getToken();
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$bug_token', 'set-working-bug', '') ");
         return (['success' => true, 'options' => ['content' => "Le bug a été mis en statut (en cours) !", 'theme' => 'success'] ]);
    }
     
@@ -156,12 +175,17 @@ class bug extends project {
    *
    * @access public
    * @author Mikhaël Bailly
-   * @param string $token Token de la tache
+   * @param string $bug_token Token de la tache
+    * @param string $project_token Token du projet  
    * @return array
    */
 
-  function setEndBug($token = '') {
-       $request = $this -> _db -> exec("UPDATE `pr_bug` SET `date_end` = NOW(), `level` = '3' WHERE `bug_token` = '$token' AND `enable` = '1' ");
+  function setEndBug($bug_token = '', $project_token = '') {
+       $request = $this -> _db -> exec("UPDATE `pr_bug` SET `date_end` = NOW(), `level` = '3' WHERE `bug_token` = '$bug_token' AND `enable` = '1' ");
+
+        // Log
+        $user = main::getToken();
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$bug_token', 'set-end-bug', '') ");
        return (['success' => true, 'options' => ['content' => "Le bug a été mis en statut (terminé) !", 'theme' => 'success'] ]);
   }
 
@@ -189,6 +213,10 @@ class bug extends project {
                 $teams .= $team.'|';
             }
             $request = $this -> _db -> exec("UPDATE `pr_bug` SET `assigned_teams` = '$teams' WHERE `project_token` = '$project_token' AND `bug_token` = '$bug_token' AND `enable` = '1' ");
+
+            // Log
+            $user = main::getToken();
+            $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$bug_token', 'assign-team-bug', '$teams') ");
         }else{
             $request = $this -> _db -> exec("UPDATE `pr_bug` SET `assigned_teams` = '' WHERE `project_token` = '$project_token' AND `bug_token` = '$bug_token' AND `enable` = '1' ");
 
@@ -296,6 +324,10 @@ class bug extends project {
                 $members .= $member.'|';
             }
             $request = $this -> _db -> exec("UPDATE `pr_bug` SET `assigned_members` = '$members' WHERE `project_token` = '$project_token' AND `bug_token` = '$bug_token' AND `enable` = '1' ");
+
+            // Log
+            $user = main::getToken();
+            $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$bug_token', 'assign-member-bug', '$members') ");
         }else{
             $request = $this -> _db -> exec("UPDATE `pr_bug` SET `assigned_members` = '' WHERE `project_token` = '$project_token' AND `bug_token` = '$bug_token' AND `enable` = '1' ");
 

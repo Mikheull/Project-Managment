@@ -33,6 +33,7 @@ require_once ('../../../../model/class/bug.php');
 require_once ('../../../../model/class/authentication.php');
 require_once ('../../../../model/class/utils.php');
 require_once ('../../../../model/class/permission.php');
+require_once ('../../../../model/class/activity.php');
 
 $main = new main();
 $router = new router($db);
@@ -43,6 +44,7 @@ $bug = new bug($db);
 $auth = new authentication($db);
 $utils = new utils($db);
 $permission = new permission($db);
+$activity = new activity($db);
 
 if(isset($_POST['result'])){ $result = $_POST['result']; }
 $bug_token = $_POST['bug_token'];
@@ -77,7 +79,7 @@ if($action == 'assign_bug'){
 
 if($action == 'delete'){
     if($permission -> hasPermission($main -> getToken(), $project_token, 'bug-tracker.delete')){
-        $errors = $bug -> disableBug($bug_token);
+        $errors = $bug -> disableBug($bug_token, $project_token);
     }else{
         $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
     }
@@ -92,7 +94,7 @@ if($action == 'edit'){
         $bug_name = cleanVar($_POST['bug_name']);
 
         if($permission -> hasPermission($main -> getToken(), $project_token, 'bug-tracker.edit')){
-            $errors = $bug -> editBug($bug_name, $bug_token);
+            $errors = $bug -> editBug($bug_name, $bug_token, $project_token);
         }else{
             $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
         }

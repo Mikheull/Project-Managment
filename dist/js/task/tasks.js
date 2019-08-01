@@ -200,7 +200,6 @@ $(document).on("click", "[data-action='reopen_task']", function(e) {
 $(document).on('click', '#popup-task-btn', function() {
     let ref = this.dataset.ref;
     let project = this.dataset.pro;
-    console.log(ref, project);
     $( '#popup-task-wrapper' ).toggleClass( 'hidden' );
     
     $.ajax({

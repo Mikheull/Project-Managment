@@ -3,10 +3,10 @@
 ?>
 
 
-<div id="demo" class="mr-top-lg mermaid">
+<div class="mr-top-lg mermaid">
     gantt
     dateFormat  YYYY-MM-DD
-    title Votre diagramme de GANTT
+    title Diagramme de Gant actuel
 
     <?php
         foreach($tabs['content'] as $t){
@@ -18,10 +18,14 @@
             $c = 1;
             foreach($tasks['content'] as $task_item){
                 $date1 = new DateTime();
-                $date2 = new DateTime( $task_item['deadline'] );
+                if($task_item['date_end'] !== 'null'){
+                    $date2 = new DateTime( $task_item['date_end'] );
+                }else{
+                    $date2 = new DateTime( $task_item['deadline'] );
+                }
+
                 $interval = $date1->diff($date2);
-                $date_creation = new DateTime( $task_item['date_creation'] );
-                $deadline = $date2->format('Y-m-d');
+                $date = $date2->format('Y-m-d');
                 $count = ($c == 1) ? 'a1' : 'after a1';
 
 
@@ -36,7 +40,7 @@
                 }
 
             ?>
-            <?= $task_item['name'] ?>               :<?= $status ?>, <?= $deadline ?>, <?= date("h", strtotime( $task_item['duration'] )) ?>H
+            <?= $task_item['name'] ?>               :<?= $status ?>, <?= $date ?>, 1d
             <?php
             $c ++;
             }

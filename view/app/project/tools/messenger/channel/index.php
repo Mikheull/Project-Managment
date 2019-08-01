@@ -1,6 +1,13 @@
 <?php
     require_once ('controller/project.php') ;
     require_once ('controller/messenger.php') ;
+
+    if($messenger -> isChannelMember($main -> getToken(), $router -> getRouteParam("2"), $router -> getRouteParam("5")) == false){
+        $messenger -> registerMemberChannel($main -> getToken(), $router -> getRouteParam("2"), $router -> getRouteParam("5"));
+    }
+
+    $lastChannelMessage = $messenger -> getLastMessagePosted($router -> getRouteParam("5"));
+    $messenger -> setLastViewedMessage($main -> getToken(), $router -> getRouteParam("2"), $router -> getRouteParam("5"), $lastChannelMessage['message_token'])
 ?>
 
 
@@ -13,8 +20,8 @@
     <div class="content_wrapper">
         <div class="container-fluid">
 
-            <div class="row tabs mr-top-lg light-border">
-                <div class="col-md-3 col-12 conv_list">
+            <div class="row tabs mr-top-lg">
+                <div class="col-lg-3 col-2 light-border conv_wrapper">
                     <?php
                         $allChannels = $messenger -> getProjectChannels($router -> getRouteParam("2"));
                         foreach($allChannels['content'] as $channel){
@@ -22,33 +29,51 @@
 
                             ?> 
                                 <a class="conv-item row mr-top mr-bot" href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/messenger/<?= $channel['channel_token'] ;?>">
-                                    <div class="col-12 mr-bot color-lg-dark">#<?= $channel['name'] ;?></div> 
-                                    <?php
-                                    if($lastMessage['content'] == null){
-                                        ?>
-                                            <div class="col-12 text-xs">Aucun message récent</div> 
-                                        <?php
-                                    }else{
-                                        $mes = ($lastMessage['content_edited'] == null ? $lastMessage['content'] : $lastMessage['content_edited']);
-                                        ?>
-                                            <div class="col-8 text-xs"><?= substr($mes, 0, 30); ?>...</div> 
-                                            <div class="col-4 text-xs"><?= $config -> time_elapsed_string($lastMessage['date_edited'] == null ? $lastMessage['date_creation'] : $lastMessage['date_edited']) ?></div> 
-                                        <?php
-                                    }
-                                    ?>
+                                    
+                                    <div class="col-2">
+                                        <div class="avatar avatar--md">
+                                            <figure class="avatar__figure" role="img" aria-label="James Powell">
+                                                <svg class="avatar__placeholder" aria-hidden="true" viewBox="0 0 20 20" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="6" r="2.5" stroke="currentColor"/><path d="M10,10.5a4.487,4.487,0,0,0-4.471,4.21L5.5,15.5h9l-.029-.79A4.487,4.487,0,0,0,10,10.5Z" stroke="currentColor"/></svg>
+                                                <div class="avatar__initials"><span class="color-lg-dark"><?= strtoupper(substr($channel['name'], 0, 1)).substr($channel['name'], 1, 1) ;?></span></div>
+                                            </figure>
+                                            <span role="status" class="avatar__status avatar__status--active" aria-label="Active"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-10 lg-hide">
+                                        <div class="flex justify-content-between">
+                                            <span class="text-sm"><?= $channel['name'] ;?></span>
+                                            <span class="text-xs"><?= $config -> time_elapsed_string($lastMessage['date_edited'] == null ? $lastMessage['date_creation'] : $lastMessage['date_edited']) ?></span>
+                                        </div>
+                                        <div class="mr-top mr-bot">
+                                            <?php
+                                                if($lastMessage['content'] == null){
+                                                    ?>
+                                                        <div class="text-xs">Aucun message récent</div> 
+                                                    <?php
+                                                }else{
+                                                    $mes = ($lastMessage['content_edited'] == null ? $lastMessage['content'] : $lastMessage['content_edited']);
+                                                    ?>
+                                                        <div class="text-xs"><?= substr($mes, 0, 30); ?>...</div> 
+                                                    <?php
+                                                }
+                                            ?>
+                                        </div>
+                                    </div>
+
+
+                                    
                                 </a> 
                             <?php
                         }
                     ?>
-                    <a class="btn btn-sm primary-btn flex center" data-action="new_channel" data-pro="<?= $router -> getRouteParam('2') ?>" href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/messenger/<?= $router -> getRouteParam('5') ?>">Nouveau channel</a> 
+                    <a class="lg-hide btn btn-sm primary-btn flex center" data-action="new_channel" data-pro="<?= $router -> getRouteParam('2') ?>" href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/messenger">Nouveau channel</a> 
+                    <a class="lg-show btn btn-sm primary-btn flex center" data-action="new_channel" data-pro="<?= $router -> getRouteParam('2') ?>" href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/messenger"><i data-feather="plus-circle"></i></a> 
                 </div>
 
-                <div class="col-md-9 col-12 conv_wrapper chat">
-                    <div class="chat-history">
-                        <div class="text-align-center">
-                            <span class="text-xs color-primary">Début du channel : <?= $config -> time_elapsed_string($utils -> getData('pr_messenger_channels', 'date_creation', 'channel_token', $router -> getRouteParam("5"))) ?></span>
-                        </div>
+                <div class="col-md-9 col-10 conv_wrapper chat">
+                    <div class="chat-history overflow">
 
+                        <!-- <div id="loader" style="text-align:center;"><img src="<?= $config -> rootUrl() ;?>dist/images/content/loading-64px.gif" /></div> -->
                         <ul>
 
                             <?php
@@ -58,86 +83,63 @@
                                     $mes = $message['content_edited'] == null ? $message['content'] : $message['content_edited'];
                                     $mes = $messenger -> convertMarkdown($mes, $router -> getRouteParam("2"));
                                     
-                                    
-
-                                    if($message['author_token'] == $main -> getToken()){
-                                        ?>
-                                        <li class="clearfix message-item" data-token="<?= $message['message_token'] ?>">
+                                    $check = false;
+                                    if(isset($pre_sender)){
+                                        if($pre_sender == $message['author_token']){
+                                            $date1 = new DateTime($pre_sender_date);
+                                            $date1->modify('+15 minute');
+                                            $date2 = new DateTime($message['date_creation']);
+                                            if ($date1 < $date2) {
+                                                $check = true;
+                                            }
+                                        }else{
+                                            $check = true;
+                                        }
+                                    }else{
+                                        $check = true;
+                                    }
+                                    ?>
+                                        <li class="message-item <?= ($check == true) ? 'mr-top-lg mb-2' : 'mb-2' ?>" data-token="<?= $message['message_token'] ?>">
+                                            
                                             <?php
-                                            if(isset($pre_sender)){
-                                                if($pre_sender == $message['author_token']){
-                                                    
-                                                    $date1 = new DateTime($pre_sender_date);
-                                                    $date1->modify('+15 minute');
-                                                    $date2 = new DateTime($message['date_creation']);
-                                                    
-                                                    if ($date1 > $date2) {
-                                                        $group_count = $group_count + 1;
-                                                    }else{
-                                                        $group_count = 1;
-                                                        ?>
-                                                            <script> $( 'li[data-token="<?= $message['message_token'] ?>"]' ).prev( "li" ).children().removeClass( "my-message-middle" ).addClass( "my-message-bottom" );</script>
-                                                            <div class="message-data text-align-right mr-top"> <span class="message-data-time text-xs" ><?= $config -> time_elapsed_string($message['date_edited'] == null ? $message['date_creation'] : $message['date_edited']) ?></span> </div>
-                                                        <?php
-                                                    }
-                                                }
-                                            }else{
+                                            if($check == true){
                                                 ?>
-                                                    <div class="message-data text-align-right mr-top"> <span class="message-data-time text-xs" ><?= $config -> time_elapsed_string($message['date_creation']) ?></span> </div>
-                                                <?php
+                                                <div class="message-data flex">
+                                                    <span class="message-data-name flex text-xs">
+                                                        <div class="avatar avatar--md mr-right"> 
+                                                            <figure class="avatar__figure" role="img">
+                                                                <svg class="avatar__placeholder" aria-hidden="true" viewBox="0 0 20 20" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="6" r="2.5" stroke="currentColor"/><path d="M10,10.5a4.487,4.487,0,0,0-4.471,4.21L5.5,15.5h9l-.029-.79A4.487,4.487,0,0,0,10,10.5Z" stroke="currentColor"/></svg>
+                                                                <img class="avatar__img" src="<?= $config -> rootUrl() ;?>dist/<?= $utils -> getData('imp_user', 'profil_image', 'public_token', $message['author_token']) == NULL ? 'images/content/defaut_profil_pic.jpg' : 'uploads/u/'. $message['author_token'].'/profil_pic/'.$utils -> getData('imp_user', 'profil_image', 'public_token', $message['author_token']) ;?>">
+                                                            </figure>
+                                                        </div>
+                                                        <span class="mt-1 mr-right"> xxx </span> 
+                                                        <span class="mt-1"> <?= $utils -> getData('imp_user', 'username', 'public_token', $message['author_token']) ?></span> 
+                                                        <span class="mt-1 mr-left color-gray text-xs"><?= $config -> time_elapsed_string($message['date_edited'] == null ? $message['date_creation'] : $message['date_edited']) ?></span>
+                                                    </span>
+                                                </div>
+                                            <?php
                                             }
                                             ?>
-                                            
-                                            <div class="message my-message float-right flex justify-content-between <?= $group_count == 1 ? 'my-message-top' : 'my-message-middle' ?>">
-                                                <?= $mes ;?>
+
+                                            <div class="flex justify-content-between">
+                                                <div class="message flex justify-content-between">
+                                                    <p> <?= $mes ;?> </p>
+                                                </div>
+                                                <!-- <span class="mt-1 mr-left color-dark-lg text-xs"><?= $message['content_edited'] !== null ? 'edité' : ''; ?></span> -->
                                                 <?php
-                                                    if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'messenger.tchat.manage')){
+                                                    if($message['author_token'] == $main -> getToken() && $permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'messenger.tchat.manage')){
                                                         ?> <span class="actions link" data-tippy-content='<span class="message-data-time text-xs" ><?= $message['date_creation'] ?></span><br class="mr-bot"><a class="link dark-link" data-action="edit_message" data-message="<?= $message['message_token'] ?>">Éditer</a><br><a class="link dark-link" data-action="delete_message" data-message="<?= $message['message_token'] ?>">Supprimer</a>'><i class="fas fa-ellipsis-v color-dark"></i></span> <?php
+                                                    }else{
+                                                        if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'messenger.tchat.manage.other')){
+                                                            ?> <span class="actions link" data-tippy-content='<span class="message-data-time text-xs" ><?= $message['date_creation'] ?></span><br class="mr-bot"><a class="link dark-link" data-action="delete_message" data-message="<?= $message['message_token'] ?>">Supprimer</a>'><i class="fas fa-ellipsis-v color-dark"></i></span> <?php
+                                                        }
                                                     }
                                                 ?>
                                             </div>
+                                            
                                         </li>
                                         <?php
 
-
-                                    }else{
-                                        ?>
-                                        <li class="message-item" data-token="<?= $message['message_token'] ?>">
-                                            <?php
-                                            if(isset($pre_sender)){
-                                                if($pre_sender == $message['author_token']){
-                                                    $date1 = new DateTime($pre_sender_date);
-                                                    $date1->modify('+15 minute');
-                                                    $date2 = new DateTime($message['date_creation']);
-                                                    if ($date1 > $date2) {
-                                                        // echo 'moins de 15 minutes, on groupe';
-                                                    }
-                                                }
-                                            }
-                                            ?>
-                                            <div class="message-data flex">
-                                                <span class="message-data-name flex text-xs">
-                                                    <div class="avatar avatar--sm mr-right"> 
-                                                        <figure class="avatar__figure" role="img">
-                                                            <svg class="avatar__placeholder" aria-hidden="true" viewBox="0 0 20 20" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="6" r="2.5" stroke="currentColor"/><path d="M10,10.5a4.487,4.487,0,0,0-4.471,4.21L5.5,15.5h9l-.029-.79A4.487,4.487,0,0,0,10,10.5Z" stroke="currentColor"/></svg>
-                                                            <img class="avatar__img" src="<?= $config -> rootUrl() ;?>dist/<?= $utils -> getData('imp_user', 'profil_image', 'public_token', $message['author_token']) == NULL ? 'images/content/defaut_profil_pic.jpg' : 'uploads/u/'. $message['author_token'].'/profil_pic/'.$utils -> getData('imp_user', 'profil_image', 'public_token', $message['author_token']) ;?>">
-                                                        </figure>
-                                                    </div>
-                                                    <?= $utils -> getData('imp_user', 'username', 'public_token', $message['author_token']) ?>
-                                                </span>&nbsp; &nbsp;
-                                                <span class="message-data-time text-xs"><?= $config -> time_elapsed_string($message['date_edited'] == null ? $message['date_creation'] : $message['date_edited']) ?></span>
-                                            </div>
-                                            <div class="message other-message float-left flex justify-content-between message-middle">
-                                                <?= $mes ;?>
-                                                <?php
-                                                    if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'messenger.tchat.manage.other')){
-                                                        ?> <span class="actions link" data-tippy-content='<span class="message-data-time text-xs" ><?= $message['date_creation'] ?></span><br class="mr-bot"><a class="link dark-link" data-action="delete_message" data-message="<?= $message['message_token'] ?>">Supprimer</a>'><i class="fas fa-ellipsis-v color-dark"></i></span> <?php
-                                                    }
-                                                ?>
-                                            </div>
-                                        </li>
-                                    <?php
-                                    }
                                     $pre_token = $message['message_token'];
                                     $pre_sender = $message['author_token'];
                                     $pre_sender_date = $message['date_creation'];
@@ -145,6 +147,7 @@
                             ?>
 
                         </ul>
+                        <div id="anchor"></div>
                     </div>
 
                     <div class="chat-message clearfix">
@@ -182,6 +185,9 @@ tippy('.message-item .actions', {
     arrow: true,
 
 })
+
+$('.overflow').scrollTop($('#anchor').offset().top);
+
 
 </script>
 

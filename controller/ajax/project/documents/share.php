@@ -30,6 +30,7 @@ require_once ('../../../../model/class/authentication.php');
 require_once ('../../../../model/class/utils.php');
 require_once ('../../../../model/class/document.php');
 require_once ('../../../../model/class/shortener.php');
+require_once ('../../../../model/class/activity.php');
 
 
 $main = new main();
@@ -40,6 +41,7 @@ $project = new project($db);
 $auth = new authentication($db);
 $utils = new utils($db);
 $shortener = new shortener($db);
+$activity = new activity($db);
 
 
 

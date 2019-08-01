@@ -54,6 +54,10 @@ class calendar extends project {
         if($count !== 1){
             return (['success' => false, 'options' => ['content' => "Une erreur est survenue !", 'theme' => 'error'] ]);
         }
+
+        // Log
+        $user = main::getToken();
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$event_token', 'create-event-calendar', '') ");
         return (['success' => true, 'options' => ['content' => "L'evenement a été ajouté !", 'theme' => 'success'] ]);
 
     } 
@@ -68,11 +72,16 @@ class calendar extends project {
      * @access public
      * @author Mikhaël Bailly
      * @param string $token Token de l'event
+     * @param string $project_token Token du projet
      * @return array
      */
 
-    function disableEvent($token = '') {
+    function disableEvent($token = '', $project_token = '') {
         $request = $this -> _db -> exec("UPDATE `pr_event` SET `enable` = 0 WHERE `event_token` = '$token' AND `enable` = '1' ");
+
+        // Log
+        $user = main::getToken();
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$token', 'disable-event-calendar', '') ");
         return (['success' => true, 'options' => ['content' => "L'event a été supprimé !", 'theme' => 'success'] ]);
     }
 
@@ -88,11 +97,16 @@ class calendar extends project {
      * @param string $name nom
      * @param string $description Description de l'event
      * @param string $token Token de l'event
+     * @param string $project_token Token du projet
      * @return array
      */
     
-    function editEvent($name = '', $description = '', $token = '') {
+    function editEvent($name = '', $description = '', $token = '', $project_token = '') {
         $exec = $this -> _db -> exec("UPDATE `pr_event` SET `name` = '$name', `description` = '$description' WHERE `event_token` = '$token' ");
+
+        // Log
+        $user = main::getToken();
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$token', 'edit-event-calendar', '') ");
         return (['success' => true, 'options' => ['content' => "Les informations on été modifiés !", 'theme' => 'success'] ]);
     }
 

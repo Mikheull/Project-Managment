@@ -1,7 +1,6 @@
 <?php
     require_once ('controller/project.php') ;
     require_once ('controller/task.php') ;
-    require_once ('controller/activity.php') ;
 
     $tabs = $task -> getTabs( $router -> getRouteParam('2') );
     $project_token = $router -> getRouteParam('2');
@@ -17,12 +16,16 @@
     <div class="content_wrapper">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-8 col-12 navbar-app">
-                    <div class="navbar-nav">
-                        <ul class="text-align-left">
+                <div class="col-12 navbar-app">
+                    <div class="navbar-nav flex justify-content-between">
+                        <ul>
                             <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/gestion-projet" class="link dark-link active"> Tableaux </a> </li>
                             <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/gestion-projet/reports" class="link dark-link"> Rapports </a> </li>
                             <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/gestion-projet/gantt" class="link dark-link"> Gantt </a> </li>
+                        </ul>
+
+                        <ul>
+                            <li class="nav-item"> <a id="new-tab" data-pro="<?= $project_token ?>" class="btn dark-btn"> <i data-feather="plus-circle"></i> Nouveau tableau </a> </li>
                         </ul>
                     </div>
                 </div>

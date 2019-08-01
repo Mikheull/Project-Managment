@@ -29,6 +29,7 @@ require_once ('../../../../model/class/project.php');
 require_once ('../../../../model/class/task.php');
 require_once ('../../../../model/class/authentication.php');
 require_once ('../../../../model/class/permission.php');
+require_once ('../../../../model/class/activity.php');
 
 $main = new main();
 $router = new router($db);
@@ -38,6 +39,7 @@ $project = new project($db);
 $task = new task($db);
 $auth = new authentication($db);
 $permission = new permission($db);
+$activity = new activity($db);
 
 
 

@@ -63,6 +63,10 @@ class recherche_utilisateur extends db_connect {
         if($count !== 1){
             return (['success' => false, 'options' => ['content' => "Une erreur est survenue !", 'theme' => 'error'] ]);
         }
+
+        // Log
+        $user = main::getToken();
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$etude_token', 'create-user-research', '') ");
         return (['success' => true, 'options' => ['content' => "L\'étude a été crée !", 'theme' => 'success'] ]);
 
     } 
@@ -151,6 +155,9 @@ class recherche_utilisateur extends db_connect {
             }
         }
 
+        // Log
+        $user = main::getToken();
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$survey_token', 'create-survey-user-research', '') ");
         return (['success' => true, 'options' => ['content' => "Le sondage a été crée !", 'theme' => 'success'] ]);
 
     } 
@@ -344,11 +351,16 @@ class recherche_utilisateur extends db_connect {
     * @access public
     * @author Mikhaël Bailly
     * @param string $survey_token Token du sondage
+     * @param string $project_token Token du projet
     * @return array
     */
 
-    function closeSurvey($survey_token = '') {
+    function closeSurvey($survey_token = '', $project_token = '') {
         $request = $this -> _db -> exec("UPDATE `pr_user_research_survey` SET `date_end` = NOW(), `enable` = '0' WHERE `survey_token` = '$survey_token' AND `enable` = '1' ");
+
+        // Log
+        $user = main::getToken();
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$survey_token', 'close-survey-user-research', '') ");
         return (['success' => true, 'options' => ['content' => "Le sondage a été terminé !", 'theme' => 'success'] ]);
    }
 
@@ -362,11 +374,16 @@ class recherche_utilisateur extends db_connect {
    * @access public
    * @author Mikhaël Bailly
    * @param string $survey_token Token du sondage
+     * @param string $project_token Token du projet
    * @return array
    */
 
-   function reopenSurvey($survey_token = '') {
+   function reopenSurvey($survey_token = '', $project_token = '') {
         $request = $this -> _db -> exec("UPDATE `pr_user_research_survey` SET `date_end` = null, `enable` = '1' WHERE `survey_token` = '$survey_token' AND `enable` = '0' ");
+
+        // Log
+        $user = main::getToken();
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$survey_token', 'reopen-survey-user-research', '') ");
         return (['success' => true, 'options' => ['content' => "Le sondage a été réouvert !", 'theme' => 'success'] ]);
     }
 
@@ -381,13 +398,18 @@ class recherche_utilisateur extends db_connect {
      * @access public
      * @author Mikhaël Bailly
      * @param string $survey_token Token du sondage
+     * @param string $project_token Token du projet
      * @return array
      */
 
-    function disableSurvey($survey_token = '') {
+    function disableSurvey($survey_token = '', $project_token = '') {
         $request = $this -> _db -> exec("DELETE FROM `pr_user_research_survey` WHERE `survey_token` = '$survey_token'");
         $request = $this -> _db -> exec("DELETE FROM `pr_user_research_survey_answer` WHERE `survey_token` = '$survey_token'");
         $request = $this -> _db -> exec("DELETE FROM `pr_user_research_survey_question` WHERE `survey_token` = '$survey_token'");
+
+        // Log
+        $user = main::getToken();
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$survey_token', 'disable-survey-user-research', '') ");
         return (['success' => true, 'options' => ['content' => "Le sondage a été supprimé !", 'theme' => 'success'] ]);
     }
     
@@ -449,6 +471,9 @@ class recherche_utilisateur extends db_connect {
 
         $req->execute();
 
+        // Log
+        $user = main::getToken();
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$diagram_token', 'create-affinity-user-research', '') ");
         return (['success' => true, 'options' => ['content' => "Le diagramme d\'affinité a été crée !", 'theme' => 'success'] ]);
 
     } 
@@ -498,11 +523,16 @@ class recherche_utilisateur extends db_connect {
     * @access public
     * @author Mikhaël Bailly
     * @param string $diagram_token Token du diagramme
+     * @param string $project_token Token du projet
     * @return array
     */
 
-    function closeAffinityDiagram($diagram_token = '') {
+    function closeAffinityDiagram($diagram_token = '', $project_token = '') {
         $request = $this -> _db -> exec("UPDATE `pr_user_research_affinity_diagram` SET `date_end` = NOW(), `enable` = '0' WHERE `diagram_token` = '$diagram_token' AND `enable` = '1' ");
+
+        // Log
+        $user = main::getToken();
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$diagram_token', 'close-affinity-user-research', '') ");
         return (['success' => true, 'options' => ['content' => "Le diagramme a été terminé !", 'theme' => 'success'] ]);
    }
 
@@ -516,11 +546,16 @@ class recherche_utilisateur extends db_connect {
    * @access public
    * @author Mikhaël Bailly
    * @param string $diagram_token Token du diagramme
+     * @param string $project_token Token du projet
    * @return array
    */
 
-   function reopenAffinityDiagram($diagram_token = '') {
+   function reopenAffinityDiagram($diagram_token = '', $project_token = '') {
         $request = $this -> _db -> exec("UPDATE `pr_user_research_affinity_diagram` SET `date_end` = null, `enable` = '1' WHERE `diagram_token` = '$diagram_token' AND `enable` = '0' ");
+
+        // Log
+        $user = main::getToken();
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$diagram_token', 'reopen-affinity-user-research', '') ");
         return (['success' => true, 'options' => ['content' => "Le diagramme a été réouvert !", 'theme' => 'success'] ]);
     }
 
@@ -535,12 +570,17 @@ class recherche_utilisateur extends db_connect {
      * @access public
      * @author Mikhaël Bailly
      * @param string $diagram_token Token du diagramme
+     * @param string $project_token Token du projet
      * @return array
      */
 
-    function disableAffinityDiagram($diagram_token = '') {
+    function disableAffinityDiagram($diagram_token = '', $project_token = '') {
         $request = $this -> _db -> exec("DELETE FROM `pr_user_research_affinity_diagram` WHERE `diagram_token` = '$diagram_token'");
         $request = $this -> _db -> exec("DELETE FROM `pr_user_research_affinity_diagram_item` WHERE `diagram_token` = '$diagram_token'");
+
+        // Log
+        $user = main::getToken();
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$diagram_token', 'disable-affinity-user-research', '') ");
         return (['success' => true, 'options' => ['content' => "Le diagramme a été supprimé !", 'theme' => 'success'] ]);
     }
 
@@ -591,11 +631,16 @@ class recherche_utilisateur extends db_connect {
     * @author Mikhaël Bailly
     * @param string $diagram_token Token du diagramme
     * @param string $idea_token Token de l'idée
+     * @param string $project_token Token du projet
     * @return array
     */
    
-    function approveIdea($diagram_token = '', $idea_token = '') {
+    function approveIdea($diagram_token = '', $idea_token = '', $project_token) {
         $request = $this -> _db -> exec("UPDATE `pr_user_research_affinity_diagram_item` SET `approved` = 1 WHERE `diagram_token` = '$diagram_token' AND `item_token` = '$idea_token' ");
+
+        // Log
+        $user = main::getToken();
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$diagram_token', 'approve-idea-affinity-user-research', '') ");
         return (['success' => true, 'options' => ['content' => "L\idée a été approuvée !", 'theme' => 'success'] ]);
     }
 
@@ -610,11 +655,16 @@ class recherche_utilisateur extends db_connect {
     * @author Mikhaël Bailly
     * @param string $diagram_token Token du diagramme
     * @param string $idea_token Token de l'idée
+     * @param string $project_token Token du projet
     * @return array
     */
    
-   function removeIdea($diagram_token = '', $idea_token = '') {
+   function removeIdea($diagram_token = '', $idea_token = '', $project_token) {
         $request = $this -> _db -> exec("DELETE FROM `pr_user_research_affinity_diagram_item` WHERE `diagram_token` = '$diagram_token' AND `item_token` = '$idea_token'");
+
+        // Log
+        $user = main::getToken();
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$diagram_token', 'remove-idea-affinity-user-research', '') ");
         return (['success' => true, 'options' => ['content' => "L\idée a été supprimée !", 'theme' => 'success'] ]);
     }
 

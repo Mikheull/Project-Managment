@@ -32,6 +32,7 @@ require_once ('../../../../model/class/recherche_utilisateur.php');
 require_once ('../../../../model/class/authentication.php');
 require_once ('../../../../model/class/utils.php');
 require_once ('../../../../model/class/permission.php');
+require_once ('../../../../model/class/activity.php');
 
 
 $main = new main();
@@ -43,6 +44,7 @@ $recherche_utilisateur = new recherche_utilisateur($db);
 $auth = new authentication($db);
 $utils = new utils($db);
 $permission = new permission($db);
+$activity = new activity($db);
 
 $diagram_token = $_POST['diagram_token'];
 $project_token = $_POST['project_token'];
@@ -59,14 +61,14 @@ if(isset($_POST['result'])){ $result = $_POST['result']; }
 
 if($action == 'ended'){
     if($permission -> hasPermission($main -> getToken(), $project_token, 'user-research.affinity.edit')){
-        $errors = $recherche_utilisateur -> closeAffinityDiagram($diagram_token);
+        $errors = $recherche_utilisateur -> closeAffinityDiagram($diagram_token, $project_token);
     }else{
         $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
     }
 }
 if($action == 'reopen'){
     if($permission -> hasPermission($main -> getToken(), $project_token, 'user-research.affinity.edit')){
-        $errors = $recherche_utilisateur -> reopenAffinityDiagram($diagram_token);
+        $errors = $recherche_utilisateur -> reopenAffinityDiagram($diagram_token, $project_token);
     }else{
         $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
     }
@@ -74,7 +76,7 @@ if($action == 'reopen'){
 
 if($action == 'delete'){
     if($permission -> hasPermission($main -> getToken(), $project_token, 'user-research.affinity.delete')){
-        $errors = $recherche_utilisateur -> disableAffinityDiagram($diagram_token);
+        $errors = $recherche_utilisateur -> disableAffinityDiagram($diagram_token, $project_token);
     }else{
         $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
     }
@@ -93,7 +95,7 @@ if($action == 'approve_idea'){
     if(isset($_POST['idea'])){ $idea_token = $_POST['idea']; }
 
     if($permission -> hasPermission($main -> getToken(), $project_token, 'user-research.affinity.approve')){
-        $errors = $recherche_utilisateur -> approveIdea($diagram_token, $idea_token);
+        $errors = $recherche_utilisateur -> approveIdea($diagram_token, $idea_token, $project_token);
     }else{
         $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
     }
@@ -103,7 +105,7 @@ if($action == 'remove_idea'){
     if(isset($_POST['idea'])){ $idea_token = $_POST['idea']; }
 
     if($permission -> hasPermission($main -> getToken(), $project_token, 'user-research.affinity.approve')){
-        $errors = $recherche_utilisateur -> removeIdea($diagram_token, $idea_token);
+        $errors = $recherche_utilisateur -> removeIdea($diagram_token, $idea_token, $project_token);
     }else{
         $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
     }

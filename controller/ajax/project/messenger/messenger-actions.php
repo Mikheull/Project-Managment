@@ -30,6 +30,7 @@ require_once ('../../../../model/class/messenger.php');
 require_once ('../../../../model/class/authentication.php');
 require_once ('../../../../model/class/permission.php');
 require_once ('../../../../model/class/utils.php');
+require_once ('../../../../model/class/activity.php');
 
 $main = new main();
 $router = new router($db);
@@ -40,6 +41,7 @@ $messenger = new messenger($db);
 $auth = new authentication($db);
 $permission = new permission($db);
 $utils = new utils($db);
+$activity = new activity($db);
 
 
 

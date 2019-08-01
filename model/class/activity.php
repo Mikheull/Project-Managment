@@ -36,12 +36,12 @@ class activity extends db_connect {
      * @access public
      * @author Mikhaël Bailly
      * @param int $project_token Token du projet
-     * @param int $task_token Token de la tache
+     * @param int $ref_token Token de la ref
      * @return array
      */
     
-    function getTaskActivity($project_token = '', $task_token = ''){
-        $task_request = $this -> _db -> query("SELECT * FROM `pr_log` WHERE `project_token` = '$project_token' AND `ref_token` = '$task_token' AND `enable` = '1' ORDER BY date DESC");
+    function getActivity($project_token = '', $ref_token = ''){
+        $task_request = $this -> _db -> query("SELECT * FROM `pr_log` WHERE `project_token` = '$project_token' AND `ref_token` = '$ref_token' AND `enable` = '1' ORDER BY date DESC");
         $res = $task_request->fetchAll();
         $count = $task_request->rowCount();
 
@@ -49,7 +49,6 @@ class activity extends db_connect {
             'count' => $count, 
             'content' => $res,
         ]);
-
     }
 /******************************************************************************/
 

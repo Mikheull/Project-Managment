@@ -29,6 +29,7 @@ require_once ('../../../../model/class/project.php');
 require_once ('../../../../model/class/authentication.php');
 require_once ('../../../../model/class/utils.php');
 require_once ('../../../../model/class/calendar.php');
+require_once ('../../../../model/class/activity.php');
 
 
 $main = new main();
@@ -39,6 +40,7 @@ $project = new project($db);
 $auth = new authentication($db);
 $utils = new utils($db);
 $calendar = new calendar($db);
+$activity = new activity($db);
 
 
 

@@ -64,6 +64,10 @@ class uml extends db_connect {
         if($count !== 1){
             return (['success' => false, 'options' => ['content' => "Une erreur est survenue !", 'theme' => 'error'] ]);
         }
+
+        // Log
+        $user = main::getToken();
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$uml_token', 'import-uml', '') ");
         return (['success' => true, 'options' => ['content' => "Le diagramme a été importé !", 'theme' => 'success'] ]);
 
     } 
@@ -81,10 +85,11 @@ class uml extends db_connect {
      * @param string $type Type de diagramme
      * @param string $content Contenu brut
      * @param string $uml_token Token du projet
+     * @param string $project_token Token du projet
      * @return array
      */
     
-    function editDiagram($name = '', $type = '', $content = '', $uml_token = '') {
+    function editDiagram($name = '', $type = '', $content = '', $uml_token = '', $project_token = '') {
         $req = $this -> _db -> prepare("UPDATE `pr_uml` (`name`, `type`, `content`) VALUES (:name, :type, :content) WHERE `uml_token` = '$uml_token' AND `enable` = '1'");
 
         $req->bindParam(':name', $name);
@@ -93,6 +98,9 @@ class uml extends db_connect {
         
         $req->execute();
 
+        // Log
+        $user = main::getToken();
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$uml_token', 'edit-uml', '') ");
         return (['success' => true, 'options' => ['content' => "Le diagramme a été edité !", 'theme' => 'success'] ]);
 
     } 
@@ -107,11 +115,16 @@ class uml extends db_connect {
      * @access public
      * @author Mikhaël Bailly
      * @param string $uml_token Token de l'uml
+     * @param string $project_token Token du projet
      * @return array
      */
     
-    function deleteDiagram($uml_token = '') {
+    function deleteDiagram($uml_token = '', $project_token = '') {
         $request = $this -> _db -> exec("DELETE FROM `pr_uml` WHERE `uml_token` = '$uml_token' AND `enable` = '1' ");
+
+        // Log
+        $user = main::getToken();
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$uml_token', 'delete-uml', '') ");
         return (['success' => true, 'options' => ['content' => "Le diagramme a été supprimé !", 'theme' => 'success'] ]);
 
     } 

@@ -32,6 +32,7 @@ require_once ('../../../../model/class/recherche_utilisateur.php');
 require_once ('../../../../model/class/authentication.php');
 require_once ('../../../../model/class/utils.php');
 require_once ('../../../../model/class/permission.php');
+require_once ('../../../../model/class/activity.php');
 
 
 $main = new main();
@@ -43,6 +44,7 @@ $recherche_utilisateur = new recherche_utilisateur($db);
 $auth = new authentication($db);
 $utils = new utils($db);
 $permission = new permission($db);
+$activity = new activity($db);
 
 $survey_token = $_POST['survey_token'];
 $project_token = $_POST['project_token'];
@@ -58,14 +60,14 @@ $action = $_POST['action'];
 
 if($action == 'ended'){
     if($permission -> hasPermission($main -> getToken(), $project_token, 'user-research.survey.edit')){
-        $errors = $recherche_utilisateur -> closeSurvey($survey_token);
+        $errors = $recherche_utilisateur -> closeSurvey($survey_token, $project_token);
     }else{
         $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
     }
 }
 if($action == 'reopen'){
     if($permission -> hasPermission($main -> getToken(), $project_token, 'user-research.survey.edit')){
-        $errors = $recherche_utilisateur -> reopenSurvey($survey_token);
+        $errors = $recherche_utilisateur -> reopenSurvey($survey_token, $project_token);
     }else{
         $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
     }
@@ -73,7 +75,7 @@ if($action == 'reopen'){
 
 if($action == 'delete'){
     if($permission -> hasPermission($main -> getToken(), $project_token, 'user-research.survey.delete')){
-        $errors = $recherche_utilisateur -> disableSurvey($survey_token);
+        $errors = $recherche_utilisateur -> disableSurvey($survey_token, $project_token);
     }else{
         $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];
     }

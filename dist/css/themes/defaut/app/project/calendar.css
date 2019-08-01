@@ -1,0 +1,10 @@
+
+#popup-event-wrapper {width: 100vw;height: 100vh;background: rgba(0, 0, 0, 0.5);z-index: 999;position: fixed;top: 0;left: 0;}
+#popup-event-wrapper .event_popup {height: 90vh;margin: 5vh auto;background: #FFF;border-radius: 6px;}
+.event_popup .head {border-bottom: solid 1px #e9e9e9;padding-bottom: 5px}
+.event_popup .head_menu {width: 100%;overflow-x: scroll;}
+.event_popup .head_menu ul {display: -webkit-inline-box;}
+.event_popup .head_menu li {font-size: .9em;}
+.event_popup .head_menu li.active {font-weight: bold;border-bottom: solid 2px var(--primary-color);padding-bottom: 5px}
+.event_popup .head_settings {border-left: solid 1px #e9e9e9;padding-bottom: 5px}
+.event_popup .list-timers, .event_popup .list-activity {max-height: 60vh;overflow-y: scroll;}

@@ -42,6 +42,10 @@ class shortener extends db_connect {
         if($count !== 1){
             return (['success' => false, 'options' => ['content' => "Une erreur est survenue !", 'theme' => 'error'] ]);
         }
+
+        // Log
+        $user = main::getToken();
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$token', '$new_token', 'create-shortener', '') ");
         ?> <script>document.location.href=rootUrl+'sharing/<?= $new_token ?>',target='_blank';</script> <?php
     }
     
@@ -53,13 +57,18 @@ class shortener extends db_connect {
     * @access public
     * @author Mikhaël Bailly
     * @param string $base_url Url de base
+    * @param string $project_token Token du projet
     * @return array
     */
 
-   function deleteShortenerUrl($base_url = '') {
-       $request = $this -> _db -> exec("UPDATE `pr_shortener` SET `enable` = 0 WHERE `base_url` = '$base_url' AND `enable` = '1' ");
-       return (['success' => true, 'options' => ['content' => "Le fichier n\'est plus partagé !", 'theme' => 'success'] ]);
-   }
+    function deleteShortenerUrl($base_url = '', $project_token = '') {
+        $request = $this -> _db -> exec("UPDATE `pr_shortener` SET `enable` = 0 WHERE `base_url` = '$base_url' AND `enable` = '1' ");
+
+        // Log
+        $user = main::getToken();
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$base_url', 'delete-shortener', '') ");
+        return (['success' => true, 'options' => ['content' => "Le fichier n\'est plus partagé !", 'theme' => 'success'] ]);
+    }
 
 
 

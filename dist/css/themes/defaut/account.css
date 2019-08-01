@@ -1,14 +1,6 @@
-
-
 /* account navbar */
 .account .image_bloc {height:250px;width: 100%;background-size: cover;display: block;background-position: center;border-radius: 6px}
 .account .menu_bar {border-bottom: solid 1px #70707036;padding-left: 0}
-
-
-/* account -- Follower - Following */
-.follow_content {width: 100%;display: flex;justify-content: space-between;}
-.follow_content .item {background: #F6F7FC}
-.follow_content .empty-fol {color: #c50d01;}
 
 
 

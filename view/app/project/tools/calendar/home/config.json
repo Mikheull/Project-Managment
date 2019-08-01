@@ -39,6 +39,7 @@
      
     "js": [ 
         "calendar/event.min.js",
+        "task/tasks.min.js",
         "project-fast-act.min.js"
     ],
 

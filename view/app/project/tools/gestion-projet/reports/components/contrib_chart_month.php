@@ -1,8 +1,3 @@
-<div class="col-12">
-    <h2 class="title-md bold color-dark">Tâches</h2>
-</div>
-
-
 <div class="col-12 mr-top">
     <canvas id="line-chart" height="100"></canvas>
 </div>

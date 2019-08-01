@@ -30,6 +30,7 @@ require_once ('../../model/class/config.php');
 require_once ('../../model/class/user.php');
 require_once ('../../model/class/project.php');
 require_once ('../../model/class/authentication.php');
+require_once ('../../../../model/class/activity.php');
 
 $main = new main();
 $router = new router($db);
@@ -37,6 +38,7 @@ $config = new config();
 $user = new user($db);
 $project = new project($db);
 $auth = new authentication($db);
+$activity = new activity($db);
 
 if(isset($_POST['result'])){ $result = $_POST['result']; }
 $project_token = $_POST['project_token'];

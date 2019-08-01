@@ -33,6 +33,7 @@ require_once ('../../../../model/class/authentication.php');
 require_once ('../../../../model/class/utils.php');
 require_once ('../../../../model/class/calendar.php');
 require_once ('../../../../model/class/task.php');
+require_once ('../../../../model/class/activity.php');
 
 
 $main = new main();
@@ -44,12 +45,14 @@ $auth = new authentication($db);
 $utils = new utils($db);
 $calendar = new calendar($db);
 $task = new task($db);
+$activity = new activity($db);
 
 
 if(isset($_POST['result'])){ $result = $_POST['result']; }
 $event_token = $_POST['event_token'];
 $action = $_POST['action'];
 $exp[1] = $event_token;
+$project_token = $_POST['project_token'];
 
 
 
@@ -60,7 +63,7 @@ $exp[1] = $event_token;
  */
 
 if($action == 'delete'){
-    $errors = $calendar -> disableEvent($event_token);
+    $errors = $calendar -> disableEvent($event_token, $project_token);
     echo '<script> document.location.reload(true); </script>';
 }
 
@@ -75,7 +78,7 @@ if($action == 'edit'){
             $event_desc = 'undefined';
         }
 
-        $errors = $calendar -> editEvent($event_name, $event_desc, $event_token);
+        $errors = $calendar -> editEvent($event_name, $event_desc, $event_token, $project_token);
         echo '<script> document.location.reload(true); </script>';
 
     }else{

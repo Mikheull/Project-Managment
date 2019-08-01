@@ -64,13 +64,13 @@ $router -> addRoutes(
 
 
         // Members & Users
-        [ 'route' => 'account', 'dir_path' => 'view/user/home/'],
+        [ 'route' => 'account', 'dir_path' => 'view/user/projects/'],
         [ 'route' => 'account/projects', 'dir_path' => 'view/user/projects/'],
         [ 'route' => 'account/followers', 'dir_path' => 'view/user/followers/'],
         [ 'route' => 'account/following', 'dir_path' => 'view/user/following/'],
         [ 'route' => 'account/settings', 'dir_path' => 'view/user/settings/'],
 
-        [ 'route' => 'member/{{USER_NAME}}', 'dir_path' => 'view/user/home/'],
+        [ 'route' => 'member/{{USER_NAME}}', 'dir_path' => 'view/user/projects/'],
         [ 'route' => 'member/{{USER_NAME}}/projects', 'dir_path' => 'view/user/projects/'],
         [ 'route' => 'member/{{USER_NAME}}/followers', 'dir_path' => 'view/user/followers/'],
         [ 'route' => 'member/{{USER_NAME}}/following', 'dir_path' => 'view/user/following/'],

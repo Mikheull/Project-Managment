@@ -20,6 +20,7 @@ require_once ('controller/authentication.php');
 require_once ('controller/project.php') ;
 require_once ('controller/permission.php') ;
 require_once ('controller/task.php') ;
+require_once ('controller/activity.php') ;
 
 
 

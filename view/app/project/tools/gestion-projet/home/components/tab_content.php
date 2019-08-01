@@ -87,9 +87,12 @@
                                 <?php
                             }
                         ?>
+                        
                     </div>
+                    <div class="task-bottom-deco"> <div></div> </div>
 
 
+                    
                     <div class="row">
                         <div class="col-6 offset-3 btn light-btn-bordered half-width color-primary text-align-center new-task" data-pro="<?= $project_token ?>" data-tab="<?= $t['tab_token'] ?>"><i data-feather="plus-circle"></i> Nouvelle tache</div>
                     </div>
@@ -115,9 +118,6 @@
         <?php
     }
 ?>
-<div class="tab-item">
-    <div class="btn primary-btn full-width text-align-center" id="new-tab" data-pro="<?= $project_token ?>"><i data-feather="plus-circle"></i> Nouveau tableau</div>
-</div>
 
 
 <script>

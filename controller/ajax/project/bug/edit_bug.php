@@ -54,11 +54,11 @@ if(isset($_POST['project_token'])){ $project_token = $_POST['project_token']; }
 
 if($permission -> hasPermission($main -> getToken(), $project_token, 'bug-tracker.move')){
     if($new_status == 2){
-        $errors = $bug -> setWorkinBug($bug_token);
+        $errors = $bug -> setWorkinBug($bug_token, $project_token);
     }else if($new_status == 3){
-        $errors = $bug -> setEndBug($bug_token);
+        $errors = $bug -> setEndBug($bug_token, $project_token);
     }else{
-        $errors = $bug -> disableBug($bug_token);
+        $errors = $bug -> disableBug($bug_token, $project_token);
     }
 }else{
     $errors = ['success' => false, 'options' => ['content' => "Vous n\'avez pas la permission !", 'theme' => 'error'] ];

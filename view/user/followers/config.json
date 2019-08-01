@@ -11,17 +11,17 @@
     ],
 
     "meta": [ 
-        "<title>Improove - Abonnés de {{username}}</title>",
-        "<meta name=\"description\" content=\"Découvrez les abonnés du compte {{username}}.\"/>",
-        "<meta property=\"og:title\" content=\"Improove - Abonnés de {{username}}\"/>",
-        "<meta property=\"og:description\" content=\"Découvrez les abonnés du compte {{username}}.\"/>",
+        "<title>Improove - Abonnés</title>",
+        "<meta name=\"description\" content=\"Découvrez les abonnés.\"/>",
+        "<meta property=\"og:title\" content=\"Improove - Abonnés\"/>",
+        "<meta property=\"og:description\" content=\"Découvrez les abonnés.\"/>",
         "<meta property=\"og:image\" content=\"https://www.improove.tk/dist/images/og_bg.jpg\"/>",
         "<meta property=\"og:image:width\" content=\"672\"/>",
         "<meta property=\"og:image:height\" content=\"350\"/>",
 
         "<meta property=\"twitter:card\" content=\"summary_large_image\"/>",
-        "<meta property=\"twitter:title\" content=\"Improove - Abonnés de {{username}}\"/>",
-        "<meta property=\"twitter:description\" content=\"Découvrez les abonnés du compte {{username}}.\"/>",
+        "<meta property=\"twitter:title\" content=\"Improove - Abonnés\"/>",
+        "<meta property=\"twitter:description\" content=\"Découvrez les abonnés.\"/>",
         "<meta property=\"twitter:image\" content=\"https://www.improove.tk/dist/images/og_bg.jpg\"/>"
 
     ],

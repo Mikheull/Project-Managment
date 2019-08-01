@@ -64,8 +64,9 @@ if(isset($_POST['edit_team'])){
         $color = cleanVar($_POST['color']);
         $permissions = $_POST['permissions'];
         $team_token = $router -> getRouteParam('6');
+        $project_token = $router -> getRouteParam('2');
 
-        $errors = $projectTeam -> editTeamInfos($name, $color, $permissions, $team_token);
+        $errors = $projectTeam -> editTeamInfos($name, $color, $permissions, $team_token, $project_token);
     }else{
         $errors = ['success' => false, 'options' => ['content' => "Vous devez remplir tout les champs ", 'theme' => 'error'] ];
     }
@@ -85,7 +86,9 @@ if(isset($_POST['edit_team'])){
  */
 if(isset($_POST['delete_team'])){
     $team_token = $router -> getRouteParam('6');
-    $errors = $projectTeam -> disable($team_token);
+    $project_token = $router -> getRouteParam('2');
+
+    $errors = $projectTeam -> disable($team_token, $project_token);
 
 }
 
@@ -105,17 +108,18 @@ if(isset($_POST['add_team_user'])){
     if(isset($_POST['team']) AND !empty($_POST['team'])){
         $teams = $_POST['team'];
         $user_token = $router -> getRouteParam('6');
+        $project_token = $router -> getRouteParam('2');
 
         $allTeams = $projectTeam -> getTeams( $router -> getRouteParam('2') );
         foreach($allTeams['content'] as $checkTeam){
 
             if(in_array($checkTeam['public_token'], $teams)){
                 if($projectTeam -> memberHasTeam($checkTeam['public_token'], $user_token) == false){
-                    $errors = $projectTeam -> addMemberTeam($checkTeam['public_token'], $user_token);
+                    $errors = $projectTeam -> addMemberTeam($checkTeam['public_token'], $user_token, $project_token);
                 }
             }else{
                 if($projectTeam -> memberHasTeam($checkTeam['public_token'], $user_token) == true){
-                    $errors = $projectTeam -> kickMember($checkTeam['public_token'], $user_token);
+                    $errors = $projectTeam -> kickMember($checkTeam['public_token'], $user_token, $project_token);
                 }
             }
         }

@@ -207,12 +207,18 @@ if($task -> timerIsLaunched($project_token) == true){
 
 
 <div class="sidebar-project-container-right">
-    <p class="color-light">
-        menu avec :
-        - Informations
-        - Membres
-        - Admin
-    </p>
+    <div class="menu-wrapper container">
+        <div class="row mr-top mr-bot">
+            <div class="col-10 offset-1">
+                <ul class="d-inline-flex text-align-center">
+                    <li class="nav-item mr-right"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/settings" title="Réglages" class="color-light"><i data-feather="settings"></i></a> </li>
+                    <li class="nav-item mr-right notification"> <a href="<?= $config -> rootUrl() ;?>notifications" title="notifications" class="color-light"><i data-feather="bell"></i></a> </li>
+                    <li class="nav-item mr-right"> <a href="<?= $config -> rootUrl() ;?>logout" title="Déconnnexion" class="color-light"><i data-feather="log-out"></i></a> </li>
+                    <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>account" title="Accédez a votre compte" class="color-light">Mon compte</a> </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 
 

@@ -56,35 +56,34 @@
             ?>
                 <div class="row">
                     <div class="col-6 offset-3 text-align-center mr-top-lg mr-bot-lg light-border">
-                        <h2 class="title-sm color-dark mr-bot mr-top">0 followers</h2>
+                        <h2 class="title-sm color-dark mr-bot mr-top">0 <?= $follow_mode == 'follower' ? 'abonnés' : 'abonnements' ;?></h2>
                     </div>
                 </div>
             <?php
         }else{
             ?>
             
-                <div class="row mr-top-lg mr-bot-lg">
-                    <ul class="follow_content">
+                <div class="mr-top-lg mr-bot-lg">
+                    <ul class="row follow_content">
                         <?php
                         foreach($list as $res){
                             ?>
-                            <li class="item mr-bot col-6 light-border">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-3 col-12 mr-bot mr-top">
-                                            <a href="<?= $config -> rootUrl() ;?>member/<?= $utils -> getData('imp_user', 'username', 'public_token', $res[$follow_mode] ) ?>" title="Accéder au compte de <?= $utils -> getData('imp_user', 'first_name', 'public_token', $res[$follow_mode] ) ?> <?= $utils -> getData('imp_user', 'last_name', 'public_token', $res[$follow_mode] ) ?>">
-                                                <div class="profil_picture-md">
-                                                    <div class="img light-border" style="background-image: url('<?= $config -> rootUrl() ;?>dist/<?= $utils -> getData('imp_user', 'profil_image', 'public_token', $res[$follow_mode] ) == NULL ? 'images/content/defaut_profil_pic.jpg' : 'uploads/u/'. $res[$follow_mode].'/profil_pic/'.$utils -> getData('imp_user', 'profil_image', 'public_token', $res[$follow_mode] ) ;?>');"></div>
-                                                </div>    
-                                            </a>
+                            <li class="col-md-6 col-12 pl-0 mr-bot">
+                                <div class="pt-3 pb-3 container light-border mr-bot flex">
+
+                                    <a href="<?= $config -> rootUrl() ;?>member/<?= $utils -> getData('imp_user', 'username', 'public_token', $res[$follow_mode] ) ?>">
+                                        <div class="flex col-10">
+                                            <div class="avatar avatar--lg ">
+                                                <figure class="avatar__figure" role="img" aria-label="Emily Ewing">
+                                                    <svg class="avatar__placeholder" aria-hidden="true" viewBox="0 0 20 20" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="6" r="2.5" stroke="currentColor"/><path d="M10,10.5a4.487,4.487,0,0,0-4.471,4.21L5.5,15.5h9l-.029-.79A4.487,4.487,0,0,0,10,10.5Z" stroke="currentColor"/></svg>
+                                                    <img class="avatar__img" src="<?= $config -> rootUrl() ;?>dist/<?= $utils -> getData('imp_user', 'profil_image', 'public_token', $res[$follow_mode]) == NULL ? 'images/content/defaut_profil_pic.jpg' : 'uploads/u/'. $res[$follow_mode].'/profil_pic/'.$utils -> getData('imp_user', 'profil_image', 'public_token', $res[$follow_mode]) ;?>">
+                                                </figure>
+                                                <span role="status" class="avatar__status avatar__status--busy" aria-label="Active"></span>
+                                            </div>
+                                            <div class="name mr-left mr-top"> <?= $utils -> getData('imp_user', 'username', 'public_token', $res[$follow_mode]) ?>  </div>
                                         </div>
-                                        <div class="col-md-5 col-12 align-self-center">
-                                            <a href="<?= $config -> rootUrl() ;?>member/<?= $utils -> getData('imp_user', 'username', 'public_token', $res[$follow_mode] ) ?>" title="Accéder au compte de <?= $utils -> getData('imp_user', 'first_name', 'public_token', $res[$follow_mode] ) ?> <?= $utils -> getData('imp_user', 'last_name', 'public_token', $res[$follow_mode] ) ?>">
-                                                <p class="title-xs bold color-dark"><?= $utils -> getData('imp_user', 'username', 'public_token', $res[$follow_mode] ) ?></p>
-                                                <p class="color-dark"><?= $utils -> getData('imp_user', 'first_name', 'public_token', $res[$follow_mode] ) ?> <?= $utils -> getData('imp_user', 'last_name', 'public_token', $res[$follow_mode] ) ?></p>
-                                            </a>
-                                        </div>
-                                    </div>
+                                    </a>
+                                    
                                 </div>
                             </li>
                         <?php

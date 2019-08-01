@@ -14,6 +14,8 @@
 <div class="container-fluid main_wrapper">
     <?php require_once ('view/app/project/components/project_sidebar.php') ?>
 
+    <div id="popup-event-wrapper" class="hidden"></div>
+
     <div class="content_wrapper">
         <div class="container-fluid mr-top-lg">
             <div class="row">
@@ -37,6 +39,8 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+
+
         var calendarEl = document.getElementById('calendar');
 
         var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -128,13 +132,15 @@
             },
 
             eventClick: function(info) {
+                $( '#popup-event-wrapper' ).toggleClass( 'hidden' );
+                var projectToken = $( 'input[name="ref"]' ).val();
+                
                 $.ajax({
                     url:  rootUrl + 'controller/ajax/project/calendar/details_output.php',
                     type: 'POST',
-                    data: {ref: info.event.id},
+                    data: {ref: info.event.id, project_token: projectToken},
                     success:function(data){
-                        $( '#calendar_details_output' ).addClass('col-3');
-                        $( '#calendar_details_output' ).html(data);
+                        $('#popup-event-wrapper').html(data);
                     }
                 });
             },
@@ -175,28 +181,5 @@ $(document).ready(function() {
     tippy('.cal-ttp', {
         content: "Cliquez pour voir les détails",
     })
-    $(document).on("click", "#close", function(e) {
-        $( '#calendar_details_output' ).empty();
-        $( '#calendar_details_output' ).removeClass('col-3');
-    });
-
 });
-
-
-// Actions avec le clavier
-$(document).bind('keydown', function(e) {
-    //console.log(e.which)
-    
-    // Bouton Echap pour quitter la création de fichiers / dossiers
-    if(e.which == 27) {
-        if ( $( "#calendar_details_output .details_container" ).length ) {
-            e.preventDefault();
-            $( '#calendar_details_output' ).empty();
-            $( '#calendar_details_output' ).removeClass('col-3');
-        }
-        return false;
-    }
-});
-
-    
 </script>

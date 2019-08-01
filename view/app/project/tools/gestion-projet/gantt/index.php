@@ -32,7 +32,8 @@
                 <?php
                     if($permission -> hasPermission($main -> getToken(), $router -> getRouteParam("2"), 'task.gantt.view')){
                         if($activity['count'] !== 0){
-                            require_once ('view/app/project/tools/gestion-projet/gantt/components/gantt_diagram.php');
+                            require_once ('view/app/project/tools/gestion-projet/gantt/components/gantt_diagram-before.php');
+                            require_once ('view/app/project/tools/gestion-projet/gantt/components/gantt_diagram-after.php');
                         }else{
                             ?>
                             <div class="col-8 offset-2 text-align-center mr-top-lg">

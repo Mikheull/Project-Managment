@@ -1,30 +1,31 @@
 <?php
-// Les variables $task_token et $project_token sont définies en AJAX !
+// Les variables $event_token et $project_token sont définies en AJAX !
 
 $date1 = new DateTime();
-$date2 = new DateTime( $utils -> getData('pr_task_item', 'deadline', 'task_token', $task_token ) );
+$date2 = new DateTime( $utils -> getData('pr_task_item', 'deadline', 'task_token', $event_token ) );
 $interval = $date1->diff($date2);
-$date_creation = new DateTime( $utils -> getData('pr_task_item', 'date_creation', 'task_token', $task_token ) );
+$date_creation = new DateTime( $utils -> getData('pr_task_item', 'date_creation', 'task_token', $event_token ) );
 
 ?>
-<div class="container" id="task-content">
-    <div id="task-if" data-ref="<?= $task_token ?>" data-pro="<?= $project_token ?>"></div>
+<div class="container" id="event-content">
+    <div id="event-if" data-ref="<?= $event_token ?>" data-pro="<?= $project_token ?>"></div>
+    <div id="task-if" data-ref="<?= $event_token ?>" data-pro="<?= $project_token ?>"></div>
 
     <div class="row">
-        <div class="col-md-6 offset-md-3 col-10 offset-1 task_popup">
+        <div class="col-md-6 offset-md-3 col-10 offset-1 event_popup">
 
             <div class="container pt-2">
 
                 <div class="row head">
                     <div class="col-12 flex justify-content-between">
-                        <h3 class="title-sm bold color-lg-dark"><?= stripslashes($utils -> getData('pr_task_item', 'name', 'task_token', $task_token )) ?></h3>
-                        <a class="link color-lg-dark" id="close-task-popup"><i class="far fa-times-circle"></i></a>
+                        <h3 class="title-sm bold color-lg-dark"><?= stripslashes($utils -> getData('pr_task_item', 'name', 'task_token', $event_token )) ?></h3>
+                        <a class="link color-lg-dark" id="close-event-popup"><i class="far fa-times-circle"></i></a>
                     </div>
                     <div class="col-12 flex justify-content-between">
                         <span class="text-xs">Crée le : <span class="color-lg-dark"><?= date_format($date_creation, 'd/m/Y à H:i') ;?></span></span>
 
                         <?php
-                            if($utils -> getData('pr_task_item', 'date_end', 'task_token', $task_token ) == NULL){
+                            if($utils -> getData('pr_task_item', 'date_end', 'task_token', $event_token ) == NULL){
                                 ?><div class="link primary-link" data-action="close_task"><i data-feather="eye-off"></i> Terminer </div><?php
                             }else{
                                 ?><div class="link primary-link" data-action="reopen_task"><i data-feather="eye"></i> Réouvrir </div><?php
@@ -47,6 +48,7 @@ $date_creation = new DateTime( $utils -> getData('pr_task_item', 'date_creation'
                         <ul>
                             <li class="mb-2"> <div class="link dark-link" data-action="assign_task"><i data-feather="user-plus"></i> <span class="md-hide">Assigner</span> </div> </li>
                             <li class="mb-2"> <div class="link dark-link" data-action="edit_task"><i data-feather="edit"></i> <span class="md-hide">Modifier</span> </div> </li>
+                            <li class="mb-2"> <a href="gestion-projet?task=<?= $event_token ?>" class="link dark-link"><i data-feather="link"></i> <span class="md-hide">Lien</span> </a> </li>
                             <li class="mb-2"> <div class="link red-link" data-action="delete_task"><i data-feather="trash-2"></i> <span class="md-hide">Supprimer</span> </div> </li>
                         </ul>
                     </div>
@@ -55,12 +57,12 @@ $date_creation = new DateTime( $utils -> getData('pr_task_item', 'date_creation'
                 <div class="row">
                     <div class="col-12 menu-content">
                         <div id="informations" class="page_el">
-                            <div>Durée prévue : <span class="color-lg-dark"><?= $utils -> getData('pr_task_item', 'duration', 'task_token', $task_token ) ;?></span> </div>
-                            <div class="mr-bot">Durée : <span class="color-lg-dark"><?= $task -> getTaskTimer($project_token, $task_token) ?></span> </div>
+                            <div>Durée prévue : <span class="color-lg-dark"><?= $utils -> getData('pr_task_item', 'duration', 'task_token', $event_token ) ;?></span> </div>
+                            <div class="mr-bot">Durée : <span class="color-lg-dark"><?= $task -> getTaskTimer($project_token, $event_token) ?></span> </div>
                             <div>Fin prévu le : <span class="color-lg-dark"><?= date_format($date2, 'd/m/Y') ;?></span> </div>
                             <?php
-                            if($utils -> getData('pr_task_item', 'date_end', 'task_token', $task_token ) !== NULL){
-                                $date_end = new DateTime( $utils -> getData('pr_task_item', 'date_end', 'task_token', $task_token ) );
+                            if($utils -> getData('pr_task_item', 'date_end', 'task_token', $event_token ) !== NULL){
+                                $date_end = new DateTime( $utils -> getData('pr_task_item', 'date_end', 'task_token', $event_token ) );
                                 ?> <div class="mr-bot">Terminée le : <span class="color-lg-dark"><?= date_format($date_end, 'd/m/Y à H:i') ;?></span> </div> <?php
                             }else{
                                 if($date1 > $date2){
@@ -75,14 +77,14 @@ $date_creation = new DateTime( $utils -> getData('pr_task_item', 'date_creation'
                                 <div class="row">
                                     <div class="col-12 mr-bot">
                                         <?php
-                                            if($utils -> getData('pr_task_item', 'date_end', 'task_token', $task_token ) == NULL){
+                                            if($utils -> getData('pr_task_item', 'date_end', 'task_token', $event_token ) == NULL){
                                                 if($task -> timerIsLaunched($project_token) == true){
                                                     $task_timer_id = $task -> getLastTimer($project_token);
                                                     $task_timer_token = $utils -> getData('pr_task_timer', 'task_token', 'ID', $task_timer_id );
                                                     $date_begin = new DateTime( $utils -> getData('pr_task_timer', 'date_creation', 'ID', $task_timer_id ) );
                                                     $date_end = new DateTime();
                                                     // $date_end->add(new DateInterval('PT2H'));
-                                                    if($task_timer_token == $task_token){
+                                                    if($task_timer_token == $event_token){
                                                         ?> 
                                                             <div class="flex">
                                                                 <a class="btn-pause link"> <i class="fas fa-pause"></i> </a>
@@ -93,8 +95,8 @@ $date_creation = new DateTime( $utils -> getData('pr_task_item', 'date_creation'
                                                 }else{
                                                     ?> 
                                                         <div class="flex">
-                                                            <a class="btn-play link" data-action="launch-timer" data-ref="<?= $task_token ?>" data-pro="<?= $project_token ?>"> <i class="fas fa-play"></i> </a>
-                                                            <a class="btn-pause link hidden" data-action="stop-timer" data-ref="<?= $task_token ?>" data-pro="<?= $project_token ?>"> <i class="fas fa-pause"></i> </a>
+                                                            <a class="btn-play link" data-action="launch-timer" data-ref="<?= $event_token ?>" data-pro="<?= $project_token ?>"> <i class="fas fa-play"></i> </a>
+                                                            <a class="btn-pause link hidden" data-action="stop-timer" data-ref="<?= $event_token ?>" data-pro="<?= $project_token ?>"> <i class="fas fa-pause"></i> </a>
                                                             <span class="ml-2 mt-2 text-sm color-red">Lancer le timer</span>
                                                         </div>
                                                     <?php
@@ -109,7 +111,7 @@ $date_creation = new DateTime( $utils -> getData('pr_task_item', 'date_creation'
                                     <div class="col-12">
                                         <ul class="list-timers">
                                             <?php
-                                                $allTasksTimers = $task -> getAllTasksTimers($project_token, $task_token);
+                                                $allTasksTimers = $task -> getAllTasksTimers($project_token, $event_token);
                                                 foreach($allTasksTimers['content'] as $timer){
                                                     ?>
                                                         <li class="mr-bot">
@@ -137,7 +139,7 @@ $date_creation = new DateTime( $utils -> getData('pr_task_item', 'date_creation'
                         <div id="activity" class="page_el hidden">
                             <ul class="list-activity">
                                 <?php
-                                $task_activity = $activity -> getActivity($project_token, $task_token);
+                                $task_activity = $activity -> getActivity($project_token, $event_token);
                                 if($task_activity['count'] !== 0){
                                     foreach($task_activity['content'] as $act_item){
                                         $date = new DateTime( $act_item['date'] );
@@ -225,7 +227,7 @@ $date_creation = new DateTime( $utils -> getData('pr_task_item', 'date_creation'
 
                         <div id="assigned_members" class="page_el hidden">
                             <?php
-                                $allMembersAssigned = $task -> getAllMemberAssigned($project_token, $task_token);
+                                $allMembersAssigned = $task -> getAllMemberAssigned($project_token, $event_token);
                                 if($allMembersAssigned['count'] !== 0){
                                     ?> 
                                     <ul>
@@ -258,7 +260,7 @@ $date_creation = new DateTime( $utils -> getData('pr_task_item', 'date_creation'
 
                         <div id="assigned_teams" class="page_el hidden">
                             <?php
-                                $allTeamsAssigned = $task -> getAllTeamAssigned($project_token, $task_token);
+                                $allTeamsAssigned = $task -> getAllTeamAssigned($project_token, $event_token);
                                 if($allTeamsAssigned['count'] !== 0){
                                     ?> 
                                     <ul>
@@ -296,5 +298,47 @@ $date_creation = new DateTime( $utils -> getData('pr_task_item', 'date_creation'
 <script>
 $(document).ready(function() {
     feather.replace()
+});
+
+
+// Assign task
+$(document).on("click", "[data-action='assign_task']", function(e) {
+    var ctx = document.getElementById("event-if");
+    var ref = ctx.getAttribute("data-ref")
+    var project = ctx.getAttribute("data-pro")
+
+    bootbox.dialog({
+        backdrop: true,
+        closeButton: false,
+        title: "Assigner la tâche",
+        buttons: {
+            confirm: {
+                label: 'Ok',
+                className: 'btn primary-btn',
+                callback: function(){
+                    let assigned_teams = [];
+                    let assigned_members = [];
+                    $("input:checkbox[name=assigned_teams]:checked").each(function(){ assigned_teams.push($(this).val()); });
+                    $("input:checkbox[name=assigned_members]:checked").each(function(){ assigned_members.push($(this).val()); });
+                    
+                    $.ajax({
+                        url:  rootUrl + 'controller/ajax/project/task/task_short-actions.php',
+                        type: 'POST',
+                        data: {assigned_teams: assigned_teams, assigned_members: assigned_members, task_token: ref, project_token: project, action: 'assign_task'},
+                        success:function(data){
+                            $('#calendar_output').html(data);
+                        }
+                    });
+                   
+                }
+            },
+            cancel: {
+                label: 'Annuler',
+                className: 'btn dark-btn',
+            }
+        },
+        message: '<div class="row"> <div class="mr-bot-lg col-12"> <h3 class="text-sm color-dark mr-bot mr-top">Assigner des équipes</h3> <?php require_once ("controller/projectTeam.php"); $teams = $projectTeam -> getTeams( $project_token ); foreach($teams["content"] as $t){ ?> <div class="tg-list-item flex mr-bot"> <div class="mr-right"> <input class="tgl tgl-light" name="assigned_teams" value="<?= $t["public_token"] ;?>" id="<?= $t["public_token"] ;?>" type="checkbox"/> <label class="tgl-btn" for="<?= $t["public_token"] ;?>"></label> </div><div> <small><?= $t["name"] ;?></small> </div></div><?php } ?> </div><div class="col-12"> <h3 class="text-sm color-dark mr-bot mr-top">Assigner des membres</h3> <?php require_once ("controller/project.php"); $teams=$project -> getProjectMembers( $project_token ); foreach($teams["content"] as $t){ ?> <div class="tg-list-item flex mr-bot"> <div class="mr-right"> <input class="tgl tgl-light" name="assigned_members" value="<?= $t["user_public_token"] ;?>" id="<?= $t["user_public_token"] ;?>" type="checkbox"/> <label class="tgl-btn" for="<?= $t["user_public_token"] ;?>"></label> </div><div> <small><?= $utils -> getData('imp_user', 'username', 'public_token', $t["user_public_token"] ) ;?></small> </div></div><?php } ?> </div></div>',
+        
+    });
 });
 </script>

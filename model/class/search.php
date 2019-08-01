@@ -35,30 +35,6 @@ class search extends db_connect {
         }
 
 
-        if($type == 'team'){
-            $request = $this -> _db -> query("SELECT * FROM `pr_team` WHERE `name` LIKE '%$keyword%' AND public = '1'");
-            foreach($request -> fetchAll() as $res){
-                if(!in_array($res['public_token'], $this->queryResult)){
-                    array_push($this->queryResult, $res['public_token']);
-                }
-            }
-
-            if($token !== null){
-                $request = $this -> _db -> query("SELECT * FROM `pr_team` WHERE `name` LIKE '%$keyword%'");
-                foreach($request -> fetchAll() as $pre){
-                    $public_token = $pre['public_token'];
-                    $request = $this -> _db -> query("SELECT * FROM `pr_team_member` WHERE `team_token` LIKE '$public_token' AND `user_public_token` = '$token' AND `enable` = '1' ");
-                    foreach($request -> fetchAll() as $res){
-                        if(!in_array($res['team_token'], $this->queryResult)){
-                            array_push($this->queryResult, $res['team_token']);
-                        }
-                    }
-                }
-                
-            }
-        }
-
-
         if($type == 'project'){
             $request = $this -> _db -> query("SELECT * FROM `pr_project` WHERE `name` LIKE '%$keyword%' AND public = '1'");
             foreach($request -> fetchAll() as $res){

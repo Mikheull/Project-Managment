@@ -33,6 +33,7 @@ require_once ('../../../../model/class/task.php');
 require_once ('../../../../model/class/authentication.php');
 require_once ('../../../../model/class/utils.php');
 require_once ('../../../../model/class/permission.php');
+require_once ('../../../../model/class/activity.php');
 
 
 $main = new main();
@@ -44,6 +45,7 @@ $task = new task($db);
 $auth = new authentication($db);
 $utils = new utils($db);
 $permission = new permission($db);
+$activity = new activity($db);
 
 if(isset($_POST['result'])){ $result = $_POST['result']; }
 $tab_token = $_POST['tab_token'];

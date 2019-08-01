@@ -30,6 +30,7 @@ require_once ('../../../../model/class/authentication.php');
 require_once ('../../../../model/class/utils.php');
 require_once ('../../../../model/class/calendar.php');
 require_once ('../../../../model/class/task.php');
+require_once ('../../../../model/class/activity.php');
 
 
 $main = new main();
@@ -41,16 +42,19 @@ $auth = new authentication($db);
 $utils = new utils($db);
 $calendar = new calendar($db);
 $task = new task($db);
+$activity = new activity($db);
 
 
 $event_ref = $_POST['ref'];
 $exp = explode( '|', $event_ref);
+$event_token = $exp[1];
+$project_token = $_POST['project_token'];
 
 
 if($exp[0] == 'task'){
-    require_once ('../../../../view/app/project/tools/calendar/home/components/details_task.php');
+    require_once ('../../../../view/app/project/tools/calendar/home/components/overlay-task-info.php');
 }else if($exp[0] == 'custom'){
-    require_once ('../../../../view/app/project/tools/calendar/home/components/details_custom.php');
+    require_once ('../../../../view/app/project/tools/calendar/home/components/overlay-event-info.php');
 }
 
 

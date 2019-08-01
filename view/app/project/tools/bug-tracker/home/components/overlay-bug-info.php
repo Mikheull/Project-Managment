@@ -25,6 +25,7 @@ $date_creation = new DateTime( $utils -> getData('pr_bug', 'date_creation', 'bug
                     <div class="col-md-9 col-10 head_menu mr-top">
                         <ul>
                             <li class="mr-3 active" data-page="informations"> <a class="link">Informations</a> </li>
+                            <li class="mr-3" data-page="activity"> <a class="link">Activité</a> </li>
                             <li class="mr-3" data-page="assigned_members"> <a class="link">Membres assignés</a> </li>
                             <li class="" data-page="assigned_teams"> <a class="link">Équipes assignées</a> </li>
                         </ul>
@@ -66,6 +67,89 @@ $date_creation = new DateTime( $utils -> getData('pr_bug', 'date_creation', 'bug
                             ?>
                         </div>
 
+                        <div id="activity" class="page_el hidden">
+                            <ul class="list-activity">
+                                <?php
+                                $bug_activity = $activity -> getActivity($project_token, $bug_token);
+                                if($bug_activity['count'] !== 0){
+                                    foreach($bug_activity['content'] as $act_item){
+                                        $date = new DateTime( $act_item['date'] );
+                                        ?>
+                                        <li class="mr-bot">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-8 flex">
+                                                        <div class="avatar avatar--md mr-right"> 
+                                                            <figure class="avatar__figure" role="img">
+                                                                <svg class="avatar__placeholder" aria-hidden="true" viewBox="0 0 20 20" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="6" r="2.5" stroke="currentColor"/><path d="M10,10.5a4.487,4.487,0,0,0-4.471,4.21L5.5,15.5h9l-.029-.79A4.487,4.487,0,0,0,10,10.5Z" stroke="currentColor"/></svg>
+                                                                <img class="avatar__img" src="../../../../dist/<?= $utils -> getData('imp_user', 'profil_image', 'public_token', $act_item['user_public_token']) == NULL ? 'images/content/defaut_profil_pic.jpg' : 'uploads/u/'. $act_item['user_public_token'].'/profil_pic/'.$utils -> getData('imp_user', 'profil_image', 'public_token', $act_item['user_public_token']) ;?>">
+                                                            </figure>
+                                                        </div>
+                                                        <span class="mt-1 color-lg-dark"> <?= $utils -> getData('imp_user', 'username', 'public_token', $act_item['user_public_token'] ) ?>
+                                                            <?php
+                                                                if($act_item['type'] == 'create-bug'){
+                                                                    ?> <span> à créer le rapport de bug </span><?php
+                                                                }
+                                                                if($act_item['type'] == 'edit-bug'){
+                                                                    ?> <span> à modifier le rapport de bug </span><?php
+                                                                }
+                                                                if($act_item['type'] == 'set-working-bug'){
+                                                                    ?> <span> à déplacer le rapport de bug dans "En cours" </span><?php
+                                                                }
+                                                                if($act_item['type'] == 'set-end-bug'){
+                                                                    ?> <span> à clos le rapport de bug </span><?php
+                                                                }
+                                                                if($act_item['type'] == 'assign-team-bug'){
+                                                                    $teams = explode('|', $act_item['optional']);
+                                                                    ?> 
+                                                                        <span> à assigner le rapport de bug aux équipes :</span>
+                                                                        <ul>
+                                                                            <?php
+                                                                            foreach($teams as $t){
+                                                                                if($t !== ''){
+                                                                                    ?> <li>- <?= $utils -> getData('pr_project_team', 'name', 'public_token', $t ) ?></li> <?php
+                                                                                }
+                                                                            }
+                                                                            ?>
+                                                                        </ul>
+                                                                    <?php
+                                                                }
+                                                                if($act_item['type'] == 'assign-member-bug'){
+                                                                    $members = explode('|', $act_item['optional']);
+                                                                    ?> 
+                                                                        <span> à assigner le rapport de bug aux membres :</span>
+                                                                        <ul>
+                                                                            <?php
+                                                                            foreach($members as $m){
+                                                                                if($m !== ''){
+                                                                                    ?> <li>- <?= $utils -> getData('imp_user', 'username', 'public_token', $m ) ?></li> <?php
+                                                                                }
+                                                                            }
+                                                                            ?>
+                                                                        </ul>
+                                                                    <?php
+                                                                }
+                                                            ?>
+                                                        </span>
+                                                    </div>
+                                                    <div class="col-8 ml-5">
+                                                        <span class="color-gray text-xs"> le <?= date_format($date, 'd/m/Y à H:i') ;?> </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="spacebar mr-top"><div class="spacebar-lg"></div></div>
+                                        </li>
+                                            
+                                        <?php
+                                        
+                                    }
+                                }else{
+                                    ?>Aucune activité pour ce rapport de bug<?php
+                                }
+                                ?>
+                            </ul>
+                        </div>
+
                         <div id="assigned_members" class="page_el hidden">
                             <?php
                                 $allMembersAssigned = $bug -> getAllMemberAssigned($project_token, $bug_token);
@@ -77,7 +161,7 @@ $date_creation = new DateTime( $utils -> getData('pr_bug', 'date_creation', 'bug
                                             if($ms !== ''){
                                                 ?> 
                                                 <li class="color-lg-dark flex">
-                                                    <div class="avatar avatar--xs mr-right"> 
+                                                    <div class="avatar avatar--md mr-right"> 
                                                         <figure class="avatar__figure" role="img">
                                                             <svg class="avatar__placeholder" aria-hidden="true" viewBox="0 0 20 20" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="6" r="2.5" stroke="currentColor"/><path d="M10,10.5a4.487,4.487,0,0,0-4.471,4.21L5.5,15.5h9l-.029-.79A4.487,4.487,0,0,0,10,10.5Z" stroke="currentColor"/></svg>
                                                             <img class="avatar__img" src="../../../../dist/<?= $utils -> getData('imp_user', 'profil_image', 'public_token', $ms) == NULL ? 'images/content/defaut_profil_pic.jpg' : 'uploads/u/'. $ms.'/profil_pic/'.$utils -> getData('imp_user', 'profil_image', 'public_token', $ms) ;?>">

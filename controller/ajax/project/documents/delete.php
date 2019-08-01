@@ -30,6 +30,7 @@ require_once ('../../../../model/class/authentication.php');
 require_once ('../../../../model/class/utils.php');
 require_once ('../../../../model/class/document.php');
 require_once ('../../../../model/class/shortener.php');
+require_once ('../../../../model/class/activity.php');
 
 
 $main = new main();
@@ -40,6 +41,7 @@ $project = new project($db);
 $auth = new authentication($db);
 $utils = new utils($db);
 $shortener = new shortener($db);
+$activity = new activity($db);
 
 
 
@@ -55,7 +57,7 @@ if(isset($_POST['base_url'])){
     $del_url = $_POST['del_url'];
     $token = $_POST['token'];
     unlink($base_url);
-    $errors = $shortener -> deleteShortenerUrl($del_url);
+    $errors = $shortener -> deleteShortenerUrl($del_url, $token);
 
     ?><script> location.href = rootUrl + "app/project/<?= $token ?>/t/documents"; </script><?php
 

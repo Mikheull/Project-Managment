@@ -233,6 +233,10 @@ class project extends db_connect {
     function projectRename($project_token = '', $new_name = '') {
         if($new_name !== ''){
             $request = $this -> _db -> exec("UPDATE `pr_project` SET `name` = '$new_name' WHERE `public_token` = '$project_token' ");
+                   
+            // Log
+            $user = main::getToken();
+            $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$project_token', 'rename-project', '$new_name') ");
             return (['success' => true, 'options' => ['content' => "Le nom a été changé !", 'theme' => 'success'] ]);
         }
         return (['success' => false, 'options' => ['content' => "Le nom est vide !", 'theme' => 'error'] ]);
@@ -265,14 +269,14 @@ class project extends db_connect {
     
             if($res['public'] == true){
                 $this -> addUser($token, $user_token);
-    
+           
                 return (['success' => true, 'options' => ['content' => "Vous avez rejoins le projet publique !", 'theme' => 'success'] ]);
             }else{
                 $request = $this -> _db -> query("SELECT * FROM `pr_invitation_project` WHERE `project_token` = '$token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
                 $res = $request->fetch();
                 if($res){
                     $this -> setInvitationAnswer($token, $user_token, 'accept');
-
+       
                     return (['success' => true, 'options' => ['content' => "Vous avez rejoins le projet !", 'theme' => 'success'] ]);
                 }else{
                     return (['success' => true, 'options' => ['content' => "Vous n\'etes pas autorisé a rejoindre ce projet !", 'theme' => 'error'] ]);
@@ -302,6 +306,10 @@ class project extends db_connect {
     
     function editProjectInfos($name = '', $desc = '', $status = '', $token = '') {
         $exec = $this -> _db -> exec("UPDATE `pr_project` SET `name` = '$name', `description` = '$desc', `public` = '$status' WHERE `public_token` = '$token' ");
+               
+        // Log
+        $user = main::getToken();
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$token', '$token', 'edit-project', '') ");
         return (['success' => true, 'options' => ['content' => "Les informations on été modifiés !", 'theme' => 'success'] ]);
     }
 
@@ -332,6 +340,9 @@ class project extends db_connect {
         if($count !== 1){
             return (['success' => false, 'options' => ['content' => "Une erreur est survenue !", 'theme' => 'error'] ]);
         }
+               
+        // Log
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user_token', '$token', '$token', 'join-project', '') ");
     }  
 
 
@@ -378,6 +389,9 @@ class project extends db_connect {
                     $notif_content = json_encode($notif_content);
                     $exec = $this -> _db -> exec("INSERT INTO `imp_notification`( `user_public_token`, `type`, `content`) VALUES ('$user_token', 'project_invite', '$notif_content') ");
         
+                    // Log
+                    $user = main::getToken();
+                    $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$project_token', 'invite-project', '$user_token') ");
                     return (['success' => true, 'options' => ['content' => "Vous avez envoyer l\'invitation !", 'theme' => 'success'] ]);
                 }
                 
@@ -414,6 +428,9 @@ class project extends db_connect {
             
             if($choose == 'accept'){
                 $request = $this -> _db -> exec("INSERT INTO `pr_project_member` (`project_token`, `user_public_token`) VALUES ('$token', '$user_token')");
+
+                // Log
+                $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user_token', '$token', '$token', 'accept-invitation-project', '') ");
                 return (['success' => true, 'options' => ['content' => "Vous avez accepter l\'invitation !", 'theme' => 'success'] ]);
             }else if($choose == 'decline'){
                 return (['success' => true, 'options' => ['content' => "Vous avez refuser l\'invitation !", 'theme' => 'success'] ]);
@@ -462,6 +479,9 @@ class project extends db_connect {
                 fopen('dist/uploads/p/'.$token.'/docs/index.php', "w");
             }
 
+            // Log
+            $user = main::getToken();
+            $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$token', '$token', 'create-project', '') ");
             return (['success' => true, 'options' => ['content' => "Le projet a été crée !", 'theme' => 'success'] ]);
         }else{
             return (['success' => false, 'options' => ['content' => "Un projet avec ce même nom existe déjà !", 'theme' => 'error'] ]);
@@ -491,6 +511,9 @@ class project extends db_connect {
             $request = $this -> _db -> exec("DELETE FROM `pr_project` WHERE `public_token` = '$token' AND `founder_token` = '$owner'");
             $request = $this -> _db -> exec("DELETE FROM `pr_project_member` WHERE `project_token` = '$token'");
             
+            // Log
+            $user = main::getToken();
+            $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$token', '$token', 'disable-project', '') ");
             return (['success' => true, 'options' => ['content' => "Le projet a été supprimée !", 'theme' => 'success'] ]);
         }else{
             return (['success' => false, 'options' => ['content' => "Aucun projet n\'a été trouvée !", 'theme' => 'error'] ]);
@@ -520,6 +543,9 @@ class project extends db_connect {
             $request = $this -> _db -> exec("UPDATE `pr_project` SET `enable`= 0 WHERE `public_token` = '$token' AND `founder_token` = '$owner' AND `enable` = '1' ");
             $request = $this -> _db -> exec("UPDATE `pr_project_member` SET `enable`= 0 WHERE `project_token` = '$token' AND `enable` = '1' ");
             
+            // Log
+            $user = main::getToken();
+            $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$token', '$token', 'archive-project', '') ");
             return (['success' => true, 'options' => ['content' => "Le projet a été archivé !", 'theme' => 'success'] ]);
         }else{
             return (['success' => false, 'options' => ['content' => "Aucune équipe n\'a été trouvée !", 'theme' => 'error'] ]);
@@ -548,7 +574,10 @@ class project extends db_connect {
         if($res){
             $request = $this -> _db -> exec("UPDATE `pr_project` SET `enable`= 1 WHERE `public_token` = '$token' AND `founder_token` = '$owner' AND `enable` = '0' ");
             $request = $this -> _db -> exec("UPDATE `pr_project_member` SET `enable`= 1 WHERE `project_token` = '$token' AND `enable` = '0' ");
-            
+    
+            // Log
+            $user = main::getToken();
+            $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$token', '$token', 'unarchive-project', '') ");
             return (['success' => true, 'options' => ['content' => "Le projet a été désarchivé !", 'theme' => 'success'] ]);
         }else{
             return (['success' => false, 'options' => ['content' => "Aucune équipe n\'a été trouvée !", 'theme' => 'error'] ]);
@@ -576,6 +605,10 @@ class project extends db_connect {
         if($res){
             $request = $this -> _db -> exec("DELETE FROM `pr_project_member` WHERE `project_token` = '$project_token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
             header('location: ');
+
+            // Log
+            $user = main::getToken();
+            $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user', '$project_token', '$project_token', 'kick-member-project', '$user_token') ");
             return (['success' => true, 'options' => ['content' => "L\'utilisateur a été retiré !", 'theme' => 'success'] ]);
         }else{
             return (['success' => false, 'options' => ['content' => "L\'utilisateur n\'est pas dans le projet !", 'theme' => 'error'] ]);

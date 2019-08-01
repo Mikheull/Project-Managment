@@ -31,6 +31,7 @@ require_once ('../../model/class/search.php');
 require_once ('../../model/class/user.php');
 require_once ('../../model/class/project.php');
 require_once ('../../model/class/utils.php');
+require_once ('../../../../model/class/activity.php');
 
 $main = new main();
 $router = new router($db);
@@ -39,6 +40,7 @@ $search = new search($db);
 $user = new user($db);
 $project = new project($db);
 $utils = new utils($db);
+$activity = new activity($db);
 
 $keyword = cleanVar($_POST['keyword']);
 $type = cleanVar($_POST['type']);
