@@ -155,6 +155,29 @@ class projectTeam extends db_connect {
         }
     }
 
+
+    /**
+     * Récupère l'équipe la plus haute d'un utilisateur
+     * 
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $user_token Token de l'utilisateur
+     * @param string $project_token Token du projet
+     * @return array
+     */
+    
+    function getHighTeamMember($user_token = '', $project_token = '') {
+        $request = $this -> _db -> query("SELECT * FROM `pr_project_team_member` WHERE `user_public_token` = '$user_token' AND `enable` = '1' ORDER BY `date_join` ASC LIMIT 1 ");
+        $res = $request->fetch();
+        $count = $request->rowCount();
+
+        if($count == 0){
+            return '';
+        }
+
+        return $res['project_team_token'];
+    }
+
 /******************************************************************************/
 
 

@@ -33,19 +33,19 @@
                                                             if($task_timer_token == $task_item['task_token']){
                                                                 ?> 
                                                                     <a class="btn-pause link"> <i class="fas fa-pause"></i> </a>
-                                                                    <h4 class="ml-2 mt-2 text-sm"><?= $task_item['name'] ?></h4>
+                                                                    <h4 class="ml-2 mt-2 text-sm"><?= stripslashes($task_item['name']) ?></h4>
                                                                 <?php
                                                             }
                                                         }else{
                                                             ?> 
                                                                 <a class="btn-play link" data-action="launch-timer" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $project_token ?>"> <i class="fas fa-play"></i> </a>
                                                                 <a class="btn-pause link hidden" data-action="stop-timer" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $project_token ?>"> <i class="fas fa-pause"></i> </a>
-                                                                <h4 class="ml-2 mt-2 text-sm"><?= $task_item['name'] ?></h4>
+                                                                <h4 class="ml-2 mt-2 text-sm"><?= stripslashes($task_item['name']) ?></h4>
                                                             <?php
                                                         }
                                                     }else{
                                                         ?> 
-                                                        <h4 class="text-sm"><?= $task_item['name'] ?></h4> 
+                                                        <h4 class="text-sm"><?= stripslashes($task_item['name']) ?></h4> 
                                                         <?php
                                                     }
                                                     ?>
@@ -166,9 +166,10 @@ $(document).on("click", "[data-action='assign_task']", function(e) {
 
 // Assign tab
 $(document).on("click", "[data-action='tab-assign']", function(e) {
-    var ctx = document.getElementById("task-if");
-    var ref = ctx.getAttribute("data-ref")
-    var project = ctx.getAttribute("data-pro")
+    event.preventDefault();
+    let ref = this.dataset.ref;
+    let project = this.dataset.pro;
+    
 
     bootbox.dialog({
         backdrop: true,

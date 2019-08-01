@@ -80,3 +80,5 @@
         </div>
     </div>
 </section>
+
+<div id="ajax-hidden-output" class="hidden"></div>

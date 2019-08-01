@@ -106,13 +106,13 @@ class messenger extends db_connect {
      *
      * @access public
      * @author Mikhaël Bailly
-     * @param string $user_token Token de l'équipe de projet
-     * @param string $channel_token Token du channel
+     * @param string $user_token Token de l'user
      * @param string $project_token Token du projet
+     * @param string $channel_token Token du channel
      * @return array
      */
     
-    function isChannelMember($user_token = '', $channel_token = '', $project_token = '') {
+    function isChannelMember($user_token = '', $project_token = '', $channel_token = '') {
         $request = $this -> _db -> query("SELECT * FROM `pr_messenger_member` WHERE `user_token` = '$user_token' AND `channel_token` = '$channel_token' AND `project_token` = '$project_token' AND `enable` = '1' ");
         $count = $request->rowCount();
         return $count !== 0 ? true : false;
@@ -125,38 +125,52 @@ class messenger extends db_connect {
      * 
      * @access public
      * @author Mikhaël Bailly
-     * @param string $user_token Token de l'équipe de projet
-     * @param string $channel_token Token du channel
+     * @param string $user_token Token de l'user
      * @param string $project_token Token du projet
+     * @param string $channel_token Token du channel
      * @return boolean
      */
 
-    function registerMemberChannel($user_token = '', $channel_token = '', $project_token = '') {
+    function registerMemberChannel($user_token = '', $project_token = '', $channel_token = '') {
         $request = $this -> _db -> exec("INSERT INTO `pr_messenger_member` (`user_token`, `channel_token`, `project_token`) VALUES ('$user_token','$channel_token','$project_token')");
         // Log
-        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user_token', '$project_token', '$channel_token', 'register-user-channel') ");
+        $request = $this -> _db -> exec("INSERT INTO `pr_log` (`user_public_token`, `project_token`, `ref_token`, `type`, `optional`) VALUES ('$user_token', '$project_token', '$channel_token', 'register-user-channel', '') ");
     } 
     
 
 
     /**
-     * Editer un message
+     * Définir le message vu
      * 
-     * Editer un message dans un channel de projet
-     *
      * @access public
      * @author Mikhaël Bailly
-     * @param string $user_token Token de l'équipe de projet
-     * @param string $channel_token Token du channel
+     * @param string $user_token Token de l'user
      * @param string $project_token Token du projet
+     * @param string $channel_token Token du channel
      * @param string $message_token Token du message
      * @return boolean
      */
 
-    function setLastViewedMessage($user_token = '', $channel_token = '', $project_token = '', $message_token) {
+    function setLastViewedMessage($user_token = '', $project_token = '', $channel_token = '', $message_token) {
         $request = $this -> _db -> exec("UPDATE `pr_messenger_member` SET `last_read_message_token` = '$message_token' WHERE `user_token` = '$user_token' AND `channel_token` = '$channel_token' AND `project_token` = '$project_token' AND `enable` = '1'");
     } 
+    
+    /**
+     * Récupérer le dernier message vu
+     * 
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $user_token Token de l'user
+     * @param string $project_token Token du projet
+     * @param string $channel_token Token du channel
+     * @return boolean
+     */
 
+    function getLastViewedMessage($user_token = '', $project_token = '', $channel_token = '') {
+        $request = $this -> _db -> query("SELECT * FROM `pr_messenger_member` WHERE `user_token` = '$user_token' AND `channel_token` = '$channel_token' AND `project_token` = '$project_token' AND `enable` = '1' ");
+        $res = $request->fetch();
+        return $res['last_read_message_token'];
+    } 
 
 
     /**

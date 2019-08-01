@@ -19,7 +19,8 @@
                                         <div class="col-md-8 offset-md-2 col-12 input mr-bot mr-top">
                                             <div class="input-field">
                                                 <label for="password" class="color-gray">Nouveau mot de passe</label>
-                                                <input type="password" name="password" id="password" value="<?= isset($_POST['password']) ? $_POST['password'] : '' ?>">
+                                                <input type="password" data-required="true" data-validate="password" name="password" id="password">
+                                                <small class="error"></small>
                                             </div>
                                         </div>
 

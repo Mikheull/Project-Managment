@@ -24,8 +24,14 @@
 .nav-item-mr a {margin-top: 5px}
 .nav-item-mr:hover {background: rgba(93, 121, 246, 0.05);border-radius: 3px}
 
+.messenger a {border: solid var(--primary-color) 3px;border-radius: 50%;padding: 2px 5px;}
+.messenger svg {stroke: var(--primary-color);}
+.messenger .dot {height: 16px;width: 16px;background-color: var(--primary-color);border-radius: 50%;position: absolute;margin-top: 15px;margin-left: -12px;border: #FFF solid 2px;}
+
 /* timer-bar */
 #timer-bar {width: 100%;padding: 20px 15px;background: #cc443a;margin-top: 20px;border-radius: 6px}
+
+
 
 
 

@@ -49,5 +49,3 @@
         }
     }
 ?>
-
-<div id="project_output"></div>

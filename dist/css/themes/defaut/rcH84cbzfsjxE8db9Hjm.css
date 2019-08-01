@@ -178,6 +178,7 @@ h1, h2, h3, h4, h5, h6 {font-family: 'Poppins', sans-serif}
 
 /* SpaceBar */
 .spacebar {height: 1px;background: #f5f5f5}
+.spacebar.spacebar-light-dark {height: 1px;background: #444d74}
 .spacebar.spacebar-xl {width: 100%;margin: 0 auto}
 .spacebar.spacebar-lg {width: 75%;margin: 0 auto}
 .spacebar.spacebar-md {width: 50%;margin: 0 auto}
@@ -365,6 +366,7 @@ em {font-style: italic}
 .avatar--lg {font-size: var(--avatar-lg);}
 .avatar__status {position: absolute;bottom: 0;right: 0;display: inline-block;width: 0.3em;height: 0.3em;border-radius: 50%;box-shadow: 0 0 0 2px #FFF;background-color: var(--light-background-color);}
 .avatar__status--active {background-color: var(--green-color);}
+.avatar__status--primary {background-color: var(--primary-color);}
 .avatar__status--busy {background-color: var(--red-color);}
 .avatar__initials, .avatar__users-counter {position: absolute;top: 0;left: 0;width: 1em;height: 1em;border-radius: inherit;background-color: var(--light-background-color);color: var(--light-background-color);display: flex;justify-content: center;align-items: center;}
 .avatar__initials {text-align: center;}

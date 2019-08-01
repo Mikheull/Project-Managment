@@ -1,6 +1,7 @@
 <?php
     require_once ('controller/project.php') ;
     require_once ('controller/messenger.php') ;
+    require_once ('controller/projectTeam.php') ;
 
     if($messenger -> isChannelMember($main -> getToken(), $router -> getRouteParam("2"), $router -> getRouteParam("5")) == false){
         $messenger -> registerMemberChannel($main -> getToken(), $router -> getRouteParam("2"), $router -> getRouteParam("5"));
@@ -36,7 +37,14 @@
                                                 <svg class="avatar__placeholder" aria-hidden="true" viewBox="0 0 20 20" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="6" r="2.5" stroke="currentColor"/><path d="M10,10.5a4.487,4.487,0,0,0-4.471,4.21L5.5,15.5h9l-.029-.79A4.487,4.487,0,0,0,10,10.5Z" stroke="currentColor"/></svg>
                                                 <div class="avatar__initials"><span class="color-lg-dark"><?= strtoupper(substr($channel['name'], 0, 1)).substr($channel['name'], 1, 1) ;?></span></div>
                                             </figure>
-                                            <span role="status" class="avatar__status avatar__status--active" aria-label="Active"></span>
+                                            <?php
+                                                if($lastMessage['content'] !== null){
+                                                    $lastChannelMessage = $messenger -> getLastMessagePosted($channel['channel_token']);
+                                                    if($lastChannelMessage['message_token'] !== $messenger -> getLastViewedMessage($main -> getToken(), $router -> getRouteParam("2"), $channel['channel_token'])){
+                                                        ?> <span role="status" class="avatar__status avatar__status--active avatar__status--primary" aria-label="Active"></span> <?php
+                                                    }
+                                                }
+                                            ?>
                                         </div>
                                     </div>
                                     <div class="col-10 lg-hide">
@@ -112,7 +120,14 @@
                                                                 <img class="avatar__img" src="<?= $config -> rootUrl() ;?>dist/<?= $utils -> getData('imp_user', 'profil_image', 'public_token', $message['author_token']) == NULL ? 'images/content/defaut_profil_pic.jpg' : 'uploads/u/'. $message['author_token'].'/profil_pic/'.$utils -> getData('imp_user', 'profil_image', 'public_token', $message['author_token']) ;?>">
                                                             </figure>
                                                         </div>
-                                                        <span class="mt-1 mr-right"> xxx </span> 
+                                                        <?php
+                                                            $ch = $projectTeam -> getHighTeamMember($message['author_token'], $router -> getRouteParam("2"));
+                                                            if($ch !== ''){
+                                                                ?>
+                                                                    <span class="mt-1 mr-1 role bold" style="border: <?= $utils -> getData('pr_project_team', 'color', 'public_token', $ch ) ?> solid 1px;color: <?= $utils -> getData('pr_project_team', 'color', 'public_token', $ch ) ?>"> <?= $utils -> getData('pr_project_team', 'name', 'public_token', $ch ) ?> </span> 
+                                                                <?php
+                                                            }
+                                                        ?>
                                                         <span class="mt-1"> <?= $utils -> getData('imp_user', 'username', 'public_token', $message['author_token']) ?></span> 
                                                         <span class="mt-1 mr-left color-gray text-xs"><?= $config -> time_elapsed_string($message['date_edited'] == null ? $message['date_creation'] : $message['date_edited']) ?></span>
                                                     </span>

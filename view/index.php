@@ -112,6 +112,7 @@
 
 
     <script src="<?= $config -> rootUrl() ;?>dist/js/notify.js"></script>
+    <script src="<?= $config -> rootUrl() ;?>dist/js/init.js"></script>
     <script src="<?= $config -> rootUrl() ;?>dist/js/main.js"></script>
     <script>
         <?php

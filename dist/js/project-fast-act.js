@@ -26,7 +26,7 @@ $(document).on("click", "[data-action='invite']", function(e) {
                     type: 'POST',
                     data: {result: result, project_token: ref, action: 'invite'},
                     success:function(data){
-                        $('#project_output').html(data);
+                        $('#ajax-hidden-output').html(data);
                     }
                 });
             }else{
@@ -64,7 +64,7 @@ $(document).on("click", "[data-action='delete']", function(e) {
                     type: 'POST',
                     data: {project_token: ref, action: 'delete'},
                     success:function(data){
-                        $('#project_output').html(data);
+                        $('#ajax-hidden-output').html(data);
                     }
                 });
             }
@@ -85,11 +85,11 @@ $(document).on("click", "[data-action='archive']", function(e) {
         message: "Vous êtes sur le point d'archiver le projet temporairement.",
         buttons: {
             cancel: {
-                label: '<i class="fa fa-times"></i> Cancel',
+                label: '<i class="fa fa-times"></i> Annuler',
                 className: 'btn dark-btn'
             },
             confirm: {
-                label: '<i class="fa fa-check"></i> Confirm',
+                label: '<i class="fa fa-check"></i> Confirmer',
                 className: 'btn primary-btn'
             }
         },
@@ -100,7 +100,7 @@ $(document).on("click", "[data-action='archive']", function(e) {
                     type: 'POST',
                     data: {project_token: ref, action: 'archive'},
                     success:function(data){
-                        $('#project_output').html(data);
+                        $('#ajax-hidden-output').html(data);
                     }
                 });
             }
@@ -136,7 +136,7 @@ $(document).on("click", "[data-action='unarchive']", function(e) {
                     type: 'POST',
                     data: {project_token: ref, action: 'unarchive'},
                     success:function(data){
-                        $('#project_output').html(data);
+                        $('#ajax-hidden-output').html(data);
                     }
                 });
             }
@@ -172,7 +172,7 @@ $(document).on("click", "[data-action='leave']", function(e) {
                     type: 'POST',
                     data: {project_token: ref, action: 'leave'},
                     success:function(data){
-                        $('#project_output').html(data);
+                        $('#ajax-hidden-output').html(data);
                     }
                 });
             }
@@ -209,7 +209,7 @@ $(document).on("click", "[data-action='rename']", function(e) {
                     type: 'POST',
                     data: {result: result, project_token: ref, action: 'rename'},
                     success:function(data){
-                        $('#project_output').html(data);
+                        $('#ajax-hidden-output').html(data);
                     }
                 });
             }else{
@@ -248,7 +248,7 @@ $(document).on("click", "[data-action='new_header_cal_event']", function(e) {
                         type: 'POST',
                         data: {event_name: event_name, event_date: event_date, event_token: ref, action: 'new_byHeader'},
                         success:function(data){
-                            $('#project_output').html(data);
+                            $('#ajax-hidden-output').html(data);
                         }
                     });
                    
@@ -287,7 +287,7 @@ $(document).on("click", "[data-action='new_header_bug']", function(e) {
                         type: 'POST',
                         data: {bug_name: bug_name, bug_desc: bug_desc, project_token: ref},
                         success:function(data){
-                            $('#bug_output').html(data);
+                            $('#ajax-hidden-output').html(data);
                         }
                     });
                    

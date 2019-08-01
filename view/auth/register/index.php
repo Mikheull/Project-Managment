@@ -30,7 +30,8 @@
                                 <div class="col-md-6 col-12 input">
                                     <div class="input-field">
                                         <label for="email" class="color-gray">Email</label>
-                                        <input type="email" placeholder="john-doe@domain.com" name="email" id="email" value="<?= isset($_POST['email']) ? $_POST['email'] : '' ?>">
+                                        <input type="email" data-required="true" data-validate="email" placeholder="john-doe@domain.com" name="email" id="email" value="<?= isset($_POST['email']) ? $_POST['email'] : '' ?>">
+                                        <small class="error"></small>
                                     </div>
                                 </div>
 
@@ -39,14 +40,16 @@
                                 <div class="col-md-6 col-12 input">
                                     <div class="input-field">
                                         <label for="password" class="color-gray">Mot de passe</label>
-                                        <input type="password" name="password" id="password">
+                                        <input type="password" data-required="true" data-validate="password" name="password" id="password">
+                                        <small class="error"></small>
                                     </div>
                                 </div>
                                 
                                 <div class="col-md-6 col-12 input mr-bot">
                                     <div class="input-field">
                                         <label for="confirm_password" class="color-gray">Confirmer le mot de passe</label>
-                                        <input type="password" name="confirm_password" id="confirm_password">
+                                        <input type="password" data-required="true" data-validate="same-password" name="confirm_password" id="confirm_password">
+                                        <small class="error"></small>
                                     </div>
                                 </div>
 

@@ -17,7 +17,8 @@
                                 <div class="col-md-8 offset-md-2 col-12 input mr-bot-lg mr-top-lg">
                                     <div class="input-field">
                                         <label for="email" class="color-gray">Mail de récupération</label>
-                                        <input type="email" placeholder="john-doe@domain.com" name="email" id="email" value="<?= isset($_POST['email']) ? $_POST['email'] : '' ?>">
+                                        <input type="email" data-required="true" data-validate="email" placeholder="john-doe@domain.com" name="email" id="email" value="<?= isset($_POST['email']) ? $_POST['email'] : '' ?>">
+                                        <small class="error"></small>
                                     </div>
                                 </div>
 

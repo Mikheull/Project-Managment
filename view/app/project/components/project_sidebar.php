@@ -110,12 +110,15 @@ if($task -> timerIsLaunched($project_token) == true){
 
             <div>
                 <ul class="text-align-right">
-                    <li class="nav-item" id="rapid_actions"> <a class="btn btn-sm primary-btn"> <i data-feather="plus-circle"></i></a> </li>
-                    <li class="nav-item sm-hide"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/settings" title="Réglages"><i data-feather="settings"></i></a> </li>
+                    <li class="nav-item sm-hide" id="rapid_actions"> <a class="btn btn-sm primary-btn"> <i data-feather="plus-circle"></i></a> </li>
                         
                     <li class="nav-item sm-hide notification"> <a href="<?= $config -> rootUrl() ;?>notifications" title="notifications"><i data-feather="bell"></i></a> </li>
+                    <li class="nav-item sm-hide mr-right messenger"> 
+                        <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/messenger" title="messenger"><i data-feather="message-square"></i></a> 
+                        <span class="dot"></span>
+                    </li>
+                    <li class="nav-item sm-hide"> <a href="<?= $config -> rootUrl() ;?>account" title="Accédez a votre compte"><i data-feather="user"></i></a> </li>
                     <li class="nav-item sm-hide"> <a href="<?= $config -> rootUrl() ;?>logout" title="Déconnnexion"><i data-feather="log-out"></i></a> </li>
-                    <li class="nav-item sm-hide"> <a href="<?= $config -> rootUrl() ;?>account" title="Accédez a votre compte">Mon compte</a> </li>
                     <li class="nav-item link" id="sidebar_pro-right-btn"> <i data-feather="sidebar" style="transform: rotate(180deg);"></i> </li>
                 </ul>
             </div>
@@ -208,16 +211,33 @@ if($task -> timerIsLaunched($project_token) == true){
 
 <div class="sidebar-project-container-right">
     <div class="menu-wrapper container">
-        <div class="row mr-top mr-bot">
+        <div class="row mr-top mr-bot text-align-center">
             <div class="col-10 offset-1">
                 <ul class="d-inline-flex text-align-center">
+                    <li class="nav-item mr-right" id="rapid_actions"> <a class="btn btn-sm primary-btn"> <i data-feather="plus-circle"></i></a> </li>
                     <li class="nav-item mr-right"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/settings" title="Réglages" class="color-light"><i data-feather="settings"></i></a> </li>
                     <li class="nav-item mr-right notification"> <a href="<?= $config -> rootUrl() ;?>notifications" title="notifications" class="color-light"><i data-feather="bell"></i></a> </li>
-                    <li class="nav-item mr-right"> <a href="<?= $config -> rootUrl() ;?>logout" title="Déconnnexion" class="color-light"><i data-feather="log-out"></i></a> </li>
-                    <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>account" title="Accédez a votre compte" class="color-light">Mon compte</a> </li>
+                    <li class="nav-item mr-right"> <a href="<?= $config -> rootUrl() ;?>app/project/<?= $router -> getRouteParam("2") ?>/t/messenger" title="messenger" class="color-light"><i data-feather="message-square"></i></a> </li>
+                    <li class="nav-item mr-right"> <a href="<?= $config -> rootUrl() ;?>account" title="Accédez a votre compte" class="color-light"><i data-feather="user"></i></a> </li>
+                    <li class="nav-item"> <a href="<?= $config -> rootUrl() ;?>logout" title="Déconnnexion" class="color-light"><i data-feather="log-out"></i></a> </li>
+                </ul>
+
+                <div class="spacebar spacebar-light-dark spacebar-lg mt-3 mb-3"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-10 offset-1 sidebar-r-menu">
+                <ul>
+                    <li class="mr-3 active" data-page="informations"> <a class="link">Informations</a> </li>
+                    <li class="mr-3" data-page="members"> <a class="link">Membres</a> </li>
+                    <li class="mr-3" data-page="assign"> <a class="link">Assignations</a> </li>
+                    <li class="mr-3" data-page="logs"> <a class="link">Logs</a> </li>
                 </ul>
             </div>
         </div>
+
+
     </div>
 </div>
 
