@@ -82,3 +82,5 @@
 </section>
 
 <div id="ajax-hidden-output" class="hidden"></div>
+
+<?php require_once ('accept_cookies.php') ;?>

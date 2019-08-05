@@ -102,3 +102,20 @@ $(document).ready(function() {
         $(".navbar-resp-container").animate({width:'toggle'},350);
     });
 });
+
+
+
+
+// Cookies accept
+$(document).ready(function() {
+    $( "#accept_cookie" ).click(function() {
+        $.ajax({
+            url: rootUrl + 'controller/ajax/accept_cookie.php',
+            type: 'POST',
+            data: {},
+            success:function(data){
+                $('.accept_cookie').remove();
+            }
+        });
+    });
+});

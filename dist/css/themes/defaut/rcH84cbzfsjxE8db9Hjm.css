@@ -319,7 +319,9 @@ h1, h2, h3, h4, h5, h6 {font-family: 'Poppins', sans-serif}
   #footer .link-box ul li {font-size: .7em;margin-bottom: .6rem}
   .btn {padding: 10px;font-size: .8em}
   .btn a {padding: 10px;}
-
+  .btn-sm {padding: 5px 10px;font-size: .8em;}
+  .btn-xs {padding: 2px 5px;font-size: .8em;}
+  
   .newsletter {text-align: center;}
   .newsletter p {width: 100%;margin-bottom: 25px;}
 }
@@ -462,3 +464,12 @@ em {font-style: italic}
 
 body { font-family: 'Poppins', sans-serif; }
 .tippy-popper a {color: #FFF}
+
+
+
+
+/* Cookies */
+.accept_cookie {position: fixed;bottom: 0;left: 0;z-index: 99999;width: 33%;background: var(--black-background-color);padding: 5px;margin: 10px 10px;border-radius: 6px;}
+.accept_cookie p {color: var(--light-background-color);width: 90%}
+@media (max-width: 720px) {.accept_cookie {width: 70%;}}
+@media (max-width: 568px) {.accept_cookie {width: 95%; margin: auto 2.5%}}

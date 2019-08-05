@@ -341,3 +341,5 @@ $(document).on("click", "[data-action='new_header_task']", function(e) {
     });
 });
 </script>
+
+<?php require_once ('view/components/accept_cookies.php') ;?>
