@@ -79,6 +79,11 @@
 
                 <button class="btn primary-btn" name="update_user_pass">Sauvegarder</button>
             </form>
+
+            <div class="spacebar"><div class="spacer-lg"></div></div>
+
+            <a href="<?= $config -> rootUrl() ;?>account/my-data" target="blank" class="btn dark-btn">Exporter mes données</a>
+            <a class="btn red-btn" id="delete-account">Supprimer mon compte</a>
         </div>
     </div>
 
@@ -86,3 +91,41 @@
 
 
 <?php require_once ('view/components/footer.php') ;?>
+
+
+
+<script>
+// Suppression
+$(document).on("click", "#delete-account", function(e) {
+    event.preventDefault();
+
+    bootbox.confirm({
+        backdrop: true,
+        closeButton: false,
+        title: "Êtes vous sûr ?",
+        message: "Vous êtes sur le point de supprimer définitivement votre compte de la plateforme.",
+        buttons: {
+            cancel: {
+                label: '<i class="fa fa-times"></i> Cancel',
+                className: 'btn dark-btn'
+            },
+            confirm: {
+                label: '<i class="fa fa-check"></i> Confirm',
+                className: 'btn primary-btn'
+            }
+        },
+        callback: function (result) {
+            if(result == true){
+                $.ajax({
+                    url:  rootUrl + 'controller/ajax/delete_account.php',
+                    type: 'POST',
+                    data: {},
+                    success:function(data){
+                        location.href="../";
+                    }
+                });
+            }
+        }
+    });
+});
+</script>

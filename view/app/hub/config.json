@@ -8,8 +8,7 @@
         "feather-icons",
         "popper",
         "tippy",
-        "bootbox",
-        "fakeLoader"
+        "bootbox"
     ],
 
     "meta": [ 
@@ -33,10 +32,6 @@
         "app/hub.min.css",
         "app/project/main.min.css",
         "bootstrap-modal.min.css"
-    ],
-
-    "online_css": [ 
-        "https://cdn.jsdelivr.net/npm/jq-fakeloader@2.0.1/css/fakeLoader.css"
     ],
 
     "js": [ 

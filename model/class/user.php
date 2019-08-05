@@ -154,6 +154,23 @@ class user extends db_connect {
         $res = $request->fetch();
 
         return ($res ? true : false);
+    } 
+
+
+
+    /**
+     * Supprimer un utilisate 
+     * 
+     * "Supprimer" un utilisateur, va simplement le rendre anonyme 
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $token token public de l'utilisateur
+     * @return boolean
+     */
+    
+    function deleteUser($token = '') {
+        $request = $this -> _db -> exec("UPDATE `imp_user` SET `enable`= 0, `username`= 'Utilisateur supprimé', `mail`= '', `password`= '', `first_name`= 'Utilisateur', `last_name`= 'supprimé', `profil_image`= '', `bio`= ''  WHERE `public_token` = '$token' AND `enable` = '1' ");
     }  
 
 /******************************************************************************/

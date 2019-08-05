@@ -69,6 +69,7 @@ $router -> addRoutes(
         [ 'route' => 'account/followers', 'dir_path' => 'view/user/followers/'],
         [ 'route' => 'account/following', 'dir_path' => 'view/user/following/'],
         [ 'route' => 'account/settings', 'dir_path' => 'view/user/settings/'],
+        [ 'route' => 'account/my-data', 'dir_path' => 'view/user/my-data/', 'rendering_html' => false],
 
         [ 'route' => 'member/{{USER_NAME}}', 'dir_path' => 'view/user/projects/'],
         [ 'route' => 'member/{{USER_NAME}}/projects', 'dir_path' => 'view/user/projects/'],

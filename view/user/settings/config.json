@@ -7,7 +7,8 @@
         "fontawesome",
         "feather-icons",
         "popper",
-        "tippy"
+        "tippy",
+        "bootbox"
     ],
 
     "meta": [ 
@@ -27,7 +28,8 @@
     ],
      
     "css": [ 
-        "account.min.css"
+        "account.min.css",
+        "bootstrap-modal.min.css"
     ]
 
 }
