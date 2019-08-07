@@ -179,6 +179,31 @@ class user extends db_connect {
 
 /******************************************************************************/
 
+    
+    /**
+     * Récupère la liste d'utilisateur bloqués 
+     * 
+     * Récupère la liste d'utilisateur bloqués par l'utilisateur
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $token user token de l'utilisateur
+     * @return boolean
+     */
+
+    function getBlockedUser($token = '') {
+        $request = $this -> _db -> query("SELECT * FROM `imp_blocked` WHERE `user_public_token` = '$token' AND `enable` = '1' ");
+        $res = $request->fetchAll();
+        $count = $request->rowCount();
+
+        return ([ 
+            'count' => $count, 
+            'content' => $res
+        ]);
+    } 
+
+
+
     /**
      * Vérifie un user bloqué
      * 

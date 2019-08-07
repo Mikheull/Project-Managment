@@ -31,6 +31,28 @@ class newsletter extends db_connect {
         return (['success' => false, 'options' => ['content' => "Vous êtes déjà inscris !", 'theme' => 'error'] ]);
     } 
 
+
+    
+    /**
+     * Vérifie un email dans la liste de  newsletter
+     * 
+     *
+     * @access public
+     * @author Mikhaël Bailly
+     * @param string $email email de l'utilisateur
+     * @return boolean
+     */
+
+    function isSubscribe($email = '') {
+        $request = $this -> _db -> query("SELECT * FROM `imp_newsletter` WHERE `email` = '$email' ");
+        $res = $request->fetch();
+        
+        if(!$res){
+            return false;
+        }
+        return true;
+    } 
+
 /******************************************************************************/
 
 }
