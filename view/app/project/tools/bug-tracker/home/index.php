@@ -1,5 +1,6 @@
 <?php
     require_once ('controller/project.php') ;
+    require_once ('controller/projectTeam.php') ;
     require_once ('controller/bug.php') ;
 ?>
 

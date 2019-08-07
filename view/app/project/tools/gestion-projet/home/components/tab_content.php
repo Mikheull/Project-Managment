@@ -76,6 +76,18 @@
                                                     <?php
                                                         if($task -> memberIsAssigned($project_token, $task_item['task_token'], $main -> getToken()) == true){
                                                             ?> <div class="text-align-right link mr-2" data-tippy="Vous êtes assigné a cette tâche"> <i data-feather="at-sign" class="color-red"></i> </div> <?php
+                                                        }else{
+                                                            $allTeams = $task -> getTeamAssigned($project_token, $task_item['task_token']);
+                                                            $check = false;
+                                                            foreach($allTeams['content'] as $t){
+                                                                if($projectTeam -> memberHasTeam($t, $main -> getToken()) == true){
+                                                                    $check = true;
+                                                                }
+                                                            }
+                                                            if($check == true){
+                                                                ?> <div class="text-align-right link mr-2" data-tippy="Vous êtes assigné a cette tâche"> <i data-feather="at-sign" class="color-red"></i> </div> <?php
+                                                            }
+                                                           
                                                         }
                                                     ?>
                                                     <div id="popup-task-btn" class="text-align-right link" data-ref="<?= $task_item['task_token'] ?>" data-pro="<?= $project_token ?>"> <i data-feather="maximize" class="color-lg-dark"></i> </div>

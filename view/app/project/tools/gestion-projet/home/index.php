@@ -1,5 +1,6 @@
 <?php
     require_once ('controller/project.php') ;
+    require_once ('controller/projectTeam.php') ;
     require_once ('controller/task.php') ;
 
     $tabs = $task -> getTabs( $router -> getRouteParam('2') );
