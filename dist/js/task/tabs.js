@@ -155,3 +155,15 @@ $(document).on("click", "[data-action='tab-export']", function(e) {
         
     });
 });
+
+
+
+// Hide task
+$(document).ready(function() {
+
+    $(document).on("click", "[data-action='task-hide']", function(e) {
+        let ref = this.dataset.ref;
+        $("[data-tab='"+ref+"'] .task_container .task_item[data-status='ended']").hide();
+    });
+
+});

@@ -4,7 +4,7 @@
     
     foreach($tabs['content'] as $t){
         ?>
-            <div class="tab-item light-border">
+            <div class="tab-item light-border" data-tab="<?= $t['tab_token'] ?>">
                 <div class="container">
                     <div class="row mr-top mr-bot">
                         <div class="col-10"><h3 class="title-sm"><?= $t['name'] ?></h3></div>
@@ -23,7 +23,7 @@
                                 $date_creation = new DateTime( $task_item['date_creation'] );
                                 
                                 ?>
-                                    <div class="col-12 task_item" data-ref="<?= $task_item['task_token'] ?>">
+                                    <div class="col-12 task_item" data-ref="<?= $task_item['task_token'] ?>" data-status="<?= (!isset($task_item['date_end']) ? 'active' : 'ended') ?>">
                                         <div class="task_item_content container light-gray-border mr-bot-lg <?= (!isset($task_item['date_end']) ? '' : 'ended') ;?>">
                                             <div class="row mr-top">
                                                 <div class="col-12 flex"> 
@@ -89,7 +89,6 @@
                         ?>
                         
                     </div>
-                    <div class="task-bottom-deco"> <div></div> </div>
 
 
                     
@@ -104,6 +103,7 @@
 
             <div id="tp-<?= $t['tab_token'] ?>" class="hidden">
                 <ul class="mr-top text-align-left">
+                    <li> <a data-action="task-hide" data-ref="<?= $t['tab_token'] ?>" data-pro="<?= $project_token ?>" class="link dark-link">Cacher les tâches terminées</a> </li>
                     <li> <a data-action="tab-rename" data-ref="<?= $t['tab_token'] ?>" data-pro="<?= $project_token ?>" class="link dark-link">Renommer</a> </li>
                     <li> <a data-action="tab-assign" data-ref="<?= $t['tab_token'] ?>" data-pro="<?= $project_token ?>" class="link dark-link">Assigner le tableau</a> </li>
                     <li> <a data-action="tab-export" data-ref="<?= $t['tab_token'] ?>" data-pro="<?= $project_token ?>" class="link dark-link">Exporter le tableau</a> </li>
