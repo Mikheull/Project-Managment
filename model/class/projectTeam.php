@@ -74,14 +74,15 @@ class projectTeam extends db_connect {
      */
 
     function addMemberTeam($team_token = '', $user_token = '', $project_token = '') {
-        $request = $this -> _db -> query("SELECT * FROM `pr_project_team_member` WHERE `project_team_token` = '$team_token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
+        $request = $this -> _db -> query("SELECT * FROM `pr_project_team_member` WHERE `project_team_token` = '$team_token' AND `project_token` = '$project_token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
         $res = $request->fetch();
         
         if(!$res){
-            $req = $this -> _db -> prepare("INSERT INTO `pr_project_team_member` (`project_team_token`, `user_public_token`) VALUES (:project_team_token, :user_public_token)");
+            $req = $this -> _db -> prepare("INSERT INTO `pr_project_team_member` (`project_team_token`, `user_public_token`, `project_token`) VALUES (:project_team_token, :user_public_token, :project_token)");
 
             $req->bindParam(':project_team_token', $team_token);
             $req->bindParam(':user_public_token', $user_token);
+            $req->bindParam(':project_token', $project_token);
 
             $req->execute();
             $count = $req->rowCount();
@@ -116,12 +117,11 @@ class projectTeam extends db_connect {
      */
 
     function kickMember($team_token = '', $user_token = '', $project_token = '') {
-        $request = $this -> _db -> query("SELECT * FROM `pr_project_team_member` WHERE `project_team_token` = '$team_token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
+        $request = $this -> _db -> query("SELECT * FROM `pr_project_team_member` WHERE `project_team_token` = '$team_token' AND `project_token` = '$project_token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
         $res = $request->fetch();
         
         if($res){
-            // $request = $this -> _db -> exec("UPDATE `pr_project_team_member` SET `enable`= 0 WHERE `project_team_token` = '$team_token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
-            $request = $this -> _db -> exec("DELETE FROM `pr_project_team_member` WHERE `project_team_token` = '$team_token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
+            $request = $this -> _db -> exec("DELETE FROM `pr_project_team_member` WHERE `project_team_token` = '$team_token' AND `project_token` = '$project_token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
 
             // Log
             $user = main::getToken();
@@ -167,7 +167,7 @@ class projectTeam extends db_connect {
      */
     
     function getHighTeamMember($user_token = '', $project_token = '') {
-        $request = $this -> _db -> query("SELECT * FROM `pr_project_team_member` WHERE `user_public_token` = '$user_token' AND `enable` = '1' ORDER BY `date_join` ASC LIMIT 1 ");
+        $request = $this -> _db -> query("SELECT * FROM `pr_project_team_member` WHERE `user_public_token` = '$user_token' AND `project_token` = '$project_token' AND `enable` = '1' ORDER BY `date_join` ASC LIMIT 1 ");
         $res = $request->fetch();
         $count = $request->rowCount();
 
@@ -273,7 +273,7 @@ class projectTeam extends db_connect {
         
         if($res){
             $request = $this -> _db -> exec("DELETE FROM `pr_project_team` WHERE `public_token` = '$token'");
-            $request = $this -> _db -> exec("DELETE FROM `pr_project_team_member` WHERE `project_team_token` = '$token'");
+            $request = $this -> _db -> exec("DELETE FROM `pr_project_team_member` WHERE `project_team_token` = '$token' AND `project_token` = '$project_token'");
 
             // Log
             $user = main::getToken();

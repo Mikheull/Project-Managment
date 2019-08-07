@@ -85,7 +85,7 @@ class permission extends db_connect {
         foreach($allTeams as $team){
             $team_token = $team['public_token'];
 
-            $request = $this -> _db -> query("SELECT * FROM `pr_project_team_member` WHERE `project_team_token` = '$team_token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
+            $request = $this -> _db -> query("SELECT * FROM `pr_project_team_member` WHERE `project_team_token` = '$team_token' AND `project_token` = '$project_token' AND `user_public_token` = '$user_token' AND `enable` = '1' ");
             $res = $request->fetch();
             if($res){
                 array_push($array, $team['public_token']);
